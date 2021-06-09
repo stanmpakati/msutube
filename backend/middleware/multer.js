@@ -6,7 +6,7 @@ const MINE_TYPE_MAP = {
   "image/jpg": "jpg",
 };
 
-export const storage = multer.diskStorage({
+export const pictureStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     const isValid = MINE_TYPE_MAP[file.mimetype];
     let error = new Error("Invalid mine type");

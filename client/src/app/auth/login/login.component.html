@@ -1,0 +1,65 @@
+<div class="container">
+  <header>
+    <span class="logo">MSU<span class="color-primary">tube</span></span>
+  </header>
+  <main fxLayout="row wrap" fxFlex="50%" class="row" *ngIf="!isLoading">
+    <!-- Signup section -->
+    <div class="left">
+      <h3>Welcome</h3>
+      <p>To continue please enter your Login Details</p>
+      <form [formGroup]="form" (submit)="onLogin()">
+        <!-- email form field -->
+        <mat-form-field>
+          <mat-label>Email or Username</mat-label>
+          <mat-icon matPrefix>person</mat-icon>
+          <input matInput type="email" formControlName="email" />
+          <mat-icon matPrefix *ngIf="email.touched && !email.errors">
+            check
+          </mat-icon>
+          <mat-error
+            *ngIf="(email.touched || submitted) && email.errors?.required"
+          >
+            Email or Username is required
+          </mat-error>
+          <mat-error *ngIf="email.touched && email?.invalid">
+            Email invalid
+          </mat-error>
+        </mat-form-field>
+
+        <!-- password form field -->
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <mat-icon matSuffix (click)="hide = !hide">{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+          <mat-error
+            *ngIf="(password.touched || submitted) && password.errors?.required"
+          >
+            Password is required
+          </mat-error>
+          <mat-error *ngIf="password.touched && password.errors?.invalid">
+            Password invalid
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">Login</button>
+      </form>
+
+      <!-- <mat-slide-toggle> DarkTheme </mat-slide-toggle> -->
+
+      <p>No account? <a [routerLink]="['/signup']">Sign up</a> instead</p>
+    </div>
+
+    <!-- SVG image -->
+    <div class="right">
+      <img src="/assets/vectors/login.svg" alt="login image" />
+    </div>
+  </main>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+</div>

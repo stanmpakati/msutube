@@ -1,0 +1,58 @@
+header {
+  margin-bottom: 1rem;
+}
+
+.row {
+  display: flex-column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.left {
+  width: 100%;
+}
+
+.right {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+h2 {
+  font-weight: 700;
+}
+
+// for tablets
+@media only screen and (min-width: 600px) {
+  .row {
+    display: flex;
+  }
+
+  .left {
+    width: 50%;
+  }
+
+  .right {
+    width: 50%;
+    padding: 1rem;
+  }
+
+  mat-form-field {
+    width: 95%;
+  }
+
+  img {
+    height: 80%;
+  }
+
+  button {
+    margin-right: 10%;
+  }
+}
+
+// for pcs
+@media only screen and (min-width: 768px) {
+}

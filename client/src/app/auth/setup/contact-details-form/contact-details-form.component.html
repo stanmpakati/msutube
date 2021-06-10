@@ -1,0 +1,31 @@
+<form [formGroup]="cdForm" (ngSubmit)="submit()">
+  <!-- Facebook input -->
+  <mat-form-field>
+    <mat-label>Facebook username</mat-label>
+    <mat-icon matPrefix>facebook</mat-icon>
+    <input matInput type="text" formControlName="facebook" />
+  </mat-form-field>
+
+  <!-- Instagram input -->
+  <mat-form-field>
+    <mat-label>Instagram username</mat-label>
+    <mat-icon matPrefix>instagram</mat-icon>
+    <input matInput type="text" formControlName="instagram" />
+  </mat-form-field>
+
+  <!-- Twitter input -->
+  <mat-form-field>
+    <mat-label>Twitter username</mat-label>
+    <mat-icon matPrefix>twitter</mat-icon>
+    <input matInput type="text" formControlName="twitter" />
+  </mat-form-field>
+
+  <!-- Whatsapp input -->
+  <mat-form-field>
+    <mat-label>Whatsapp username</mat-label>
+    <mat-icon matPrefix>whatsapp</mat-icon>
+    <input matInput type="text" formControlName="whatsapp" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</form>

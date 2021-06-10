@@ -1,0 +1,49 @@
+<form [formGroup]="pdForm" (ngSubmit)="next()">
+  <!-- first name -->
+  <mat-form-field>
+    <mat-label>First Name</mat-label>
+    <input matInput type="text" formControlName="firstname" />
+    <mat-error
+      *ngIf="(firstname.touched || submitted) && firstname.errors?.required"
+    >
+      First name is required
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Last name -->
+  <mat-form-field>
+    <mat-label>Last Name</mat-label>
+    <input matInput type="text" formControlName="lastname" />
+    <mat-error
+      *ngIf="(lastname.touched || submitted) && lastname.errors?.required"
+    >
+      Last name is required
+    </mat-error>
+  </mat-form-field>
+
+  <!-- reg number -->
+  <mat-form-field>
+    <mat-label>Reg-number</mat-label>
+    <input matInput type="text" formControlName="regnumber" />
+    <mat-error
+      *ngIf="
+        (regnumber.touched || submitted) &&
+        regnumber.errors?.invalidrequiredRegNumber
+      "
+    >
+      Reg-number should be in the form RxxxxxxX
+    </mat-error>
+  </mat-form-field>
+
+  <!-- bio -->
+  <mat-form-field>
+    <mat-label>Bio</mat-label>
+    <textarea rows="4" matInput type="text" formControlName="bio"></textarea>
+  </mat-form-field>
+
+  <br />
+
+  <button mat-raised-button [disabled]="!pdForm.valid" type="submit">
+    Next
+  </button>
+</form>

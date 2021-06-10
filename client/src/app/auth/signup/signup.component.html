@@ -1,0 +1,143 @@
+<div class="container">
+  <header>
+    <span class="logo">MSU<span class="color-primary">tube</span></span>
+  </header>
+  <main fxLayout="row wrap" fxFlex="50%" class="row" *ngIf="!isLoading">
+    <!-- Signup section -->
+    <div class="left">
+      <h3>Welcome</h3>
+      <p>To continue please fill in signup details</p>
+      <form [formGroup]="form" (submit)="onSignup()">
+        <!-- username form field -->
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <mat-icon matPrefix>person</mat-icon>
+          <input matInput type="name" formControlName="username" />
+          <mat-error
+            *ngIf="
+              (registerFormControl.username.touched || submitted) &&
+              registerFormControl.username.errors?.required
+            "
+          >
+            Username required
+          </mat-error>
+          <mat-error
+            *ngIf="
+              registerFormControl.username.touched &&
+              registerFormControl.username.errors?.userNameNotAvailable
+            "
+          >
+            Username not available
+          </mat-error>
+        </mat-form-field>
+
+        <!-- email form field -->
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <mat-icon matPrefix>email</mat-icon>
+          <input matInput type="email" formControlName="email" />
+          <mat-error
+            *ngIf="
+              (registerFormControl.email.touched || submitted) &&
+              registerFormControl.email.errors?.required
+            "
+          >
+            Email is required
+          </mat-error>
+          <mat-error
+            *ngIf="
+              registerFormControl.email.touched &&
+              registerFormControl.email.errors?.email
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+          <mat-error
+            *ngIf="
+              registerFormControl.email.touched &&
+              registerFormControl.email.errors?.emailNotAvailable
+            "
+          >
+            Email not available
+          </mat-error>
+        </mat-form-field>
+
+        <!-- password form field -->
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <mat-icon matSuffix (click)="hide = !hide">
+            {{ hide ? "visibility_off" : "visibility" }}
+          </mat-icon>
+          <mat-error
+            *ngIf="
+              registerFormControl.password.touched &&
+              registerFormControl.password.errors?.invalidPassword
+            "
+          >
+            Password should have minimum 8 characters, at least 1 uppercase
+            letter, 1 lowercase letter and 1 number
+          </mat-error>
+          <mat-hint>
+            Minimum of 8 characters, with atleast 1 uppercase letter and 1
+            number
+          </mat-hint>
+        </mat-form-field>
+
+        <!-- password form field -->
+        <mat-form-field>
+          <mat-label>Confirm Password</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="confirmPassword"
+          />
+          <mat-icon matSuffix (click)="hide = !hide">
+            {{ hide ? "visibility_off" : "visibility" }}
+          </mat-icon>
+          <mat-error
+            *ngIf="
+              (registerFormControl.confirmPassword.touched || submitted) &&
+              registerFormControl.confirmPassword.errors?.required
+            "
+          >
+            Confirm Password is required
+          </mat-error>
+          <mat-error
+            *ngIf="
+              registerFormControl.confirmPassword.touched &&
+              registerFormControl.confirmPassword.errors?.passwordMismatch
+            "
+          >
+            Passwords do not match
+          </mat-error>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="this.form.invalid && false"
+        >
+          Signup
+        </button>
+      </form>
+
+      <!-- <mat-slide-toggle> DarkTheme </mat-slide-toggle> -->
+
+      <p>Already have an account? <a routerLink="/login">Login</a> instead</p>
+    </div>
+
+    <!-- SVG image -->
+    <div class="right">
+      <img src="/assets/vectors/signup.svg" alt="signup image" />
+    </div>
+  </main>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+</div>

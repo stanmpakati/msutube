@@ -1,0 +1,35 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+mat-spinner {
+  margin: auto;
+}
+
+mat-button {
+  // TODO playaround with font weight
+  font-weight: 600;
+}
+
+.container {
+  padding: 1rem 2rem;
+  height: 100%;
+}
+
+.logo {
+  font-size: x-large;
+  font-weight: 900;
+
+  span {
+    color: blue;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

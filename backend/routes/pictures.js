@@ -26,6 +26,7 @@ router.pic(
   addPic
 );
 
+// updating pictures
 router.patch(
   "/:id",
   checkAuth,

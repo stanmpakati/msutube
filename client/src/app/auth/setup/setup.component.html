@@ -1,10 +1,16 @@
-<div class="container">
+<div class="container" fxLayout="column">
   <header>
-    <span class="logo">MSU<span class="color-primary">tube</span></span>
+    <span class="logo-light">MSU<span class="color-primary">tube</span></span>
   </header>
-  <main fxLayout="row wrap" fxFlex="50%" class="row" *ngIf="true">
+  <main fxLayout.gt-sm="row" fxFlex="50%" class="row" *ngIf="true">
     <!-- Signup section -->
-    <div class="left">
+    <div
+      class="left"
+      fxFlex.lt-md="100"
+      fxFlex="50%"
+      fxLayout="column"
+      fxFlexAlign="space-around center"
+    >
       <h2>Setup Account</h2>
       <p class="mat-headline">{{ details }} details</p>
 
@@ -23,8 +29,18 @@
     </div>
 
     <!-- Image -->
-    <div class="right">
-      <img src="/assets/vectors/signup.svg" alt="setup account image" />
+    <div
+      class="right"
+      fxFlex.lt-md="100"
+      fxFlex="50%"
+      fxLayout="column"
+      fxFlexAlign="center center"
+    >
+      <img
+        fxFlex.gt-xs="80%"
+        src="/assets/vectors/signup.svg"
+        alt="setup account image"
+      />
     </div>
   </main>
 </div>

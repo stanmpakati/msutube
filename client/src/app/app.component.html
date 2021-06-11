@@ -1,3 +1,6 @@
-<div class="mat-typography app-frame mat-app-background">
+<div
+  [ngClass]="{ 'dark-theme': isDarkMode }"
+  class="mat-typography app-frame mat-app-background"
+>
   <router-outlet></router-outlet>
 </div>

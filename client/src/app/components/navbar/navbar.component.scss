@@ -2,3 +2,51 @@ img {
   height: 35px;
   border-radius: 50%;
 }
+
+mat-form-field {
+  height: 22px;
+}
+
+.search-input {
+  border-radius: 5px 0px 0px 5px;
+  border: none;
+  width: 240px;
+}
+
+.search-input-dark {
+  background-color: rgb(126, 126, 126);
+}
+
+.search-button {
+  //   height: 27px;
+  margin: 0;
+  border: none;
+
+  //   border-radius: 5px;
+}
+
+.search-button-dark {
+  background-color: rgb(44, 44, 44);
+  color: rgb(197, 197, 197);
+  border: none !important;
+}
+
+mat-menu div {
+  margin: 1rem;
+  padding: 1rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+@media only screen and (min-width: 600px) {
+  .search-button {
+    width: 60px;
+    border: 1px solid rgb(177, 177, 177);
+    border-radius: 0px 5px 5px 0px;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+}

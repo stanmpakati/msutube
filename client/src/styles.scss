@@ -21,9 +21,20 @@ mat-button {
   height: 100%;
 }
 
-.logo {
+.logo-light {
   font-size: x-large;
   font-weight: 900;
+  color: rgb(34, 34, 34);
+
+  span {
+    color: blue;
+  }
+}
+
+.logo-dark {
+  font-size: x-large;
+  font-weight: 900;
+  color: white;
 
   span {
     color: blue;

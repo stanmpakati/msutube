@@ -27,6 +27,7 @@ import { ContactDetailsFormComponent } from './auth/setup/contact-details-form/c
 import { PersonalDetailsFormComponent } from './auth/setup/personal-details-form/personal-details-form.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     PersonalDetailsFormComponent,
     HomeComponent,
     NavbarComponent,
+    BottomNavbarComponent,
   ],
   imports: [
     BrowserModule,

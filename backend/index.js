@@ -14,6 +14,3 @@ mongoose
     app.listen(port, () => console.log(`Running on http://localhost:${port}`));
   })
   .catch((e) => console.log(`Error connecting to the database: ${e.message}`));
-
-// Mongo password
-// stan - veuJLztIPiA9LDRB

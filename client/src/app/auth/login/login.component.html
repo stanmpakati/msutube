@@ -1,8 +1,14 @@
-<div class="container">
+<div class="container" fxLayout="column">
   <header>
-    <span class="logo">MSU<span class="color-primary">tube</span></span>
+    <span class="logo-light">MSU<span class="color-primary">tube</span></span>
   </header>
-  <main fxLayout="row wrap" fxFlex="50%" class="row" *ngIf="!isLoading">
+  <main
+    fxLayout="row wrap"
+    fxFlex.gt-sm="50%"
+    fxFlex.lt-sm="100"
+    class="row"
+    *ngIf="!isLoading"
+  >
     <!-- Signup section -->
     <div class="left">
       <h3>Welcome</h3>

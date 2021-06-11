@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   private authStatusSub!: Subscription;
   isDark = true;
 
-  // constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -27,11 +28,11 @@ export class LoginComponent implements OnInit {
       }),
     });
 
-    // this.authStatusSub = this.authService
-    //   .getAuthStatusListener()
-    //   .subscribe((authStatus) => {
-    //     this.isLoading = false;
-    //   });
+    this.authStatusSub = this.authService
+      .getAuthStatusListener()
+      .subscribe((authStatus) => {
+        this.isLoading = false;
+      });
   }
 
   ngOnDestroy() {

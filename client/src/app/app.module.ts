@@ -28,6 +28,7 @@ import { PersonalDetailsFormComponent } from './auth/setup/personal-details-form
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.component';
+import { ErrorInterceptor } from './_helpers/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,9 @@ import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.
     MatListModule,
     MatMenuModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

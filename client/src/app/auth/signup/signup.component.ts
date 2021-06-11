@@ -93,9 +93,9 @@ export class SignupComponent implements OnInit {
   }
 
   onSignup() {
-    this.router.navigateByUrl('/setup');
     if (this.form.invalid) return;
     if (this.form.valid) {
+      this.isLoading = true;
       const authData: Auth = {
         username: this.form.value.username.toLowercase(),
         email: this.form.value.email.toLowercase(),
@@ -104,6 +104,8 @@ export class SignupComponent implements OnInit {
       console.log(authData);
 
       this.authService.createUser(authData);
+      this.isLoading = false;
+      this.router.navigateByUrl('/setup');
     }
   }
 }

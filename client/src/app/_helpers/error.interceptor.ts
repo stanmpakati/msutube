@@ -19,6 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
+      // TODO ignore username and email not found errors
       catchError((err: HttpErrorResponse) => {
         console.log(err);
         this.openSnackBar(err.error.message);

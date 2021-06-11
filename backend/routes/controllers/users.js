@@ -22,7 +22,7 @@ export const getEmail = (req, res) => {
   User.find({ email: req.body.email.toLowerCase() })
     .then((email) => {
       if (email.length !== 0) return res.status(200).json({ message: "Found" });
-      else res.json({ message: "Not found" });
+      else res.status(200).json({ message: "Not found" });
     })
     .catch((err) =>
       res.status(500).json({ message: "Fetching email failed", error: err })
@@ -33,6 +33,7 @@ export const signup = (req, res) => {
   // For signing up new users
   // Recieves username, email and password
 
+  console.log("signing in");
   // Check if user is already in database
   User.find({
     email: req.body.email.toLowerCase(),

@@ -93,19 +93,21 @@ export class SignupComponent implements OnInit {
   }
 
   onSignup() {
-    if (this.form.invalid) return;
-    if (this.form.valid) {
-      this.isLoading = true;
-      const authData: Auth = {
-        username: this.form.value.username.toLowercase(),
-        email: this.form.value.email.toLowercase(),
-        password: this.form.value.password,
-      };
-      console.log(authData);
+    console.log('sign');
+    console.log(this.form.value.username);
+    console.log(`${this.form.value.username}`.toLowerCase());
 
-      this.authService.createUser(authData);
-      this.isLoading = false;
-      this.router.navigateByUrl('/setup');
-    }
+    if (this.form.invalid) return;
+
+    this.isLoading = true;
+    const authData: Auth = {
+      username: `${this.form.value.username}`.toLowerCase(),
+      email: `${this.form.value.email}`.toLowerCase(),
+      password: this.form.value.password,
+    };
+    console.log(authData);
+
+    this.authService.createUser(authData);
+    this.isLoading = false;
   }
 }

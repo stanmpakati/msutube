@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { Auth } from '../_models/auth.model';
 import { environment } from '../../environments/environment';
 
-const authUrl = `${environment.production}/user`;
+const authUrl = `${environment.host}/user`;
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +40,8 @@ export class AuthService {
     this.http.post(`${authUrl}/signup`, authDetails).subscribe(
       (response) => {
         console.log(response);
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/setup');
+        // this.router.navigateByUrl('/login');
       },
       (error) => {
         console.log(error);

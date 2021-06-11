@@ -6,7 +6,7 @@ app.set("port", port);
 
 mongoose
   .connect(
-    `mongodb+srv://stan:${process.env.MONGO_ATLAS_PW}@cluster0.5icjs.mongodb.net/mean-social?retryWrites=true&w=majority`,
+    `mongodb+srv://stan:${process.env.MONGO_ATLAS_PW}@cluster0.eexsq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {

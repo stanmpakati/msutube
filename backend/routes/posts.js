@@ -8,7 +8,6 @@ import {
   getPost,
   updatePost,
   deletePost,
-  storage,
 } from "./controllers/post.js";
 
 const router = express.Router();
@@ -22,14 +21,14 @@ router.delete("/:id", checkAuth, deletePost);
 router.post(
   "/",
   checkAuth,
-  multer({ storage: storage }).single("image"),
+  // multer({ storage: storage }).single("image"),
   addPost
 );
 
 router.patch(
   "/:id",
   checkAuth,
-  multer({ storage: storage }).single("image"),
+  // multer({ storage: storage }).single("image"),
   updatePost
 );
 

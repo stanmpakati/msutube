@@ -15,7 +15,9 @@
       <a routerLink="/upload" mat-button><mat-icon>upload</mat-icon></a>
 
       <!-- profile button -->
-      <button mat-button [matMenuTriggerFor]="menu"></button>
+      <button class="icon-btn" mat-icon-button [matMenuTriggerFor]="menu">
+        <img src="/assets/vectors/man.jpg" alt="" />
+      </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>Item 1</button>
       </mat-menu>

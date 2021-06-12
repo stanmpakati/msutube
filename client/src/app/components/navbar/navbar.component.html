@@ -43,7 +43,7 @@
       </button>
       <!-- profile menu -->
       <mat-menu #menu="matMenu">
-        <div mat-menu-item>
+        <div mat-menu-item (click)="$event.stopPropagation()">
           <mat-slide-toggle (toggleChange)="toggleThemeSelection()">
             Dark Mode
           </mat-slide-toggle>

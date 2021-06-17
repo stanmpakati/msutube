@@ -1,0 +1,96 @@
+<div class="container" fxLayout.lt-sm="column" fxFlex.gt-sm="row">
+  <!-- Upload Form -->
+  <div class="video-upload-form" fxFlex="100%" fxFlex.gt-sm="30%">
+    <form [formGroup]="uploadForm">
+      <!-- File Upload box -->
+      <div class="upload-field">
+        <div class="upload-box video-upload">
+          <button mat-raised-button (click)="filePicker.click()">
+            Select File
+          </button>
+          <input type="file" #filePicker (change)="onImagePicked($event)" />
+          <button
+            *ngIf="imagePreview === '' || !imagePreview"
+            mat-icon-button
+            (click)="filePicker.click()"
+          >
+            <mat-icon>upload</mat-icon>
+          </button>
+        </div>
+
+        <!-- Thumbnail upload box -->
+        <div class="upload-box thumbnail-upload">
+          <button mat-raised-button (click)="thumbnailPicker.click()">
+            Select thumbnail
+          </button>
+          <input
+            type="file"
+            #thumbnailPicker
+            (change)="onImagePicked($event)"
+          />
+          <button
+            *ngIf="imagePreview === '' || !imagePreview"
+            mat-icon-button
+            (click)="thumbnailPicker.click()"
+          >
+            <mat-icon>upload</mat-icon>
+          </button>
+          <div
+            class="image-preview"
+            *ngIf="imagePreview !== '' && imagePreview"
+          >
+            <img [src]="imagePreview" [alt]="uploadForm.value.title" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Uploaded media details -->
+  <div fxFlex="100%" fxFlex.gt-sm="70%">
+    <mat-horizontal-stepper linear="true" #stepper>
+      <!-- Media details -->
+      <mat-step [stepControl]="detailsForm">
+        <form [formGroup]="detailsForm">
+          <ng-template matStepLabel>Fill in video details</ng-template>
+          <div class="stepper-form">
+            <h2>Details</h2>
+            <mat-form-field>
+              <mat-label>Title of video</mat-label>
+              <input matInput type="text" />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Description of video</mat-label>
+              <textarea matInput></textarea>
+            </mat-form-field>
+            <button mat-button matStepperNext type="button">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="contributesForm" label="Fill out your address">
+        <form [formGroup]="contributesForm">
+          <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input
+              matInput
+              placeholder="Ex. 1 Main St, New York, NY"
+              required
+            />
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+</div>

@@ -16,6 +16,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +30,7 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.component';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
     HomeComponent,
     NavbarComponent,
     BottomNavbarComponent,
+    UploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +67,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
     MatSidenavModule,
     MatListModule,
     MatMenuModule,
+    MatStepperModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

@@ -4,6 +4,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SetupComponent } from './auth/setup/setup.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { HomeComponent } from './home/home.component';
+import { UploadComponent } from './upload/upload.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'setup', component: SetupComponent },
 
   { path: 'home', component: HomeComponent },
+  { path: 'upload', component: UploadComponent },
 ];
 
 @NgModule({

@@ -17,6 +17,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +32,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.component';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { UploadComponent } from './upload/upload.component';
+import { FileDropDirective } from './_helpers/file-drop.directive';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { UploadComponent } from './upload/upload.component';
     NavbarComponent,
     BottomNavbarComponent,
     UploadComponent,
+    FileDropDirective,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,7 @@ import { UploadComponent } from './upload/upload.component';
     MatListModule,
     MatMenuModule,
     MatStepperModule,
+    MatChipsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

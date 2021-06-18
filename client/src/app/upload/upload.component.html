@@ -19,7 +19,13 @@
         </div>
 
         <!-- Thumbnail upload box -->
-        <div class="upload-box thumbnail-upload">
+        <div
+          class="upload-box thumbnail-upload"
+          appFileDrop
+          (filesDropped)="handleDrop($event)"
+          (filesHovered)="dropzoneState($event)"
+          [ngClass]="{ 'drop-active': dropzoneActive }"
+        >
           <button mat-raised-button (click)="thumbnailPicker.click()">
             Select thumbnail
           </button>
@@ -48,7 +54,8 @@
 
   <!-- Uploaded media details -->
   <div fxFlex="100%" fxFlex.gt-sm="70%">
-    <mat-horizontal-stepper linear="true" #stepper>
+    <!-- TODO linear = true -->
+    <mat-horizontal-stepper linear="false" #stepper>
       <!-- Media details -->
       <mat-step [stepControl]="detailsForm">
         <form [formGroup]="detailsForm">
@@ -61,21 +68,73 @@
             </mat-form-field>
             <mat-form-field>
               <mat-label>Description of video</mat-label>
-              <textarea matInput></textarea>
+              <textarea matInput rows="5"></textarea>
             </mat-form-field>
-            <button mat-button matStepperNext type="button">Next</button>
+            <mat-form-field>
+              <mat-label>Tags</mat-label>
+              <mat-chip-list #tagsList aria-label="tags selection">
+                <mat-chip
+                  *ngFor="let tag of tags"
+                  [selectable]="true"
+                  [removable]="true"
+                  (removed)="remove(tag)"
+                >
+                  {{ tag }}
+                </mat-chip>
+                <input
+                  matInput
+                  type="text"
+                  placeholder="Add new tag..."
+                  [matChipInputFor]="tagsList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeyCodes"
+                  [matChipInputAddOnBlur]="true"
+                  (matChipInputTokenEnd)="add($event)"
+                />
+                <button mat-flat-button color="accent" matSuffix>Add</button>
+              </mat-chip-list>
+              <!-- TODO only show on blur -->
+              <mat-hint>Press comma or enter to add new tag</mat-hint>
+            </mat-form-field>
+            <button
+              mat-raised-button
+              color="primary"
+              matStepperNext
+              type="button"
+              (click)="next()"
+            >
+              Next
+            </button>
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="contributesForm" label="Fill out your address">
+
+      <!-- Add various contributers here -->
+      <mat-step [stepControl]="contributesForm" label="Contributers">
         <form [formGroup]="contributesForm">
           <mat-form-field>
-            <mat-label>Address</mat-label>
-            <input
-              matInput
-              placeholder="Ex. 1 Main St, New York, NY"
-              required
-            />
+            <mat-label>Partners</mat-label>
+            <mat-chip-list #partnersList aria-label="Partners selection">
+              <mat-chip
+                *ngFor="let tag of tags"
+                [selectable]="true"
+                [removable]="true"
+                (removed)="remove(tag)"
+              >
+                {{ tag }}
+              </mat-chip>
+              <input
+                matInput
+                type="text"
+                placeholder="Add new tag..."
+                [matChipInputFor]="tagsList"
+                [matChipInputSeparatorKeyCodes]="separatorKeyCodes"
+                [matChipInputAddOnBlur]="true"
+                (matChipInputTokenEnd)="add($event)"
+              />
+              <button mat-flat-button color="accent" matSuffix>Add</button>
+            </mat-chip-list>
+            <!-- TODO only show on focus -->
+            <mat-hint>Press comma or enter to add new tag</mat-hint>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Back</button>
@@ -84,7 +143,7 @@
         </form>
       </mat-step>
       <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
+        <ng-template matStepLabel>References</ng-template>
         <p>You are now done.</p>
         <div>
           <button mat-button matStepperPrevious>Back</button>

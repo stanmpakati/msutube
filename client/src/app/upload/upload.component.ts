@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { fromEventPattern } from 'rxjs';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { ENTER, COMMA } from '@angular/cdk/keycodes';
+import * as _ from 'lodash';
+import { UploadService } from '../_services/upload.service';
+import { Post } from '../_models/post';
 
 @Component({
   selector: 'app-upload',
@@ -8,14 +12,22 @@ import { fromEventPattern } from 'rxjs';
   styleUrls: ['./upload.component.scss'],
 })
 export class UploadComponent implements OnInit {
+  // Upload form
   uploadForm!: FormGroup;
   imagePreview!: string;
+  dropzoneActive: boolean = false;
+  //details form
   detailsForm!: FormGroup;
-  contributesForm!: FormGroup;
-  linksForm!: FormGroup;
   videoDetails!: { title: string; description: string; categories: string[] };
+  tags: string[] = [];
+  separatorKeyCodes = [ENTER, COMMA] as const;
+  // Contributers form
+  contributesForm!: FormGroup;
+  partners: string[] = [];
+  // Links form
+  linksForm!: FormGroup;
 
-  constructor() {}
+  constructor(private uploadService: UploadService) {}
 
   ngOnInit(): void {
     this.uploadForm = new FormGroup({
@@ -36,18 +48,11 @@ export class UploadComponent implements OnInit {
     return this.detailsForm.controls.title;
   }
 
-  next() {
-    console.log('clicked');
-    if (this.detailsForm.invalid) return;
-
-    // this.
-  }
-
   onImagePicked(event: Event) {
     // @ts-ignore: Object is possibly 'null'.
     const file = (event.target as HTMLInputElement).files[0];
     this.uploadForm.patchValue({ file: file });
-    this.uploadForm.get('image')?.updateValueAndValidity();
+    this.uploadForm.get('file')?.updateValueAndValidity();
 
     const reader = new FileReader();
     reader.onload = () => {
@@ -55,5 +60,56 @@ export class UploadComponent implements OnInit {
     };
 
     reader.readAsDataURL(file);
+
+    //TODO remove this
+    const post: Post = {
+      name: 'vid',
+      filePath: '',
+    };
+
+    this.uploadService.uploadVideo(post, this.uploadForm.value.file);
+  }
+
+  handleDrop(fileList: FileList) {
+    console.log('dropped');
+    let filesIndex = _.range(fileList.length);
+
+    this.uploadForm.patchValue({ file: fileList.item });
+    this.uploadForm.get('file')?.updateValueAndValidity();
+
+    _.each(filesIndex, (idx) => {
+      const post: Post = {
+        name: 'vid',
+        filePath: '',
+      };
+
+      this.uploadService.uploadVideo(post, this.uploadForm.value.file);
+    });
+  }
+
+  dropzoneState($event: boolean) {
+    this.dropzoneActive = $event;
+  }
+
+  add(event: MatChipInputEvent) {
+    const val = (event.value || '').trim();
+
+    if (val) {
+      this.tags.push(val);
+      event.chipInput?.clear();
+    }
+  }
+
+  remove(tag: string) {
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) this.tags.splice(index, 1);
+  }
+
+  next() {
+    console.log('clicked');
+    if (this.detailsForm.invalid) return;
+
+    // this.
   }
 }

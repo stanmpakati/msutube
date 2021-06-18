@@ -5,8 +5,11 @@ export const addPost = (req, res) => {
   const post = new Post({
     ...req.body,
     imagePath: `${url}/images/${req.file.filename}`,
-    creator: req.userData.userId,
+    // creator: req.userData.userId,
   });
+
+  // TODO remove return statement
+  return res.status(200).json({ message: "done" });
 
   post
     .save()

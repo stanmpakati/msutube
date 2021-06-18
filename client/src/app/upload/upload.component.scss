@@ -1,7 +1,4 @@
-input {
-  width: 100%;
-}
-
+// Styling upload form
 input[type="file"] {
   visibility: hidden;
 }
@@ -21,12 +18,22 @@ input[type="file"] {
   height: 10rem;
   width: 10rem;
   border: 2px dotted #898989;
+  border-radius: 10px;
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
   padding: 1rem;
 }
 
+.drop-active {
+  border: 2px solid yellow;
+}
+
 .video-upload {
   margin-bottom: 8px;
+}
+
+// styling stepper
+.stepper-form mat-form-field {
+  width: 100%;
 }

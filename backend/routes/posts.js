@@ -2,6 +2,7 @@ import express from "express";
 import multer from "multer";
 
 import checkAuth from "../middleware/check-auth.js";
+import { pictureStorage } from "../middleware/multer.js";
 import {
   addPost,
   getPosts,
@@ -20,8 +21,8 @@ router.delete("/:id", checkAuth, deletePost);
 
 router.post(
   "/",
-  checkAuth,
-  // multer({ storage: storage }).single("image"),
+  // checkAuth,
+  multer({ storage: pictureStorage }).single("image"),
   addPost
 );
 

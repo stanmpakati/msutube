@@ -7,6 +7,8 @@ import { UploadService } from '../_services/upload.service';
 import { Post } from '../_models/post';
 import { User } from '../_models/user';
 import { Contributer } from '../_models/contributer';
+import { UserService } from '../_services/user.service';
+import { debounceTime, map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-upload',
@@ -16,7 +18,8 @@ import { Contributer } from '../_models/contributer';
 export class UploadComponent implements OnInit {
   // Upload form
   uploadForm!: FormGroup;
-  imagePreview!: string;
+  imagePreview!: string | ArrayBuffer | null;
+  draggedFile!: File;
   dropzoneActive: boolean = false;
   //details form
   detailsForm!: FormGroup;
@@ -26,11 +29,14 @@ export class UploadComponent implements OnInit {
   // Contributers form
   contributesForm!: FormGroup;
   partners: User[] = [];
-  contributer!: Contributer[];
+  contributers!: Contributer[];
   // Links form
   linksForm!: FormGroup;
 
-  constructor(private uploadService: UploadService) {}
+  constructor(
+    private uploadService: UploadService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.uploadForm = new FormGroup({
@@ -94,6 +100,35 @@ export class UploadComponent implements OnInit {
     this.dropzoneActive = $event;
   }
 
+  saveFiles(files: FileList) {
+    if (files.length > 1) return;
+    else {
+      console.log(files[0].size, files[0].name, files[0].type);
+
+      const mimeType = files[0].type;
+
+      if (mimeType.match(/image\/*/) == null) {
+        // image error
+        return;
+      }
+
+      var reader = new FileReader();
+      // this.imagePreview = files[0];
+
+      this.draggedFile = files[0];
+      reader.readAsDataURL(files[0]);
+      reader.onload = (_event) => {
+        this.imagePreview = reader.result;
+      };
+
+      // update form validation
+      this.uploadForm.patchValue({ file: files[0] });
+      this.uploadForm.get('file')?.updateValueAndValidity();
+      console.log(files[0]);
+    }
+  }
+
+  // details -------------------------------------------------
   add(event: MatChipInputEvent) {
     const val = (event.value || '').trim();
 
@@ -114,5 +149,29 @@ export class UploadComponent implements OnInit {
     if (this.detailsForm.invalid) return;
 
     // this.
+  }
+
+  // Contributers
+  removeContributer(contributer: Contributer) {
+    const index = this.contributers.indexOf(contributer);
+
+    if (index >= 0) this.contributers.splice(index, 1);
+  }
+
+  addPartner(event: MatChipInputEvent) {
+    const val = (event.value || '').trim();
+
+    if (val) {
+      this.userService.findUser(val).pipe(
+        debounceTime(1000),
+        take(1),
+        map((res) => {
+          if (res.message === 'User found') {
+            this.partners.push(res.user);
+            event.chipInput?.clear();
+          }
+        })
+      );
+    }
   }
 }

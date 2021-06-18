@@ -22,7 +22,7 @@
         <div
           class="upload-box thumbnail-upload"
           appFileDrop
-          (filesDropped)="handleDrop($event)"
+          (filesDropped)="saveFiles($event)"
           (filesHovered)="dropzoneState($event)"
           [ngClass]="{ 'drop-active': dropzoneActive }"
         >
@@ -80,6 +80,7 @@
                   (removed)="remove(tag)"
                 >
                   {{ tag }}
+                  <mat-icon matChipRemove>cancel</mat-icon>
                 </mat-chip>
                 <input
                   matInput
@@ -112,24 +113,26 @@
       <mat-step [stepControl]="contributesForm" label="Contributers">
         <form [formGroup]="contributesForm">
           <mat-form-field>
-            <mat-label>Partners</mat-label>
-            <mat-chip-list #partnersList aria-label="Partners selection">
+            <mat-label>Contributers</mat-label>
+            <mat-chip-list #contributersList aria-label="Partners selection">
+              <!-- TODO add picture to contributer pic and link with backend -->
               <mat-chip
-                *ngFor="let tag of tags"
+                *ngFor="let contributer of contributers"
                 [selectable]="true"
                 [removable]="true"
-                (removed)="remove(tag)"
+                (removed)="removeContributer(contributer)"
               >
-                {{ tag }}
+                {{ contributer.user.username }}
+                <mat-icon matChipRemove>cancel</mat-icon>
               </mat-chip>
               <input
                 matInput
                 type="text"
-                placeholder="Add new tag..."
-                [matChipInputFor]="tagsList"
+                placeholder="Add new contributer..."
+                [matChipInputFor]="contributersList"
                 [matChipInputSeparatorKeyCodes]="separatorKeyCodes"
                 [matChipInputAddOnBlur]="true"
-                (matChipInputTokenEnd)="add($event)"
+                (matChipInputTokenEnd)="addPartner($event)"
               />
               <button mat-flat-button color="accent" matSuffix>Add</button>
             </mat-chip-list>

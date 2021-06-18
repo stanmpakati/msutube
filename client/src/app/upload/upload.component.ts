@@ -5,6 +5,8 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import * as _ from 'lodash';
 import { UploadService } from '../_services/upload.service';
 import { Post } from '../_models/post';
+import { User } from '../_models/user';
+import { Contributer } from '../_models/contributer';
 
 @Component({
   selector: 'app-upload',
@@ -23,7 +25,8 @@ export class UploadComponent implements OnInit {
   separatorKeyCodes = [ENTER, COMMA] as const;
   // Contributers form
   contributesForm!: FormGroup;
-  partners: string[] = [];
+  partners: User[] = [];
+  contributer!: Contributer[];
   // Links form
   linksForm!: FormGroup;
 

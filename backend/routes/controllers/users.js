@@ -72,6 +72,45 @@ export const signup = (req, res) => {
   });
 };
 
+export const searchUser = (req, res) => {
+  // To search for a user in the database
+
+  // Check is there is a query parameter
+  if (!req.body.query)
+    return res
+      .status(400)
+      .json({ message: "Sorry there is no query parameter" });
+
+  user
+    .findOne({
+      $or: [
+        { username: req.body.query.toLowerCase() },
+        { regnumber: req.body.query.toLowerCase() },
+      ],
+    })
+    .then((user) => {
+      // If the user was not found
+      if (!user)
+        return res.status(404).json({ message: "Sorry User does not exsist" });
+
+      // User object to be sent to client
+      const foundUser = {
+        username: user.username,
+        email: user.email,
+        regnumber: user.regnumber,
+        profilePicUrl: user.profilePicUrl,
+      };
+      res.status(200).json({ message: "User found", user: foundUser });
+    })
+    .catch((err) => {
+      console.log(err),
+        res.status(500).json({
+          message: "Sorry there was a problem quering the user",
+          error: err,
+        });
+    });
+};
+
 export const login = (req, res) => {
   // To login already existing users
   // Takes in either username or email and password

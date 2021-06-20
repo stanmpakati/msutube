@@ -4,5 +4,5 @@ export interface Contributer {
   user: User;
   role: string;
   roleDetails: string;
-  actor: boolean;
+  // actor: boolean; maybe Later
 }

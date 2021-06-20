@@ -60,7 +60,7 @@ export class UploadService {
     // postData.append('id', post.id);
     // postData.append('title', post.title);
     // postData.append('content', post.content);
-    postData.append('image', image, 'post.title');
+    postData.append('image', image, 'img');
 
     this.http
       .post<{ message: string; post: Post }>(

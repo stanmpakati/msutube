@@ -1,5 +1,10 @@
 app-bottom-navbar {
   position: absolute;
   bottom: 0;
+  left: 0;
   width: 100%;
+}
+
+:host {
+  min-height: 100vh;
 }

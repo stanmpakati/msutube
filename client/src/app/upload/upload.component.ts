@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import * as _ from 'lodash';
+import { debounceTime, map, take } from 'rxjs/operators';
+
 import { UploadService } from '../_services/upload.service';
 import { Post } from '../_models/post';
 import { User } from '../_models/user';
 import { Contributer } from '../_models/contributer';
 import { UserService } from '../_services/user.service';
-import { debounceTime, map, take } from 'rxjs/operators';
+import { imageMimeTypeValidator } from '../_helpers/mine-type.validator';
+import { DetailsComponent } from './details/details.component';
 
 @Component({
   selector: 'app-upload',
@@ -22,16 +24,15 @@ export class UploadComponent implements OnInit {
   draggedFile!: File;
   dropzoneActive: boolean = false;
   //details form
-  detailsForm!: FormGroup;
-  videoDetails!: { title: string; description: string; categories: string[] };
-  tags: string[] = [];
-  separatorKeyCodes = [ENTER, COMMA] as const;
+  // detailsForm!: FormGroup;
   // Contributers form
   contributesForm!: FormGroup;
   partners: User[] = [];
   contributers!: Contributer[];
   // Links form
   linksForm!: FormGroup;
+  @ViewChild('detailsComponent')
+  detailsComponent!: DetailsComponent;
 
   constructor(
     private uploadService: UploadService,
@@ -41,27 +42,33 @@ export class UploadComponent implements OnInit {
   ngOnInit(): void {
     this.uploadForm = new FormGroup({
       file: new FormControl(null, [Validators.required]),
-      thumbnail: new FormControl(null),
+      thumbnail: new FormControl(null, {
+        asyncValidators: [imageMimeTypeValidator],
+      }),
     });
-    this.detailsForm = new FormGroup({
-      title: new FormControl(null, [Validators.required]),
-      description: new FormControl(null, [Validators.required]),
-      categories: new FormControl(null),
-    });
+
     this.contributesForm = new FormGroup({
       partners: new FormControl(),
+      contributers: new FormControl(),
+      username: new FormControl(null),
+      // TODO make required only if username has been completed
+      role: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, [Validators.required]),
     });
   }
 
-  get title() {
-    return this.detailsForm.controls.title;
+  get detailsForm() {
+    return this.detailsComponent?.detailsForm;
+    // return this.detailsComponent ? this.detailsComponent.detailsForm : null;
   }
 
-  onImagePicked(event: Event) {
-    // @ts-ignore: Object is possibly 'null'.
-    const file = (event.target as HTMLInputElement).files[0];
-    this.uploadForm.patchValue({ file: file });
-    this.uploadForm.get('file')?.updateValueAndValidity();
+  get thumbnail() {
+    return this.uploadForm.controls.thumbnail;
+  }
+
+  readFile(file: File) {
+    this.uploadForm.patchValue({ thumbnail: file });
+    this.uploadForm.get('thumbnail')?.updateValueAndValidity();
 
     const reader = new FileReader();
     reader.onload = () => {
@@ -69,31 +76,25 @@ export class UploadComponent implements OnInit {
     };
 
     reader.readAsDataURL(file);
+  }
 
-    //TODO remove this
+  onImagePicked(event: Event) {
+    // @ts-ignore: Object is possibly 'null'.
+    const file = (event.target as HTMLInputElement).files[0];
+    this.readFile(file);
+  }
+
+  handleDrop(fileList: FileList) {
+    console.log('dropped');
+
+    this.readFile(fileList[0]);
+
     const post: Post = {
       name: 'vid',
       filePath: '',
     };
 
     this.uploadService.uploadVideo(post, this.uploadForm.value.file);
-  }
-
-  handleDrop(fileList: FileList) {
-    console.log('dropped');
-    let filesIndex = _.range(fileList.length);
-
-    this.uploadForm.patchValue({ file: fileList.item });
-    this.uploadForm.get('file')?.updateValueAndValidity();
-
-    _.each(filesIndex, (idx) => {
-      const post: Post = {
-        name: 'vid',
-        filePath: '',
-      };
-
-      this.uploadService.uploadVideo(post, this.uploadForm.value.file);
-    });
   }
 
   dropzoneState($event: boolean) {
@@ -128,34 +129,23 @@ export class UploadComponent implements OnInit {
     }
   }
 
-  // details -------------------------------------------------
-  add(event: MatChipInputEvent) {
-    const val = (event.value || '').trim();
+  // details --------------------------------------------------------------------------------------
 
-    if (val) {
-      this.tags.push(val);
-      event.chipInput?.clear();
-    }
+  // Contributers -------------------------------------------------------------------------------------
+  get username() {
+    return this.contributesForm.controls.username;
   }
 
-  remove(tag: string) {
-    const index = this.tags.indexOf(tag);
-
-    if (index >= 0) this.tags.splice(index, 1);
-  }
-
-  next() {
-    console.log('clicked');
-    if (this.detailsForm.invalid) return;
-
-    // this.
-  }
-
-  // Contributers
   removeContributer(contributer: Contributer) {
     const index = this.contributers.indexOf(contributer);
 
     if (index >= 0) this.contributers.splice(index, 1);
+  }
+
+  removePartner(partner: User) {
+    const index = this.partners.indexOf(partner);
+
+    if (index >= 0) this.partners.splice(index, 1);
   }
 
   addPartner(event: MatChipInputEvent) {
@@ -173,5 +163,21 @@ export class UploadComponent implements OnInit {
         })
       );
     }
+  }
+
+  addContributer() {
+    if (this.contributesForm.invalid) return;
+
+    this.userService
+      .findUser(this.contributesForm.value.username)
+      .subscribe((resObj) => {
+        const newContributer: Contributer = {
+          user: resObj.user,
+          role: this.contributesForm.value.role,
+          roleDetails: this.contributesForm.value.description,
+        };
+        this.contributers.push(newContributer);
+        this.contributesForm.reset();
+      });
   }
 }

@@ -24,7 +24,7 @@ mat-button {
 .logo-light {
   font-size: x-large;
   font-weight: 900;
-  color: rgb(34, 34, 34);
+  color: rgb(124, 124, 124);
 
   span {
     color: blue;
@@ -34,7 +34,7 @@ mat-button {
 .logo-dark {
   font-size: x-large;
   font-weight: 900;
-  color: white;
+  color: rgb(226, 226, 226);
 
   span {
     color: blue;
@@ -43,4 +43,16 @@ mat-button {
 
 .spacer {
   flex: 1 1 auto;
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}
+
+.mt-1 {
+  margin-top: 1rem;
+}
+
+.w-100 {
+  width: 100%;
 }

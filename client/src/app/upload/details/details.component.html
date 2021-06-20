@@ -1,0 +1,49 @@
+<form [formGroup]="detailsForm">
+  <div class="stepper-form">
+    <h2>Details</h2>
+    <mat-form-field class="w-100">
+      <mat-label>Title of video</mat-label>
+      <input matInput type="text" />
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Description of video</mat-label>
+      <textarea matInput rows="5"></textarea>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Tags</mat-label>
+      <mat-chip-list #tagsList aria-label="tags selection">
+        <mat-chip
+          *ngFor="let tag of tags"
+          [selectable]="true"
+          [removable]="true"
+          (removed)="remove(tag)"
+        >
+          {{ tag }}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input
+          matInput
+          type="text"
+          placeholder="Add new tag..."
+          [matChipInputFor]="tagsList"
+          [matChipInputSeparatorKeyCodes]="separatorKeyCodes"
+          [matChipInputAddOnBlur]="true"
+          (matChipInputTokenEnd)="add($event)"
+        />
+        <button mat-stroked-button color="primary" matSuffix>Add</button>
+      </mat-chip-list>
+      <!-- TODO only show on blur -->
+      <mat-hint>Press comma or enter to add new tag</mat-hint>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      matStepperNext
+      type="button"
+      (click)="next()"
+      class="mt-1"
+    >
+      Next
+    </button>
+  </div>
+</form>

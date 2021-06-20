@@ -33,6 +33,7 @@ import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { UploadComponent } from './upload/upload.component';
 import { FileDropDirective } from './_helpers/file-drop.directive';
+import { DetailsComponent } from './upload/details/details.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { FileDropDirective } from './_helpers/file-drop.directive';
     BottomNavbarComponent,
     UploadComponent,
     FileDropDirective,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,

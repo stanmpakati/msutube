@@ -35,6 +35,9 @@ import { UploadComponent } from './upload/upload.component';
 import { FileDropDirective } from './_helpers/file-drop.directive';
 import { DetailsComponent } from './upload/details/details.component';
 import { ThumbnailComponent } from './components/thumbnail/thumbnail.component';
+import { MusicComponent } from './music/music.component';
+import { PicturesComponent } from './pictures/pictures.component';
+import { TopNavComponent } from './components/top-nav/top-nav.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,9 @@ import { ThumbnailComponent } from './components/thumbnail/thumbnail.component';
     FileDropDirective,
     DetailsComponent,
     ThumbnailComponent,
+    MusicComponent,
+    PicturesComponent,
+    TopNavComponent,
   ],
   imports: [
     BrowserModule,

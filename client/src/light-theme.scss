@@ -38,6 +38,10 @@ $dark-theme: mat.define-dark-theme(
   @include mat.all-component-themes($dark-theme);
 }
 
+// .main-color {
+//   background-color: mat-color(map-get($light-theme, primary), darker);
+// }
+
 // light by default
 @include mat.core-theme($light-theme);
 @include mat.all-component-themes($light-theme);

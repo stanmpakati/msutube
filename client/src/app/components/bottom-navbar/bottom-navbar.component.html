@@ -1,27 +1,31 @@
 <mat-toolbar>
   <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-around center">
-    <a routerLink="/home">
+    <a
+      routerLink="/home"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLinkActive="active"
+    >
       <div fxLayout="column" fxLayoutAlign="center center">
         <mat-icon>home</mat-icon>
         <span class="mat-caption">Home</span>
       </div>
     </a>
 
-    <a routerLink="/music">
+    <a routerLink="/music" routerLinkActive="active">
       <div fxLayout="column" fxLayoutAlign="center center">
         <mat-icon>music</mat-icon>
         <span class="mat-caption">Music</span>
       </div>
     </a>
 
-    <a routerLink="/pictures">
+    <a routerLink="/pictures" routerLinkActive="active">
       <div fxLayout="column" fxLayoutAlign="center center">
         <mat-icon>picture</mat-icon>
         <span class="mat-caption">Pictures</span>
       </div>
     </a>
 
-    <a routerLink="/profile">
+    <a routerLink="/profile" routerLinkActive="active">
       <div fxLayout="column" fxLayoutAlign="center center">
         <mat-icon>person</mat-icon>
         <span class="mat-caption">Profile</span>

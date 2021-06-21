@@ -1,0 +1,43 @@
+:host {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.thumb-container {
+  width: 12rem;
+  display: block;
+}
+
+.img {
+  background: url("/assets/img/Get-Out.jpg");
+  aspect-ratio: 19/10;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  img {
+    // TODO fix stretching of image
+    width: 100%;
+    // height: 100%;
+    aspect-ratio: 19/10;
+
+    background-size: contain;
+    background-position: center;
+    overflow: hidden;
+    // position: absolute;
+  }
+  span {
+    background-color: rgb(29, 29, 29);
+    color: rgb(255, 255, 255);
+    opacity: 0.9;
+    padding: 1px 3px;
+    // margin-top: 30px;
+    // margin-left: 10px;
+    position: relative;
+    top: 75px;
+    left: 8px;
+  }
+}
+
+.mat-body-2 {
+  color: rgb(39, 39, 175);
+}

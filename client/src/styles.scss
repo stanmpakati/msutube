@@ -56,3 +56,17 @@ mat-button {
 .w-100 {
   width: 100%;
 }
+
+.active {
+  border-bottom: 2px solid blue;
+
+  div span {
+    font-size: 1rem;
+    color: blue;
+  }
+
+  div mat-icon {
+    color: blue;
+    font-size: 28px;
+  }
+}

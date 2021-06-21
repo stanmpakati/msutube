@@ -34,6 +34,7 @@ import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { UploadComponent } from './upload/upload.component';
 import { FileDropDirective } from './_helpers/file-drop.directive';
 import { DetailsComponent } from './upload/details/details.component';
+import { ThumbnailComponent } from './components/thumbnail/thumbnail.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { DetailsComponent } from './upload/details/details.component';
     UploadComponent,
     FileDropDirective,
     DetailsComponent,
+    ThumbnailComponent,
   ],
   imports: [
     BrowserModule,

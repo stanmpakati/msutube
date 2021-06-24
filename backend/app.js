@@ -24,7 +24,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => res.send("Hello Weirdo"));
+app.get("/", (req, res) => res.send("Hello Weirdo, Your server is working"));
 
 app.use("/api/posts", postRoutes);
 app.use("/api/user", userRoutes);

@@ -1,3 +1,4 @@
+import Video from "../../models/video.js";
 let uploads = {};
 
 export const videoUpload = (req, res) => {
@@ -15,7 +16,7 @@ export const addVideo = (req, res) => {
   const url = req.protocol + "://" + req.get("host");
   const video = new Video({
     ...req.body,
-    VideoPath: `${url}/videos/${req.file.filename}`,
+    VideoPath: `${url}/videos/${req.video.filename}`,
     // creator: req.userData.userId,
   });
 

@@ -7,7 +7,7 @@ const videoSchema = mongoose.Schema(
     videoPath: { type: String, required: true },
     thumbnailPath: { type: String, required: true },
     tags: [{ type: String }],
-    views: { type: Integer },
+    views: { type: Number },
     citations: [{ type: String }],
     creators: [
       {
@@ -18,20 +18,16 @@ const videoSchema = mongoose.Schema(
     ],
     contributers: [
       {
-        type: {
-          username: String,
-          role: String,
-          roleDescription: String,
-        },
+        username: String,
+        role: String,
+        roleDescription: String,
       },
     ],
     comments: [
       {
-        type: {
-          username: String,
-          comment: String,
-          likes: integer,
-        },
+        username: String,
+        comment: String,
+        likes: Number,
       },
     ],
   },

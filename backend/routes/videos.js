@@ -2,7 +2,7 @@ import express from "express";
 import multer from "multer";
 
 import checkAuth from "../middleware/check-auth.js";
-import { pictureStorage, videoStorage } from "../middleware/multer.js";
+import { storage, videoStorage } from "../middleware/multer.js";
 import {
   addVideo,
   getVideo,
@@ -22,8 +22,17 @@ router.delete("/:id", checkAuth, deleteVideo);
 router.post(
   "/",
   // checkAuth,
-  multer({ storage: pictureStorage }).single("image"),
-  multer({ storage: videoStorage }).single("video"),
+  multer({ storage: storage }).fields([
+    {
+      name: "video",
+      maxCount: 1,
+    },
+    {
+      name: "thumbnail",
+      maxCount: 1,
+    },
+  ]),
+  // multer({ storage: videoStorage }).single("video"),
   addVideo
 );
 

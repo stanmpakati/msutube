@@ -16,13 +16,12 @@ export class VideoService {
 
   uploadVideo(post: Post, image: File, video: File) {
     console.log('uploading');
-    console.log(video);
     const postData = new FormData();
     // postData.append('id', post.id);
     // postData.append('title', post.title);
     // postData.append('content', post.content);
-    postData.append('image', image, 'img');
-    postData.append('video', video, 'vid');
+    postData.append('thumbnail', image);
+    postData.append('video', video);
 
     this.http
       .post<{ message: string; post: Post }>(

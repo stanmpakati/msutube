@@ -11,16 +11,25 @@ const VID_MINE_TYPE_MAP = {
   "video/mkv": "mkv",
 };
 
-export const pictureStorage = multer.diskStorage({
+const MINE_TYPE_MAP = {
+  "video/mp4": "mp4",
+  "video/mkv": "mkv",
+  "image/png": "png",
+  "image/jpeg": "jpg",
+  "image/jpg": "jpg",
+  "audio/mp3": "mp3",
+};
+export const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const isValid = IMG_MINE_TYPE_MAP[file.mimetype];
+    console.log(file);
+    const isValid = MINE_TYPE_MAP[file.mimetype];
     let error = new Error("Invalid mine type");
     if (isValid) error = null;
-    cb(error, "images");
+    cb(error, "./_uploads/videos");
   },
   filename: (req, file, cb) => {
     const name = file.originalname.toLocaleLowerCase().split(" ").join("-");
-    const ext = IMG_MINE_TYPE_MAP[file.mimetype];
+    const ext = MINE_TYPE_MAP[file.mimetype];
     cb(null, name + "-" + Date.now() + "." + ext);
   },
 });

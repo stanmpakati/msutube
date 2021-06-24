@@ -11,6 +11,7 @@ export const videoUpload = (req, res) => {
 };
 
 export const addVideo = (req, res) => {
+  console.log("upploading", req.body);
   const url = req.protocol + "://" + req.get("host");
   const video = new Video({
     ...req.body,

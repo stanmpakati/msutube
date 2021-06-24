@@ -1,58 +1,7 @@
 <div class="container" fxLayout.lt-sm="column" fxFlex.gt-sm="row">
   <!-- Upload Form -->
   <div class="video-upload-form" fxFlex="100%" fxFlex.gt-sm="30%">
-    <form [formGroup]="uploadForm">
-      <!-- File Upload box -->
-      <div class="upload-field">
-        <div class="upload-box video-upload">
-          <button mat-raised-button (click)="filePicker.click()">
-            Select File
-          </button>
-          <input type="file" #filePicker (change)="onImagePicked($event)" />
-          <button
-            *ngIf="imagePreview === '' || !imagePreview"
-            mat-icon-button
-            (click)="filePicker.click()"
-          >
-            <mat-icon>backup</mat-icon>
-          </button>
-        </div>
-
-        <!-- Thumbnail upload box -->
-        <div
-          class="upload-box thumbnail-upload"
-          appFileDrop
-          (filesDropped)="saveFiles($event)"
-          (filesHovered)="dropzoneState($event)"
-          [ngClass]="{ 'drop-active': dropzoneActive }"
-        >
-          <mat-error *ngIf="thumbnail.errors?.invalidMimeType"
-            >Only jpg and png files accepted</mat-error
-          >
-          <button mat-raised-button (click)="thumbnailPicker.click()">
-            Select thumbnail
-          </button>
-          <input
-            type="file"
-            #thumbnailPicker
-            (change)="onImagePicked($event)"
-          />
-          <button
-            *ngIf="imagePreview === '' || !imagePreview"
-            mat-icon-button
-            (click)="thumbnailPicker.click()"
-          >
-            <mat-icon>backup</mat-icon>
-          </button>
-          <div
-            class="image-preview"
-            *ngIf="imagePreview !== '' && imagePreview && thumbnail.valid"
-          >
-            <img [src]="imagePreview" [alt]="uploadForm.value.title" />
-          </div>
-        </div>
-      </div>
-    </form>
+    <app-file-upload></app-file-upload>
   </div>
 
   <!-- Uploaded media details -->

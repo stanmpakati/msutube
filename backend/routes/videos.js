@@ -9,7 +9,7 @@ import {
   getVideos,
   updateVideo,
   deleteVideo,
-} from "./controllers/video";
+} from "./controllers/video.js";
 
 const router = express.Router();
 

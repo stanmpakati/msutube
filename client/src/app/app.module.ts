@@ -38,6 +38,7 @@ import { ThumbnailComponent } from './components/thumbnail/thumbnail.component';
 import { MusicComponent } from './music/music.component';
 import { PicturesComponent } from './pictures/pictures.component';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
+import { FeaturedComponent } from './home/featured/featured.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { TopNavComponent } from './components/top-nav/top-nav.component';
     MusicComponent,
     PicturesComponent,
     TopNavComponent,
+    FeaturedComponent,
   ],
   imports: [
     BrowserModule,

@@ -23,17 +23,11 @@ export class VideoService {
     postData.append('thumbnail', image);
     postData.append('video', video);
 
-    this.http
-      .post<{ message: string; post: Post }>(
-        videoUrl,
-        postData
-        // {observe: 'response'}
-      )
-      .subscribe((response) => {
-        console.log(response);
-        // this.posts.push(response.post);
-        // this.postsUpdated.next({posts: [...this.posts], postCount: response.maxPosts});
-        // this.router.navigate(['/']);
-      });
+    // <{ message: string; post: Post }>
+    // <{loaded: any, total: any}>
+    return this.http.post(videoUrl, postData, {
+      reportProgress: true,
+      observe: 'response',
+    });
   }
 }

@@ -10,6 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -78,6 +79,7 @@ import { FileUploadComponent } from './upload/file-upload/file-upload.component'
     MatExpansionModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     MatSnackBarModule,
     MatIconModule,
     MatSlideToggleModule,

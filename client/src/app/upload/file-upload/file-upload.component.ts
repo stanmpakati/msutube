@@ -1,5 +1,7 @@
+import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { map } from 'rxjs/operators';
 import { Post } from 'src/app/_models/post';
 import { VideoService } from 'src/app/_services/video.service';
 import { imageMimeTypeValidator } from '../../_helpers/mine-type.validator';
@@ -15,6 +17,7 @@ export class FileUploadComponent implements OnInit {
   filePreview!: string | ArrayBuffer | null;
   draggedFile!: File;
   dropzoneActive: boolean = false;
+  uploadPcnt!: number;
 
   constructor(private videoService: VideoService) {}
 
@@ -66,11 +69,30 @@ export class FileUploadComponent implements OnInit {
       name: 'test video',
       filePath: '',
     };
-    this.videoService.uploadVideo(
-      post,
-      this.uploadForm.value.thumbnail,
-      this.uploadForm.value.file
-    );
+    this.videoService
+      .uploadVideo(
+        post,
+        this.uploadForm.value.thumbnail,
+        this.uploadForm.value.file
+      )
+      .pipe(
+        map((event) => {
+          // if (event.type == HttpEventType.UploadProgress) {
+          //   this.uploadPcnt = Math.round((100 / (event.total) || 0) * event.loaded)
+          // }
+          if (event.type == HttpEventType.Response) {
+            this.uploadPcnt = 0;
+          }
+        })
+      )
+      .subscribe((event) => {
+        // if(event['loaded'] && event['total']) {
+        //   this.uploadPcnt = Math.round(event['loaded'] / event['total'] * 100)
+        // }
+        // if (event['body']) {
+        //   this
+        // }
+      });
   }
 
   // To pick images

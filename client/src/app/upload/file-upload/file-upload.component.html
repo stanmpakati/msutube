@@ -47,5 +47,11 @@
         <img [src]="thumbPreview" [alt]="uploadForm.value.title" />
       </div>
     </div>
+    <div class="upload-progress">
+      <mat-progress-bar
+        mode="determinate"
+        [value]="uploadPcnt"
+      ></mat-progress-bar>
+    </div>
   </div>
 </form>

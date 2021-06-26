@@ -4,6 +4,7 @@
     <mat-form-field class="w-100">
       <mat-label>Title of video</mat-label>
       <input matInput type="text" />
+      <mat-error *ngIf="title.errors?.required"> Title required </mat-error>
     </mat-form-field>
     <mat-form-field class="w-100">
       <mat-label>Description of video</mat-label>
@@ -33,7 +34,7 @@
         <button mat-stroked-button color="primary" matSuffix>Add</button>
       </mat-chip-list>
       <!-- TODO only show on blur -->
-      <mat-hint>Press comma or enter to add new tag</mat-hint>
+      <mat-hint> Press comma or enter to add new tag </mat-hint>
     </mat-form-field>
     <button
       mat-raised-button

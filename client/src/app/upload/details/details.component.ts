@@ -52,6 +52,7 @@ export class DetailsComponent implements OnInit {
   }
 
   next() {
+    console.log(this.title.errors);
     if (this.detailsForm.invalid) return;
     console.log('clicked');
 

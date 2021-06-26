@@ -1,6 +1,14 @@
 <form [formGroup]="uploadForm">
   <!-- File Upload box -->
-  <div class="upload-field">
+  <div
+    class="upload-field"
+    appFileDrop
+    (filesDropped)="handleDrop($event, 0)"
+    (filesHovered)="dropzoneState($event)"
+    [ngClass]="{ 'drop-active': dropzoneActive }"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
     <div class="upload-box video-upload">
       <button mat-raised-button (click)="filePicker.click()">
         Select File
@@ -22,7 +30,7 @@
     <div
       class="upload-box thumbnail-upload"
       appFileDrop
-      (filesDropped)="handleDrop($event)"
+      (filesDropped)="handleDrop($event, 1)"
       (filesHovered)="dropzoneState($event)"
       [ngClass]="{ 'drop-active': dropzoneActive }"
     >
@@ -47,7 +55,7 @@
         <img [src]="thumbPreview" [alt]="uploadForm.value.title" />
       </div>
     </div>
-    <div class="upload-progress">
+    <div class="upload-progress" *ngIf="uploadPcnt">
       <mat-progress-bar
         mode="determinate"
         [value]="uploadPcnt"

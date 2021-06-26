@@ -23,11 +23,10 @@ export class VideoService {
     postData.append('thumbnail', image);
     postData.append('video', video);
 
-    // <{ message: string; post: Post }>
     // <{loaded: any, total: any}>
-    return this.http.post(videoUrl, postData, {
+    return this.http.post<{ message: string; post: Post }>(videoUrl, postData, {
       reportProgress: true,
-      observe: 'response',
+      observe: 'events',
     });
   }
 }

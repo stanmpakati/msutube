@@ -77,9 +77,12 @@ export class FileUploadComponent implements OnInit {
       )
       .pipe(
         map((event) => {
-          // if (event.type == HttpEventType.UploadProgress) {
-          //   this.uploadPcnt = Math.round((100 / (event.total) || 0) * event.loaded)
-          // }
+          if (event.type === HttpEventType.UploadProgress) {
+            this.uploadPcnt = Math.round(
+              (100 / event.total! || 0) * event.loaded
+            );
+            console.log(this.uploadPcnt);
+          }
           if (event.type == HttpEventType.Response) {
             this.uploadPcnt = 0;
           }
@@ -110,9 +113,10 @@ export class FileUploadComponent implements OnInit {
   }
 
   // To handle file drops in the dropzone
-  handleDrop(fileList: FileList) {
+  handleDrop(fileList: FileList, fileNum: number) {
     console.log('dropped');
 
-    this.readThumbFile(fileList[0]);
+    if (fileNum === 0) this.readContentFile(fileList[0]);
+    else this.readThumbFile(fileList[0]);
   }
 }

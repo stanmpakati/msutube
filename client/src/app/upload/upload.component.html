@@ -1,5 +1,13 @@
 <div class="container" fxLayoutAlign="center center">
-  <div class="custom-bg" fxLayout.lt-sm="column" fxFlex.gt-sm="row">
+  <div
+    class="custom-bg"
+    [ngClass]="{
+      'custom-bg-light': !isDarkMode,
+      'custom-bg-dark': isDarkMode
+    }"
+    fxLayout.lt-sm="column"
+    fxFlex.gt-sm="row"
+  >
     <!-- Upload Form -->
     <div
       class="video-upload-form"

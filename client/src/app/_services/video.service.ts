@@ -14,17 +14,18 @@ const videoUrl = `${environment.host}/video`;
 export class VideoService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  uploadVideo(post: Post, image: File, video: File) {
+  uploadVideo(image: File, video: File) {
     console.log('uploading');
     const postData = new FormData();
-    // postData.append('id', post.id);
-    // postData.append('title', post.title);
-    // postData.append('content', post.content);
     postData.append('thumbnail', image);
     postData.append('video', video);
 
     // <{loaded: any, total: any}>
-    return this.http.post<{ message: string; post: Post }>(videoUrl, postData, {
+    return this.http.post<{
+      message: string;
+      fileUrl: string;
+      thumbnailUrl: string;
+    }>(videoUrl, postData, {
       reportProgress: true,
       observe: 'events',
     });

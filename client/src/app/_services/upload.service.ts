@@ -54,16 +54,11 @@ export class UploadService {
   }
 
   uploadVideo(post: Post, image: File) {
-    console.log('uploading');
-    console.log(image);
     const postData = new FormData();
-    // postData.append('id', post.id);
-    // postData.append('title', post.title);
-    // postData.append('content', post.content);
     postData.append('image', image, 'img');
 
     this.http
-      .post<{ message: string; post: Post }>(
+      .post<{ message: string; url: string }>(
         // videoUrl,
         'http://localhost:5000/api/posts',
         postData
@@ -71,9 +66,6 @@ export class UploadService {
       )
       .subscribe((response) => {
         console.log(response);
-        // this.posts.push(response.post);
-        // this.postsUpdated.next({posts: [...this.posts], postCount: response.maxPosts});
-        // this.router.navigate(['/']);
       });
   }
 

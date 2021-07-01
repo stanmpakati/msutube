@@ -11,17 +11,24 @@ export const videoUpload = (req, res) => {
   // if ()
 };
 
-export const addVideo = (req, res) => {
-  console.log("upploading", req.body);
+export const uploadVideo = (req, res) => {
+  console.log("uploading", req.files);
   const url = req.protocol + "://" + req.get("host");
-  const video = new Video({
-    ...req.body,
-    // VideoPath: `${url}/videos/${req.video.filename}`,
-    // creator: req.userData.userId,
-  });
+
+  const videoPath = `${url}/${req.files.video[0].path}`;
+  const thumbPath = `${url}/${req.files.thumbnail[0].path}`;
 
   // TODO remove return statement
-  return res.status(200).json({ message: "done" });
+  return res.status(200).json({
+    message: "Uploaded",
+    fileUrl: videoPath,
+    thumbnailUrl: thumbPath,
+  });
+
+  const video = new Video({
+    ...req.body,
+    // creator: req.userData.userId,
+  });
 
   video
     .save()

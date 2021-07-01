@@ -7,6 +7,7 @@ import { debounceTime, map, take } from 'rxjs/operators';
 import { UserService } from '../_services/user.service';
 import { DetailsComponent } from './details/details.component';
 import { ContributersFormComponent } from './contributers-form/contributers-form.component';
+import { ThemeService } from '../_services/theme.service';
 
 @Component({
   selector: 'app-upload',
@@ -20,10 +21,21 @@ export class UploadComponent implements OnInit {
 
   @ViewChild('contributersFormComponent', { static: false })
   contributersFormComponent!: ContributersFormComponent;
+  isDarkMode!: boolean;
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private themeService: ThemeService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isDarkMode = this.themeService.getIsDarkMode;
+    // this.themeService.themeStatusListener.subscribe((isDark) => {
+    //   this.isDarkMode = isDark;
+    //   console.log(isDark);
+    // });
+    console.log(this.isDarkMode);
+  }
 
   // ngAfterViewInit() {
   //   this.contributersFormComponent = new ContributersFormComponent()

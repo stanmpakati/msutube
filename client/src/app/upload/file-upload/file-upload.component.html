@@ -34,9 +34,9 @@
       (filesHovered)="dropzoneState($event)"
       [ngClass]="{ 'drop-active': dropzoneActive }"
     >
-      <mat-error *ngIf="thumbnail.errors?.invalidMimeType"
-        >Only jpg and png files accepted</mat-error
-      >
+      <mat-error *ngIf="thumbnail.errors?.invalidMimeType">
+        Only jpg and png files accepted
+      </mat-error>
       <button mat-raised-button (click)="thumbnailPicker.click()">
         Select thumbnail
       </button>

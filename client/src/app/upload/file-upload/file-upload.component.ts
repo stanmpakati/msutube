@@ -65,16 +65,9 @@ export class FileUploadComponent implements OnInit {
     reader.readAsDataURL(file);
 
     // upload video
-    const post: Post = {
-      name: 'test video',
-      filePath: '',
-    };
+
     this.videoService
-      .uploadVideo(
-        post,
-        this.uploadForm.value.thumbnail,
-        this.uploadForm.value.file
-      )
+      .uploadVideo(this.uploadForm.value.thumbnail, this.uploadForm.value.file)
       .pipe(
         map((event) => {
           if (event.type === HttpEventType.UploadProgress) {
@@ -85,17 +78,11 @@ export class FileUploadComponent implements OnInit {
           }
           if (event.type == HttpEventType.Response) {
             this.uploadPcnt = 0;
+            console.log(event.body?.message);
           }
         })
       )
-      .subscribe((event) => {
-        // if(event['loaded'] && event['total']) {
-        //   this.uploadPcnt = Math.round(event['loaded'] / event['total'] * 100)
-        // }
-        // if (event['body']) {
-        //   this
-        // }
-      });
+      .subscribe((event) => {});
   }
 
   // To pick images

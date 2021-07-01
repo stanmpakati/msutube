@@ -4,7 +4,7 @@ import multer from "multer";
 import checkAuth from "../middleware/check-auth.js";
 import { storage, videoStorage } from "../middleware/multer.js";
 import {
-  addVideo,
+  uploadVideo,
   getVideo,
   getVideos,
   updateVideo,
@@ -33,7 +33,7 @@ router.post(
     },
   ]),
   // multer({ storage: videoStorage }).single("video"),
-  addVideo
+  uploadVideo
 );
 
 router.patch(

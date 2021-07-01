@@ -2,7 +2,9 @@ import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
+import { UploadStatus } from 'src/app/_models/enums/upload-status.enum';
 import { Post } from 'src/app/_models/post';
+import { Upload } from 'src/app/_models/upload.interface';
 import { VideoService } from 'src/app/_services/video.service';
 import { imageMimeTypeValidator } from '../../_helpers/mine-type.validator';
 
@@ -17,7 +19,7 @@ export class FileUploadComponent implements OnInit {
   filePreview!: string | ArrayBuffer | null;
   draggedFile!: File;
   dropzoneActive: boolean = false;
-  uploadPcnt!: number;
+  uploadStatus!: Upload;
 
   constructor(private videoService: VideoService) {}
 
@@ -28,6 +30,11 @@ export class FileUploadComponent implements OnInit {
         asyncValidators: [imageMimeTypeValidator],
       }),
     });
+
+    this.uploadStatus = {
+      percentage: 25,
+      status: UploadStatus.init,
+    };
   }
 
   get thumbnail() {
@@ -71,18 +78,21 @@ export class FileUploadComponent implements OnInit {
       .pipe(
         map((event) => {
           if (event.type === HttpEventType.UploadProgress) {
-            this.uploadPcnt = Math.round(
+            this.uploadStatus.status = UploadStatus.progress;
+
+            let uploadPcnt = Math.round(
               (100 / event.total! || 0) * event.loaded
             );
-            console.log(this.uploadPcnt);
+            this.uploadStatus.percentage = uploadPcnt;
+            console.log(this.uploadStatus.percentage);
           }
           if (event.type == HttpEventType.Response) {
-            this.uploadPcnt = 0;
+            this.uploadStatus.status = UploadStatus.complete;
             console.log(event.body?.message);
           }
         })
       )
-      .subscribe((event) => {});
+      .subscribe(() => {});
   }
 
   // To pick images

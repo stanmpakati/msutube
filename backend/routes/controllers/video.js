@@ -16,7 +16,9 @@ export const uploadVideo = (req, res) => {
   const url = req.protocol + "://" + req.get("host");
 
   const videoPath = `${url}/${req.files.video[0].path}`;
-  const thumbPath = `${url}/${req.files.thumbnail[0].path}`;
+  const thumbPath = req.files.thumbnail
+    ? `${url}/${req.files.thumbnail[0].path}`
+    : null;
 
   // TODO remove return statement
   return res.status(200).json({

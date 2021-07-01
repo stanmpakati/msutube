@@ -55,10 +55,10 @@
         <img [src]="thumbPreview" [alt]="uploadForm.value.title" />
       </div>
     </div>
-    <div class="upload-progress" *ngIf="uploadPcnt">
+    <div class="upload-progress">
       <mat-progress-bar
         mode="determinate"
-        [value]="uploadPcnt"
+        [value]="uploadStatus.percentage"
       ></mat-progress-bar>
     </div>
   </div>

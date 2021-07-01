@@ -20,7 +20,6 @@ export class VideoService {
     postData.append('thumbnail', image);
     postData.append('video', video);
 
-    // <{loaded: any, total: any}>
     return this.http.post<{
       message: string;
       fileUrl: string;

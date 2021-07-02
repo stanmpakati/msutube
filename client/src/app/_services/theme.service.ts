@@ -27,6 +27,5 @@ export class ThemeService {
     this.isDarkMode = val;
     localStorage.setItem('theme', val ? 'dark' : 'light');
     this.themeListener.next(this.isDarkMode);
-    console.log('hit' + val);
   }
 }

@@ -6,6 +6,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { HomeComponent } from './home/home.component';
 import { MusicComponent } from './music/music.component';
 import { PicturesComponent } from './pictures/pictures.component';
+import { ProfileComponent } from './profile/profile.component';
 import { UploadComponent } from './upload/upload.component';
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'upload', component: UploadComponent },
   { path: 'music', component: MusicComponent },
   { path: 'pictures', component: PicturesComponent },
+  { path: 'profile', component: ProfileComponent },
 ];
 
 @NgModule({

@@ -15,10 +15,14 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private themeService: ThemeService) {}
 
   ngOnInit() {
-    this.themeService.getTheme();
-    this.themeService.themeStatusListener.subscribe(
-      (isDark) => (this.isDarkMode = isDark)
+    this.themeSub = this.themeService.themeStatusListener.subscribe(
+      (isDark) => {
+        console.log(`isdark: ${isDark}`);
+        this.isDarkMode = isDark;
+      }
     );
+    this.themeService.getTheme();
+    console.log(`isdarkmode: ${this.isDarkMode}`);
   }
 
   ngOnDestroy() {

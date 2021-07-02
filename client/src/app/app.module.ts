@@ -42,6 +42,7 @@ import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { FeaturedComponent } from './home/featured/featured.component';
 import { FileUploadComponent } from './upload/file-upload/file-upload.component';
 import { ContributersFormComponent } from './upload/contributers-form/contributers-form.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ContributersFormComponent } from './upload/contributers-form/contribute
     FeaturedComponent,
     FileUploadComponent,
     ContributersFormComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

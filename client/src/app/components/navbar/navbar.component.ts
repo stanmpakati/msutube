@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.isDarkMode = isDark;
       }
     );
+    this.themeService.getTheme();
   }
 
   ngOnDestroy() {
@@ -28,6 +29,5 @@ export class NavbarComponent implements OnInit, OnDestroy {
   toggleThemeSelection() {
     this.isDarkMode = !this.isDarkMode;
     this.themeService.toggleTheme(this.isDarkMode);
-    console.log('toggled');
   }
 }

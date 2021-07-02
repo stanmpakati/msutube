@@ -14,8 +14,6 @@ export class ThumbnailComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.thumbnailData);
     this.timeElapsed = timeAgo(this.thumbnailData.uploadDate);
-    console.log(this.timeElapsed);
   }
 }

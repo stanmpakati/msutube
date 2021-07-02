@@ -37,8 +37,30 @@
   <div class="content-section" fxFlex="75%">
     <!-- To switch between content shown -->
     <div class="categories-navbar">
-      <mat-icon>video</mat-icon> 4 Videos <mat-icon>image</mat-icon> 15 Pictures
-      <mat-icon>library_music</mat-icon> 1 Audio
+      <mat-tab-group>
+        <!-- Videos Tab group -->
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>video</mat-icon> Videos
+          </ng-template>
+          <ng-template matTabContent> Vids </ng-template>
+        </mat-tab>
+        <!-- Music tab group -->
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>library_music</mat-icon> Audio
+          </ng-template>
+          <ng-template matTabContent> Music </ng-template>
+        </mat-tab>
+
+        <!-- Pictures Tab group -->
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>image</mat-icon> Pictures
+          </ng-template>
+          <ng-template matTabContent> Pics </ng-template>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 </div>

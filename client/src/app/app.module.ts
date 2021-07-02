@@ -19,6 +19,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -92,6 +93,7 @@ import { ProfileComponent } from './profile/profile.component';
     MatMenuModule,
     MatStepperModule,
     MatChipsModule,
+    MatTabsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

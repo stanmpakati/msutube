@@ -145,6 +145,9 @@ export class FileUploadComponent implements OnInit {
 
   cancelUpload() {
     this.uploadStatus = { percentage: 0, status: 'PENDING' };
+    this.fileName = '';
+    this.fileType = '';
+    this.readyForUpload = false;
   }
 
   continueFileUpload() {

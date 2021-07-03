@@ -70,3 +70,19 @@ mat-progress-spinner {
 .drop-active {
   border: 3px solid #ffd740;
 }
+
+.staged-upload {
+  text-align: center;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+
+  mat-icon {
+    transform: scale(3);
+    color: rgb(228, 48, 48);
+    margin-bottom: 8px;
+  }
+}
+
+mat-error {
+  text-align: center;
+}

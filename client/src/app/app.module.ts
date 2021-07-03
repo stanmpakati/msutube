@@ -20,6 +20,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,7 +42,10 @@ import { MusicComponent } from './music/music.component';
 import { PicturesComponent } from './pictures/pictures.component';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { FeaturedComponent } from './home/featured/featured.component';
-import { FileUploadComponent } from './upload/file-upload/file-upload.component';
+import {
+  FileUploadComponent,
+  ThumbCheckDialog,
+} from './upload/file-upload/file-upload.component';
 import { ContributersFormComponent } from './upload/contributers-form/contributers-form.component';
 import { ProfileComponent } from './profile/profile.component';
 
@@ -67,6 +71,7 @@ import { ProfileComponent } from './profile/profile.component';
     FileUploadComponent,
     ContributersFormComponent,
     ProfileComponent,
+    ThumbCheckDialog,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +99,7 @@ import { ProfileComponent } from './profile/profile.component';
     MatStepperModule,
     MatChipsModule,
     MatTabsModule,
+    MatDialogModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

@@ -1,6 +1,7 @@
 import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { map } from 'rxjs/operators';
 
 import { Upload } from 'src/app/_models/upload.interface';
@@ -21,8 +22,11 @@ export class FileUploadComponent implements OnInit {
   thumbDropzoneActive: boolean = false;
   uploadStatus!: Upload;
   fileName!: string;
+  fileType!: string;
+  readyForUpload: boolean = false;
+  isSubmitted = false;
 
-  constructor(private videoService: VideoService) {}
+  constructor(private videoService: VideoService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.uploadForm = new FormGroup({
@@ -36,6 +40,11 @@ export class FileUploadComponent implements OnInit {
       percentage: 0,
       status: 'PENDING',
     };
+    // this.fileName = 'oaifoewi weifowe iwenfow wiefno oe.mpS';
+  }
+
+  get file() {
+    return this.uploadForm.controls.file;
   }
 
   get thumbnail() {
@@ -74,6 +83,10 @@ export class FileUploadComponent implements OnInit {
 
     // update file name
     this.fileName = file.name;
+    this.fileType = file.type;
+    console.log(file.type);
+
+    this.readyForUpload = true;
 
     // Load with file reader
     const reader = new FileReader();
@@ -108,10 +121,34 @@ export class FileUploadComponent implements OnInit {
 
   // Fpload files
   uploadFiles() {
-    console.log('submit');
+    this.isSubmitted = true;
+
     // Check Form Validation
     if (this.uploadForm.invalid) return;
 
+    // Ask user to upload thumbnail
+    if (!this.thumbPreview && !this.fileType.includes('image')) {
+      this.openDialog();
+    } else {
+      this.continueFileUpload();
+    }
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ThumbCheckDialog);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+      if (result) this.continueFileUpload();
+    });
+  }
+
+  cancelUpload() {
+    this.uploadStatus = { percentage: 0, status: 'PENDING' };
+  }
+
+  continueFileUpload() {
+    console.log('uploading');
     this.videoService
       .uploadVideo(this.uploadForm.value.thumbnail, this.uploadForm.value.file)
       .pipe(
@@ -139,8 +176,15 @@ export class FileUploadComponent implements OnInit {
         }
       );
   }
+}
 
-  cancelUpload() {
-    this.uploadStatus = { percentage: 0, status: 'PENDING' };
-  }
+/*
+ * Calls Html file that contains dialogue
+ */
+@Component({
+  selector: 'my-dialog',
+  templateUrl: 'dialogue-prompt.html',
+})
+export class ThumbCheckDialog {
+  uploadFile() {}
 }

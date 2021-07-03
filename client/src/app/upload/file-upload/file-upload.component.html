@@ -8,7 +8,7 @@
       (filesHovered)="fileDropzoneState($event)"
       [ngClass]="{ 'drop-active': fileDropzoneActive }"
       class="upload-box video-upload"
-      *ngIf="uploadStatus.status === 'PENDING'"
+      *ngIf="uploadStatus.status === 'PENDING' && !readyForUpload"
     >
       <button
         mat-stroked-button
@@ -27,9 +27,33 @@
       >
         <mat-icon>attachment</mat-icon>
       </button>
-      <div class="image-preview" *ngIf="filePreview !== '' && filePreview">
-        <img [src]="filePreview" [alt]="uploadForm.value.title" />
-      </div>
+      <mat-error *ngIf="file.errors?.required && isSubmitted">
+        Video, audio or image file required
+      </mat-error>
+    </div>
+
+    <!-- Ready for upload file -->
+    <div
+      class="staged-upload"
+      *ngIf="readyForUpload && uploadStatus.status === 'PENDING'"
+    >
+      <mat-icon color="warning">warning</mat-icon>
+      <br />
+      <br />
+      <span>
+        <strong>Ready to upload:</strong>
+        <br />
+        {{ fileName }}
+      </span>
+      <input type="file" #filePicker (change)="onFilePicked($event)" /> <br />
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="filePicker.click()"
+        type="button"
+      >
+        Change File
+      </button>
     </div>
 
     <!-- Progress spinner -->
@@ -69,9 +93,10 @@
       (filesDropped)="handleDrop($event, 1)"
       (filesHovered)="thumbDropzoneState($event)"
       [ngClass]="{ 'drop-active': thumbDropzoneActive }"
+      *ngIf="fileName && !fileType.includes('image')"
     >
       <mat-error *ngIf="thumbnail.errors?.invalidMimeType">
-        Only jpg and png files accepted
+        Sorry only jpg and png files supported
       </mat-error>
       <button
         mat-stroked-button
@@ -97,6 +122,8 @@
         <img [src]="thumbPreview" [alt]="uploadForm.value.title" />
       </div>
     </div>
-    <button mat-raised-button color="accent">Upload Files</button>
+    <button mat-raised-button color="accent" [disabled]="!readyForUpload">
+      Upload Files
+    </button>
   </div>
 </form>

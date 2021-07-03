@@ -1,16 +1,21 @@
-<form [formGroup]="uploadForm">
+<form [formGroup]="uploadForm" (submit)="uploadFiles()">
   <!-- File Upload box -->
-  <div
-    class="upload-field"
-    appFileDrop
-    (filesDropped)="handleDrop($event, 0)"
-    (filesHovered)="dropzoneState($event)"
-    [ngClass]="{ 'drop-active': dropzoneActive }"
-    fxLayout="column"
-    fxLayoutAlign="center center"
-  >
-    <div class="upload-box video-upload">
-      <button mat-raised-button (click)="filePicker.click()">
+  <div class="upload-field" fxLayout="column" fxLayoutAlign="center center">
+    <!-- File Upload Box -->
+    <div
+      appFileDrop
+      (filesDropped)="handleDrop($event, 0)"
+      (filesHovered)="fileDropzoneState($event)"
+      [ngClass]="{ 'drop-active': fileDropzoneActive }"
+      class="upload-box video-upload"
+      *ngIf="uploadStatus.status === 'PENDING'"
+    >
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="filePicker.click()"
+        type="button"
+      >
         Select File
       </button>
       <input type="file" #filePicker (change)="onFilePicked($event)" />
@@ -18,12 +23,43 @@
         *ngIf="filePreview === '' || !filePreview"
         mat-icon-button
         (click)="filePicker.click()"
+        type="button"
       >
-        <mat-icon>backup</mat-icon>
+        <mat-icon>attachment</mat-icon>
       </button>
       <div class="image-preview" *ngIf="filePreview !== '' && filePreview">
         <img [src]="filePreview" [alt]="uploadForm.value.title" />
       </div>
+    </div>
+
+    <!-- Progress spinner -->
+    <div class="uploading-box" *ngIf="uploadStatus.status === 'IN_PROGRESS'">
+      <div class="circular-progress-box">
+        <mat-progress-spinner
+          class="example-margin"
+          mode="determinate"
+          strokeWidth="6"
+          diameter="150"
+          [value]="uploadStatus.percentage"
+        >
+        </mat-progress-spinner>
+        <span>{{ uploadStatus.percentage }}%</span>
+      </div>
+      <span>Uploading: <br />{{ fileName }}</span>
+    </div>
+
+    <!-- After file is finished uploading -->
+    <div class="uploaded-box" *ngIf="uploadStatus.status === 'DONE'">
+      <img src="/assets/del/upload_completed.jpg" alt="" />
+      <span>{{ fileName }} Uploaded</span> <br />
+      <button
+        type="button"
+        mat-stroked-button
+        color="warn"
+        (click)="cancelUpload()"
+      >
+        Delete Upload
+      </button>
     </div>
 
     <!-- Thumbnail upload box -->
@@ -31,13 +67,18 @@
       class="upload-box thumbnail-upload"
       appFileDrop
       (filesDropped)="handleDrop($event, 1)"
-      (filesHovered)="dropzoneState($event)"
-      [ngClass]="{ 'drop-active': dropzoneActive }"
+      (filesHovered)="thumbDropzoneState($event)"
+      [ngClass]="{ 'drop-active': thumbDropzoneActive }"
     >
       <mat-error *ngIf="thumbnail.errors?.invalidMimeType">
         Only jpg and png files accepted
       </mat-error>
-      <button mat-raised-button (click)="thumbnailPicker.click()">
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="thumbnailPicker.click()"
+        type="button"
+      >
         Select thumbnail
       </button>
       <input type="file" #thumbnailPicker (change)="onImagePicked($event)" />
@@ -45,8 +86,9 @@
         *ngIf="thumbPreview === '' || !thumbPreview"
         mat-icon-button
         (click)="thumbnailPicker.click()"
+        type="button"
       >
-        <mat-icon>backup</mat-icon>
+        <mat-icon>add_photo_alternate</mat-icon>
       </button>
       <div
         class="image-preview"
@@ -55,11 +97,6 @@
         <img [src]="thumbPreview" [alt]="uploadForm.value.title" />
       </div>
     </div>
-    <div class="upload-progress">
-      <mat-progress-bar
-        mode="determinate"
-        [value]="uploadStatus.percentage"
-      ></mat-progress-bar>
-    </div>
+    <button mat-raised-button color="accent">Upload Files</button>
   </div>
 </form>

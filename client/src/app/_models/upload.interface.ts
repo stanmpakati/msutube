@@ -1,6 +1,4 @@
-import { UploadStatus } from './enums/upload-status.enum';
-
 export interface Upload {
-  status: UploadStatus;
+  status: 'PENDING' | 'IN_PROGRESS' | 'DONE' | 'ERROR';
   percentage: number;
 }

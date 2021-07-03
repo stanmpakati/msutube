@@ -1,12 +1,12 @@
-import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { HttpEventType } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { map } from 'rxjs/operators';
 
 import { Upload } from 'src/app/_models/upload.interface';
-import { VideoService } from 'src/app/_services/video.service';
 import { imageMimeTypeValidator } from '../../_helpers/mine-type.validator';
+import { UploadService } from 'src/app/_services/upload.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -26,7 +26,7 @@ export class FileUploadComponent implements OnInit {
   readyForUpload: boolean = false;
   isSubmitted = false;
 
-  constructor(private videoService: VideoService, public dialog: MatDialog) {}
+  constructor(private UploadService: UploadService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.uploadForm = new FormGroup({
@@ -148,12 +148,24 @@ export class FileUploadComponent implements OnInit {
     this.fileName = '';
     this.fileType = '';
     this.readyForUpload = false;
+    this.UploadService.uploadFalse();
+  }
+
+  // TODO implement deleting uploaded file
+  deleteUpload() {
+    this.uploadStatus = { percentage: 0, status: 'PENDING' };
+    this.fileName = '';
+    this.fileType = '';
+    this.readyForUpload = false;
+    this.UploadService.uploadFalse();
   }
 
   continueFileUpload() {
     console.log('uploading');
-    this.videoService
-      .uploadVideo(this.uploadForm.value.thumbnail, this.uploadForm.value.file)
+    this.UploadService.uploadVideo(
+      this.uploadForm.value.thumbnail,
+      this.uploadForm.value.file
+    )
       .pipe(
         map((event) => {
           if (event.type === HttpEventType.UploadProgress) {
@@ -174,6 +186,7 @@ export class FileUploadComponent implements OnInit {
       .subscribe(
         () => {},
         (err) => {
+          this.UploadService.uploadFalse();
           this.uploadStatus = { status: 'ERROR', percentage: 0 };
           console.log(err);
         }

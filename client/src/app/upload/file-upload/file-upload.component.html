@@ -70,6 +70,14 @@
         <span>{{ uploadStatus.percentage }}%</span>
       </div>
       <span>Uploading: <br />{{ fileName }}</span>
+      <button
+        type="button"
+        mat-stroked-button
+        color="warn"
+        (click)="cancelUpload()"
+      >
+        Cancel Upload
+      </button>
     </div>
 
     <!-- After file is finished uploading -->
@@ -80,7 +88,7 @@
         type="button"
         mat-stroked-button
         color="warn"
-        (click)="cancelUpload()"
+        (click)="deleteUpload()"
       >
         Delete Upload
       </button>

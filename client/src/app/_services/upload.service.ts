@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Post } from '../_models/post';
@@ -12,61 +11,36 @@ const videoUrl = `${environment.host}/videos`;
   providedIn: 'root',
 })
 export class UploadService {
-  private posts: Post[] = [];
-  private totalPosts!: number;
-  private postsUpdated = new Subject<{ posts: Post[]; postCount: number }>();
+  private fileUploadingListener = new Subject<boolean>();
+  private fileUploading = false;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
-  getPosts(postsPerPage: number, currentPage: number): void {
-    const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
-    this.http
-      .get<any>(`http://localhost:5000/api/posts${queryParams}`)
-      .pipe(
-        map((postData) => ({
-          posts: postData.posts.map((post: any) => ({
-            title: post.title,
-            content: post.content,
-            imagePath: post.imagePath,
-            id: post._id,
-            creator: post.creator,
-          })),
-          maxPosts: postData.maxPosts,
-        }))
-      )
-      .subscribe((postData) => {
-        console.log(postData);
-        this.posts = postData.posts;
-        this.totalPosts = postData.maxPosts;
-        this.postsUpdated.next({
-          posts: [...this.posts],
-          postCount: postData.maxPosts,
-        });
-      });
+  get isFileUploading() {
+    return this.fileUploadingListener.asObservable();
   }
 
-  getPostsListener(): Observable<{ posts: Post[]; postCount: number }> {
-    return this.postsUpdated.asObservable();
+  uploadFalse() {
+    this.fileUploadingListener.next(false);
   }
 
-  getPost(id: string) {
-    return this.http.get<Post>(`http://localhost:5000/api/posts/${id}`);
-  }
+  uploadVideo(image: File, video: File) {
+    // Register upload and send to listeners
+    this.fileUploadingListener.next(true);
 
-  uploadVideo(post: Post, image: File) {
+    // Sending file to server
     const postData = new FormData();
-    postData.append('image', image, 'img');
+    postData.append('thumbnail', image);
+    postData.append('video', video);
 
-    this.http
-      .post<{ message: string; url: string }>(
-        // videoUrl,
-        'http://localhost:5000/api/posts',
-        postData
-        // {observe: 'response'}
-      )
-      .subscribe((response) => {
-        console.log(response);
-      });
+    return this.http.post<{
+      message: string;
+      fileUrl: string;
+      thumbnailUrl: string;
+    }>(videoUrl, postData, {
+      reportProgress: true,
+      observe: 'events',
+    });
   }
 
   // updatePost(post: Post, image: File | string) {

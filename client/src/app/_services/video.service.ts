@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Post } from '../_models/post';
 import { environment } from '../../environments/environment';
 
 const videoUrl = `${environment.host}/video`;

@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { Post } from '../_models/post';
 import { environment } from '../../environments/environment';
 
-const videoUrl = `${environment.host}/videos`;
+const videoUrl = `${environment.host}/video`;
 
 @Injectable({
   providedIn: 'root',

@@ -48,6 +48,7 @@ import {
 } from './upload/file-upload/file-upload.component';
 import { ContributersFormComponent } from './upload/contributers-form/contributers-form.component';
 import { ProfileComponent } from './profile/profile.component';
+import { NoFileDialogComponent } from './components/no-file-dialog/no-file-dialog.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { ProfileComponent } from './profile/profile.component';
     ContributersFormComponent,
     ProfileComponent,
     ThumbCheckDialog,
+    NoFileDialogComponent,
   ],
   imports: [
     BrowserModule,

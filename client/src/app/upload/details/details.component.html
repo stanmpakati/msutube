@@ -5,6 +5,8 @@
       <mat-label>Title of video</mat-label>
       <input matInput type="text" />
       <mat-error *ngIf="title.errors?.required"> Title required </mat-error>
+      <!-- TODO verify error -->
+      <mat-error *ngIf="title.errors?.maxLength"> Title too long </mat-error>
     </mat-form-field>
     <mat-form-field class="w-100">
       <mat-label>Description of video</mat-label>

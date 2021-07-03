@@ -40,11 +40,11 @@
       <mat-icon color="warning">warning</mat-icon>
       <br />
       <br />
-      <span>
+      <p>
         <strong>Ready to upload:</strong>
         <br />
         {{ fileName }}
-      </span>
+      </p>
       <input type="file" #filePicker (change)="onFilePicked($event)" /> <br />
       <button
         mat-stroked-button
@@ -101,7 +101,7 @@
       (filesDropped)="handleDrop($event, 1)"
       (filesHovered)="thumbDropzoneState($event)"
       [ngClass]="{ 'drop-active': thumbDropzoneActive }"
-      *ngIf="fileName && !fileType.includes('image')"
+      *ngIf="fileName && !fileType?.includes('image')"
     >
       <mat-error *ngIf="thumbnail.errors?.invalidMimeType">
         Sorry only jpg and png files supported
@@ -130,7 +130,12 @@
         <img [src]="thumbPreview" [alt]="uploadForm.value.title" />
       </div>
     </div>
-    <button mat-raised-button color="accent" [disabled]="!readyForUpload">
+    <button
+      *ngIf="uploadStatus.status != 'DONE'"
+      mat-raised-button
+      color="accent"
+      [disabled]="!readyForUpload"
+    >
       Upload Files
     </button>
   </div>

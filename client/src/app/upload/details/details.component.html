@@ -2,15 +2,19 @@
   <div class="stepper-form">
     <h2>Details</h2>
     <mat-form-field class="w-100">
-      <mat-label>Title of video</mat-label>
-      <input matInput type="text" />
+      <mat-label>Title of content</mat-label>
+      <input matInput type="text" formControlName="title" />
       <mat-error *ngIf="title.errors?.required"> Title required </mat-error>
       <!-- TODO verify error -->
-      <mat-error *ngIf="title.errors?.maxLength"> Title too long </mat-error>
+      <mat-error *ngIf="title.errors?.minlength"> Title too Short </mat-error>
+      <mat-error *ngIf="title.errors?.maxlength"> Title too long </mat-error>
     </mat-form-field>
     <mat-form-field class="w-100">
-      <mat-label>Description of video</mat-label>
-      <textarea matInput rows="5"></textarea>
+      <mat-label>Description of content</mat-label>
+      <textarea matInput rows="5" formControlName="description"></textarea>
+      <mat-error *ngIf="description.errors?.required">
+        Description required
+      </mat-error>
     </mat-form-field>
     <mat-form-field class="w-100">
       <mat-label>Tags</mat-label>
@@ -38,15 +42,5 @@
       <!-- TODO only show on blur -->
       <mat-hint> Press comma or enter to add new tag </mat-hint>
     </mat-form-field>
-    <button
-      mat-raised-button
-      color="primary"
-      matStepperNext
-      type="button"
-      (click)="next()"
-      class="mt-1"
-    >
-      Next
-    </button>
   </div>
 </form>

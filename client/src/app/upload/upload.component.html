@@ -26,6 +26,16 @@
           <!-- Form: {{ detailsForm }} -->
           <ng-template matStepLabel>Fill in video details</ng-template>
           <app-details #detailsComponent></app-details>
+          <button
+            mat-raised-button
+            color="primary"
+            matStepperNext
+            type="button"
+            (click)="next()"
+            class="mt-1"
+          >
+            Next
+          </button>
         </mat-step>
 
         <!-- Add various contributers here -->

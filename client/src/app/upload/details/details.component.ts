@@ -32,12 +32,18 @@ export class DetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Setup form
     this.detailsForm = new FormGroup({
-      title: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(60),
-      ]),
-      description: new FormControl(null, [Validators.required]),
+      title: new FormControl(null, {
+        validators: [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(60),
+        ],
+        updateOn: 'blur',
+      }),
+      description: new FormControl(null, {
+        validators: [Validators.required],
+        updateOn: 'blur',
+      }),
       categories: new FormControl(null),
     });
     // listen for file upload changes
@@ -53,6 +59,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   get title() {
     return this.detailsForm.controls.title;
+  }
+
+  get description() {
+    return this.detailsForm.controls.description;
   }
 
   get tagsForm() {

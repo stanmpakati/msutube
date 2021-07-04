@@ -49,5 +49,13 @@ export class UploadComponent implements OnInit {
     return this.contributersFormComponent?.contributesForm;
   }
 
+  next() {
+    console.log('next');
+    console.log(this.detailsComponent.description.errors);
+    if (this.detailsForm.invalid) return;
+    console.log('next2');
+    this.detailsComponent.next();
+  }
+
   // Contributers -------------------------------------------------------------------------------------
 }

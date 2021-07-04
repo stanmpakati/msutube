@@ -20,37 +20,43 @@
 
     <!-- Uploaded media details -->
     <div fxFlex="100%" fxFlex.gt-sm="70%">
-      <mat-horizontal-stepper linear="true" #stepper>
+      <mat-horizontal-stepper linear="false" #stepper>
         <!-- Media details -->
-        <mat-step [stepControl]="detailsComponent.detailsForm">
+        <mat-step [stepControl]="detailsForm">
           <!-- Form: {{ detailsForm }} -->
           <ng-template matStepLabel>Fill in video details</ng-template>
-          <app-details #detailsComponent></app-details>
-          <button
-            mat-raised-button
-            color="primary"
-            matStepperNext
-            type="button"
-            (click)="sendDetails()"
-            class="mt-1"
-          >
-            Next
-          </button>
+          <ng-template matStepContent>
+            <app-details #detailsComponent></app-details>
+            <button
+              mat-raised-button
+              color="primary"
+              matStepperNext
+              type="button"
+              (click)="sendDetails()"
+              class="mt-1"
+            >
+              Next
+            </button>
+          </ng-template>
         </mat-step>
 
         <!-- Add various contributers here -->
-        <mat-step [stepControl]="contributersForm" label="Contributers">
-          <app-contributers-form
-            #contributersFormComponent
-          ></app-contributers-form>
+        <mat-step [stepControl]="contributersForm">
+          <ng-template matStepLabel>Contributers</ng-template>
+          <ng-template matStepContent>
+            <app-contributers-form
+              #contributersFormComponent
+            ></app-contributers-form>
+          </ng-template>
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>References</ng-template>
-          <p>You are now done.</p>
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-          </div>
+          <ng-template matStepContent>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+          </ng-template>
         </mat-step>
       </mat-horizontal-stepper>
     </div>

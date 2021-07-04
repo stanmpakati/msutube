@@ -83,3 +83,7 @@ mat-button {
 .custom-bg-dark {
   background-color: #424242;
 }
+
+.mat-form-field:not(.mat-focused) .mat-hint {
+  display: none;
+}

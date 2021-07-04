@@ -10,7 +10,7 @@
         [removable]="true"
         (removed)="removePartner(partner)"
       >
-        {{ partner.username }}
+        {{ partner }}
         <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
       <input
@@ -18,53 +18,71 @@
         type="text"
         placeholder="Add new contributer..."
         [matChipInputFor]="partnersList"
+        [matChipInputSeparatorKeyCodes]="separatorKeyCodes"
         [matChipInputAddOnBlur]="true"
         (matChipInputTokenEnd)="addPartner($event)"
       />
-      <!-- [matChipInputSeparatorKeyCodes]="separatorKeyCodes" -->
       <button mat-stroked-button color="primary" matSuffix>Add</button>
     </mat-chip-list>
-    <!-- TODO only show on focus -->
-    <!-- <mat-hint *ngIf="tagsForm?.touched">
-        Press comma or enter to add new tag
-      </mat-hint> -->
+    <mat-hint align="end"> Press comma or enter to add new tag </mat-hint>
   </mat-form-field>
   <h3>Contributers</h3>
-  <mat-chip-list #contributersList aria-label="List of contributers">
-    <mat-chip
-      *ngFor="let contributer of contributers"
-      [removable]="true"
-      (removed)="removeContributer(contributer)"
-      >{{ contributer.user.username }}
-      <mat-icon matChipRemove>cancel</mat-icon>
-    </mat-chip>
-  </mat-chip-list>
-  <!-- username form field -->
-  <mat-form-field>
-    <mat-label>Username</mat-label>
-    <input matInput type="text" formControlName="username" />
-    <mat-error *ngIf="username.touched && username.errors?.usernameNotFound">
-      Username does not exsist
-    </mat-error>
-  </mat-form-field>
-  <!-- Role Form Field -->
-  <mat-form-field>
-    <mat-label>Role</mat-label>
-    <input matInput type="text" formControlName="role" />
-  </mat-form-field>
-  <!-- Description Form Field -->
-  <mat-form-field>
-    <mat-label>Description</mat-label>
-    <textarea matInput rows="5"></textarea>
-  </mat-form-field>
-  <button
-    mat-stroked-button
-    color="primary"
-    type="button"
-    (click)="addContributer()"
-  >
-    Add Contributer
-  </button>
+  <form [formGroup]="helpersForm">
+    <mat-chip-list #contributersList aria-label="List of contributers">
+      <mat-chip
+        *ngFor="let contributer of contributers"
+        [removable]="true"
+        (removed)="removeContributer(contributer)"
+      >
+        {{ contributer.user.username }}<mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+
+    <!-- username form field -->
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput type="text" formControlName="username" />
+      <!-- errors -->
+      <mat-error *ngIf="username.errors?.required && contribSubmit">
+        Username required
+      </mat-error>
+      <mat-error
+        *ngIf="username?.touched && username?.errors?.usernameNotFound"
+      >
+        Username does not exsist
+      </mat-error>
+      <!-- hint -->
+      <mat-hint align="end"> Needs to have an account with MSUtube </mat-hint>
+    </mat-form-field>
+
+    <!-- Role Form Field -->
+    <mat-form-field>
+      <mat-label>Role</mat-label>
+      <input matInput type="text" formControlName="role" />
+      <mat-hint align="end">
+        E.g. Main Actor, Actor, Sound Engineering ...etc
+      </mat-hint>
+    </mat-form-field>
+
+    <!-- Description Form Field -->
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput rows="5"></textarea>
+      <mat-hint align="end">
+        Detailed description of how the person helped
+      </mat-hint>
+    </mat-form-field>
+    <button
+      mat-stroked-button
+      color="primary"
+      type="button"
+      (click)="addContributer()"
+    >
+      Add Contributer
+    </button>
+  </form>
+
+  <!-- Forward and next buttons -->
   <div class="mt-2" fxLayoutAlign="space-between center">
     <button mat-button matStepperPrevious>Back</button>
     <button mat-raised-button matStepperNext color="primary">Next</button>

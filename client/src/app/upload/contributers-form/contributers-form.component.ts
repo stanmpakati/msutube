@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
@@ -18,8 +18,11 @@ import { DetailsComponent } from '.././details/details.component';
 })
 export class ContributersFormComponent implements OnInit {
   contributesForm!: FormGroup;
-  partners: User[] = [];
+  helpersForm!: FormGroup;
+  partners: string[] = [];
   contributers!: Contributer[];
+  contribSubmit = false;
+  separatorKeyCodes = [ENTER, COMMA] as const;
 
   constructor(private userService: UserService) {}
 
@@ -27,15 +30,25 @@ export class ContributersFormComponent implements OnInit {
     this.contributesForm = new FormGroup({
       partners: new FormControl(),
       contributers: new FormControl(),
-      username: new FormControl(null),
+    });
+
+    this.helpersForm = new FormGroup({
       // TODO make required only if username has been completed
+      username: new FormControl(null, {
+        validators: [Validators.required],
+        updateOn: 'submit',
+      }),
       role: new FormControl(null, [Validators.required]),
       description: new FormControl(null, [Validators.required]),
     });
   }
 
   get username() {
-    return this.contributesForm.controls.username;
+    return this.helpersForm.controls.username;
+  }
+
+  get role() {
+    return this.helpersForm.controls.role;
   }
 
   removeContributer(contributer: Contributer) {
@@ -44,7 +57,7 @@ export class ContributersFormComponent implements OnInit {
     if (index >= 0) this.contributers.splice(index, 1);
   }
 
-  removePartner(partner: User) {
+  removePartner(partner: string) {
     const index = this.partners.indexOf(partner);
 
     if (index >= 0) this.partners.splice(index, 1);
@@ -53,23 +66,31 @@ export class ContributersFormComponent implements OnInit {
   addPartner(event: MatChipInputEvent) {
     const val = (event.value || '').trim();
 
+    // if (val) {
+    //   this.userService.findUser(val).pipe(
+    //     debounceTime(1000),
+    //     take(1),
+    //     map((res) => {
+    //       if (res.message === 'User found') {
+    //         this.partners.push(res.user);
+    //         event.chipInput?.clear();
+    //       }
+    //     })
+    //   );
+    // }
     if (val) {
-      this.userService.findUser(val).pipe(
-        debounceTime(1000),
-        take(1),
-        map((res) => {
-          if (res.message === 'User found') {
-            this.partners.push(res.user);
-            event.chipInput?.clear();
-          }
-        })
-      );
+      this.partners.push(val);
+      event.chipInput?.clear();
     }
   }
 
   addContributer() {
+    // Update error messages
+    this.contribSubmit = true;
     if (this.contributesForm.invalid) return;
 
+    // Confirm user with database
+    // and add contributer
     this.userService
       .findUser(this.contributesForm.value.username)
       .subscribe((resObj) => {
@@ -79,7 +100,12 @@ export class ContributersFormComponent implements OnInit {
           roleDetails: this.contributesForm.value.description,
         };
         this.contributers.push(newContributer);
+        console.log(this.contributers);
+
         this.contributesForm.reset();
       });
+
+    // reset Errors
+    this.contribSubmit = false;
   }
 }

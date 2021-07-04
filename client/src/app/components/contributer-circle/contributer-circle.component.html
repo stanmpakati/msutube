@@ -1,1 +1,32 @@
-<p>contributer-circle works!</p>
+<div class="circle">
+  <mat-icon>person</mat-icon>
+</div>
+
+<!-- --------------------------------------------------------- -->
+<ng-template #popoverContent>
+  <div class="title">This is a popover missing from angular/material</div>
+  <div class="content">
+    This popover is pretty simple. It uses material menu to work like a popover.
+    The benefit of this approach is it is super lightweigt. And it is very
+    flexible as well.
+  </div>
+  <div class="action">
+    <button mat-button (click)="(null)">close</button>
+    <button mat-raised-button color="accent" (click)="(null)">CONFIRM</button>
+  </div>
+</ng-template>
+
+<mat-menu #popover="matMenu" xPosition="after" class="ngx-mat-popover">
+  <ng-template matMenuContent>
+    <span
+      mat-menu-item
+      [disableRipple]="true"
+      (click)="$event.stopPropagation()"
+      class="mat-popover"
+    >
+      <!-- popover content begin -->
+      <ng-container *ngTemplateOutlet="popoverContent"></ng-container>
+      <!-- popover content end  -->
+    </span>
+  </ng-template>
+</mat-menu>

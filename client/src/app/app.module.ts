@@ -34,7 +34,10 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.component';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
-import { UploadComponent } from './upload/upload.component';
+import {
+  NoFileDialogComponent,
+  UploadComponent,
+} from './upload/upload.component';
 import { FileDropDirective } from './_helpers/file-drop.directive';
 import { DetailsComponent } from './upload/details/details.component';
 import { ThumbnailComponent } from './components/thumbnail/thumbnail.component';
@@ -48,7 +51,6 @@ import {
 } from './upload/file-upload/file-upload.component';
 import { ContributersFormComponent } from './upload/contributers-form/contributers-form.component';
 import { ProfileComponent } from './profile/profile.component';
-import { NoFileDialogComponent } from './components/no-file-dialog/no-file-dialog.component';
 
 @NgModule({
   declarations: [

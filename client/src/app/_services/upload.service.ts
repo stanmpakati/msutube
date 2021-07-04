@@ -13,6 +13,14 @@ const videoUrl = `${environment.host}/video`;
 export class UploadService {
   private fileUploadingListener = new Subject<boolean>();
   private fileUploading = false;
+  // for Form Upload
+  private fileDetails!: {
+    title: string;
+    description: string;
+    tags: string[];
+  };
+  private filePartners!: {};
+  private fileRefs!: {};
 
   constructor(private http: HttpClient) {}
 
@@ -41,6 +49,22 @@ export class UploadService {
       reportProgress: true,
       observe: 'events',
     });
+  }
+
+  recordDetails(details: {
+    title: string;
+    description: string;
+    tags: string[];
+  }) {
+    this.fileDetails = details;
+  }
+
+  recordPartners(partners: {}) {
+    this.filePartners = partners;
+  }
+
+  recordRefs(refs: {}) {
+    this.fileRefs = refs;
   }
 
   // updatePost(post: Post, image: File | string) {

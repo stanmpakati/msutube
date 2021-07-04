@@ -67,11 +67,20 @@ export class UploadComponent implements OnInit, OnDestroy {
     console.log('clicked');
   }
 
-  next() {
-    console.log('next');
-    this.checkIfFileIsUploading();
+  sendDetails() {
+    // Check form validity before continuing
+    // this.checkIfFileIsUploading();
     if (this.detailsForm.invalid) return;
-    console.log('next2');
+
+    // Make details object to send to service
+    const details = {
+      title: this.detailsComponent.title.value as string,
+      description: this.detailsComponent.description.value as string,
+      tags: this.detailsComponent.tags,
+    };
+
+    console.log(details);
+    this.uploadService.recordDetails(details);
   }
 
   // Contributers -------------------------------------------------------------------------------------

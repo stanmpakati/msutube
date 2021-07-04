@@ -22,9 +22,11 @@ export class LoginComponent implements OnInit {
     this.form = new FormGroup({
       email: new FormControl(null, {
         validators: [Validators.required],
+        updateOn: 'blur',
       }),
       password: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(6)],
+        updateOn: 'blur',
       }),
     });
 

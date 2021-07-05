@@ -1,3 +1,10 @@
+<div class="backdrop" *ngIf="isLoading"></div>
+<mat-spinner
+  class="is-loading-spinner"
+  color="accent"
+  *ngIf="isLoading"
+></mat-spinner>
+
 <div class="container" fxLayout="column">
   <header>
     <span class="logo-light">MSU<span class="color-primary">tube</span></span>
@@ -19,16 +26,10 @@
           <mat-label>Email or Username</mat-label>
           <mat-icon matPrefix>person</mat-icon>
           <input matInput type="email" formControlName="email" />
-          <mat-icon matPrefix *ngIf="email.touched && !email.errors">
-            check
-          </mat-icon>
           <mat-error
             *ngIf="(email.touched || submitted) && email.errors?.required"
           >
             Email or Username is required
-          </mat-error>
-          <mat-error *ngIf="email.touched && email?.invalid">
-            Email invalid
           </mat-error>
         </mat-form-field>
 
@@ -49,8 +50,8 @@
           >
             Password is required
           </mat-error>
-          <mat-error *ngIf="password.touched && password.errors?.invalid">
-            Password invalid
+          <mat-error *ngIf="password.touched && password.errors?.minlength">
+            Password too short
           </mat-error>
         </mat-form-field>
 
@@ -77,5 +78,4 @@
       />
     </div>
   </main>
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
 </div>

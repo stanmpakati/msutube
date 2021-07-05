@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Auth } from 'src/app/_models/auth.model';
 import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { AuthService } from 'src/app/_services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   isLoading = false;
   submitted = false;
   hide = true;
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
     this.authStatusSub = this.authService
       .getAuthStatusListener()
       .subscribe((authStatus) => {
+        console.log(authStatus);
         this.isLoading = false;
       });
   }
@@ -58,14 +60,14 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.submitted = true;
 
-    // const auth: Auth = {
-    //   email: this.form.value.email,
-    //   username: this.form.value.email,
-    //   password: this.form.value.password,
-    // };
+    const auth: Auth = {
+      email: this.form.value.email,
+      username: this.form.value.email,
+      password: this.form.value.password,
+    };
 
-    // this.authService.loginUser(auth);
-    // this.form.reset();
+    this.authService.loginUser(auth);
+    this.form.reset();
     this.isLoading = false;
   }
 }

@@ -51,10 +51,7 @@ import {
 } from './upload/file-upload/file-upload.component';
 import { ContributersFormComponent } from './upload/contributers-form/contributers-form.component';
 import { ProfileComponent } from './profile/profile.component';
-import {
-  ContributerCircleComponent,
-  PopoverComponent,
-} from './components/contributer-circle/contributer-circle.component';
+import { ContributerCircleComponent } from './components/contributer-circle/contributer-circle.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +78,6 @@ import {
     ThumbCheckDialog,
     NoFileDialogComponent,
     ContributerCircleComponent,
-    PopoverComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,32 +1,24 @@
-<div class="circle">
-  <mat-icon>person</mat-icon>
-</div>
+<button
+  type="button"
+  class="icon-btn"
+  mat-icon-button
+  [matMenuTriggerFor]="contribTooltip"
+>
+  <img src="/assets/vectors/man.jpg" alt="icon" />
+</button>
 
-<!-- --------------------------------------------------------- -->
-<ng-template #popoverContent>
-  <div class="title">This is a popover missing from angular/material</div>
-  <div class="content">
-    This popover is pretty simple. It uses material menu to work like a popover.
-    The benefit of this approach is it is super lightweigt. And it is very
-    flexible as well.
-  </div>
-  <div class="action">
-    <button mat-button (click)="(null)">close</button>
-    <button mat-raised-button color="accent" (click)="(null)">CONFIRM</button>
-  </div>
-</ng-template>
-
-<mat-menu #popover="matMenu" xPosition="after" class="ngx-mat-popover">
+<!-- profile menu -->
+<mat-menu #contribTooltip>
   <ng-template matMenuContent>
-    <span
-      mat-menu-item
-      [disableRipple]="true"
-      (click)="$event.stopPropagation()"
-      class="mat-popover"
-    >
-      <!-- popover content begin -->
-      <ng-container *ngTemplateOutlet="popoverContent"></ng-container>
-      <!-- popover content end  -->
-    </span>
+    <div class="container-small">
+      <h3>{{ contributer }}</h3>
+      <p class="mat-body-2">Role</p>
+      <p>
+        This is a really stupidly long description of what he/she did to test
+        how it will look like if a user adds a long-ass description. Maybe I
+        should limit word length
+      </p>
+      <button mat-stroked-button color="primary">View Profile</button>
+    </div>
   </ng-template>
 </mat-menu>

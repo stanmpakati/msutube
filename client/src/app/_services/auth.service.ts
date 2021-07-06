@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 
 import { Auth } from '../_models/auth.model';
 import { environment } from '../../environments/environment';
+import { User } from '../_models/user';
 
 const authUrl = `${environment.host}/user`;
 
@@ -17,6 +18,7 @@ export class AuthService {
   private isAuthenticated = false;
   private authStatusListener = new Subject<boolean>();
   private userId!: string;
+  private signupAuth!: Auth;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -36,12 +38,18 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  createUser(authDetails: Auth) {
-    this.http.post(`${authUrl}/signup`, authDetails).subscribe(
+  saveSignUpAuth(authDetails: Auth) {
+    this.signupAuth = authDetails;
+    this.router.navigateByUrl('/setup');
+  }
+
+  createUser() {
+    const user = { ...this.signupAuth };
+
+    this.http.post(`${authUrl}/signup`, user).subscribe(
       (response) => {
         console.log(response);
-        this.router.navigateByUrl('/setup');
-        // this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/login');
       },
       (error) => {
         console.log(error);

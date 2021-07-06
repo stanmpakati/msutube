@@ -38,8 +38,9 @@ export const signup = (req, res) => {
   User.find({
     email: req.body.email.toLowerCase(),
     username: req.body.username.toLowerCase(),
-  }).then((email) => {
-    if (email.length !== 0 || username.length !== 0)
+  }).then((result) => {
+    console.log("email: " + result);
+    if (result.length !== 0)
       return res
         .status(400)
         .json({ message: "Sorry email or username already exists" });
@@ -53,6 +54,9 @@ export const signup = (req, res) => {
       username: req.body.username.toLowerCase(),
       email: req.body.email.toLowerCase(),
       password: hash,
+      firstname: "",
+      lastname: "",
+      regnumber: "",
     });
     user
       .save()
@@ -115,6 +119,7 @@ export const login = (req, res) => {
   // To login already existing users
   // Takes in either username or email and password
   let loggedInUser = new User();
+  let errorState = false;
 
   // if request doesn't come with password
   if (!req.body.password)
@@ -129,17 +134,28 @@ export const login = (req, res) => {
     })
     .then((user) => {
       // if user is not found
-      if (!user) return res.status(404).json({ message: "user not found" });
+      if (!user) {
+        errorState = true;
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      console.log("USER: " + user);
       // if user found
       loggedInUser = user;
       return bcrypt.compare(req.body.password, user.password);
     })
     .then((result) => {
-      // If passwords don't match
-      if (!result)
-        return res
-          .status(401)
-          .json({ message: "Invalid Password or Username/email" });
+      // Stop function from continuing when error occured
+      if (errorState) return;
+
+      if (!loggedInUser)
+        if (!result)
+          // If passwords don't match
+          return res
+            .status(401)
+            .json({ message: "Invalid Password or Username/email" });
+
+      console.log("result" + result);
 
       // If passwords match
       // Create jwt token
@@ -153,9 +169,11 @@ export const login = (req, res) => {
         { expiresIn: "1h" }
       );
 
+      console.log("token: " + token);
+
       // Send response
       res.status(200).json({
-        message: "logged in successefuly",
+        message: "Logged in successefuly",
         token: token,
         expiresIn: 3600,
         userId: loggedInUser._id,

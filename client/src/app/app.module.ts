@@ -52,6 +52,7 @@ import {
 import { ContributersFormComponent } from './upload/contributers-form/contributers-form.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ContributerCircleComponent } from './components/contributer-circle/contributer-circle.component';
+import { MediaComponent } from './auth/setup/media/media.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { ContributerCircleComponent } from './components/contributer-circle/cont
     ThumbCheckDialog,
     NoFileDialogComponent,
     ContributerCircleComponent,
+    MediaComponent,
   ],
   imports: [
     BrowserModule,

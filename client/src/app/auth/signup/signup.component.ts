@@ -107,7 +107,7 @@ export class SignupComponent implements OnInit {
     };
     console.log(authData);
 
-    this.authService.createUser(authData);
+    this.authService.saveSignUpAuth(authData);
     this.isLoading = false;
   }
 }

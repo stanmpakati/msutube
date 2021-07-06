@@ -18,6 +18,7 @@ export class SetupComponent implements OnInit {
     regnumber: string;
     bio: string;
   };
+  contact!: {};
   @Input() personalDetails!: {};
 
   constructor(private router: Router) {}
@@ -34,6 +35,8 @@ export class SetupComponent implements OnInit {
     this.personal = { ...personalDetails };
     console.log(personalDetails);
   }
+
+  toUpload(contactDetails: {}) {}
 
   onSubmit(contactDetails: {}) {
     const user = {

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ImageCropperModule } from 'ngx-image-cropper';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -87,6 +88,7 @@ import { MediaComponent } from './auth/setup/media/media.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ImageCropperModule,
     FlexLayoutModule,
 
     // TODO: material imports separate later

@@ -1,1 +1,57 @@
-<p>media works!</p>
+<form [formGroup]="uploadForm" (submit)="uploadFile()">
+  <!-- hidden input box -->
+  <input type="file" #imagePicker (change)="onImagePicked($event)" />
+
+  <!-- Thumbnail upload box -->
+  <div class="row">
+    <div class="column">
+      <div
+        class="pp-upload-box"
+        appFileDrop
+        (filesDropped)="handleDrop($event)"
+        (filesHovered)="fileDropzoneState($event)"
+        [ngClass]="{ 'drop-active': fileDropzoneActive }"
+      >
+        <button
+          *ngIf="picPreview === '' || !picPreview"
+          mat-icon-button
+          (click)="imagePicker.click()"
+          type="button"
+        >
+          <mat-icon>add_a_photo</mat-icon>
+        </button>
+      </div>
+      <mat-error *ngIf="profilePic.errors?.invalidMimeType">
+        Sorry only jpg and png files supported
+      </mat-error>
+    </div>
+
+    <button
+      mat-stroked-button
+      color="primary"
+      (click)="imagePicker.click()"
+      type="button"
+    >
+      Select profilePic
+    </button>
+    <div
+      class="image-preview"
+      *ngIf="picPreview !== '' && picPreview && profilePic.valid"
+    >
+      <img [src]="picPreview" alt="Your Prof pic" />
+    </div>
+  </div>
+
+  <!-- Image Cropper -->
+
+  <image-cropper
+    [imageChangedEvent]="imageChangedEvent"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="1 / 1"
+    [resizeToWidth]="256"
+    format="jpeg"
+    (imageCropped)="imageCropped($event)"
+  ></image-cropper>
+
+  <img [src]="croppedImage" />
+</form>

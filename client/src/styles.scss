@@ -61,6 +61,18 @@ mat-button {
   width: 100%;
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  justify-content: start;
+  align-items: baseline;
+}
+
 .active {
   border-bottom: 2px solid blue;
 
@@ -106,4 +118,20 @@ mat-button {
   bottom: 50%;
   left: 50%;
   right: 50%;
+}
+
+.upload-box {
+  height: 10rem;
+  width: 10rem;
+  border: 2px dotted #898989;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 8px;
+}
+
+input[type="file"] {
+  visibility: hidden;
 }

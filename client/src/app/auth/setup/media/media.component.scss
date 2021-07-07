@@ -1,0 +1,26 @@
+image-cropper {
+  height: 50px;
+}
+
+.pp-upload-box {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: #cecece;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-right: 12px;
+}
+
+.drop-active {
+  border: 2px solid #ffd740;
+  background-color: #dedee6;
+}
+
+.column {
+  max-width: 125px;
+  text-align: center;
+}

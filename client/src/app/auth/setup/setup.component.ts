@@ -8,7 +8,8 @@ import { UserDetails } from 'src/app/_models/user-details';
   styleUrls: ['./setup.component.scss'],
 })
 export class SetupComponent implements OnInit {
-  details = 'Personal';
+  // details = 'Personal';
+  details = 'Profile';
   isLoading = false;
   submitted = false;
   userDetails!: UserDetails;
@@ -18,7 +19,12 @@ export class SetupComponent implements OnInit {
     regnumber: string;
     bio: string;
   };
-  contact!: {};
+  contact!: {
+    facebook: string;
+    instagram: string;
+    twitter: string;
+    whatsapp: string;
+  };
   @Input() personalDetails!: {};
 
   constructor(private router: Router) {}
@@ -31,12 +37,20 @@ export class SetupComponent implements OnInit {
     regnumber: string;
     bio: string;
   }) {
-    this.details = 'Contact';
     this.personal = { ...personalDetails };
     console.log(personalDetails);
+    this.details = 'Contact';
   }
 
-  toUpload(contactDetails: {}) {}
+  toUpload(contactDetails: {
+    facebook: string;
+    instagram: string;
+    twitter: string;
+    whatsapp: string;
+  }) {
+    this.contact = contactDetails;
+    this.details = 'Profile';
+  }
 
   onSubmit(contactDetails: {}) {
     const user = {

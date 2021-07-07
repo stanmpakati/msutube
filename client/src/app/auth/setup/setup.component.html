@@ -30,10 +30,15 @@
       </app-personal-details-form>
 
       <app-contact-details-form
-        *ngIf="details !== 'Personal'"
-        (addContactDetails)="onSubmit($event)"
+        *ngIf="details === 'Contact'"
+        (addContactDetails)="toUpload($event)"
       >
       </app-contact-details-form>
+
+      <app-media
+        *ngIf="details === 'Profile'"
+        (uploadProfilePicture)="onSubmit($event)"
+      ></app-media>
     </div>
 
     <!-- Image -->

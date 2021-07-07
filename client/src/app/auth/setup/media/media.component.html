@@ -12,8 +12,9 @@
         (filesHovered)="fileDropzoneState($event)"
         [ngClass]="{ 'drop-active': fileDropzoneActive }"
       >
+        <img [src]="croppedImage" *ngIf="croppedImage" />
         <button
-          *ngIf="picPreview === '' || !picPreview"
+          *ngIf="!croppedImage"
           mat-icon-button
           (click)="imagePicker.click()"
           type="button"
@@ -41,17 +42,4 @@
       <img [src]="picPreview" alt="Your Prof pic" />
     </div>
   </div>
-
-  <!-- Image Cropper -->
-
-  <image-cropper
-    [imageChangedEvent]="imageChangedEvent"
-    [maintainAspectRatio]="true"
-    [aspectRatio]="1 / 1"
-    [resizeToWidth]="256"
-    format="jpeg"
-    (imageCropped)="imageCropped($event)"
-  ></image-cropper>
-
-  <img [src]="croppedImage" />
 </form>

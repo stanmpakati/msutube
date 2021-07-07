@@ -3,8 +3,9 @@ image-cropper {
 }
 
 .pp-upload-box {
-  height: 100px;
-  width: 100px;
+  height: 150px;
+  width: 150px;
+  overflow: hidden;
   border-radius: 50%;
   background-color: #cecece;
 
@@ -15,12 +16,19 @@ image-cropper {
   margin-right: 12px;
 }
 
+image {
+  width: auto;
+  height: auto;
+  min-width: 100%;
+  min-height: 100%;
+}
+
 .drop-active {
   border: 2px solid #ffd740;
   background-color: #dedee6;
 }
 
 .column {
-  max-width: 125px;
+  max-width: 175px;
   text-align: center;
 }

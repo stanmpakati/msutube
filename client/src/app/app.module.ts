@@ -53,7 +53,10 @@ import {
 import { ContributersFormComponent } from './upload/contributers-form/contributers-form.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ContributerCircleComponent } from './components/contributer-circle/contributer-circle.component';
-import { MediaComponent } from './auth/setup/media/media.component';
+import {
+  ImageCropperDialog,
+  MediaComponent,
+} from './auth/setup/media/media.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +84,7 @@ import { MediaComponent } from './auth/setup/media/media.component';
     NoFileDialogComponent,
     ContributerCircleComponent,
     MediaComponent,
+    ImageCropperDialog,
   ],
   imports: [
     BrowserModule,

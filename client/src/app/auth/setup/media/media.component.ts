@@ -1,6 +1,11 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 
 import { imageMimeTypeValidator } from 'src/app/_helpers/mine-type.validator';
 import { Upload } from 'src/app/_models/upload.interface';
@@ -16,11 +21,11 @@ export class MediaComponent implements OnInit {
   fileDropzoneActive = false;
   uploadStatus!: Upload;
   picPreview!: string;
-  croppedImage: any = '';
+  croppedImage: any;
   imageChangedEvent!: any;
   showCropper = false;
 
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.uploadForm = new FormGroup({
@@ -50,35 +55,34 @@ export class MediaComponent implements OnInit {
   handleDrop(fileList: FileList) {
     console.log('dropped');
 
-    this.readProfPick(fileList[0]);
+    // this.onImagePicked(fileList[0]);
   }
 
   // To pick images
   onImagePicked(event: Event) {
     // @ts-ignore: Object is possibly 'null'.
-    // const file = (event.target as HTMLInputElement).files[0];
-    // this.readProfPick(file);
+    const file = (event.target as HTMLInputElement).files[0];
 
-    this.imageChangedEvent = event;
-  }
-
-  // To add the profilePic to the form and preview
-  readProfPick(file: File) {
     // Add file to form
     this.uploadForm.patchValue({ profilePic: file });
     this.uploadForm.get('profilePic')?.updateValueAndValidity();
 
-    // Load with file reader
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.picPreview = reader.result as string;
-    };
+    if (this.profilePic.errors) return;
 
-    reader.readAsDataURL(file);
+    console.log('No errors yey');
+    this.openDialog(event);
   }
 
-  imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event.base64;
+  // To open the dialog to update the profile picture
+  openDialog(event: any): void {
+    const dialogRef = this.dialog.open(ImageCropperDialog, {
+      width: '450px',
+      data: event,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.croppedImage = result;
+    });
   }
 
   imageLoaded() {
@@ -93,5 +97,27 @@ export class MediaComponent implements OnInit {
   loadImageFailed() {
     console.log('Load failed');
   }
+
   uploadFile() {}
+}
+
+@Component({
+  selector: 'image-cropper-dialog',
+  templateUrl: 'image-cropper-dialog.component.html',
+})
+export class ImageCropperDialog {
+  croppedImage: any = '';
+
+  constructor(
+    public dialogRef: MatDialogRef<ImageCropperDialog>,
+    @Inject(MAT_DIALOG_DATA) public event: any
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+  }
 }

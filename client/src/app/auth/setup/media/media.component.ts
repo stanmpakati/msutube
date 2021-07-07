@@ -7,8 +7,12 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 
-import { imageMimeTypeValidator } from 'src/app/_helpers/mine-type.validator';
+import {
+  imageMimeTypeValidator,
+  imageSizeValidator,
+} from 'src/app/_helpers/mine-type.validator';
 import { Upload } from 'src/app/_models/upload.interface';
+import { delay } from 'lodash';
 
 @Component({
   selector: 'app-media',
@@ -21,15 +25,17 @@ export class MediaComponent implements OnInit {
   fileDropzoneActive = false;
   uploadStatus!: Upload;
   picPreview!: string;
-  croppedImage: any;
+  croppedImage!: string;
   imageChangedEvent!: any;
   showCropper = false;
+  fileTooBigError!: string;
 
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.uploadForm = new FormGroup({
       profilePic: new FormControl(null, {
+        validators: [imageSizeValidator],
         asyncValidators: [imageMimeTypeValidator],
       }),
     });
@@ -38,8 +44,6 @@ export class MediaComponent implements OnInit {
       percentage: 0,
       status: 'PENDING',
     };
-
-    console.log('app-media');
   }
 
   get profilePic() {
@@ -59,27 +63,42 @@ export class MediaComponent implements OnInit {
   }
 
   // To pick images
-  onImagePicked(event: Event) {
+  onImagePicked = async (event: Event) => {
     // @ts-ignore: Object is possibly 'null'.
     const file = (event.target as HTMLInputElement).files[0];
 
+    // Check if file is greater than 1mb and reject it
+    const size = file.size;
+    if (size >= 1024000) {
+      this.fileTooBigError = 'Sorry Your file is too big';
+      return;
+    }
+
+    // reset file size error
+    this.fileTooBigError = '';
+
     // Add file to form
     this.uploadForm.patchValue({ profilePic: file });
-    this.uploadForm.get('profilePic')?.updateValueAndValidity();
+    this.profilePic.updateValueAndValidity();
 
+    // Delay to give chance for angular to check if file is valid or not
+    await new Promise((res) => setTimeout(res, 800));
+
+    // Break function if there is an error
     if (this.profilePic.errors) return;
 
-    console.log('No errors yey');
     this.openDialog(event);
-  }
+  };
 
   // To open the dialog to update the profile picture
   openDialog(event: any): void {
     const dialogRef = this.dialog.open(ImageCropperDialog, {
       width: '450px',
+      maxHeight: '600px',
       data: event,
     });
 
+    // Register 1/1 cropped file
     dialogRef.afterClosed().subscribe((result) => {
       this.croppedImage = result;
     });

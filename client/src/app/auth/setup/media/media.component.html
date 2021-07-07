@@ -25,6 +25,9 @@
       <mat-error *ngIf="profilePic.errors?.invalidMimeType">
         Sorry only jpg and png files supported
       </mat-error>
+      <mat-error *ngIf="fileTooBigError">
+        {{ fileTooBigError }}
+      </mat-error>
     </div>
 
     <button
@@ -33,13 +36,7 @@
       (click)="imagePicker.click()"
       type="button"
     >
-      Select profilePic
+      {{ !croppedImage ? "Select" : "Change" }} picture
     </button>
-    <div
-      class="image-preview"
-      *ngIf="picPreview !== '' && picPreview && profilePic.valid"
-    >
-      <img [src]="picPreview" alt="Your Prof pic" />
-    </div>
   </div>
 </form>

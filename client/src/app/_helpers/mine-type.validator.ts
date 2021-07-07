@@ -1,4 +1,4 @@
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
 import { Observable, Observer, of } from 'rxjs';
 
 export const imageMimeTypeValidator = (
@@ -53,3 +53,24 @@ export const imageMimeTypeValidator = (
   );
   return frObs;
 };
+
+export function imageSizeValidator(): ValidatorFn | null {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    console.log('validator');
+    console.log(control.value);
+    if (typeof control.value === 'string') {
+      return null;
+    }
+
+    const file = control.value as File;
+    if (!file) return of(null);
+
+    const size = file.size;
+
+    if (size > 1000) {
+      return { fileTooBig: true };
+    }
+
+    return null;
+  };
+}

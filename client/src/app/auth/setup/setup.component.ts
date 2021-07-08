@@ -7,8 +7,7 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./setup.component.scss'],
 })
 export class SetupComponent implements OnInit {
-  // details = 'Personal';
-  details = 'Profile';
+  details = 'Personal';
   isLoading = false;
   submitted = false;
   personal!: {
@@ -23,7 +22,6 @@ export class SetupComponent implements OnInit {
     twitterLink: string;
     whatsappLink: string;
   };
-  // @Input() personalDetails!: {};
 
   constructor(private authService: AuthService) {}
 

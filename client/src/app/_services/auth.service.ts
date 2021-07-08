@@ -46,10 +46,10 @@ export class AuthService {
   createUser(
     pic: File,
     otherDetails: {
-      facebook: string;
-      instagram: string;
-      twitter: string;
-      whatsapp: string;
+      facebookLink: string;
+      instagramLink: string;
+      twitterLink: string;
+      whatsappLink: string;
       firstname: string;
       lastname: string;
       regnumber: string;

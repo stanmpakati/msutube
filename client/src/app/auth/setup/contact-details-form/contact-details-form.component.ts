@@ -9,20 +9,20 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class ContactDetailsFormComponent implements OnInit {
   cdForm!: FormGroup;
   @Output() addContactDetails: EventEmitter<{
-    facebook: string;
-    instagram: string;
-    twitter: string;
-    whatsapp: string;
+    facebookLink: string;
+    instagramLink: string;
+    twitterLink: string;
+    whatsappLink: string;
   }> = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {
     this.cdForm = new FormGroup({
-      facebook: new FormControl(null),
-      instagram: new FormControl(null),
-      twitter: new FormControl(null),
-      whatsapp: new FormControl(null),
+      facebookLink: new FormControl(null),
+      instagramLink: new FormControl(null),
+      twitterLink: new FormControl(null),
+      whatsappLink: new FormControl(null),
     });
   }
 
@@ -44,10 +44,10 @@ export class ContactDetailsFormComponent implements OnInit {
 
   submit() {
     const contactDetails = {
-      facebook: this.cdForm.value.facebook,
-      instagram: this.cdForm.value.instagram,
-      twitter: this.cdForm.value.twitter,
-      whatsapp: this.cdForm.value.whatsapp,
+      facebookLink: this.cdForm.value.facebook,
+      instagramLink: this.cdForm.value.instagram,
+      twitterLink: this.cdForm.value.twitter,
+      whatsappLink: this.cdForm.value.whatsapp,
     };
 
     this.addContactDetails.emit(contactDetails);

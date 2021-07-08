@@ -18,10 +18,10 @@ export class SetupComponent implements OnInit {
     bio: string;
   };
   contact!: {
-    facebook: string;
-    instagram: string;
-    twitter: string;
-    whatsapp: string;
+    facebookLink: string;
+    instagramLink: string;
+    twitterLink: string;
+    whatsappLink: string;
   };
   // @Input() personalDetails!: {};
 
@@ -41,10 +41,10 @@ export class SetupComponent implements OnInit {
   }
 
   toUpload(contactDetails: {
-    facebook: string;
-    instagram: string;
-    twitter: string;
-    whatsapp: string;
+    facebookLink: string;
+    instagramLink: string;
+    twitterLink: string;
+    whatsappLink: string;
   }) {
     this.contact = contactDetails;
     this.details = 'Profile';

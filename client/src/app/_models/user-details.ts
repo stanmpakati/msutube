@@ -6,8 +6,8 @@ export interface FullUser {
   lastname: string;
   regnumber: string | null;
   bio: string;
-  facebook: string | null;
-  instagram: string | null;
-  twitter: string | null;
-  whatsapp: string | null;
+  facebookLink: string | null;
+  instagramLink: string | null;
+  twitterLink: string | null;
+  whatsappLink: string | null;
 }

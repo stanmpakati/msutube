@@ -22,6 +22,10 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  getSignupAuth() {
+    return this.signupAuth;
+  }
+
   getToken() {
     return this.token;
   }
@@ -77,7 +81,7 @@ export class AuthService {
     // then upload profile picture and get it's destination and
   }
 
-  loginUser(authDetails: Auth) {
+  loginUser(authDetails: Auth, returnUrl: string) {
     this.http
       .post<{
         token: string;
@@ -102,7 +106,14 @@ export class AuthService {
             this.authStatusListener.next(true);
             this.isAuthenticated = true;
             this.userId = response.userId;
-            this.router.navigateByUrl('/');
+
+            // Continue to where user was headed
+            if (returnUrl) {
+              this.router.navigateByUrl(returnUrl);
+              return;
+            }
+            // Otherwise go to homepage
+            this.router.navigateByUrl('/home');
           }
         },
         (error) => {

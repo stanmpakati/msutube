@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Auth } from 'src/app/_models/auth.model';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -16,8 +17,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   form!: FormGroup;
   private authStatusSub!: Subscription;
   isDark = true;
+  returnUrl!: string;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -37,6 +43,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         console.log(authStatus);
         this.isLoading = false;
       });
+
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   ngOnDestroy() {
@@ -60,13 +69,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.submitted = true;
 
+    console.log(this.returnUrl);
+
     const auth: Auth = {
       email: this.form.value.email,
       username: this.form.value.email,
       password: this.form.value.password,
     };
 
-    this.authService.loginUser(auth);
+    this.authService.loginUser(auth, this.returnUrl);
     this.form.reset();
     this.isLoading = false;
   }

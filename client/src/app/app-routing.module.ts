@@ -8,19 +8,20 @@ import { MusicComponent } from './music/music.component';
 import { PicturesComponent } from './pictures/pictures.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UploadComponent } from './upload/upload.component';
+import { AuthGuard } from './_helpers/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   // Auth routes
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'setup', component: SetupComponent },
+  { path: 'setup', component: SetupComponent, canActivate: [AuthGuard] },
 
   { path: 'home', component: HomeComponent },
-  { path: 'upload', component: UploadComponent },
+  { path: 'upload', component: UploadComponent, canActivate: [AuthGuard] },
   { path: 'music', component: MusicComponent },
   { path: 'pictures', component: PicturesComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

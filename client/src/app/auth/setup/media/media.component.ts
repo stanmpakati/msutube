@@ -12,7 +12,6 @@ import {
   imageSizeValidator,
 } from 'src/app/_helpers/mine-type.validator';
 import { Upload } from 'src/app/_models/upload.interface';
-import { delay } from 'lodash';
 
 @Component({
   selector: 'app-media',
@@ -20,7 +19,7 @@ import { delay } from 'lodash';
   styleUrls: ['./media.component.scss'],
 })
 export class MediaComponent implements OnInit {
-  @Output() uploadProfilePicture: EventEmitter<{}> = new EventEmitter();
+  @Output() uploadProfilePicture: EventEmitter<File> = new EventEmitter();
   uploadForm!: FormGroup;
   fileDropzoneActive = false;
   uploadStatus!: Upload;
@@ -117,7 +116,9 @@ export class MediaComponent implements OnInit {
     console.log('Load failed');
   }
 
-  uploadFile() {}
+  uploadFile() {
+    this.uploadProfilePicture.emit(this.uploadForm.value.prifilePic);
+  }
 }
 
 @Component({

@@ -32,3 +32,11 @@ image {
   max-width: 175px;
   text-align: center;
 }
+
+.submit {
+  float: right;
+}
+
+p {
+  color: darken($color: #ffd740, $amount: 45);
+}

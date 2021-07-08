@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 
 import { Auth } from '../_models/auth.model';
 import { environment } from '../../environments/environment';
-import { User } from '../_models/user';
+import { FullUser } from '../_models/user-details';
 
 const authUrl = `${environment.host}/user`;
 
@@ -43,9 +43,26 @@ export class AuthService {
     this.router.navigateByUrl('/setup');
   }
 
-  createUser() {
-    const user = { ...this.signupAuth };
+  createUser(
+    pic: File,
+    otherDetails: {
+      facebook: string;
+      instagram: string;
+      twitter: string;
+      whatsapp: string;
+      firstname: string;
+      lastname: string;
+      regnumber: string;
+      bio: string;
+    }
+  ) {
+    const user: FullUser = {
+      ...this.signupAuth,
+      ...otherDetails,
+      profilePicUrl: null,
+    };
 
+    // First upload user details
     this.http.post(`${authUrl}/signup`, user).subscribe(
       (response) => {
         console.log(response);
@@ -56,6 +73,8 @@ export class AuthService {
         this.authStatusListener.next(false);
       }
     );
+
+    // then upload profile picture and get it's destination and
   }
 
   loginUser(authDetails: Auth) {

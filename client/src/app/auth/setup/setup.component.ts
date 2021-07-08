@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserDetails } from 'src/app/_models/user-details';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-setup',
@@ -12,7 +11,6 @@ export class SetupComponent implements OnInit {
   details = 'Profile';
   isLoading = false;
   submitted = false;
-  userDetails!: UserDetails;
   personal!: {
     firstname: string;
     lastname: string;
@@ -25,9 +23,9 @@ export class SetupComponent implements OnInit {
     twitter: string;
     whatsapp: string;
   };
-  @Input() personalDetails!: {};
+  // @Input() personalDetails!: {};
 
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {}
 
@@ -52,13 +50,13 @@ export class SetupComponent implements OnInit {
     this.details = 'Profile';
   }
 
-  onSubmit(contactDetails: {}) {
+  onSubmit(profilePic: File) {
     const user = {
       ...this.personal,
-      ...contactDetails,
+      ...this.contact,
     };
-
     console.log(user);
-    this.router.navigateByUrl('/home');
+
+    this.authService.createUser(profilePic, user);
   }
 }

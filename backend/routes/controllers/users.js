@@ -32,8 +32,11 @@ export const getEmail = (req, res) => {
 export const signup = (req, res) => {
   // For signing up new users
   // Recieves username, email and password
+  if (!req.body.username || !req.body.email || !req.body.password)
+    return res
+      .status(400)
+      .json({ message: "Sorry incomplete details, try again", reset: true });
 
-  console.log("signing in");
   // Check if user is already in database
   User.find({
     email: req.body.email.toLowerCase(),

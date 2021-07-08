@@ -19,10 +19,12 @@ export class ContactDetailsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.cdForm = new FormGroup({
-      facebookLink: new FormControl(null),
-      instagramLink: new FormControl(null),
-      twitterLink: new FormControl(null),
-      whatsappLink: new FormControl(null),
+      city: new FormControl(null),
+      country: new FormControl(null),
+      facebook: new FormControl(null),
+      instagram: new FormControl(null),
+      twitter: new FormControl(null),
+      whatsapp: new FormControl(null),
     });
   }
 

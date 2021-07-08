@@ -1,4 +1,17 @@
 <form [formGroup]="cdForm" (ngSubmit)="submit()">
+  <!-- Location input -->
+  <mat-form-field>
+    <mat-label>City</mat-label>
+    <mat-icon matPrefix>location_on</mat-icon>
+    <input matInput type="text" formControlName="city" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Country</mat-label>
+    <mat-icon matPrefix>location_on</mat-icon>
+    <input matInput type="text" formControlName="country" />
+  </mat-form-field>
+
   <!-- Facebook input -->
   <mat-form-field>
     <mat-label>Facebook username</mat-label>

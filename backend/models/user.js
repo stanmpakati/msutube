@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema({
   },
   profilePicUrl: { type: String },
   bio: { city: String, country: String },
-  location: { type: String },
+  location: { city: String, country: String },
   facebookLink: { type: String },
   instagramLink: { type: String },
   twitterLink: { type: String },

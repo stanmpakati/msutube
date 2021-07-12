@@ -97,7 +97,7 @@ export class SignupComponent implements OnInit {
     console.log(this.form.value.username);
     console.log(`${this.form.value.username}`.toLowerCase());
 
-    if (this.form.invalid) return;
+    // if (this.form.invalid) return;
 
     this.isLoading = true;
     const authData: Auth = {
@@ -107,7 +107,8 @@ export class SignupComponent implements OnInit {
     };
     console.log(authData);
 
-    this.authService.saveSignUpAuth(authData);
+    // this.authService.saveSignUpAuth(authData);
+    this.authService.createUser();
     this.isLoading = false;
   }
 }

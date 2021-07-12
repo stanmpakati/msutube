@@ -32,15 +32,18 @@ export const getEmail = (req, res) => {
 export const signup = (req, res) => {
   // For signing up new users
   // Recieves username, email and password
-  if (!req.body.username || !req.body.email || !req.body.password)
+  const formData = { ...req.body };
+  console.log("form data", formData);
+
+  if (!formData.username || !formData.email || !formData.password)
     return res
       .status(400)
       .json({ message: "Sorry incomplete details, try again", reset: true });
 
   // Check if user is already in database
   User.find({
-    email: req.body.email.toLowerCase(),
-    username: req.body.username.toLowerCase(),
+    email: formData.email.toLowerCase(),
+    username: formData.username.toLowerCase(),
   }).then((result) => {
     console.log("email: " + result);
     if (result.length !== 0)
@@ -50,12 +53,12 @@ export const signup = (req, res) => {
   });
 
   // Encrypypts the password
-  bcrypt.hash(req.body.password, 10).then((hash) => {
+  bcrypt.hash(formData.password, 10).then((hash) => {
     // Create a new user with the information provided
     // and hashed password
     const user = new User({
-      username: req.body.username.toLowerCase(),
-      email: req.body.email.toLowerCase(),
+      username: formData.username.toLowerCase(),
+      email: formData.email.toLowerCase(),
       password: hash,
       firstname: "",
       lastname: "",

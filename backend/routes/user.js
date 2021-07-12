@@ -1,4 +1,6 @@
 import express from "express";
+import multer from "multer";
+
 import {
   getUsernames,
   getEmail,
@@ -8,12 +10,13 @@ import {
 } from "./controllers/users.js";
 
 const router = express.Router();
+const upload = multer();
 
 router.get("/usernames", getUsernames);
 
 router.post("/email", getEmail);
 
-router.post("/signup", signup);
+router.post("/signup", upload.none(), signup);
 
 router.post("/login", login);
 

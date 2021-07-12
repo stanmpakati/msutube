@@ -47,27 +47,34 @@ export class AuthService {
     this.router.navigateByUrl('/setup');
   }
 
-  createUser(
-    pic: File,
-    otherDetails: {
-      facebookLink: string;
-      instagramLink: string;
-      twitterLink: string;
-      whatsappLink: string;
-      firstname: string;
-      lastname: string;
-      regnumber: string;
-      bio: string;
-    }
-  ) {
-    const user: FullUser = {
-      ...this.signupAuth,
-      ...otherDetails,
+  createUser() {
+    // } //   country: string; //   city: string; //   bio: string; //   regnumber: string; //   lastname: string; //   firstname: string; //   whatsappLink: string; //   twitterLink: string; //   instagramLink: string; //   facebookLink: string; // otherDetails: { // pic: File,
+    // const user: FullUser = {
+    //   ...this.signupAuth,
+    //   ...otherDetails,
+    //   profilePicUrl: null,
+    // };
+
+    const mockUser: FullUser = {
+      username: 'stan',
+      email: 'me@stan.co.zw',
       profilePicUrl: null,
+      firstname: 'stan',
+      lastname: 'Mpakati',
+      regnumber: 'R1911268h',
+      bio: 'My Bio',
     };
 
+    const userData = new FormData();
+
+    Object.entries(mockUser).forEach(([key, value]) => {
+      userData.append(key, value);
+    });
+
+    userData.append('password', 'Test123.');
+
     // First upload user details
-    this.http.post(`${authUrl}/signup`, user).subscribe(
+    this.http.post(`${authUrl}/signup`, userData).subscribe(
       (response) => {
         console.log(response);
         this.router.navigateByUrl('/login');

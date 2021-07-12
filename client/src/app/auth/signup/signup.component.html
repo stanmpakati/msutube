@@ -34,7 +34,7 @@
               registerFormControl.username.errors?.userNameNotAvailable
             "
           >
-            Username not available
+            Username already taken
           </mat-error>
         </mat-form-field>
 
@@ -65,7 +65,7 @@
               registerFormControl.email.errors?.emailNotAvailable
             "
           >
-            Email not available
+            Email already taken
           </mat-error>
         </mat-form-field>
 
@@ -85,6 +85,14 @@
             Password should have minimum 8 characters, at least 1 uppercase
             letter, 1 lowercase letter and 1 number
           </mat-hint>
+          <mat-error
+            *ngIf="
+              (registerFormControl.password.touched || submitted) &&
+              registerFormControl.password.errors?.required
+            "
+          >
+            Password is required
+          </mat-error>
           <mat-error
             *ngIf="
               registerFormControl.password.touched &&

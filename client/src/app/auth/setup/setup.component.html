@@ -1,10 +1,11 @@
 <!-- Loading state -->
-<div class="backdrop" *ngIf="isLoading"></div>
-<mat-spinner
-  class="is-loading-spinner"
-  color="accent"
-  *ngIf="isLoading"
-></mat-spinner>
+<div class="backdrop" *ngIf="isLoading">
+  <mat-spinner
+    class="is-loading-spinner"
+    color="accent"
+    *ngIf="isLoading"
+  ></mat-spinner>
+</div>
 
 <div class="container" fxLayout="column">
   <header>

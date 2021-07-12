@@ -48,6 +48,7 @@ export class SetupComponent implements OnInit {
   }
 
   onSubmit(profilePic?: File) {
+    this.isLoading = true;
     const user = {
       ...this.personal,
       ...this.contact,

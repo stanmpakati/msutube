@@ -93,6 +93,7 @@ export class SignupComponent implements OnInit {
   }
 
   onSignup() {
+    this.submitted = true;
     if (this.form.invalid) return;
 
     const authData: Auth = {

@@ -35,9 +35,6 @@ export class SetupComponent implements OnInit {
   }) {
     this.personal = { ...personalDetails };
     this.details = 'Contact';
-
-    this.authService.createUser();
-    console.log('auth');
   }
 
   toUpload(contactDetails: {
@@ -50,13 +47,13 @@ export class SetupComponent implements OnInit {
     this.details = 'Profile';
   }
 
-  onSubmit(profilePic: File) {
+  onSubmit(profilePic?: File) {
     const user = {
       ...this.personal,
       ...this.contact,
     };
     console.log(user);
 
-    // this.authService.createUser(profilePic, user);
+    this.authService.createUser(user, profilePic);
   }
 }

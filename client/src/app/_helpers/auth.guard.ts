@@ -32,6 +32,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     // Send users to login if they want to do some stuff
     const isAuth = this.authService.getIsAuthenticated();
     console.log(state.url);
+    console.log(isAuth);
 
     if (!isAuth && state.url != '/setup') {
       this.openSnackBar("Sorry we don't have your login details");
@@ -41,8 +42,15 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     }
 
     // Prevent reroute to signup if auth details aren't available
-    const hasAuthData = this.authService.getSignupAuth();
-    if (!hasAuthData) this.router.navigateByUrl('/signup');
+    if (state.url === '/setup') {
+      const hasAuthData = this.authService.getSignupAuth();
+      if (!hasAuthData) {
+        this.router.navigateByUrl('/signup');
+        this.openSnackBar(
+          "Sorry we don't have your Username, Email and Password details"
+        );
+      }
+    }
 
     return true;
   }

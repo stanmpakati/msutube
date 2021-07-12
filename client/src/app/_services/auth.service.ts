@@ -5,7 +5,6 @@ import { Observable, Subject } from 'rxjs';
 
 import { Auth } from '../_models/auth.model';
 import { environment } from '../../environments/environment';
-import { FullUser } from '../_models/user-details';
 
 const authUrl = `${environment.host}/user`;
 
@@ -109,11 +108,12 @@ export class AuthService {
             const expirationDate = new Date(
               now.getTime() + expiresInDuration * 1000
             );
-            this.saveAuthData(this.token, expirationDate, this.userId);
-
             this.authStatusListener.next(true);
             this.isAuthenticated = true;
             this.userId = response.userId;
+
+            // Save to local storage
+            this.saveAuthData(this.token, expirationDate, this.userId);
 
             // Continue to where user was headed
             if (returnUrl) {

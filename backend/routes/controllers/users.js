@@ -29,11 +29,25 @@ export const getEmail = (req, res) => {
     );
 };
 
-export const signup = (req, res) => {
+export const signup = (req, res, next) => {
   // For signing up new users
   // Recieves username, email and password
-  const formData = { ...req.body };
-  console.log("form data", formData);
+  let carryOn = true;
+  let formData = { ...req.body };
+
+  // Ensure all strings are lowercase
+  formData = Object.assign(
+    ...Object.keys(formData).map((key) => {
+      if (
+        typeof formData[key] === "string" &&
+        key != "bio" &&
+        key != "password"
+      ) {
+        return { [key]: formData[key].toLowerCase() };
+      }
+      return { [key]: formData[key] };
+    })
+  );
 
   if (!formData.username || !formData.email || !formData.password)
     return res
@@ -44,42 +58,52 @@ export const signup = (req, res) => {
   User.find({
     email: formData.email.toLowerCase(),
     username: formData.username.toLowerCase(),
-  }).then((result) => {
-    console.log("email: " + result);
-    if (result.length !== 0)
-      return res
-        .status(400)
-        .json({ message: "Sorry email or username already exists" });
-  });
+  })
+    .then((result) => {
+      console.log("email: " + result);
+      if (result.length !== 0) {
+        carryOn = false;
+        return res
+          .status(400)
+          .json({ message: "Sorry email or username already exists" });
+      }
+    })
+    .then(() => {
+      if (!carryOn) return;
+      console.log("continuing");
 
-  // Encrypypts the password
-  bcrypt.hash(formData.password, 10).then((hash) => {
-    // Create a new user with the information provided
-    // and hashed password
-    const user = new User({
-      username: formData.username.toLowerCase(),
-      email: formData.email.toLowerCase(),
-      password: hash,
-      firstname: "",
-      lastname: "",
-      regnumber: "",
-    });
-    user
-      .save()
-      .then((result) => {
-        res.status(201).json({
-          message: "User Created",
-          result: result,
+      // Encrypypts the password
+      bcrypt.hash(formData.password, 10).then((hash) => {
+        // Create a new user with the information provided
+        // and hashed password
+        const user = new User({
+          ...formData,
+          password: hash,
         });
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json({
-          message: "Sorry creating user failed",
-          error: err,
-        });
+
+        req.user = user;
+        next();
       });
-  });
+    });
+};
+
+export const saveUser = (req, res) => {
+  console.log("saveUser ", req.user);
+  req.user
+    .save()
+    .then((result) => {
+      res.status(201).json({
+        message: "User Created",
+        result: result,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        message: "Sorry creating user failed",
+        error: err,
+      });
+    });
 };
 
 export const searchUser = (req, res) => {

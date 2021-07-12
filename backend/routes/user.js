@@ -1,5 +1,6 @@
 import express from "express";
 import multer from "multer";
+import { getProfilePic } from "../middleware/multer.js";
 
 import {
   getUsernames,
@@ -7,6 +8,7 @@ import {
   login,
   signup,
   searchUser,
+  saveUser,
 } from "./controllers/users.js";
 
 const router = express.Router();
@@ -16,7 +18,13 @@ router.get("/usernames", getUsernames);
 
 router.post("/email", getEmail);
 
-router.post("/signup", upload.none(), signup);
+router.post(
+  "/signup",
+  multer().none(),
+  signup,
+  multer({ storage: getProfilePic }).single("profilePicture"),
+  saveUser
+);
 
 router.post("/login", login);
 

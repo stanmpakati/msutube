@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../_models/user';
 import { FullUser } from '../_models/user-details';
 import { UserService } from '../_services/user.service';
 
@@ -9,15 +8,16 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  user!: User;
+  user!: FullUser;
+  isDarkMode = true;
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.userService.getUser('stan').subscribe((res) => {
       console.log(res.message);
-      console.log(res.user);
-      this.user = res.user;
+      this.user = { ...res.user };
+      console.log(this.user);
     });
   }
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
 import { environment } from '../../environments/environment';
+import { FullUser } from '../_models/user-details';
 
 const userUrl = `${environment.host}/user`;
 
@@ -28,7 +29,7 @@ export class UserService {
   }
 
   getUser(query: string) {
-    return this.http.post<{ user: User; message: string }>(
+    return this.http.post<{ user: FullUser; message: string }>(
       `${userUrl}/search`,
       {
         query: query,

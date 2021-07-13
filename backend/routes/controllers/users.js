@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-import user from "../../models/user.js";
 import User from "../../models/user.js";
 
 export const getUsernames = (req, res) => {
@@ -78,6 +77,14 @@ export const signup = (req, res, next) => {
         // and hashed password
         const user = new User({
           ...formData,
+          name: {
+            first: formData.firstname,
+            last: formData.lastname,
+          },
+          location: {
+            city: formData.city,
+            country: formData.country,
+          },
           password: hash,
         });
 
@@ -116,22 +123,20 @@ export const searchUser = (req, res) => {
       .status(400)
       .json({ message: "Sorry there is no query parameter" });
 
-  user
-    .findOne({
-      $or: [
-        { username: req.body.query.toLowerCase() },
-        { regnumber: req.body.query.toLowerCase() },
-      ],
-    })
+  User.findOne({
+    $or: [
+      { username: req.body.query.toLowerCase() },
+      { regnumber: req.body.query.toLowerCase() },
+    ],
+  })
+    .select("-password")
     .then((user) => {
       // If the user was not found
       if (!user)
         return res.status(404).json({ message: "Sorry User does not exist" });
 
       // User object to be sent to client
-      const { a, ...foundUser } = user;
-      console.log("found: ", foundUser);
-      res.status(200).json({ message: "User found", user: foundUser });
+      res.status(200).json({ message: "User found", user: user });
     })
     .catch((err) => {
       console.log(err),
@@ -152,13 +157,12 @@ export const login = (req, res) => {
   if (!req.body.password)
     return res.status(400).json({ message: "Put full login details" });
 
-  user
-    .findOne({
-      $or: [
-        { username: req.body.username.toLowerCase() },
-        { email: req.body.email.toLowerCase() },
-      ],
-    })
+  User.findOne({
+    $or: [
+      { username: req.body.username.toLowerCase() },
+      { email: req.body.email.toLowerCase() },
+    ],
+  })
     .then((user) => {
       // if user is not found
       if (!user) {

@@ -13,14 +13,16 @@ export class SetupComponent implements OnInit {
   personal!: {
     firstname: string;
     lastname: string;
-    regnumber: string;
-    bio: string;
+    regnumber?: string;
+    bio?: string;
   };
   contact!: {
-    facebookLink: string;
-    instagramLink: string;
-    twitterLink: string;
-    whatsappLink: string;
+    facebookLink?: string;
+    instagramLink?: string;
+    twitterLink?: string;
+    whatsappLink?: string;
+    city?: string;
+    country?: string;
   };
 
   constructor(private authService: AuthService) {}
@@ -30,18 +32,20 @@ export class SetupComponent implements OnInit {
   onNext(personalDetails: {
     firstname: string;
     lastname: string;
-    regnumber: string;
-    bio: string;
+    regnumber?: string;
+    bio?: string;
   }) {
     this.personal = { ...personalDetails };
     this.details = 'Contact';
   }
 
   toUpload(contactDetails: {
-    facebookLink: string;
-    instagramLink: string;
-    twitterLink: string;
-    whatsappLink: string;
+    facebookLink?: string;
+    instagramLink?: string;
+    twitterLink?: string;
+    whatsappLink?: string;
+    city?: string;
+    country?: string;
   }) {
     this.contact = contactDetails;
     this.details = 'Profile';

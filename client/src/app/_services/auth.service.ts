@@ -48,14 +48,16 @@ export class AuthService {
 
   createUser(
     otherDetails: {
-      facebookLink: string;
-      instagramLink: string;
-      twitterLink: string;
-      whatsappLink: string;
+      facebookLink?: string;
+      instagramLink?: string;
+      twitterLink?: string;
+      whatsappLink?: string;
       firstname: string;
       lastname: string;
-      regnumber: string;
-      bio: string;
+      regnumber?: string;
+      bio?: string;
+      city?: string;
+      country?: string;
     },
     picture?: File
   ) {

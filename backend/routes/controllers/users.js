@@ -209,6 +209,6 @@ export const login = (req, res) => {
       console.log(err),
         res
           .status(500)
-          .json({ message: "Sorry logging in unsuccesseful", error: err });
+          .json({ message: "Invalid Password or Username/email", error: err });
     });
 };

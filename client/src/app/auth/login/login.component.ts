@@ -21,8 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -65,9 +64,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onLogin() {
+    this.submitted = true;
     if (this.form.invalid) return;
     this.isLoading = true;
-    this.submitted = true;
 
     console.log(this.returnUrl);
 
@@ -78,7 +77,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     };
 
     this.authService.loginUser(auth, this.returnUrl);
-    this.form.reset();
+    // this.form.reset();
     this.isLoading = false;
   }
 }

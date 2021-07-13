@@ -9,7 +9,7 @@ import { UserService } from '../_services/user.service';
 })
 export class ProfileComponent implements OnInit {
   user!: FullUser;
-  isDarkMode = true;
+  isDarkMode = false;
 
   constructor(private userService: UserService) {}
 

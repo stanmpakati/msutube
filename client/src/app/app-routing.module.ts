@@ -21,7 +21,8 @@ const routes: Routes = [
   { path: 'upload', component: UploadComponent, canActivate: [AuthGuard] },
   { path: 'music', component: MusicComponent },
   { path: 'pictures', component: PicturesComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  // TODO: authguard: , canActivate: [AuthGuard]
+  { path: 'profile', component: ProfileComponent },
 ];
 
 @NgModule({

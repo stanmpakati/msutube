@@ -108,6 +108,7 @@ export const saveUser = (req, res) => {
 
 export const searchUser = (req, res) => {
   // To search for a user in the database
+  console.log("searching:", req.body.query);
 
   // Check is there is a query parameter
   if (!req.body.query)
@@ -125,15 +126,11 @@ export const searchUser = (req, res) => {
     .then((user) => {
       // If the user was not found
       if (!user)
-        return res.status(404).json({ message: "Sorry User does not exsist" });
+        return res.status(404).json({ message: "Sorry User does not exist" });
 
       // User object to be sent to client
-      const foundUser = {
-        username: user.username,
-        email: user.email,
-        regnumber: user.regnumber,
-        profilePicUrl: user.profilePicUrl,
-      };
+      const { a, ...foundUser } = user;
+      console.log("found: ", foundUser);
       res.status(200).json({ message: "User found", user: foundUser });
     })
     .catch((err) => {
@@ -169,7 +166,6 @@ export const login = (req, res) => {
         return res.status(404).json({ message: "User not found" });
       }
 
-      console.log("USER: " + user);
       // if user found
       loggedInUser = user;
       return bcrypt.compare(req.body.password, user.password);
@@ -185,8 +181,6 @@ export const login = (req, res) => {
             .status(401)
             .json({ message: "Invalid Password or Username/email" });
 
-      console.log("result" + result);
-
       // If passwords match
       // Create jwt token
       const token = jwt.sign(
@@ -198,8 +192,6 @@ export const login = (req, res) => {
         process.env.JWT_KEY,
         { expiresIn: "1h" }
       );
-
-      console.log("token: " + token);
 
       // Send response
       res.status(200).json({

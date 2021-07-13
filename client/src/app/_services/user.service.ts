@@ -26,4 +26,13 @@ export class UserService {
       }
     );
   }
+
+  getUser(query: string) {
+    return this.http.post<{ user: User; message: string }>(
+      `${userUrl}/search`,
+      {
+        query: query,
+      }
+    );
+  }
 }

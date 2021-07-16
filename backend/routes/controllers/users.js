@@ -64,7 +64,6 @@ export const signup = (req, res) => {
     username: formData.username.toLowerCase(),
   })
     .then((result) => {
-      console.log("email: " + result);
       if (result.length !== 0) {
         carryOn = false;
         return res
@@ -74,7 +73,6 @@ export const signup = (req, res) => {
     })
     .then(() => {
       if (!carryOn) return;
-      console.log("continuing");
 
       // Encrypypts the password
       bcrypt.hash(formData.password, 10).then((hash) => {
@@ -104,7 +102,6 @@ export const signup = (req, res) => {
             });
           })
           .catch((err) => {
-            console.log(err);
             res.status(500).json({
               message: "Sorry creating user failed",
               error: err,
@@ -116,7 +113,6 @@ export const signup = (req, res) => {
 
 export const searchUser = (req, res) => {
   // To search for a user in the database
-  console.log("searching:", req.body.query);
 
   // Check is there is a query parameter
   if (!req.body.query)
@@ -130,7 +126,6 @@ export const searchUser = (req, res) => {
       { regnumber: req.body.query.toLowerCase() },
     ],
   })
-    .select("-password")
     .then((user) => {
       // If the user was not found
       if (!user)
@@ -164,13 +159,13 @@ export const login = (req, res) => {
       { email: req.body.email.toLowerCase() },
     ],
   })
+    .select("+password")
     .then((user) => {
       // if user is not found
       if (!user) {
         errorState = true;
         return res.status(404).json({ message: "User not found" });
       }
-
       // if user found
       loggedInUser = user;
       return bcrypt.compare(req.body.password, user.password);

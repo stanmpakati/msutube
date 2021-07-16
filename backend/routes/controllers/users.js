@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import user from "../../models/user.js";
 
 import User from "../../models/user.js";
 
@@ -28,11 +29,14 @@ export const getEmail = (req, res) => {
     );
 };
 
-export const signup = (req, res, next) => {
+export const signup = (req, res) => {
   // For signing up new users
   // Recieves username, email and password
   let carryOn = true;
   let formData = { ...req.body };
+  const url = req.protocol + "://" + req.get("host");
+
+  const ppPath = `${url}/${req.file.path}`;
 
   // Ensure all strings are lowercase
   formData = Object.assign(
@@ -48,6 +52,7 @@ export const signup = (req, res, next) => {
     })
   );
 
+  // Check if formdata has all the required fields
   if (!formData.username || !formData.email || !formData.password)
     return res
       .status(400)
@@ -86,29 +91,25 @@ export const signup = (req, res, next) => {
             country: formData.country,
           },
           password: hash,
+          profilePicUrl: ppPath,
         });
 
-        req.user = user;
-        next();
-      });
-    });
-};
-
-export const saveUser = (req, res) => {
-  console.log("saveUser ", req.user);
-  req.user
-    .save()
-    .then((result) => {
-      res.status(201).json({
-        message: "User Created",
-        result: result,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        message: "Sorry creating user failed",
-        error: err,
+        // Save user
+        user
+          .save()
+          .then((result) => {
+            res.status(201).json({
+              message: "User Created",
+              result: result,
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(500).json({
+              message: "Sorry creating user failed",
+              error: err,
+            });
+          });
       });
     });
 };

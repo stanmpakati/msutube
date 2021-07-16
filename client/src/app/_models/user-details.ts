@@ -3,9 +3,9 @@ export interface FullUser {
   profilePicUrl?: string | null;
   username: string;
   email: string;
-  regnumber: string | null;
+  regnumber?: string | null;
   bio?: string;
-  location: { city?: string; country?: string };
+  location?: { city?: string; country?: string };
   facebookLink?: string;
   instagramLink?: string;
   twitterLink?: string;

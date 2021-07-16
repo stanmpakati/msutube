@@ -59,14 +59,18 @@ export const videoStorage = multer.diskStorage({
 
 export const getProfilePic = multer.diskStorage({
   destination: (req, file, cb) => {
-    const isValid = IMG_MINE_TYPE_MAP[file.minetype];
+    const isValid = IMG_MINE_TYPE_MAP[file.mimetype];
     let error = new Error("Invalid image mine type");
     if (isValid) error = null;
     cb(error, "./_uploads/profile-pictures");
   },
   filename: (req, file, cb) => {
-    const name = req.user._id.substring(0, 8);
+    // todo get name from user id
+    // const name = req.user._id.substring(0, 8);
+
+    const name = file.originalname.toLocaleLowerCase().split(" ").join("-");
     const ext = IMG_MINE_TYPE_MAP[file.mimetype];
-    cb(null, "pp-" + name + "-" + Date.now() + "." + ext);
+    console.log("file name", name);
+    cb(null, "pp-" + Date.now() + "-" + name);
   },
 });

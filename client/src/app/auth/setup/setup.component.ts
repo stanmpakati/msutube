@@ -51,13 +51,13 @@ export class SetupComponent implements OnInit {
     this.details = 'Profile';
   }
 
-  onSubmit(profilePic?: File) {
+  onSubmit(profilePic: File) {
     this.isLoading = true;
     const user = {
       ...this.personal,
       ...this.contact,
     };
-    console.log(user);
+    console.log(profilePic);
 
     this.authService.createUser(user, profilePic);
   }

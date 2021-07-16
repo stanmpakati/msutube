@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { ImageCroppedEvent, base64ToFile } from 'ngx-image-cropper';
 import {
   MatDialog,
   MatDialogRef,
@@ -100,6 +100,12 @@ export class MediaComponent implements OnInit {
     // Register 1/1 cropped file
     dialogRef.afterClosed().subscribe((result) => {
       this.croppedImage = result;
+
+      const ppFile = base64ToFile(this.croppedImage);
+
+      // Send file to form
+      this.uploadForm.patchValue({ profilePic: ppFile });
+      this.profilePic.updateValueAndValidity();
     });
   }
 
@@ -117,7 +123,8 @@ export class MediaComponent implements OnInit {
   }
 
   uploadFile() {
-    this.uploadProfilePicture.emit(this.uploadForm.value.prifilePic);
+    console.log(this.uploadForm.value.profilePic);
+    this.uploadProfilePicture.emit(this.uploadForm.value.profilePic);
   }
 }
 

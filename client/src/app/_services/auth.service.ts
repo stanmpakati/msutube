@@ -73,6 +73,7 @@ export class AuthService {
       if (value) userData.append(key, value);
     });
 
+    console.log(picture);
     if (picture) userData.append('profilePicture', picture);
 
     // First upload user details

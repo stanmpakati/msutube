@@ -8,11 +8,9 @@ import {
   login,
   signup,
   searchUser,
-  saveUser,
 } from "./controllers/users.js";
 
 const router = express.Router();
-const upload = multer();
 
 router.get("/usernames", getUsernames);
 
@@ -20,10 +18,9 @@ router.post("/email", getEmail);
 
 router.post(
   "/signup",
-  multer().none(),
-  signup,
+  // Todo get Filename from userid
   multer({ storage: getProfilePic }).single("profilePicture"),
-  saveUser
+  signup
 );
 
 router.post("/login", login);

@@ -199,6 +199,11 @@ export const login = (req, res) => {
         token: token,
         expiresIn: 3600,
         userId: loggedInUser._id,
+        user: {
+          email: loggedInUser.email,
+          username: loggedInUser.name,
+          userId: loggedInUser._id,
+        },
       });
     })
     .catch((err) => {

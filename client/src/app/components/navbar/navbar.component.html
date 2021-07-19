@@ -39,7 +39,11 @@
 
       <!-- profile button -->
       <button class="icon-btn" mat-icon-button [matMenuTriggerFor]="menu">
-        <img src="/assets/vectors/man.jpg" alt="" />
+        <img
+          [src]="profileUrl ? profileUrl : '/assets/vectors/man.jpg'"
+          alt="profile picture"
+          #img
+        />
       </button>
       <!-- profile menu -->
       <mat-menu #menu="matMenu">

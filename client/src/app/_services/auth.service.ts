@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs';
 
 import { Auth } from '../_models/auth.model';
 import { environment } from '../../environments/environment';
+import { User } from '../_models/user';
 
 const authUrl = `${environment.host}/user`;
 
@@ -18,6 +19,7 @@ export class AuthService {
   private authStatusListener = new Subject<boolean>();
   private userId!: string;
   private signupAuth!: Auth;
+  private user!: User;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -31,6 +33,10 @@ export class AuthService {
 
   getUserId() {
     return this.userId;
+  }
+
+  getProfileUrl() {
+    return localStorage.getItem('profileUrl');
   }
 
   getIsAuthenticated() {
@@ -98,6 +104,7 @@ export class AuthService {
         message: string;
         expiresIn: number;
         userId: string;
+        user: User;
       }>(`${authUrl}/login`, authDetails)
       .subscribe(
         (response) => {
@@ -114,9 +121,15 @@ export class AuthService {
             this.authStatusListener.next(true);
             this.isAuthenticated = true;
             this.userId = response.userId;
+            this.user = response.user;
 
             // Save to local storage
-            this.saveAuthData(this.token, expirationDate, this.userId);
+            this.saveAuthData(
+              this.token,
+              expirationDate,
+              this.userId,
+              this.user
+            );
 
             // Continue to where user was headed
             if (returnUrl) {
@@ -175,10 +188,17 @@ export class AuthService {
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date, userId: string) {
+  private saveAuthData(
+    token: string,
+    expirationDate: Date,
+    userId: string,
+    user: User
+  ) {
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expirationDate.toISOString());
     localStorage.setItem('userId', userId);
+    localStorage.setItem('username', user.username);
+    localStorage.setItem('profileUrl', user.profilePicUrl);
   }
 
   private clearAuthData() {

@@ -45,15 +45,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     //     this.image.nativeElement.src = this.user.profilePicUrl;
     //   });
 
-    this.authService.loginUser(
-      {
-        email: 'stanmp@stan.com',
-        username: 'stanmp',
-        password: 'Test123.',
-      },
-      '/'
-    );
-
     this.profileUrl = this.authService.getProfileUrl();
     this.themeService.getTheme();
 

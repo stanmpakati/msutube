@@ -97,7 +97,7 @@ export class AuthService {
     // then upload profile picture and get it's destination and
   }
 
-  loginUser(authDetails: Auth, returnUrl: string) {
+  loginUser(authDetails: Auth, returnUrl?: string) {
     console.log(authDetails);
     this.http
       .post<{
@@ -137,8 +137,8 @@ export class AuthService {
               this.router.navigateByUrl(returnUrl);
               return;
             }
-            // Otherwise go to homepage
-            this.router.navigateByUrl('/home');
+            // Todo Otherwise go to homepage
+            this.router.navigateByUrl('/profile');
           }
         },
         (error) => {

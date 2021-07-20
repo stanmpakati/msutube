@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
+import { AuthService } from './_services/auth.service';
 import { ThemeService } from './_services/theme.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private themeService: ThemeService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private authService: AuthService
   ) {
     this.matIconRegistry
       .addSvgIcon(
@@ -54,7 +56,13 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     );
     this.themeService.getTheme();
-    console.log(`isdarkmode: ${this.isDarkMode}`);
+
+    // Todo remove later
+    this.authService.loginUser({
+      email: 'stanmp@stan.com',
+      username: 'stanmp',
+      password: 'Test123.',
+    });
   }
 
   ngOnDestroy() {

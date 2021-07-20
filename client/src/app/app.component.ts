@@ -51,7 +51,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.themeSub = this.themeService.themeStatusListener.subscribe(
       (isDark) => {
-        console.log(`isdark: ${isDark}`);
         this.isDarkMode = isDark;
       }
     );

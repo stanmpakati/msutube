@@ -3,7 +3,8 @@
     <a
       routerLink="/home"
       [routerLinkActiveOptions]="{ exact: true }"
-      routerLinkActive="active"
+      [routerLinkActive]="className"
+      [ngClass]="{ 'a-dark': isDarkmode }"
     >
       <div fxLayout="column" fxLayoutAlign="center center">
         <mat-icon>home</mat-icon>
@@ -11,21 +12,33 @@
       </div>
     </a>
 
-    <a routerLink="/music" routerLinkActive="active">
+    <a
+      routerLink="/music"
+      [routerLinkActive]="className"
+      [ngClass]="{ 'a-dark': isDarkmode }"
+    >
       <div fxLayout="column" fxLayoutAlign="center center">
         <mat-icon>library_music</mat-icon>
         <span class="mat-caption">Music</span>
       </div>
     </a>
 
-    <a routerLink="/pictures" routerLinkActive="active">
+    <a
+      routerLink="/pictures"
+      [routerLinkActive]="className"
+      [ngClass]="{ 'a-dark': isDarkmode }"
+    >
       <div fxLayout="column" fxLayoutAlign="center center">
         <mat-icon>image</mat-icon>
         <span class="mat-caption">Pictures</span>
       </div>
     </a>
 
-    <a routerLink="/profile" routerLinkActive="active">
+    <a
+      routerLink="/profile"
+      [routerLinkActive]="className"
+      [ngClass]="{ 'a-dark': isDarkmode }"
+    >
       <div fxLayout="column" fxLayoutAlign="center center">
         <mat-icon>person</mat-icon>
         <span class="mat-caption">Profile</span>

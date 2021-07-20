@@ -4,18 +4,34 @@ a {
   width: 100%;
 }
 
-a-dark {
-  color: rgb(196, 196, 196);
+.a-dark {
+  color: rgb(235, 235, 235);
 }
 
-a-dark:active {
-  color: rgb(255, 255, 255);
+.active {
+  border-bottom: 2px solid #1976d2;
+
+  div span {
+    font-size: 1rem;
+    color: #1976d2;
+  }
+
+  div mat-icon {
+    color: #1976d2;
+    font-size: 28px;
+  }
 }
 
-a-light {
-  color: rgb(70, 70, 70);
-}
+.active-dark {
+  border-bottom: 2px solid #ffd740;
 
-a-light:active {
-  color: rgb(46, 46, 46);
+  div span {
+    font-size: 1rem;
+    color: #ffd740;
+  }
+
+  div mat-icon {
+    color: #ffd740;
+    font-size: 28px;
+  }
 }

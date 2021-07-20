@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import user from "../../models/user.js";
 
 import User from "../../models/user.js";
 
+// ------------------------------------------------GetUsernames----------------------------------------------
 export const getUsernames = (req, res) => {
   // Returns a list of all the usernames
   User.find()
@@ -29,6 +29,40 @@ export const getEmail = (req, res) => {
     );
 };
 
+// --------------------------------------------------Search User--------------------------------------
+export const searchUser = (req, res) => {
+  // To search for a user in the database
+
+  // Check is there is a query parameter
+  if (!req.body.query)
+    return res
+      .status(400)
+      .json({ message: "Sorry there is no query parameter" });
+
+  User.findOne({
+    $or: [
+      { username: req.body.query.toLowerCase() },
+      { regnumber: req.body.query.toLowerCase() },
+    ],
+  })
+    .then((user) => {
+      // If the user was not found
+      if (!user)
+        return res.status(404).json({ message: "Sorry User does not exist" });
+
+      // User object to be sent to client
+      res.status(200).json({ message: "User found", user: user });
+    })
+    .catch((err) => {
+      console.log(err),
+        res.status(500).json({
+          message: "Sorry there was a problem quering the user",
+          error: err,
+        });
+    });
+};
+
+// ---------------------------------------------Sign Up-------------------------------------------
 export const signup = (req, res) => {
   // For signing up new users
   // Recieves username, email and password
@@ -92,6 +126,8 @@ export const signup = (req, res) => {
           profilePicUrl: ppPath,
         });
 
+        console.log(user);
+
         // Save user
         user
           .save()
@@ -111,38 +147,7 @@ export const signup = (req, res) => {
     });
 };
 
-export const searchUser = (req, res) => {
-  // To search for a user in the database
-
-  // Check is there is a query parameter
-  if (!req.body.query)
-    return res
-      .status(400)
-      .json({ message: "Sorry there is no query parameter" });
-
-  User.findOne({
-    $or: [
-      { username: req.body.query.toLowerCase() },
-      { regnumber: req.body.query.toLowerCase() },
-    ],
-  })
-    .then((user) => {
-      // If the user was not found
-      if (!user)
-        return res.status(404).json({ message: "Sorry User does not exist" });
-
-      // User object to be sent to client
-      res.status(200).json({ message: "User found", user: user });
-    })
-    .catch((err) => {
-      console.log(err),
-        res.status(500).json({
-          message: "Sorry there was a problem quering the user",
-          error: err,
-        });
-    });
-};
-
+// --------------------------------------------------Login---------------------------------------
 export const login = (req, res) => {
   // To login already existing users
   // Takes in either username or email and password
@@ -161,6 +166,7 @@ export const login = (req, res) => {
   })
     .select("+password")
     .then((user) => {
+      console.log(user);
       // if user is not found
       if (!user) {
         errorState = true;
@@ -203,6 +209,7 @@ export const login = (req, res) => {
           email: loggedInUser.email,
           username: loggedInUser.name,
           userId: loggedInUser._id,
+          profilePicUrl: loggedInUser.profilePicUrl,
         },
       });
     })

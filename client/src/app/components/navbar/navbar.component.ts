@@ -37,6 +37,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.isDarkMode = isDark;
       }
     );
+
+    this.authService.loginUser(
+      {
+        email: 'stanmp@stan.com',
+        username: 'stanmp',
+        password: 'Test123.',
+      },
+      '/'
+    );
     // this.imgCache = this.imageService
     //   .getImage(this.user.profilePicUrl)
     //   .subscribe((res) => {
@@ -46,6 +55,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     this.profileUrl = this.authService.getProfileUrl();
     this.themeService.getTheme();
+    console.log('purl', this.profileUrl);
 
     // this.user = {
     //   username: 'stanmpakati',

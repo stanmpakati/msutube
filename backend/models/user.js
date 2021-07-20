@@ -4,7 +4,6 @@ import uniqueValidator from "mongoose-unique-validator";
 const userSchema = mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
-  regnumber: { type: String, unique: true },
   password: { type: String, required: true, select: false },
   name: {
     first: String,
@@ -18,6 +17,7 @@ const userSchema = mongoose.Schema({
   instagramLink: { type: String },
   twitterLink: { type: String },
   phoneNumber: { type: String },
+  regnumber: { type: String },
 });
 
 userSchema.plugin(uniqueValidator);

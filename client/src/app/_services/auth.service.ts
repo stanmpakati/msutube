@@ -98,6 +98,7 @@ export class AuthService {
   }
 
   loginUser(authDetails: Auth, returnUrl: string) {
+    console.log(authDetails);
     this.http
       .post<{
         token: string;

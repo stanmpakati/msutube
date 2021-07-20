@@ -137,8 +137,8 @@ export class AuthService {
               this.router.navigateByUrl(returnUrl);
               return;
             }
-            // Todo Otherwise go to homepage
-            this.router.navigateByUrl('/profile');
+            // Otherwise go to homepage
+            this.router.navigateByUrl('/home');
           }
         },
         (error) => {

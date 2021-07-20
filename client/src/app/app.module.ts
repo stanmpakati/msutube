@@ -26,7 +26,6 @@ import { DetailsComponent } from './upload/details/details.component';
 import { ThumbnailComponent } from './components/thumbnail/thumbnail.component';
 import { MusicComponent } from './music/music.component';
 import { PicturesComponent } from './pictures/pictures.component';
-import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { FeaturedComponent } from './home/featured/featured.component';
 import {
   FileUploadComponent,
@@ -58,7 +57,6 @@ import { MaterialModule } from './shared/material/material.module';
     ThumbnailComponent,
     MusicComponent,
     PicturesComponent,
-    TopNavComponent,
     FeaturedComponent,
     FileUploadComponent,
     ContributersFormComponent,

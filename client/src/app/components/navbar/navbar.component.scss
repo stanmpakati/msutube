@@ -1,3 +1,8 @@
+mat-toolbar {
+  margin-bottom: 0.75rem;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
 img {
   height: 35px;
   border-radius: 50%;
@@ -37,9 +42,36 @@ mat-menu div {
   padding: 1rem;
 }
 
+// -----------------------------------------------------
+.nav-row {
+  height: 45px !important;
+}
+
 a {
   text-decoration: none;
+  font-weight: normal;
+  font-size: 1rem;
 }
+
+.bg-light {
+  background-color: rgb(221, 221, 221);
+  a {
+    color: rgb(46, 46, 46);
+  }
+}
+
+.bg-dark {
+  background-color: #424242;
+  a {
+    color: rgb(255, 255, 255);
+  }
+}
+
+.link-active {
+  font-weight: 600;
+  font-size: 22px;
+}
+// ---------
 
 @media only screen and (min-width: 600px) {
   .search-button {

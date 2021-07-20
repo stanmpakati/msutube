@@ -68,4 +68,25 @@
       </mat-menu>
     </div>
   </mat-toolbar-row>
+  <!-- ---------------- Desktop Links ---------------------------- -->
+  <mat-toolbar-row
+    [ngClass]="{
+      'nav-row': true,
+      'bg-dark': isDarkMode,
+      'bg-light': !isDarkMode
+    }"
+    fxHide.xs
+    fxAlign="row"
+    fxLayoutAlign="space-around center"
+  >
+    <a
+      routerLink="/home"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLinkActive="link-active"
+    >
+      Home
+    </a>
+    <a routerLink="/music" routerLinkActive="link-active">Music</a>
+    <a routerLink="/pictures" routerLinkActive="link-active">Pictures</a>
+  </mat-toolbar-row>
 </mat-toolbar>

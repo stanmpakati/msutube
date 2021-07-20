@@ -1,12 +1,11 @@
-:host {
-  display: inline-block;
-  margin-right: 8px;
-}
+// :host {
+// display: inline-block;
+// margin-right: 8px;
+// }
 
-.thumb-container {
-  width: 12rem;
-  display: block;
-}
+// .thumb-container {
+//   display: block;
+// }
 
 .img {
   background: url("/assets/img/Get-Out.jpg");
@@ -14,6 +13,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  position: relative;
   img {
     // TODO fix stretching of image
     width: 100%;
@@ -25,17 +25,16 @@
     overflow: hidden;
     // position: absolute;
   }
-  span {
-    background-color: rgb(29, 29, 29);
-    color: rgb(255, 255, 255);
-    opacity: 0.9;
-    padding: 1px 3px;
-    // margin-top: 30px;
-    // margin-left: 10px;
-    position: relative;
-    top: 75px;
-    left: 8px;
-  }
+}
+
+.duration-stamp {
+  background-color: rgb(29, 29, 29);
+  color: rgb(255, 255, 255);
+  opacity: 0.9;
+  padding: 1px 3px;
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
 }
 
 .mat-body-2 {

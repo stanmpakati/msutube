@@ -10,7 +10,7 @@ export const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use("/images", express.static(path.join("images")));
+app.use("/_uploads", express.static(path.join("_uploads")));
 
 app.use(cors());
 app.use((req, res, next) => {

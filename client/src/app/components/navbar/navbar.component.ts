@@ -38,6 +38,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
       }
     );
 
+    // this.imgCache = this.imageService
+    //   .getImage(this.user.profilePicUrl)
+    //   .subscribe((res) => {
+    //     console.log(res);
+    //     this.image.nativeElement.src = this.user.profilePicUrl;
+    //   });
+
     this.authService.loginUser(
       {
         email: 'stanmp@stan.com',
@@ -46,23 +53,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
       },
       '/'
     );
-    // this.imgCache = this.imageService
-    //   .getImage(this.user.profilePicUrl)
-    //   .subscribe((res) => {
-    //     console.log(res);
-    //     this.image.nativeElement.src = this.user.profilePicUrl;
-    //   });
 
     this.profileUrl = this.authService.getProfileUrl();
     this.themeService.getTheme();
-    console.log('purl', this.profileUrl);
-
-    // this.user = {
-    //   username: 'stanmpakati',
-    //   email: 'stan@stan.com',
-    //   profilePicUrl:
-    //     'http://localhost:5000/_uploads/profile-pictures/pp-1626448377219-blob',
-    // };
 
     // this.imageService.cacheUrls = [this.user.profilePicUrl];
   }

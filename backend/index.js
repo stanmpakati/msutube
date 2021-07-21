@@ -11,6 +11,7 @@ mongoose
   )
   .then(() => {
     console.log("Connected to database");
-    app.listen(port, () => console.log(`Running on http://localhost:${port}`));
+    app.listen(5002, "192.168.100.4", () => console.log(`Running on ip`));
+    // app.listen(port, () => console.log(`Running on http://localhost:${port}`));
   })
   .catch((e) => console.log(`Error connecting to the database: ${e.message}`));

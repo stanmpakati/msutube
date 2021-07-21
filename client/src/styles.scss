@@ -4,6 +4,7 @@ $color-accent: #ffd740;
 html,
 body {
   height: 100%;
+  overflow-x: hidden;
 }
 body {
   margin: 0;
@@ -24,6 +25,7 @@ app-bottom-navbar {
   bottom: 0px;
   width: 100%;
   z-index: 10;
+  box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.3);
 }
 
 .container {

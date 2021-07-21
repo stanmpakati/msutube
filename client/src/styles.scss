@@ -23,6 +23,7 @@ app-bottom-navbar {
   position: fixed;
   bottom: 0px;
   width: 100%;
+  z-index: 10;
 }
 
 .container {
@@ -30,8 +31,9 @@ app-bottom-navbar {
   height: 100%;
 }
 
+// Todo: check if padding changed anything singificant 8px 10px
 .container-small {
-  padding: 8px 10px;
+  padding: 8px 1.5rem;
 }
 
 .logo-light {

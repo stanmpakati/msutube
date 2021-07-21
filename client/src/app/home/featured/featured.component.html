@@ -1,7 +1,11 @@
-<div class="section-title">
+<div class="section-title" fxHide.xs>
   <span class="mat-title">Featured</span> <span class="spacer"></span>
   <button mat-stroked-button color="primary">See More</button>
 </div>
-<div class="thumbnails">
-  <app-thumbnail *ngFor="let vid of vids" [thumbnailData]="vid"></app-thumbnail>
+<div class="thumbnails" ngClass.xs="container-small">
+  <app-thumbnail
+    *ngFor="let vid of vids"
+    [thumbnailData]="vid"
+    ngClass.xs="mt-1"
+  ></app-thumbnail>
 </div>

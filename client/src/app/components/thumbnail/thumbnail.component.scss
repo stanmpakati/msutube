@@ -18,6 +18,15 @@
   }
 }
 
+.small {
+  font-size: 1.2rem;
+
+  .mat-body-2 {
+    margin-top: 4px;
+    font-size: 1.4rem;
+  }
+}
+
 .duration-stamp {
   background-color: rgb(29, 29, 29);
   color: rgb(255, 255, 255);

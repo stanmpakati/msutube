@@ -21,7 +21,7 @@ export class FeaturedComponent implements OnInit {
         uploadDate: new Date('July 20, 2020 16:24:00'),
       },
       {
-        title: 'My Second Fake Video',
+        title: 'My Second Fake Video with a really long title',
         length: '09:52',
         owner: 'stanmpakati',
         thumbnailUrl: '',

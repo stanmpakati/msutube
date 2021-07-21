@@ -39,6 +39,8 @@ import {
   MediaComponent,
 } from './auth/setup/media/media.component';
 import { MaterialModule } from './shared/material/material.module';
+import { RenderTilesComponent } from './components/render-tiles/render-tiles.component';
+import { TrendingComponent } from './home/trending/trending.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import { MaterialModule } from './shared/material/material.module';
     ContributerCircleComponent,
     MediaComponent,
     ImageCropperDialog,
+    RenderTilesComponent,
+    TrendingComponent,
   ],
   imports: [
     BrowserModule,

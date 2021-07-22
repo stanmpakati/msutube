@@ -2,7 +2,11 @@
   <h2>Add content partners and contributers</h2>
   <mat-form-field>
     <mat-label>Partners</mat-label>
-    <mat-chip-list #partnersList aria-label="Partners selection">
+    <mat-chip-list
+      #partnersList
+      aria-label="Partners selection"
+      formControlName="owners"
+    >
       <!-- TODO add picture to contributer pic and link with backend -->
       <mat-chip
         *ngFor="let partner of partners"
@@ -17,7 +21,6 @@
         matInput
         type="text"
         placeholder="Add new contributer..."
-        formControlName="owners"
         [matChipInputFor]="partnersList"
         [matChipInputSeparatorKeyCodes]="separatorKeyCodes"
         [matChipInputAddOnBlur]="true"
@@ -26,6 +29,15 @@
       <button mat-stroked-button color="primary" matSuffix>Add</button>
     </mat-chip-list>
     <mat-hint align="end"> Press comma or enter to add new tag </mat-hint>
+    <mat-error align="end" *ngIf="owners?.touched && owners?.errors?.required">
+      Email is required
+    </mat-error>
+    <mat-error *ngIf="owners?.touched && owners?.errors?.email">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="owners?.touched && owners?.errors?.emailNotAvailable">
+      Email already taken
+    </mat-error>
   </mat-form-field>
   <h3>Contributers</h3>
   <form [formGroup]="helpersForm">

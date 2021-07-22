@@ -50,6 +50,7 @@ export class CustomValidatorService {
   }
 
   emailValidator = (emailControl: AbstractControl) => {
+    console.log('hit');
     return this.authService.findEmail(emailControl.value).pipe(
       debounceTime(1000),
       take(1),

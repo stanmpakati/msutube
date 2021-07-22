@@ -31,8 +31,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     | UrlTree {
     // Send users to login if they want to do some stuff
     const isAuth = this.authService.getIsAuthenticated();
-    console.log(state.url);
-    console.log(isAuth);
 
     if (!isAuth && state.url != '/setup') {
       this.openSnackBar("Sorry we don't have your login details");

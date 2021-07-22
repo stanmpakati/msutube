@@ -172,6 +172,7 @@ export class AuthService {
   }
 
   findEmail(email: string) {
+    console.log('auth hit');
     return this.http.post<{ message: string }>(`${authUrl}/email`, {
       email: email,
     });

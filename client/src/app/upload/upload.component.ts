@@ -38,7 +38,6 @@ export class UploadComponent implements OnInit, OnDestroy {
     this.ifFileUploadingListener = this.uploadService.isFileUploading.subscribe(
       (isUploading) => (this.fileUploading = isUploading)
     );
-    console.log('uploading' + this.fileUploading);
   }
 
   ngOnDestroy() {
@@ -54,8 +53,6 @@ export class UploadComponent implements OnInit, OnDestroy {
   }
 
   checkIfFileIsUploading() {
-    console.log('details file upload ' + this.fileUploading);
-
     // Throw error if there is no file uploading
     if (!this.fileUploading) {
       const dialogRef = this.dialog.open(NoFileDialogComponent);
@@ -64,7 +61,6 @@ export class UploadComponent implements OnInit, OnDestroy {
     }
 
     if (this.detailsForm.invalid) return;
-    console.log('clicked');
   }
 
   sendDetails() {
@@ -79,7 +75,6 @@ export class UploadComponent implements OnInit, OnDestroy {
       tags: this.detailsComponent.tags,
     };
 
-    console.log(details);
     this.uploadService.recordDetails = details;
   }
 

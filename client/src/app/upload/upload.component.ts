@@ -50,7 +50,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   }
 
   get contributersForm() {
-    return this.contributersFormComponent?.contributesForm;
+    return this.contributersFormComponent?.contributersForm;
   }
 
   checkIfFileIsUploading() {
@@ -84,6 +84,19 @@ export class UploadComponent implements OnInit, OnDestroy {
   }
 
   // Contributers -------------------------------------------------------------------------------------
+  sendContributers() {
+    // Check form validity before continuing
+    // this.checkIfFileIsUploading();
+    if (this.contributersForm.invalid) return;
+
+    // Make details object to send to service
+    const contributers = {
+      owners: this.contributersFormComponent.partners,
+      contibuters: this.contributersFormComponent.contributers,
+    };
+
+    this.uploadService.recordContributers = contributers;
+  }
 }
 
 /**

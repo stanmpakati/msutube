@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { debounceTime, map, take } from 'rxjs/operators';
@@ -10,6 +15,7 @@ import { User } from '../../_models/user';
 import { Contributer } from '../../_models/contributer';
 import { UserService } from '../../_services/user.service';
 import { DetailsComponent } from '.././details/details.component';
+import { CustomValidatorService } from 'src/app/_services/custom-validator.service';
 
 @Component({
   selector: 'app-contributers-form',
@@ -17,19 +23,26 @@ import { DetailsComponent } from '.././details/details.component';
   styleUrls: ['./contributers-form.component.scss'],
 })
 export class ContributersFormComponent implements OnInit {
-  contributesForm!: FormGroup;
+  contributersForm!: FormGroup;
   helpersForm!: FormGroup;
   partners: string[] = [];
   contributers!: Contributer[];
   contribSubmit = false;
   separatorKeyCodes = [ENTER, COMMA] as const;
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private customValidator: CustomValidatorService
+  ) {}
 
   ngOnInit(): void {
-    this.contributesForm = new FormGroup({
-      partners: new FormControl(),
-      contributers: new FormControl(),
+    this.contributersForm = this.fb.group({
+      owners: [
+        '',
+        [Validators.required, Validators.email],
+        this.customValidator.userNameValidator.bind(this.customValidator),
+      ],
     });
 
     this.helpersForm = new FormGroup({
@@ -41,6 +54,10 @@ export class ContributersFormComponent implements OnInit {
       role: new FormControl(null, [Validators.required]),
       description: new FormControl(null, [Validators.required]),
     });
+  }
+
+  get owners() {
+    return this.helpersForm.controls.owners;
   }
 
   get username() {
@@ -87,25 +104,32 @@ export class ContributersFormComponent implements OnInit {
   addContributer() {
     // Update error messages
     this.contribSubmit = true;
-    if (this.contributesForm.invalid) return;
+    if (this.contributersForm.invalid) return;
 
     // Confirm user with database
     // and add contributer
     this.userService
-      .findUser(this.contributesForm.value.username)
+      .findUser(this.contributersForm.value.username)
       .subscribe((resObj) => {
         const newContributer: Contributer = {
           user: resObj.user,
-          role: this.contributesForm.value.role,
-          roleDetails: this.contributesForm.value.description,
+          role: this.contributersForm.value.role,
+          roleDetails: this.contributersForm.value.description,
         };
         this.contributers.push(newContributer);
         console.log(this.contributers);
 
-        this.contributesForm.reset();
+        this.contributersForm.reset();
       });
 
     // reset Errors
     this.contribSubmit = false;
+  }
+
+  onSubmit() {
+    const contributers = {
+      owners: this.partners,
+      contributers: this.contributers,
+    };
   }
 }

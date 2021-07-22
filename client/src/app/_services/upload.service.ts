@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Post } from '../_models/post';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
+import { Contributer } from '../_models/contributer';
 
 const videoUrl = `${environment.host}/video`;
 
@@ -20,7 +21,7 @@ export class UploadService {
     description: string;
     tags: string[];
   };
-  private filePartners!: {};
+  private contibuters!: { owners?: string[]; contributers?: Contributer[] };
   private fileRefs!: {};
   private fileDestDetails!: {
     fileUrl: string;
@@ -50,8 +51,11 @@ export class UploadService {
     this.fileDetails = details;
   }
 
-  set recordPartners(partners: {}) {
-    this.filePartners = partners;
+  set recordContributers(contibuters: {
+    owners?: string[];
+    contibuters?: Contributer[];
+  }) {
+    this.contibuters = contibuters;
   }
 
   set recordRefs(refs: {}) {
@@ -83,6 +87,8 @@ export class UploadService {
       observe: 'events',
     });
   }
+
+  finishFileUpload() {}
 
   // updatePost(post: Post, image: File | string) {
   //   let postData: FormData | Post;

@@ -41,7 +41,7 @@ export class ContributersFormComponent implements OnInit {
       owners: [
         '',
         [Validators.required, Validators.email],
-        this.customValidator.userNameValidator.bind(this.customValidator),
+        this.customValidator.emailValidator.bind(this.customValidator),
       ],
     });
 
@@ -83,21 +83,22 @@ export class ContributersFormComponent implements OnInit {
   addPartner(event: MatChipInputEvent) {
     const val = (event.value || '').trim();
 
-    // if (val) {
-    //   this.userService.findUser(val).pipe(
-    //     debounceTime(1000),
-    //     take(1),
-    //     map((res) => {
-    //       if (res.message === 'User found') {
-    //         this.partners.push(res.user);
-    //         event.chipInput?.clear();
-    //       }
-    //     })
-    //   );
-    // }
     if (val) {
-      this.partners.push(val);
-      event.chipInput?.clear();
+      console.log('search');
+      this.userService.getUser(val).pipe(
+        debounceTime(1000),
+        take(1),
+        map((res) => {
+          console.log(res.message);
+          if (res.message === 'User found') {
+            this.partners.push(res.user.username);
+            event.chipInput?.clear();
+          }
+        })
+      );
+
+      // this.partners.push(val);
+      // event.chipInput?.clear();
     }
   }
 

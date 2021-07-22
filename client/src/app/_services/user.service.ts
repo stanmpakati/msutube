@@ -19,6 +19,7 @@ export class UserService {
     });
   }
 
+  // Todo delete this one
   findUser(query: string): Observable<{ user: User; message: string }> {
     return this.http.post<{ user: User; message: string }>(
       `${userUrl}/search`,

@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authStatusSub = this.authService
       .getAuthStatusListener()
       .subscribe((authStatus) => {
-        console.log(authStatus);
         this.isLoading = false;
       });
 
@@ -67,8 +66,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.submitted = true;
     if (this.form.invalid) return;
     this.isLoading = true;
-
-    console.log(this.returnUrl);
 
     const auth: Auth = {
       email: this.form.value.email,

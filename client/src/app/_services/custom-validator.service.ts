@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ValidatorFn, AbstractControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
+import { Observable, of } from 'rxjs';
 import { debounceTime, map, take } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
@@ -77,4 +78,31 @@ export class CustomValidatorService {
   validateUserName(userName: string) {
     return this.UserList.indexOf(userName) > -1;
   }
+
+  // userValidator = (
+  //   control: AbstractControl
+  // ):
+  //   | Promise<{ [key: string]: any }>
+  //   | Observable<{ [key: string]: any } | null> => {
+  //     if (typeof control.value === 'string') {
+  //       return of(null);
+  //     }
+
+  //     const username = control.value as File;
+  //     if (!username) return of(null);
+
+  //     this.userService.getUser(val).pipe(
+  //       debounceTime(1000),
+  //       take(1),
+  //       map((res) => {
+  //         console.log(res.message);
+  //         if (res.message === 'User found') {
+  //           this.partners.push(res.user.username);
+  //           event.chipInput?.clear();
+  //         }
+  //       })
+  //     );
+
+  // return of(null);
+  //   }
 }

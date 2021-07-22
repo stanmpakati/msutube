@@ -15,11 +15,17 @@ export const getUsernames = (req, res) => {
     );
 };
 
+// ---------------------------------------search email----------------------------------------
 export const getEmail = (req, res) => {
   // to check if an email is in the db or not
   // takes in email
 
-  User.find({ email: req.body.email.toLowerCase() })
+  User.find({
+    $or: [
+      { email: req.body.email.toLowerCase() },
+      { username: req.body.email.toLowerCase() },
+    ],
+  })
     .then((email) => {
       if (email.length !== 0) return res.status(200).json({ message: "Found" });
       else res.status(200).json({ message: "Not found" });
@@ -32,6 +38,7 @@ export const getEmail = (req, res) => {
 // --------------------------------------------------Search User--------------------------------------
 export const searchUser = (req, res) => {
   // To search for a user in the database
+  console.log(req.body.query);
 
   // Check is there is a query parameter
   if (!req.body.query)

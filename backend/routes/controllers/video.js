@@ -14,8 +14,9 @@ export const videoUpload = (req, res) => {
 export const uploadVideo = (req, res) => {
   console.log("uploading", req.files);
   const url = req.protocol + "://" + req.get("host");
+  const fileType = req.files.file[0].mimetype;
 
-  const videoPath = `${url}/${req.files.video[0].path}`;
+  const videoPath = `${url}/${req.files.file[0].path}`;
   const thumbPath = req.files.thumbnail
     ? `${url}/${req.files.thumbnail[0].path}`
     : null;

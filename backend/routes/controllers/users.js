@@ -166,7 +166,6 @@ export const login = (req, res) => {
   })
     .select("+password")
     .then((user) => {
-      console.log(user);
       // if user is not found
       if (!user) {
         errorState = true;

@@ -98,7 +98,6 @@ export class AuthService {
   }
 
   loginUser(authDetails: Auth, returnUrl?: string) {
-    console.log(authDetails);
     this.http
       .post<{
         token: string;
@@ -138,7 +137,7 @@ export class AuthService {
               return;
             }
             // Otherwise go to homepage
-            this.router.navigateByUrl('/home');
+            this.router.navigateByUrl('/upload');
           }
         },
         (error) => {
@@ -183,7 +182,6 @@ export class AuthService {
   }
 
   private setAuthTimer(duration: number) {
-    console.log(`timer in ${duration}`);
     this.tokenTimer = setTimeout(() => {
       this.logout();
     }, duration * 1000);

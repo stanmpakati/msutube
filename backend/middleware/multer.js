@@ -39,14 +39,14 @@ export const storage = multer.diskStorage({
         file.mimetype === "audio/mpeg"
       ) {
         cb(error, "./_uploads/audios");
+      } else {
+        cb(error, "./_uploads/images");
       }
-      cb(error, "./_uploads/images");
     }
   },
   filename: (req, file, cb) => {
     const name = file.originalname.toLocaleLowerCase().replace(/\s+/, "-");
-    const ext = MINE_TYPE_MAP[file.mimetype];
-    cb(null, name + "-" + Date.now() + "." + ext);
+    cb(null, Date.now() + "-" + name);
   },
 });
 

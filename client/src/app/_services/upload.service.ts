@@ -22,11 +22,40 @@ export class UploadService {
   };
   private filePartners!: {};
   private fileRefs!: {};
+  private fileDestDetails!: {
+    fileUrl: string;
+    thumbnailUrl: string;
+    fileMimetype: string;
+  };
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   get isFileUploading() {
     return this.fileUploadingListener.asObservable();
+  }
+
+  set recordFileDestDetails(details: {
+    fileUrl: string;
+    thumbnailUrl: string;
+    fileMimetype: string;
+  }) {
+    this.fileDestDetails = details;
+  }
+
+  set recordDetails(details: {
+    title: string;
+    description: string;
+    tags: string[];
+  }) {
+    this.fileDetails = details;
+  }
+
+  set recordPartners(partners: {}) {
+    this.filePartners = partners;
+  }
+
+  set recordRefs(refs: {}) {
+    this.fileRefs = refs;
   }
 
   uploadFalse() {
@@ -48,26 +77,11 @@ export class UploadService {
       message: string;
       fileUrl: string;
       thumbnailUrl: string;
+      fileMimetype: string;
     }>(videoUrl, postData, {
       reportProgress: true,
       observe: 'events',
     });
-  }
-
-  recordDetails(details: {
-    title: string;
-    description: string;
-    tags: string[];
-  }) {
-    this.fileDetails = details;
-  }
-
-  recordPartners(partners: {}) {
-    this.filePartners = partners;
-  }
-
-  recordRefs(refs: {}) {
-    this.fileRefs = refs;
   }
 
   // updatePost(post: Post, image: File | string) {

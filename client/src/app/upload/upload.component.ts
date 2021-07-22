@@ -80,7 +80,7 @@ export class UploadComponent implements OnInit, OnDestroy {
     };
 
     console.log(details);
-    this.uploadService.recordDetails(details);
+    this.uploadService.recordDetails = details;
   }
 
   // Contributers -------------------------------------------------------------------------------------

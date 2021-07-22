@@ -26,6 +26,7 @@ export const uploadVideo = (req, res) => {
     message: "Uploaded",
     fileUrl: videoPath,
     thumbnailUrl: thumbPath,
+    fileMimetype: fileType,
   });
 };
 

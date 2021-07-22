@@ -1,5 +1,6 @@
 node_modules
-images
-videos
-audios
-profile-pictures
+_uploads
+# images
+# videos
+# audios
+# profile-pictures

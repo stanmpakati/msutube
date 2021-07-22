@@ -175,11 +175,14 @@ export class FileUploadComponent implements OnInit {
               (100 / event.total! || 0) * event.loaded
             );
             this.uploadStatus.percentage = uploadPcnt;
-            console.log(this.uploadStatus.percentage);
           }
           if (event.type == HttpEventType.Response) {
             this.uploadStatus.status = 'DONE';
-            console.log(event.body?.message);
+            console.log(event.body);
+            const dets = { ...event.body! };
+            // delete dets.message
+
+            this.UploadService.recordFileDestDetails = dets;
           }
         })
       )

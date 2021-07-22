@@ -24,7 +24,7 @@ router.post(
   // checkAuth,
   multer({ storage: storage }).fields([
     {
-      name: "video",
+      name: "file",
       maxCount: 1,
     },
     {
@@ -32,7 +32,6 @@ router.post(
       maxCount: 1,
     },
   ]),
-  // multer({ storage: videoStorage }).single("video"),
   uploadVideo
 );
 

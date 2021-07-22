@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Post } from '../_models/post';
 import { environment } from '../../environments/environment';
+import { AuthService } from './auth.service';
 
 const videoUrl = `${environment.host}/video`;
 
@@ -22,7 +23,7 @@ export class UploadService {
   private filePartners!: {};
   private fileRefs!: {};
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   get isFileUploading() {
     return this.fileUploadingListener.asObservable();
@@ -32,14 +33,16 @@ export class UploadService {
     this.fileUploadingListener.next(false);
   }
 
-  uploadVideo(image: File, video: File) {
+  uploadVideo(image: File, file: File) {
     // Register upload and send to listeners
     this.fileUploadingListener.next(true);
+    const token = this.authService.getToken();
 
     // Sending file to server
     const postData = new FormData();
     postData.append('thumbnail', image);
-    postData.append('video', video);
+    postData.append('file', file);
+    postData.append('token', token);
 
     return this.http.post<{
       message: string;

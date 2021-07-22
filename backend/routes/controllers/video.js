@@ -26,7 +26,9 @@ export const uploadVideo = (req, res) => {
     fileUrl: videoPath,
     thumbnailUrl: thumbPath,
   });
+};
 
+export const saveVideoDetails = (req, res) => {
   const video = new Video({
     ...req.body,
     // creator: req.userData.userId,
@@ -48,6 +50,7 @@ export const uploadVideo = (req, res) => {
     );
 };
 
+// -----------------------------Get Content-------------------------------
 export const getVideos = (req, res) => {
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;

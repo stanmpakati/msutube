@@ -26,18 +26,25 @@ export const storage = multer.diskStorage({
     const isValid = MINE_TYPE_MAP[file.mimetype];
     let error = new Error("Invalid mine type");
     if (isValid) error = null;
-    if (VID_MINE_TYPE_MAP[file.mimetype]) {
-      cb(error, "./_uploads/videos");
-    } else if (
-      file.mimetype === "audio/mp3" ||
-      file.mimetype === "audio/mpeg"
-    ) {
-      cb(error, "./_uploads/audios");
+
+    // Save thumbnails first
+    if (file.fieldname === "thumbnail") {
+      cb(error, "./_uploads/thumbnails");
+    } else {
+      // then save the actual file
+      if (VID_MINE_TYPE_MAP[file.mimetype]) {
+        cb(error, "./_uploads/videos");
+      } else if (
+        file.mimetype === "audio/mp3" ||
+        file.mimetype === "audio/mpeg"
+      ) {
+        cb(error, "./_uploads/audios");
+      }
+      cb(error, "./_uploads/images");
     }
-    cb(error, "./_uploads/images");
   },
   filename: (req, file, cb) => {
-    const name = file.originalname.toLocaleLowerCase().split(" ").join("-");
+    const name = file.originalname.toLocaleLowerCase().replace(/\s+/, "-");
     const ext = MINE_TYPE_MAP[file.mimetype];
     cb(null, name + "-" + Date.now() + "." + ext);
   },

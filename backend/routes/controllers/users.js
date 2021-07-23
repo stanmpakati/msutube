@@ -27,6 +27,7 @@ export const getEmail = (req, res) => {
     ],
   })
     .then((email) => {
+      console.log(email);
       if (email.length !== 0) return res.status(200).json({ message: "Found" });
       else res.status(200).json({ message: "Not found" });
     })

@@ -37,19 +37,32 @@ export class ContributersFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.contributersForm = this.fb.group({
-      owners: [
-        '',
-        [Validators.required, Validators.email],
-        this.customValidator.emailValidator.bind(this.customValidator),
-      ],
+    // this.contributersForm = this.fb.group({
+    //   owners: [
+    //     '',
+    //     [Validators.required, Validators.email],
+    //     this.customValidator.emailValidator.bind(this.customValidator),
+    //   ],
+    // });
+    this.contributersForm = new FormGroup({
+      partnersControl: new FormControl(null, {
+        validators: [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(60),
+        ],
+        // asyncValidators: [this.customValidator.emailValidator],
+        updateOn: 'blur',
+      }),
     });
 
+    // Todo maybe make a separate FormControl object
     this.helpersForm = new FormGroup({
       // TODO make required only if username has been completed
       username: new FormControl(null, {
         validators: [Validators.required],
-        updateOn: 'submit',
+        // asyncValidators: [this.customValidator.emailValidator],
+        updateOn: 'blur',
       }),
       role: new FormControl(null, [Validators.required]),
       description: new FormControl(null, [Validators.required]),
@@ -68,6 +81,10 @@ export class ContributersFormComponent implements OnInit {
     return this.helpersForm.controls.role;
   }
 
+  get description() {
+    return this.helpersForm.controls.description;
+  }
+
   removeContributer(contributer: Contributer) {
     const index = this.contributers.indexOf(contributer);
 
@@ -84,7 +101,9 @@ export class ContributersFormComponent implements OnInit {
     const val = (event.value || '').trim();
 
     if (val) {
+      // this.partnersControl.updateValueAndValidity();
       console.log('search');
+
       this.userService.getUser(val).pipe(
         debounceTime(1000),
         take(1),
@@ -103,25 +122,32 @@ export class ContributersFormComponent implements OnInit {
   }
 
   addContributer() {
+    console.log('updating');
     // Update error messages
     this.contribSubmit = true;
-    if (this.contributersForm.invalid) return;
+    // if (this.helpersForm.invalid) return;
+    console.log('valid', this.username.value, this.helpersForm.value.username);
 
     // Confirm user with database
     // and add contributer
-    this.userService
-      .findUser(this.contributersForm.value.username)
-      .subscribe((resObj) => {
-        const newContributer: Contributer = {
-          user: resObj.user,
-          role: this.contributersForm.value.role,
-          roleDetails: this.contributersForm.value.description,
-        };
-        this.contributers.push(newContributer);
-        console.log(this.contributers);
+    this.userService.findUser(this.username.value).subscribe((res) => {
+      const userShort: User = {
+        username: res.user.username,
+        email: res.user.email,
+        profilePicUrl: res.user.profilePicUrl,
+      };
+      console.log(userShort);
+      const newContributer: Contributer = {
+        user: userShort,
+        role: this.role.value,
+        roleDetails: this.description.value,
+      };
+      console.log(newContributer);
+      this.contributers.push(newContributer);
+      console.log(this.contributers);
 
-        this.contributersForm.reset();
-      });
+      this.helpersForm.reset();
+    });
 
     // reset Errors
     this.contribSubmit = false;

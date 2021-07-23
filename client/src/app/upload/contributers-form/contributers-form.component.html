@@ -5,7 +5,7 @@
     <mat-chip-list
       #partnersList
       aria-label="Partners selection"
-      formControlName="owners"
+      formControlName="partnersControl"
     >
       <!-- TODO add picture to contributer pic and link with backend -->
       <mat-chip
@@ -30,13 +30,10 @@
     </mat-chip-list>
     <mat-hint align="end"> Press comma or enter to add new tag </mat-hint>
     <mat-error align="end" *ngIf="owners?.touched && owners?.errors?.required">
-      Email is required
+      username is required
     </mat-error>
     <mat-error *ngIf="owners?.touched && owners?.errors?.email">
-      Please enter a valid email address
-    </mat-error>
-    <mat-error *ngIf="owners?.touched && owners?.errors?.emailNotAvailable">
-      Email already taken
+      Please enter a username with a registered account
     </mat-error>
   </mat-form-field>
   <h3>Contributers</h3>
@@ -55,7 +52,7 @@
     </mat-chip-list>
 
     <!-- username form field -->
-    <mat-form-field>
+    <mat-form-field [formGroup]="helpersForm">
       <mat-label>Username</mat-label>
       <input matInput type="text" formControlName="username" />
       <!-- errors -->

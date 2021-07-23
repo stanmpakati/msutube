@@ -54,9 +54,10 @@ export class CustomValidatorService {
     return this.authService.findEmail(emailControl.value).pipe(
       debounceTime(1000),
       take(1),
-      map((res) =>
-        res.message === 'Found' ? { emailNotAvailable: true } : null
-      )
+      map((res) => {
+        console.log(res.message);
+        res.message === 'Found' ? { emailNotAvailable: true } : null;
+      })
     );
   };
 

@@ -198,7 +198,10 @@ export class AuthService {
     localStorage.setItem('expiration', expirationDate.toISOString());
     localStorage.setItem('userId', userId);
     localStorage.setItem('username', user.username);
-    localStorage.setItem('profileUrl', user.profilePicUrl);
+    localStorage.setItem(
+      'profileUrl',
+      user.profilePicUrl ? user.profilePicUrl : ''
+    );
   }
 
   private clearAuthData() {

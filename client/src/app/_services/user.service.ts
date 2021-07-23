@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../_models/user';
 import { environment } from '../../environments/environment';
 import { FullUser } from '../_models/user-details';
 
@@ -20,8 +19,8 @@ export class UserService {
   }
 
   // Todo delete this one
-  findUser(query: string): Observable<{ user: User; message: string }> {
-    return this.http.post<{ user: User; message: string }>(
+  findUser(query: string): Observable<{ user: FullUser; message: string }> {
+    return this.http.post<{ user: FullUser; message: string }>(
       `${userUrl}/search`,
       {
         query: query,

@@ -39,7 +39,10 @@
   <h3>Contributers</h3>
   <form [formGroup]="helpersForm">
     <!-- contributers boxes -->
-    <app-contributer-circle [contributer]="'Stan'"></app-contributer-circle>
+    <app-contributer-circle
+      *ngFor="let contributer of contributers"
+      [contributer]="contributer"
+    ></app-contributer-circle>
 
     <mat-chip-list #contributersList aria-label="List of contributers">
       <mat-chip

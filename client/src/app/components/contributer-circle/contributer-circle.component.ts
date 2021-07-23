@@ -8,7 +8,7 @@ import { Contributer } from 'src/app/_models/contributer';
 })
 export class ContributerCircleComponent implements OnInit {
   // @ViewChild('popover') popover!: PopoverComponent;
-  @Input() contributer!: string;
+  @Input() contributer!: Contributer;
   isConfirm = false;
 
   constructor(private router: Router) {}

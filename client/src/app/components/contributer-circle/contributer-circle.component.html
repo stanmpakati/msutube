@@ -4,19 +4,24 @@
   mat-icon-button
   [matMenuTriggerFor]="contribTooltip"
 >
-  <img src="/assets/vectors/man.jpg" alt="icon" />
+  <img
+    [src]="
+      contributer.user.profilePicUrl
+        ? contributer.user.profilePicUrl
+        : '/assets/vectors/man.jpg'
+    "
+    alt="icon"
+  />
 </button>
 
 <!-- profile menu -->
 <mat-menu #contribTooltip>
   <ng-template matMenuContent>
     <div class="container-small">
-      <h3>{{ contributer }}</h3>
-      <p class="mat-body-2">Role</p>
+      <h3>{{ contributer.user.username }}</h3>
+      <p class="mat-body-2">{{ contributer.role }}</p>
       <p>
-        This is a really stupidly long description of what he/she did to test
-        how it will look like if a user adds a long-ass description. Maybe I
-        should limit word length
+        {{ contributer.roleDetails }}
       </p>
       <button mat-stroked-button color="primary">View Profile</button>
     </div>

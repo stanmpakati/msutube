@@ -35,7 +35,10 @@ export class ReferencesFormComponent implements OnInit {
         validators: [Validators.required],
         updateOn: 'submit',
       }),
-      title: new FormControl(null),
+      title: new FormControl(null, {
+        validators: [Validators.required],
+        updateOn: 'submit',
+      }),
       book: new FormControl(null),
       link: new FormControl(null, {
         validators: [Validators.required, Validators.pattern(urlRegex)],
@@ -49,6 +52,8 @@ export class ReferencesFormComponent implements OnInit {
   }
 
   addReference() {
+    if (this.refForm.invalid) return;
+
     const ref: Reference = {
       author: this.refForm.value.author as string,
       title: this.refForm.value.title as string,

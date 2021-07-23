@@ -1,11 +1,23 @@
 ioijol
-<form [formGroup]="refForm">
+<form [formGroup]="refForm" (ngSubmit)="addReference()">
   <div class="stepper-form">
     <h2>Add All your References Here</h2>
     <!-- Author -->
     <mat-form-field class="w-100">
       <mat-label>Author of publication</mat-label>
       <input matInput type="text" formControlName="author" />
+    </mat-form-field>
+
+    <!-- Title of publication -->
+    <mat-form-field class="w-100">
+      <mat-label>Title of publication</mat-label>
+      <input matInput type="text" formControlName="title" />
+    </mat-form-field>
+
+    <!-- Website -->
+    <mat-form-field class="w-100">
+      <mat-label>Link to page</mat-label>
+      <input matInput type="text" formControlName="link" />
     </mat-form-field>
 
     <!-- Pick Date of publication -->
@@ -15,21 +27,35 @@ ioijol
         matInput
         [matDatepicker]="picker"
         formControlName="publicationDate"
+        [max]="today"
+        (dateInput)="choosePublicationDate($event)"
+        (dateChange)="choosePublicationDate($event)"
       />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <!-- Title of publication -->
-    <mat-form-field class="w-100">
-      <mat-label>Author of publication</mat-label>
-      <input matInput type="text" formControlName="author" />
-    </mat-form-field>
+    <div class="row">
+      <!-- Date accessed -->
+      <mat-form-field>
+        <mat-label>Date accessed</mat-label>
+        <input
+          matInput
+          [matDatepicker]="dateAccessedPicker"
+          formControlName="dateAccessed"
+          [max]="today"
+          [min]="min"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="dateAccessedPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #dateAccessedPicker></mat-datepicker>
+      </mat-form-field>
+    </div>
 
-    <!-- Website -->
-    <mat-form-field class="w-100">
-      <mat-label>Link to page</mat-label>
-      <input matInput type="text" formControlName="link" />
-    </mat-form-field>
+    <button type="submit" mat-stroked-button color="primary">
+      Add Reference
+    </button>
   </div>
 </form>

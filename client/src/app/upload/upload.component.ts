@@ -90,6 +90,8 @@ export class UploadComponent implements OnInit, OnDestroy {
       contibuters: this.contributersFormComponent.contributers,
     };
 
+    console.log(contributers);
+
     this.uploadService.recordContributers = contributers;
   }
 }

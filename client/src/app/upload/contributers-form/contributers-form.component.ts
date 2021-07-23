@@ -26,7 +26,7 @@ export class ContributersFormComponent implements OnInit {
   contributersForm!: FormGroup;
   helpersForm!: FormGroup;
   partners: string[] = [];
-  contributers!: Contributer[];
+  contributers: Contributer[] = [];
   contribSubmit = false;
   separatorKeyCodes = [ENTER, COMMA] as const;
 
@@ -102,27 +102,26 @@ export class ContributersFormComponent implements OnInit {
 
     if (val) {
       // this.partnersControl.updateValueAndValidity();
-      console.log('search');
 
-      this.userService.getUser(val).pipe(
-        debounceTime(1000),
-        take(1),
-        map((res) => {
-          console.log(res.message);
-          if (res.message === 'User found') {
-            this.partners.push(res.user.username);
-            event.chipInput?.clear();
-          }
-        })
-      );
+      // Check for user in the database
+      // this.userService.getUser(val).pipe(
+      //   debounceTime(1000),
+      //   take(1),
+      //   map((res) => {
+      //     console.log(res.message);
+      //     if (res.message === 'User found') {
+      //       this.partners.push(res.user.username);
+      //       event.chipInput?.clear();
+      //     }
+      //   })
+      // );
 
-      // this.partners.push(val);
-      // event.chipInput?.clear();
+      this.partners.push(val);
+      event.chipInput?.clear();
     }
   }
 
   addContributer() {
-    console.log('updating');
     // Update error messages
     this.contribSubmit = true;
     // if (this.helpersForm.invalid) return;
@@ -136,13 +135,11 @@ export class ContributersFormComponent implements OnInit {
         email: res.user.email,
         profilePicUrl: res.user.profilePicUrl,
       };
-      console.log(userShort);
       const newContributer: Contributer = {
         user: userShort,
         role: this.role.value,
         roleDetails: this.description.value,
       };
-      console.log(newContributer);
       this.contributers.push(newContributer);
       console.log(this.contributers);
 
@@ -151,12 +148,5 @@ export class ContributersFormComponent implements OnInit {
 
     // reset Errors
     this.contribSubmit = false;
-  }
-
-  onSubmit() {
-    const contributers = {
-      owners: this.partners,
-      contributers: this.contributers,
-    };
   }
 }

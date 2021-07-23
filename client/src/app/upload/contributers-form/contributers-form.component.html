@@ -44,16 +44,6 @@
       [contributer]="contributer"
     ></app-contributer-circle>
 
-    <mat-chip-list #contributersList aria-label="List of contributers">
-      <mat-chip
-        *ngFor="let contributer of contributers"
-        [removable]="true"
-        (removed)="removeContributer(contributer)"
-      >
-        {{ contributer.user.username }}<mat-icon matChipRemove>cancel</mat-icon>
-      </mat-chip>
-    </mat-chip-list>
-
     <!-- username form field -->
     <mat-form-field [formGroup]="helpersForm">
       <mat-label>Username</mat-label>
@@ -83,7 +73,7 @@
     <!-- Description Form Field -->
     <mat-form-field>
       <mat-label>Description</mat-label>
-      <textarea matInput rows="5"></textarea>
+      <textarea matInput formControlName="description" rows="5"></textarea>
       <mat-hint align="end">
         Detailed description of how the person helped
       </mat-hint>
@@ -97,10 +87,4 @@
       Add Contributer
     </button>
   </form>
-
-  <!-- Forward and next buttons -->
-  <div class="mt-2" fxLayoutAlign="space-between center">
-    <button mat-button matStepperPrevious>Back</button>
-    <button mat-raised-button matStepperNext color="primary">Next</button>
-  </div>
 </form>

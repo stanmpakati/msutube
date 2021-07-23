@@ -47,8 +47,22 @@
             <app-contributers-form
               #contributersFormComponent
             ></app-contributers-form>
+            <div class="mt-2" fxLayoutAlign="space-between center">
+              <button mat-button matStepperPrevious>Back</button>
+              <button
+                mat-raised-button
+                matStepperNext
+                color="primary"
+                (click)="sendContributers()"
+                class="mt-1"
+              >
+                Next
+              </button>
+            </div>
           </ng-template>
         </mat-step>
+
+        <!-- For references -->
         <mat-step>
           <ng-template matStepLabel>References</ng-template>
           <ng-template matStepContent>

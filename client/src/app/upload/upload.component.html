@@ -20,7 +20,7 @@
 
     <!-- Uploaded media details -->
     <div fxFlex="100%" fxFlex.gt-sm="70%">
-      <mat-horizontal-stepper linear="true" #stepper>
+      <mat-horizontal-stepper linear="false" #stepper>
         <!-- Media details -->
         <mat-step [stepControl]="detailsForm" (onsubmit)="recordDetails()">
           <!-- Form: {{ detailsForm }} -->
@@ -69,9 +69,18 @@
         <mat-step>
           <ng-template matStepLabel>References</ng-template>
           <ng-template matStepContent>
-            <div>
+            <app-references-form #referencesFormComponent></app-references-form>
+            <div class="mt-2" fxLayoutAlign="space-between center">
               <button mat-button matStepperPrevious>Back</button>
-              <button mat-button (click)="stepper.reset()">Reset</button>
+              <button
+                mat-raised-button
+                matStepperNext
+                (click)="recordReferences()"
+                color="primary"
+                class="mt-1"
+              >
+                Finish
+              </button>
             </div>
           </ng-template>
         </mat-step>

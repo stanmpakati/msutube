@@ -41,6 +41,7 @@ import {
 import { MaterialModule } from './shared/material/material.module';
 import { RenderTilesComponent } from './components/render-tiles/render-tiles.component';
 import { TrendingComponent } from './home/trending/trending.component';
+import { ReferencesFormComponent } from './upload/references-form/references-form.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { TrendingComponent } from './home/trending/trending.component';
     ImageCropperDialog,
     RenderTilesComponent,
     TrendingComponent,
+    ReferencesFormComponent,
   ],
   imports: [
     BrowserModule,

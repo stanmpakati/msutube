@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { UploadService } from '../_services/upload.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Contributer } from '../_models/contributer';
+import { ReferencesFormComponent } from './references-form/references-form.component';
 
 @Component({
   selector: 'app-upload',
@@ -16,12 +17,13 @@ import { Contributer } from '../_models/contributer';
   styleUrls: ['./upload.component.scss'],
 })
 export class UploadComponent implements OnInit, OnDestroy {
-  linksForm!: FormGroup;
   @ViewChild('detailsComponent', { static: false })
   detailsComponent!: DetailsComponent;
-
   @ViewChild('contributersFormComponent', { static: false })
   contributersFormComponent!: ContributersFormComponent;
+  @ViewChild('referencesFormComponent', { static: false })
+  referencesFormComponent!: ReferencesFormComponent;
+
   isDarkMode!: boolean;
   ifFileUploadingListener = new Subscription();
   fileUploading!: boolean;
@@ -106,6 +108,9 @@ export class UploadComponent implements OnInit, OnDestroy {
     this.contributers = contributers;
     // this.uploadService.recordContributers = contributers;
   }
+
+  // References --------------------------------------------------------------------------------
+  recordReferences() {}
 }
 
 /**

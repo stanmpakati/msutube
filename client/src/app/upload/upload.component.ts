@@ -8,6 +8,7 @@ import { ThemeService } from '../_services/theme.service';
 import { Subscription } from 'rxjs';
 import { UploadService } from '../_services/upload.service';
 import { MatDialog } from '@angular/material/dialog';
+import { Contributer } from '../_models/contributer';
 
 @Component({
   selector: 'app-upload',
@@ -24,6 +25,15 @@ export class UploadComponent implements OnInit, OnDestroy {
   isDarkMode!: boolean;
   ifFileUploadingListener = new Subscription();
   fileUploading!: boolean;
+  details!: {
+    title: string;
+    description: string;
+    tags: string[];
+  };
+  contributers!: {
+    owners?: string[] | undefined;
+    contibuters?: Contributer[] | undefined;
+  };
 
   constructor(
     private userService: UserService,
@@ -63,10 +73,10 @@ export class UploadComponent implements OnInit, OnDestroy {
     if (this.detailsForm.invalid) return;
   }
 
-  sendDetails() {
+  recordDetails() {
     // Check form validity before continuing
     // this.checkIfFileIsUploading();
-    if (this.detailsForm.invalid) return;
+    // if (this.detailsForm.invalid) return;
 
     // Make details object to send to service
     const details = {
@@ -75,11 +85,13 @@ export class UploadComponent implements OnInit, OnDestroy {
       tags: this.detailsComponent.tags,
     };
 
-    this.uploadService.recordDetails = details;
+    console.log(details);
+    this.details = details;
+    // this.uploadService.recordDetails = details;
   }
 
   // Contributers -------------------------------------------------------------------------------------
-  sendContributers() {
+  recordContributers() {
     // Check form validity before continuing
     // this.checkIfFileIsUploading();
     if (this.contributersForm.invalid) return;
@@ -91,8 +103,8 @@ export class UploadComponent implements OnInit, OnDestroy {
     };
 
     console.log(contributers);
-
-    this.uploadService.recordContributers = contributers;
+    this.contributers = contributers;
+    // this.uploadService.recordContributers = contributers;
   }
 }
 

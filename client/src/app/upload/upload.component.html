@@ -20,9 +20,9 @@
 
     <!-- Uploaded media details -->
     <div fxFlex="100%" fxFlex.gt-sm="70%">
-      <mat-horizontal-stepper linear="false" #stepper>
+      <mat-horizontal-stepper linear="true" #stepper>
         <!-- Media details -->
-        <mat-step [stepControl]="detailsForm">
+        <mat-step [stepControl]="detailsForm" (onsubmit)="recordDetails()">
           <!-- Form: {{ detailsForm }} -->
           <ng-template matStepLabel>Fill in video details</ng-template>
           <ng-template matStepContent>
@@ -32,7 +32,7 @@
               color="primary"
               matStepperNext
               type="button"
-              (click)="sendDetails()"
+              (click)="recordDetails()"
               class="mt-1"
             >
               Next
@@ -41,7 +41,10 @@
         </mat-step>
 
         <!-- Add various contributers here -->
-        <mat-step [stepControl]="contributersForm">
+        <mat-step
+          [stepControl]="contributersForm"
+          (onsubmit)="recordContributers()"
+        >
           <ng-template matStepLabel>Contributers</ng-template>
           <ng-template matStepContent>
             <app-contributers-form
@@ -52,8 +55,8 @@
               <button
                 mat-raised-button
                 matStepperNext
+                (click)="recordContributers()"
                 color="primary"
-                (click)="sendContributers()"
                 class="mt-1"
               >
                 Next

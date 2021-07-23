@@ -46,11 +46,7 @@ export class ContributersFormComponent implements OnInit {
     // });
     this.contributersForm = new FormGroup({
       partnersControl: new FormControl(null, {
-        validators: [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.maxLength(60),
-        ],
+        validators: [Validators.minLength(3), Validators.maxLength(60)],
         // asyncValidators: [this.customValidator.emailValidator],
         updateOn: 'blur',
       }),
@@ -60,12 +56,12 @@ export class ContributersFormComponent implements OnInit {
     this.helpersForm = new FormGroup({
       // TODO make required only if username has been completed
       username: new FormControl(null, {
-        validators: [Validators.required],
+        validators: [],
         // asyncValidators: [this.customValidator.emailValidator],
         updateOn: 'blur',
       }),
-      role: new FormControl(null, [Validators.required]),
-      description: new FormControl(null, [Validators.required]),
+      role: new FormControl(null, []),
+      description: new FormControl(null, []),
     });
   }
 

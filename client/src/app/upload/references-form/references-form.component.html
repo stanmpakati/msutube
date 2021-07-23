@@ -1,1 +1,35 @@
-<p>references-form works!</p>
+ioijol
+<form [formGroup]="refForm">
+  <div class="stepper-form">
+    <h2>Add All your References Here</h2>
+    <!-- Author -->
+    <mat-form-field class="w-100">
+      <mat-label>Author of publication</mat-label>
+      <input matInput type="text" formControlName="author" />
+    </mat-form-field>
+
+    <!-- Pick Date of publication -->
+    <mat-form-field>
+      <mat-label>Date of publication</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="publicationDate"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Title of publication -->
+    <mat-form-field class="w-100">
+      <mat-label>Author of publication</mat-label>
+      <input matInput type="text" formControlName="author" />
+    </mat-form-field>
+
+    <!-- Website -->
+    <mat-form-field class="w-100">
+      <mat-label>Link to page</mat-label>
+      <input matInput type="text" formControlName="link" />
+    </mat-form-field>
+  </div>
+</form>

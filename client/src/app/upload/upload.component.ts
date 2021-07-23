@@ -1,15 +1,14 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 
 import { UserService } from '../_services/user.service';
 import { DetailsComponent } from './details/details.component';
 import { ContributersFormComponent } from './contributers-form/contributers-form.component';
+import { ReferencesFormComponent } from './references-form/references-form.component';
 import { ThemeService } from '../_services/theme.service';
 import { Subscription } from 'rxjs';
 import { UploadService } from '../_services/upload.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Contributer } from '../_models/contributer';
-import { ReferencesFormComponent } from './references-form/references-form.component';
 
 @Component({
   selector: 'app-upload',
@@ -62,6 +61,10 @@ export class UploadComponent implements OnInit, OnDestroy {
 
   get contributersForm() {
     return this.contributersFormComponent?.contributersForm;
+  }
+
+  get refForm() {
+    return this.referencesFormComponent?.refForm;
   }
 
   checkIfFileIsUploading() {

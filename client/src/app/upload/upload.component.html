@@ -66,7 +66,7 @@
         </mat-step>
 
         <!-- For references -->
-        <mat-step>
+        <mat-step [stepControl]="refForm" (onsubmit)="recordReferences()">
           <ng-template matStepLabel>References</ng-template>
           <ng-template matStepContent>
             <app-references-form #referencesFormComponent></app-references-form>

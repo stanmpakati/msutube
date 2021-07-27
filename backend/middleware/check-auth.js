@@ -18,8 +18,6 @@ export default (req, res, next) => {
       userId: decodedToken.userId,
       username: decodedToken.username,
     };
-    console.log("next");
-    console.log(decodedToken);
     next();
   } catch (err) {
     console.log(err);

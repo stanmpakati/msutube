@@ -9,8 +9,7 @@ import { Subscription } from 'rxjs';
 import { UploadService } from '../_services/upload.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Contributer } from '../_models/contributer';
-import { Reference } from '../_models/reference.interface';
-import { Medium, Post } from '../_models/post';
+import { Medium } from '../_models/post';
 
 @Component({
   selector: 'app-upload',
@@ -84,8 +83,8 @@ export class UploadComponent implements OnInit, OnDestroy {
 
   recordDetails() {
     // Check form validity before continuing
-    // this.checkIfFileIsUploading();
-    // if (this.detailsForm.invalid) return;
+    this.checkIfFileIsUploading();
+    if (this.detailsForm.invalid) return;
 
     // Make details object to send to service
     const details = {
@@ -96,13 +95,12 @@ export class UploadComponent implements OnInit, OnDestroy {
 
     console.log(details);
     this.details = details;
-    // this.uploadService.recordDetails = details;
   }
 
   // Contributers -------------------------------------------------------------------------------------
   recordContributers() {
     // Check form validity before continuing
-    // this.checkIfFileIsUploading();
+    this.checkIfFileIsUploading();
     if (this.contributersForm.invalid) return;
 
     // Make details object to send to service
@@ -113,7 +111,6 @@ export class UploadComponent implements OnInit, OnDestroy {
 
     console.log(contributers);
     this.contributers = contributers;
-    // this.uploadService.recordContributers = contributers;
   }
 
   // References --------------------------------------------------------------------------------

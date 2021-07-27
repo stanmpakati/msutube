@@ -1,11 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Medium, Post } from '../_models/post';
+import { Medium } from '../_models/post';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
-import { Contributer } from '../_models/contributer';
 import { Router } from '@angular/router';
 
 const videoUrl = `${environment.host}/video`;
@@ -73,7 +71,7 @@ export class UploadService {
   uploadFileDetails(file: Medium) {
     const token = this.authService.getToken();
 
-    this.http.post(videoUrl, { file: file, token: token }).subscribe(
+    this.http.post(`${videoUrl}/post`, { file: file, token: token }).subscribe(
       (response) => {
         console.log(response);
         this.router.navigateByUrl('/home');

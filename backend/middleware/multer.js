@@ -22,7 +22,6 @@ const MINE_TYPE_MAP = {
 };
 export const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(file.mimetype);
     const isValid = MINE_TYPE_MAP[file.mimetype];
     let error = new Error("Invalid mine type");
     if (isValid) error = null;
@@ -77,7 +76,6 @@ export const getProfilePic = multer.diskStorage({
 
     const name = file.originalname.toLocaleLowerCase().split(" ").join("-");
     const ext = IMG_MINE_TYPE_MAP[file.mimetype];
-    console.log("file name", name);
     cb(null, "pp-" + Date.now() + "-" + name);
   },
 });

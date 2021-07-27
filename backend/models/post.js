@@ -5,8 +5,8 @@ const postSchema = mongoose.Schema(
     title: { type: String, required: true },
     description: { type: String, required: true },
     fileUrl: { type: String, required: true },
-    fileMimeType: { type: String, required: true },
-    thumbnailUrl: { type: String },
+    fileType: { type: String, required: true },
+    thumbnailUrl: { type: String, default: "" },
     tags: [{ type: String }],
     views: { type: Number },
     citations: [

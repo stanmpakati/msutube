@@ -1,3 +1,4 @@
+import Post from "../../models/post.js";
 import Video from "../../models/video.js";
 let uploads = {};
 
@@ -12,7 +13,6 @@ export const videoUpload = (req, res) => {
 };
 
 export const uploadVideo = (req, res) => {
-  console.log("uploading", req.files);
   const url = req.protocol + "://" + req.get("host");
   const fileType = req.files.file[0].mimetype.split("/")[0];
 
@@ -31,14 +31,16 @@ export const uploadVideo = (req, res) => {
 };
 
 export const saveVideoDetails = (req, res) => {
-  console.log(req.body);
-  const video = new Video({
+  console.log("body", req.body);
+  const post = new Post({
     ...req.body,
   });
+  console.log("post obj", post);
 
-  video
+  post
     .save()
     .then((createdPost) => {
+      console.log("created post", createdPost);
       res.status(201).json({
         message: "201 message idiot, what else do you want from me?",
         post: {
@@ -46,9 +48,10 @@ export const saveVideoDetails = (req, res) => {
         },
       });
     })
-    .catch((err) =>
-      res.status(500).json({ message: "Saving Post failed", error: err })
-    );
+    .catch((err) => {
+      res.status(500).json({ message: "Saving Post failed", error: err });
+      console.log(err);
+    });
 };
 
 // -----------------------------Get Content-------------------------------

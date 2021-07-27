@@ -14,7 +14,7 @@ export const videoUpload = (req, res) => {
 export const uploadVideo = (req, res) => {
   console.log("uploading", req.files);
   const url = req.protocol + "://" + req.get("host");
-  const fileType = req.files.file[0].mimetype;
+  const fileType = req.files.file[0].mimetype.split("/")[0];
 
   const videoPath = `${url}/${req.files.file[0].path}`;
   const thumbPath = req.files.thumbnail
@@ -31,10 +31,9 @@ export const uploadVideo = (req, res) => {
 };
 
 export const saveVideoDetails = (req, res) => {
-  console.log(req);
+  console.log(req.body);
   const video = new Video({
     ...req.body,
-    // creator: req.userData.userId,
   });
 
   video
@@ -44,7 +43,6 @@ export const saveVideoDetails = (req, res) => {
         message: "201 message idiot, what else do you want from me?",
         post: {
           ...createdPost,
-          id: createdPost._id,
         },
       });
     })

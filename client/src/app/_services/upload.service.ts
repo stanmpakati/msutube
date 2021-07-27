@@ -17,7 +17,7 @@ export class UploadService {
   private fileDestDetails!: {
     fileUrl: string;
     thumbnailUrl: string;
-    fileMimetype: string;
+    fileMimetype: 'video' | 'audio' | 'image';
   };
 
   constructor(
@@ -37,7 +37,7 @@ export class UploadService {
   set recordFileDestDetails(details: {
     fileUrl: string;
     thumbnailUrl: string;
-    fileMimetype: string;
+    fileMimetype: 'video' | 'audio' | 'image';
   }) {
     this.fileDestDetails = details;
   }
@@ -61,7 +61,7 @@ export class UploadService {
       message: string;
       fileUrl: string;
       thumbnailUrl: string;
-      fileMimetype: string;
+      fileMimetype: 'video' | 'audio' | 'image';
     }>(videoUrl, postData, {
       reportProgress: true,
       observe: 'events',
@@ -69,11 +69,15 @@ export class UploadService {
   }
 
   uploadFileDetails(file: Medium) {
-    const token = this.authService.getToken();
+    const username = this.authService.getSignupAuth().username;
 
-    this.http.post(`${videoUrl}/post`, { file: file, token: token }).subscribe(
+    file.owners?.push(username);
+    console.log(file.owners);
+
+    this.http.post(`${videoUrl}/post`, file).subscribe(
       (response) => {
         console.log(response);
+
         this.router.navigateByUrl('/home');
       },
       (error) => {

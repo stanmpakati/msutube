@@ -14,5 +14,6 @@ export interface Medium {
   contibuters?: Contributer[] | undefined;
   citations?: Citation[];
   fileUrl: string;
+  fileType: 'video' | 'audio' | 'image';
   thumbnailUrl?: string;
 }

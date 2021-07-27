@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../_services/user.service';
 import { DetailsComponent } from './details/details.component';
 import { ContributersFormComponent } from './contributers-form/contributers-form.component';
-import { ReferencesFormComponent } from './references-form/references-form.component';
+import { ReferencesFormComponent } from './citations-form/citations-form.component';
 import { ThemeService } from '../_services/theme.service';
 import { Subscription } from 'rxjs';
 import { UploadService } from '../_services/upload.service';
@@ -115,9 +115,9 @@ export class UploadComponent implements OnInit, OnDestroy {
 
   // References --------------------------------------------------------------------------------
   recordReferences() {
-    const refs = this.referencesFormComponent.references;
+    const refs = this.referencesFormComponent.citations;
     const filePost: Medium = {
-      references: refs,
+      citations: refs,
       ...this.details,
       ...this.contributers,
       fileUrl: this.uploadService.getFileDestDetails.fileUrl,

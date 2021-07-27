@@ -4,18 +4,18 @@ import { DateAdapter } from '@angular/material/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 
-import { Reference } from 'src/app/_models/reference.interface';
+import { Citation } from 'src/app/_models/reference.interface';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
-  selector: 'app-references-form',
-  templateUrl: './references-form.component.html',
-  styleUrls: ['./references-form.component.scss'],
+  selector: 'app-citations-form',
+  templateUrl: './citations-form.component.html',
+  styleUrls: ['./citations-form.component.scss'],
 })
 export class ReferencesFormComponent implements OnInit {
   refForm!: FormGroup;
   authors: string[] = [];
-  references: Reference[] = [];
+  citations: Citation[] = [];
   today = new Date();
   min!: Date | null;
   separatorKeyCodes = [ENTER, COMMA] as const;
@@ -74,17 +74,17 @@ export class ReferencesFormComponent implements OnInit {
   addReference() {
     if (this.refForm.invalid) return;
 
-    const ref: Reference = {
+    const ref: Citation = {
       author: this.authors,
       refTitle: this.refForm.value.title as string,
       publicationDate: this.refForm.value.publicationDate as Date,
       dateAccessed: this.refForm.value.dateAccessed as Date,
       link: this.refForm.value.link as string,
     };
-    this.references.push(ref);
+    this.citations.push(ref);
 
     this.authors = [];
     this.refForm.reset();
-    console.log(this.references);
+    console.log(this.citations);
   }
 }

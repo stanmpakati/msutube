@@ -65,11 +65,11 @@
           </ng-template>
         </mat-step>
 
-        <!-- For references -->
+        <!-- For citations -->
         <mat-step [stepControl]="refForm" (onsubmit)="recordReferences()">
           <ng-template matStepLabel>References</ng-template>
           <ng-template matStepContent>
-            <app-references-form #referencesFormComponent></app-references-form>
+            <app-citations-form #referencesFormComponent></app-citations-form>
             <div class="mt-2" fxLayoutAlign="space-between center">
               <button mat-button matStepperPrevious>Back</button>
               <button

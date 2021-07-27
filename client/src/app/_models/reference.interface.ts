@@ -1,4 +1,4 @@
-export interface Reference {
+export interface Citation {
   author?: string[];
   publicationDate?: Date;
   refTitle?: string;

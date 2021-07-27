@@ -1,5 +1,5 @@
 import { Contributer } from './contributer';
-import { Reference } from './reference.interface';
+import { Citation } from './reference.interface';
 
 export interface Post {
   name: string;
@@ -12,7 +12,7 @@ export interface Medium {
   tags?: string[];
   owners?: string[] | undefined;
   contibuters?: Contributer[] | undefined;
-  references?: Reference[];
+  citations?: Citation[];
   fileUrl: string;
   thumbnailUrl?: string;
 }

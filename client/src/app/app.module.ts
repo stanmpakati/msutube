@@ -41,7 +41,7 @@ import {
 import { MaterialModule } from './shared/material/material.module';
 import { RenderTilesComponent } from './components/render-tiles/render-tiles.component';
 import { TrendingComponent } from './home/trending/trending.component';
-import { ReferencesFormComponent } from './upload/references-form/references-form.component';
+import { ReferencesFormComponent } from './upload/citations-form/citations-form.component';
 import { AuthInterceptor } from './_helpers/auth.interceptor';
 
 @NgModule({

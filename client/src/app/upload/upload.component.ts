@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core'; // import
 
 import { UserService } from '../_services/user.service';
 import { DetailsComponent } from './details/details.component';
@@ -12,6 +13,7 @@ import { Contributer } from '../_models/contributer';
 import { Medium } from '../_models/post';
 
 @Component({
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-upload',
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss'],

@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../_services/user.service';
 import { DetailsComponent } from './details/details.component';
 import { ContributersFormComponent } from './contributers-form/contributers-form.component';
-import { ReferencesFormComponent } from './citations-form/citations-form.component';
+import { ReferencesFormComponent } from './references-form/references-form.component';
 import { ThemeService } from '../_services/theme.service';
 import { Subscription } from 'rxjs';
 import { UploadService } from '../_services/upload.service';

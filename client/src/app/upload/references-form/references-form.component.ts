@@ -8,9 +8,9 @@ import { Citation } from 'src/app/_models/reference.interface';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
-  selector: 'app-citations-form',
-  templateUrl: './citations-form.component.html',
-  styleUrls: ['./citations-form.component.scss'],
+  selector: 'app-references-form',
+  templateUrl: './references-form.component.html',
+  styleUrls: ['./references-form.component.scss'],
 })
 export class ReferencesFormComponent implements OnInit {
   refForm!: FormGroup;

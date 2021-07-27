@@ -23,6 +23,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  // Todo delete, it returns an error
   getSignupAuth() {
     return this.signupAuth;
   }
@@ -31,8 +32,8 @@ export class AuthService {
     return this.token;
   }
 
-  getUserId() {
-    return this.userId;
+  getUsername() {
+    return localStorage.getItem('username');
   }
 
   getProfileUrl() {
@@ -193,7 +194,6 @@ export class AuthService {
     userId: string,
     user: User
   ) {
-    console.log(user);
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expirationDate.toISOString());
     localStorage.setItem('userId', userId);

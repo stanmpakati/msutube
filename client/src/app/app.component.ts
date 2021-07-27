@@ -62,6 +62,7 @@ export class AppComponent implements OnInit, OnDestroy {
       username: 'stanmp',
       password: 'Test123.',
     });
+    console.log(this.authService.getUsername());
   }
 
   ngOnDestroy() {

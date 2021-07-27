@@ -69,10 +69,12 @@ export class UploadService {
   }
 
   uploadFileDetails(file: Medium) {
-    const username = this.authService.getSignupAuth().username;
+    const username = this.authService.getUsername();
 
-    file.owners?.push(username);
-    console.log(file.owners);
+    if (username) file.owners?.push(username);
+    else console.log('No Username');
+
+    console.log(file?.owners);
 
     this.http.post(`${videoUrl}/post`, file).subscribe(
       (response) => {

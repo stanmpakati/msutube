@@ -8,9 +8,32 @@
       </mat-chip-list>
     </div>
     <!-- Author -->
+    <input matInput type="text" formControlName="author" />
+
     <mat-form-field class="w-100">
       <mat-label>Author of publication</mat-label>
-      <input matInput type="text" formControlName="author" />
+      <mat-chip-list #authorsList aria-label="tags selection">
+        <mat-chip
+          *ngFor="let author of authors"
+          [selectable]="true"
+          [removable]="true"
+          (removed)="remove(author)"
+        >
+          {{ author }}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input
+          matInput
+          type="text"
+          placeholder="Add new author..."
+          [matChipInputFor]="authorsList"
+          [matChipInputSeparatorKeyCodes]="separatorKeyCodes"
+          [matChipInputAddOnBlur]="true"
+          (matChipInputTokenEnd)="add($event)"
+        />
+        <button mat-stroked-button color="primary" matSuffix>Add</button>
+      </mat-chip-list>
+      <mat-hint align="end"> Press comma or enter to add new author </mat-hint>
     </mat-form-field>
 
     <!-- Title of publication -->

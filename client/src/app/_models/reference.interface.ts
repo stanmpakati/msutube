@@ -1,5 +1,5 @@
 export interface Reference {
-  author?: string;
+  author?: string[];
   publicationDate?: Date;
   title?: string;
   edition?: string;

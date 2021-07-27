@@ -9,7 +9,19 @@ const postSchema = mongoose.Schema(
     thumbnailUrl: { type: String },
     tags: [{ type: String }],
     views: { type: Number },
-    citations: [{ type: String }],
+    citations: [
+      {
+        author: [{ type: String }],
+        publicationDate: { type: Date, default: Date.now },
+        refTitle: { type: String },
+        edition: { type: String },
+        place: { type: String },
+        publisher: { type: String },
+        book: { type: String },
+        link: { type: String },
+        dateAccessed: { type: Date, default: Date.now },
+      },
+    ],
     creators: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -19,15 +31,15 @@ const postSchema = mongoose.Schema(
     ],
     contributers: [
       {
-        username: String,
-        role: String,
-        roleDescription: String,
+        username: { type: String },
+        role: { type: String },
+        roleDescription: { type: String },
       },
     ],
     comments: [
       {
-        username: String,
-        comment: String,
+        username: { type: String },
+        comment: { type: String },
         likes: Number,
       },
     ],

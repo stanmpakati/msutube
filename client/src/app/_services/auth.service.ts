@@ -108,7 +108,6 @@ export class AuthService {
       }>(`${authUrl}/login`, authDetails)
       .subscribe(
         (response) => {
-          console.log(response);
           this.token = response.token;
 
           if (response.token) {
@@ -194,6 +193,7 @@ export class AuthService {
     userId: string,
     user: User
   ) {
+    console.log(user);
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expirationDate.toISOString());
     localStorage.setItem('userId', userId);

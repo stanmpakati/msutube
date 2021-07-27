@@ -9,6 +9,7 @@ import {
   getVideos,
   updateVideo,
   deleteVideo,
+  saveVideoDetails,
 } from "./controllers/video.js";
 
 const router = express.Router();
@@ -21,7 +22,7 @@ router.delete("/:id", checkAuth, deleteVideo);
 
 router.post(
   "/",
-  // checkAuth,
+  checkAuth,
   multer({ storage: storage }).fields([
     {
       name: "file",
@@ -34,6 +35,8 @@ router.post(
   ]),
   uploadVideo
 );
+
+router.post("/post", checkAuth, saveVideoDetails);
 
 router.patch(
   "/:id",

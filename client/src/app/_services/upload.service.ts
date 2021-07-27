@@ -6,6 +6,7 @@ import { Medium, Post } from '../_models/post';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { Contributer } from '../_models/contributer';
+import { Router } from '@angular/router';
 
 const videoUrl = `${environment.host}/video`;
 
@@ -21,7 +22,11 @@ export class UploadService {
     fileMimetype: string;
   };
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   get isFileUploading() {
     return this.fileUploadingListener.asObservable();
@@ -65,7 +70,19 @@ export class UploadService {
     });
   }
 
-  uploadFileDetails(file: Medium) {}
+  uploadFileDetails(file: Medium) {
+    const token = this.authService.getToken();
+
+    this.http.post(videoUrl, { file: file, token: token }).subscribe(
+      (response) => {
+        console.log(response);
+        this.router.navigateByUrl('/home');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
   // updatePost(post: Post, image: File | string) {
   //   let postData: FormData | Post;

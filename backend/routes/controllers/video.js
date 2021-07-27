@@ -31,6 +31,7 @@ export const uploadVideo = (req, res) => {
 };
 
 export const saveVideoDetails = (req, res) => {
+  console.log(req);
   const video = new Video({
     ...req.body,
     // creator: req.userData.userId,

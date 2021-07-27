@@ -1,6 +1,12 @@
 <form [formGroup]="refForm" (ngSubmit)="addReference()">
   <div class="stepper-form">
     <h2>Add All your References Here</h2>
+    <div class="references" *ngIf="references">
+      <h4>Added References:</h4>
+      <mat-chip-list>
+        <mat-chip *ngFor="let ref of references">{{ ref.author }}</mat-chip>
+      </mat-chip-list>
+    </div>
     <!-- Author -->
     <mat-form-field class="w-100">
       <mat-label>Author of publication</mat-label>

@@ -113,7 +113,10 @@ export class UploadComponent implements OnInit, OnDestroy {
   }
 
   // References --------------------------------------------------------------------------------
-  recordReferences() {}
+  recordReferences() {
+    const refs = this.referencesFormComponent.references;
+    console.log(refs);
+  }
 }
 
 /**

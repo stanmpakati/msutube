@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import cors from "cors";
 
-import postRoutes from "./routes/posts.js";
+// import postRoutes from "./routes/posts.js";
 import userRoutes from "./routes/user.js";
 import videoRoutes from "./routes/videos.js";
 
@@ -29,6 +29,6 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res) => res.send("Hello Weirdo, Your server is working"));
 
-app.use("/api/posts", postRoutes);
+// app.use("/api/posts", postRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/video", videoRoutes);

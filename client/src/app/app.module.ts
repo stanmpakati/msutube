@@ -42,6 +42,7 @@ import { MaterialModule } from './shared/material/material.module';
 import { RenderTilesComponent } from './components/render-tiles/render-tiles.component';
 import { TrendingComponent } from './home/trending/trending.component';
 import { ReferencesFormComponent } from './upload/references-form/references-form.component';
+import { AuthInterceptor } from './_helpers/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { ReferencesFormComponent } from './upload/references-form/references-for
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

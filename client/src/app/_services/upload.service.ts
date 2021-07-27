@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Post } from '../_models/post';
+import { Medium, Post } from '../_models/post';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { Contributer } from '../_models/contributer';
@@ -15,14 +15,6 @@ const videoUrl = `${environment.host}/video`;
 export class UploadService {
   private fileUploadingListener = new Subject<boolean>();
   private fileUploading = false;
-  // for Form Upload
-  private fileDetails!: {
-    title: string;
-    description: string;
-    tags: string[];
-  };
-  private contibuters!: { owners?: string[]; contributers?: Contributer[] };
-  private fileRefs!: {};
   private fileDestDetails!: {
     fileUrl: string;
     thumbnailUrl: string;
@@ -35,31 +27,16 @@ export class UploadService {
     return this.fileUploadingListener.asObservable();
   }
 
+  get getFileDestDetails() {
+    return this.fileDestDetails;
+  }
+
   set recordFileDestDetails(details: {
     fileUrl: string;
     thumbnailUrl: string;
     fileMimetype: string;
   }) {
     this.fileDestDetails = details;
-  }
-
-  set recordDetails(details: {
-    title: string;
-    description: string;
-    tags: string[];
-  }) {
-    this.fileDetails = details;
-  }
-
-  set recordContributers(contibuters: {
-    owners?: string[];
-    contibuters?: Contributer[];
-  }) {
-    this.contibuters = contibuters;
-  }
-
-  set recordRefs(refs: {}) {
-    this.fileRefs = refs;
   }
 
   uploadFalse() {
@@ -88,7 +65,7 @@ export class UploadService {
     });
   }
 
-  finishFileUpload() {}
+  uploadFileDetails(file: Medium) {}
 
   // updatePost(post: Post, image: File | string) {
   //   let postData: FormData | Post;

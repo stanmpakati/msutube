@@ -76,7 +76,7 @@ export class ReferencesFormComponent implements OnInit {
 
     const ref: Reference = {
       author: this.authors,
-      title: this.refForm.value.title as string,
+      refTitle: this.refForm.value.title as string,
       publicationDate: this.refForm.value.publicationDate as Date,
       dateAccessed: this.refForm.value.dateAccessed as Date,
       link: this.refForm.value.link as string,

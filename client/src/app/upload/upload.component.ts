@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs';
 import { UploadService } from '../_services/upload.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Contributer } from '../_models/contributer';
+import { Reference } from '../_models/reference.interface';
+import { Medium, Post } from '../_models/post';
 
 @Component({
   selector: 'app-upload',
@@ -26,6 +28,8 @@ export class UploadComponent implements OnInit, OnDestroy {
   isDarkMode!: boolean;
   ifFileUploadingListener = new Subscription();
   fileUploading!: boolean;
+  fileLink!: string;
+  isLoading = false;
   details!: {
     title: string;
     description: string;
@@ -115,7 +119,17 @@ export class UploadComponent implements OnInit, OnDestroy {
   // References --------------------------------------------------------------------------------
   recordReferences() {
     const refs = this.referencesFormComponent.references;
-    console.log(refs);
+    const filePost: Medium = {
+      references: refs,
+      ...this.details,
+      ...this.contributers,
+      fileUrl: this.uploadService.getFileDestDetails.fileUrl,
+      thumbnailUrl: this.uploadService.getFileDestDetails.thumbnailUrl,
+    };
+    console.log(filePost);
+
+    this.uploadService.uploadFileDetails(filePost);
+    this.isLoading = true;
   }
 }
 

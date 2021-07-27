@@ -1,7 +1,7 @@
 export interface Reference {
   author?: string[];
   publicationDate?: Date;
-  title?: string;
+  refTitle?: string;
   edition?: string;
   place?: string;
   publisher?: string;

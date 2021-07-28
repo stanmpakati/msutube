@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { Thumbnail } from '../_models/thumbnail';
 
 const postsUrl = `${environment.host}/video`;
 
@@ -19,7 +20,7 @@ export class PostService {
 
   getPosts(postsPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
-    return this.http.get<{ posts: Post[]; maxPosts: number }>(
+    return this.http.get<{ posts: Thumbnail[]; maxPosts: number }>(
       `${postsUrl}${queryParams}`
     );
     // .pipe(

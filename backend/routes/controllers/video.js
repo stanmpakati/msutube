@@ -48,7 +48,9 @@ export const getPosts = (req, res) => {
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
 
-  const fileQuery = Post.find();
+  const fileQuery = Post.find().select(
+    "_id title length owner thumbnailUrl uploadDate"
+  );
   let fetchedPosts;
 
   if (pageSize && currentPage) {

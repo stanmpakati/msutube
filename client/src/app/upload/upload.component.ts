@@ -119,6 +119,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   recordReferences() {
     const refs = this.referencesFormComponent.citations;
     const filePost: Medium = {
+      _id: '',
       citations: refs,
       ...this.details,
       ...this.contributers,

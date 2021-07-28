@@ -9,7 +9,6 @@ export const uploadPost = (req, res) => {
     ? `${url}/${req.files.thumbnail[0].path}`
     : null;
 
-  // TODO remove return statement
   return res.status(200).json({
     message: "Uploaded",
     fileUrl: filePath,
@@ -19,6 +18,7 @@ export const uploadPost = (req, res) => {
 };
 
 export const savePostDetails = (req, res) => {
+  // Todo undo user given null id
   const post = new Post({
     ...req.body,
   });

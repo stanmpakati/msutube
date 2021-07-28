@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Thumbnail } from 'src/app/_models/thumbnail';
+import { PostService } from 'src/app/_services/post.service';
 
 @Component({
   selector: 'app-featured',
@@ -9,66 +10,12 @@ import { Thumbnail } from 'src/app/_models/thumbnail';
 export class FeaturedComponent implements OnInit {
   vids!: Thumbnail[];
 
-  constructor() {}
+  constructor(private postService: PostService) {}
 
   ngOnInit(): void {
-    this.vids = [
-      {
-        title: 'My Fake Movie',
-        length: '1.04:12',
-        owner: 'Various Owners',
-        thumbnailUrl: '',
-        uploadDate: new Date('July 20, 2020 16:24:00'),
-      },
-      {
-        title: 'My Second Fake Video with a really long title',
-        length: '09:52',
-        owner: 'stanmpakati',
-        thumbnailUrl: '',
-        uploadDate: new Date(),
-      },
-      {
-        title: 'My Third Fake Movie',
-        length: '1.04:12',
-        owner: 'Various Owners',
-        thumbnailUrl: '',
-        uploadDate: new Date('December 20, 2020 16:24:00'),
-      },
-      {
-        title: 'My fourth Fake Video',
-        length: '19:52',
-        owner: 'stanmpakati',
-        thumbnailUrl: '',
-        uploadDate: new Date(),
-      },
-      {
-        title: 'My Fifth Fake Movie',
-        length: '1.04:12',
-        owner: 'Various Owners',
-        thumbnailUrl: '',
-        uploadDate: new Date('July 20, 2021 16:24:00'),
-      },
-      {
-        title: 'My Sixth Fake Video',
-        length: '03:22',
-        owner: 'ganizanimpakati',
-        thumbnailUrl: '',
-        uploadDate: new Date(),
-      },
-      {
-        title: 'My Sevent Fake Movie',
-        length: '1.04:12',
-        owner: 'Various Owners',
-        thumbnailUrl: '',
-        uploadDate: new Date('July 21, 2021 06:24:00'),
-      },
-      {
-        title: 'My Last Fake Video',
-        length: '09:52',
-        owner: 'stanmpakati',
-        thumbnailUrl: '',
-        uploadDate: new Date(),
-      },
-    ];
+    this.postService.getPosts(10, 1).subscribe((postData) => {
+      console.log(postData);
+      // this.vids =  postData.posts;
+    });
   }
 }

@@ -17,26 +17,23 @@ export class PostService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getPosts(postsPerPage: number, currentPage: number): void {
+  getPosts(postsPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
-    this.http
-      .get<any>(`${postsUrl}${queryParams}`)
-      // .pipe(
-      //   map((postData) => ({
-      //     posts: postData.posts.map((post: any) => ({
-      //       title: post.title,
-      //       content: post.content,
-      //       imagePath: post.imagePath,
-      //       id: post._id,
-      //       creator: post.creator,
-      //     })),
-      //     maxPosts: postData.maxPosts,
-      //   }))
-      // )
-      .subscribe((postData) => {
-        console.log(postData);
-        this.posts = postData.posts;
-      });
+    return this.http.get<{ posts: Medium[]; maxPosts: number }>(
+      `${postsUrl}${queryParams}`
+    );
+    // .pipe(
+    //   map((postData) => ({
+    //     posts: postData.posts.map((post: any) => ({
+    //       title: post.title,
+    //       content: post.content,
+    //       imagePath: post.imagePath,
+    //       id: post._id,
+    //       creator: post.creator,
+    //     })),
+    //     maxPosts: postData.maxPosts,
+    //   }))
+    // )
   }
 
   // getPostsListener(): Observable<{ posts: Post[]; postCount: number }> {

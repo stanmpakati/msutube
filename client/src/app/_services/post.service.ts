@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Medium } from '../_models/post';
+import { Post } from '../_models/post';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
@@ -13,13 +13,13 @@ const postsUrl = `${environment.host}/video`;
   providedIn: 'root',
 })
 export class PostService {
-  private posts: Medium[] = [];
+  private posts: Post[] = [];
 
   constructor(private http: HttpClient, private router: Router) {}
 
   getPosts(postsPerPage: number, currentPage: number) {
     const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}`;
-    return this.http.get<{ posts: Medium[]; maxPosts: number }>(
+    return this.http.get<{ posts: Post[]; maxPosts: number }>(
       `${postsUrl}${queryParams}`
     );
     // .pipe(
@@ -41,6 +41,6 @@ export class PostService {
   // }
 
   getPost(id: string) {
-    return this.http.get<Medium>(`http://localhost:5000/api/posts/${id}`);
+    return this.http.get<Post>(`http://localhost:5000/api/posts/${id}`);
   }
 }

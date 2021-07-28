@@ -1,12 +1,7 @@
 import { Contributer } from './contributer';
 import { Citation } from './reference.interface';
 
-export interface Post {
-  name: string;
-  filePath: string;
-}
-
-export class Medium {
+export class Post {
   _id!: string;
   title!: string;
   description!: string;

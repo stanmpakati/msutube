@@ -43,6 +43,7 @@ const postSchema = mongoose.Schema(
         likes: Number,
       },
     ],
+    length: { type: Number },
   },
   { timestamps: true }
 );

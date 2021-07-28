@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Medium } from '../_models/post';
+import { Post } from '../_models/post';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
@@ -68,7 +68,7 @@ export class UploadService {
     });
   }
 
-  uploadFileDetails(file: Medium) {
+  uploadFileDetails(file: Post) {
     const username = this.authService.getUsername();
 
     if (username) file.owners?.push(username);

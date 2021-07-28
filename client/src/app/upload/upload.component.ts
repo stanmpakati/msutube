@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 import { UploadService } from '../_services/upload.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Contributer } from '../_models/contributer';
-import { Medium } from '../_models/post';
+import { Post } from '../_models/post';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -118,7 +118,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   // References --------------------------------------------------------------------------------
   recordReferences() {
     const refs = this.referencesFormComponent.citations;
-    const filePost: Medium = {
+    const filePost: Post = {
       _id: '',
       citations: refs,
       ...this.details,

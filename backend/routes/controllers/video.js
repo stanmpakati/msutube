@@ -22,6 +22,8 @@ export const uploadPost = (req, res) => {
 
 export const savePostDetails = (req, res) => {
   // Todo undo user given null id
+  // const {recievedPost} = {}
+  delete req.body._id;
   const post = new Post({
     ...req.body,
   });
@@ -49,7 +51,7 @@ export const getPosts = (req, res) => {
   const currentPage = +req.query.page;
 
   const fileQuery = Post.find().select(
-    "_id title length owner thumbnailUrl uploadDate"
+    "_id title length creators thumbnailUrl uploadDate createdAt"
   );
   let fetchedPosts;
 
@@ -60,6 +62,7 @@ export const getPosts = (req, res) => {
   fileQuery
     .then((documents) => {
       fetchedPosts = documents;
+      console.log(documents);
       return Post.count();
     })
     .then((count) => {

@@ -22,10 +22,9 @@ const postSchema = mongoose.Schema(
         dateAccessed: { type: Date, default: Date.now },
       },
     ],
-    creators: [
+    owners: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        type: String,
         required: true,
       },
     ],

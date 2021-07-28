@@ -15,7 +15,7 @@ export class FeaturedComponent implements OnInit {
   ngOnInit(): void {
     this.postService.getPosts(10, 1).subscribe((postData) => {
       console.log(postData);
-      // this.vids =  postData.posts;
+      this.vids = postData.posts;
     });
   }
 }

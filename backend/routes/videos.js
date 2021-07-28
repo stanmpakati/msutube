@@ -4,21 +4,21 @@ import multer from "multer";
 import checkAuth from "../middleware/check-auth.js";
 import { storage, videoStorage } from "../middleware/multer.js";
 import {
-  uploadVideo,
-  getVideo,
-  getVideos,
-  updateVideo,
-  deleteVideo,
-  saveVideoDetails,
+  uploadPost,
+  getPost,
+  getPosts,
+  updatePost,
+  deletePost,
+  savePostDetails,
 } from "./controllers/video.js";
 
 const router = express.Router();
 
-router.get("/", getVideos);
+router.get("/", getPosts);
 
-router.get("/:id", getVideo);
+router.get("/:id", getPost);
 
-router.delete("/:id", checkAuth, deleteVideo);
+router.delete("/:id", checkAuth, deletePost);
 
 router.post(
   "/",
@@ -33,17 +33,17 @@ router.post(
       maxCount: 1,
     },
   ]),
-  uploadVideo
+  uploadPost
 );
 
-router.post("/post", checkAuth, saveVideoDetails);
+router.post("/post", checkAuth, savePostDetails);
 
 router.patch(
   "/:id",
   checkAuth,
   // multer({ storage: storage }).single("image"),
   multer({ storage: videoStorage }).single("video"),
-  updateVideo
+  updatePost
 );
 
 export default router;

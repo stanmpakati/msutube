@@ -1,22 +1,10 @@
 import Post from "../../models/post.js";
-import Video from "../../models/video.js";
-let uploads = {};
 
-export const videoUpload = (req, res) => {
-  let fileId = req.headers["x-file-id"];
-  let startByte = parseInt(req.headers["x-start-byte"], 10);
-  let fileSize = parseInt(req.headers["size"], 10);
-  let name = req.headers["name"];
-
-  console.log("file size", fileSize, fileId, startByte);
-  // if ()
-};
-
-export const uploadVideo = (req, res) => {
+export const uploadPost = (req, res) => {
   const url = req.protocol + "://" + req.get("host");
   const fileType = req.files.file[0].mimetype.split("/")[0];
 
-  const videoPath = `${url}/${req.files.file[0].path}`;
+  const filePath = `${url}/${req.files.file[0].path}`;
   const thumbPath = req.files.thumbnail
     ? `${url}/${req.files.thumbnail[0].path}`
     : null;
@@ -24,18 +12,16 @@ export const uploadVideo = (req, res) => {
   // TODO remove return statement
   return res.status(200).json({
     message: "Uploaded",
-    fileUrl: videoPath,
+    fileUrl: filePath,
     thumbnailUrl: thumbPath,
     fileMimetype: fileType,
   });
 };
 
-export const saveVideoDetails = (req, res) => {
-  console.log("body", req.body);
+export const savePostDetails = (req, res) => {
   const post = new Post({
     ...req.body,
   });
-  console.log("post obj", post);
 
   post
     .save()
@@ -55,41 +41,41 @@ export const saveVideoDetails = (req, res) => {
 };
 
 // -----------------------------Get Content-------------------------------
-export const getVideos = (req, res) => {
+export const getPosts = (req, res) => {
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
 
-  const videoQuery = Video.find();
-  let fetchedVideos;
+  const fileQuery = Post.find();
+  let fetchedPosts;
 
   if (pageSize && currentPage) {
-    videoQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
+    fileQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
   }
 
-  videoQuery
+  fileQuery
     .then((documents) => {
-      fetchedVideos = documents;
-      return Video.count();
+      fetchedPosts = documents;
+      return Post.count();
     })
     .then((count) => {
-      res.status(200).json({ videos: fetchedVideos, maxVideos: count });
+      res.status(200).json({ Posts: fetchedPosts, maxPosts: count });
     })
     .catch((err) =>
-      res.status(500).json({ message: "Fetching Videos failed", error: err })
+      res.status(500).json({ message: "Fetching Posts failed", error: err })
     );
 };
 
-export const getVideo = (req, res) => {
-  Video.findById(req.params.id)
-    .then((video) => {
-      if (video) res.status(200).json(video);
-      else res.status(404).json({ message: "Video not found" });
+export const getPost = (req, res) => {
+  Post.findById(req.params.id)
+    .then((file) => {
+      if (file) res.status(200).json(file);
+      else res.status(404).json({ message: "Post not found" });
     })
     .catch((err) =>
-      res.status(500).json({ message: "Getting Video failed", error: err })
+      res.status(500).json({ message: "Getting Post failed", error: err })
     );
 };
 
-export const deleteVideo = (req, res) => {};
+export const deletePost = (req, res) => {};
 
-export const updateVideo = (req, res) => {};
+export const updatePost = (req, res) => {};

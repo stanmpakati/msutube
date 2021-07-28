@@ -73,6 +73,7 @@ export class UploadService {
 
     if (username) file.owners?.push(username);
     else console.log('No Username');
+    file.owners = [...new Set(file.owners)];
 
     console.log(file?.owners);
 

@@ -16,6 +16,7 @@ export class FeaturedComponent implements OnInit {
     this.postService.getPosts(10, 1).subscribe((postData) => {
       console.log(postData);
       this.vids = postData.posts;
+      console.log(this.vids);
     });
   }
 }

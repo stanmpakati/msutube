@@ -66,7 +66,7 @@ export const getPosts = (req, res) => {
       return Post.count();
     })
     .then((count) => {
-      res.status(200).json({ Posts: fetchedPosts, maxPosts: count });
+      res.status(200).json({ posts: fetchedPosts, maxPosts: count });
     })
     .catch((err) =>
       res.status(500).json({ message: "Fetching Posts failed", error: err })

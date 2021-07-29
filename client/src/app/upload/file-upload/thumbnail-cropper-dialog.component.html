@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Crop your profile picture</h1>
+<div mat-dialog-content>
+  <image-cropper
+    [imageChangedEvent]="event"
+    [maintainAspectRatio]="true"
+    [aspectRatio]="19 / 10"
+    [resizeToWidth]="150"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+  ></image-cropper>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button
+      mat-stroked-button
+      color="primary"
+      [mat-dialog-close]="croppedImage"
+      cdkFocusInitial
+    >
+      Update Profile Picture
+    </button>
+  </div>
+</div>

@@ -69,7 +69,7 @@ export class MediaComponent implements OnInit {
     // Check if file is greater than 1mb and reject it
     const size = file.size;
     if (size >= 1024000) {
-      this.fileTooBigError = 'Sorry Your file is too big';
+      this.fileTooBigError = 'Sorry file should not exceed 1mb';
       return;
     }
 

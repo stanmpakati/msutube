@@ -30,6 +30,7 @@ import { FeaturedComponent } from './home/featured/featured.component';
 import {
   FileUploadComponent,
   ThumbCheckDialog,
+  ThumbnailCropperDialog,
 } from './upload/file-upload/file-upload.component';
 import { ContributersFormComponent } from './upload/contributers-form/contributers-form.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -63,6 +64,7 @@ import { AuthInterceptor } from './_helpers/auth.interceptor';
     PicturesComponent,
     FeaturedComponent,
     FileUploadComponent,
+    ThumbnailCropperDialog,
     ContributersFormComponent,
     ProfileComponent,
     ThumbCheckDialog,

@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { HttpEventType } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { map } from 'rxjs/operators';
 
 import { Upload } from 'src/app/_models/upload.interface';
 import { imageMimeTypeValidator } from '../../_helpers/mine-type.validator';
 import { UploadService } from 'src/app/_services/upload.service';
+import { base64ToFile, ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-file-upload',
@@ -25,6 +30,9 @@ export class FileUploadComponent implements OnInit {
   fileType!: string;
   readyForUpload: boolean = false;
   isSubmitted = false;
+  fileTooBigError!: string;
+  croppedImage!: string;
+  showCropper = false;
 
   constructor(private UploadService: UploadService, public dialog: MatDialog) {}
 
@@ -103,6 +111,61 @@ export class FileUploadComponent implements OnInit {
     const file = (event.target as HTMLInputElement).files[0];
     this.readThumbFile(file);
   }
+  // ----------------------------------------------------------------
+
+  // To pick images
+  onThumbPick = async (event: Event) => {
+    // @ts-ignore: Object is possibly 'null'.
+    const file = (event.target as HTMLInputElement).files[0];
+
+    // Check if file is greater than 1mb and reject it
+    const size = file.size;
+    if (size >= 1024000) {
+      this.fileTooBigError = 'Sorry Your file is too big';
+      return;
+    }
+
+    // reset file size error
+    this.fileTooBigError = '';
+
+    // Add file to form
+    this.uploadForm.patchValue({ thumbnail: file });
+    this.thumbnail.updateValueAndValidity();
+
+    // Delay to give chance for angular to check if file is valid or not
+    await new Promise((res) => setTimeout(res, 800));
+
+    // Break function if there is an error
+    if (this.thumbnail.errors) return;
+
+    this.openCropDialog(event);
+  };
+
+  // To open the dialog to update the profile picture
+  openCropDialog(event: any): void {
+    const dialogRef = this.dialog.open(ThumbnailCropperDialog, {
+      width: '450px',
+      maxHeight: '600px',
+      data: event,
+    });
+
+    // Register 1/1 cropped file
+    dialogRef.afterClosed().subscribe((result) => {
+      this.croppedImage = result;
+
+      const ppFile = base64ToFile(this.croppedImage);
+
+      // Send file to form
+      this.uploadForm.patchValue({ thumbnail: ppFile });
+      this.thumbnail.updateValueAndValidity();
+    });
+  }
+
+  imageLoaded() {
+    this.showCropper = true;
+    console.log('Image loaded');
+  }
+  // -----------------------------------------------------------------------------
 
   // To pick file
   onFilePicked(event: Event) {
@@ -206,4 +269,25 @@ export class FileUploadComponent implements OnInit {
 })
 export class ThumbCheckDialog {
   uploadFile() {}
+}
+
+@Component({
+  selector: 'thumbnail-cropper-dialog',
+  templateUrl: 'thumbnail-cropper-dialog.component.html',
+})
+export class ThumbnailCropperDialog {
+  croppedImage: any = '';
+
+  constructor(
+    public dialogRef: MatDialogRef<ThumbnailCropperDialog>,
+    @Inject(MAT_DIALOG_DATA) public event: any
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+  }
 }

@@ -114,7 +114,7 @@
       >
         Select thumbnail
       </button>
-      <input type="file" #thumbnailPicker (change)="onImagePicked($event)" />
+      <input type="file" #thumbnailPicker (change)="onThumbPick($event)" />
       <button
         *ngIf="thumbPreview === '' || !thumbPreview"
         mat-icon-button

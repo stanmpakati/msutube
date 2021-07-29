@@ -51,7 +51,7 @@ export const getPosts = (req, res) => {
   const currentPage = +req.query.page;
 
   const fileQuery = Post.find().select(
-    "_id title length creators thumbnailUrl uploadDate createdAt"
+    "_id title length owners thumbnailUrl uploadDate createdAt"
   );
   let fetchedPosts;
 

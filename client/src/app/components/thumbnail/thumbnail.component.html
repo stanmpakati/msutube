@@ -1,6 +1,13 @@
 <div class="thumb-container" ngClass.xs="small" fxLayout="column">
   <div class="img">
-    <!-- <img [src]="'assets/img/Get-Out.jpg'" [alt]="thumbnailData.title" /> -->
+    <img
+      [src]="
+        thumbnailData.thumbnailUrl
+          ? thumbnailData.thumbnailUrl
+          : '/assets/img/Get-Out.jpg'
+      "
+      [alt]="thumbnailData.title"
+    />
     <span class="duration-stamp">{{ thumbnailData.length }}</span>
   </div>
   <span class="mat-body-2">{{ thumbnailData.title }}</span>

@@ -1,5 +1,4 @@
 .img {
-  background: url("/assets/img/Get-Out.jpg");
   aspect-ratio: 19/10;
   background-size: cover;
   background-position: center;
@@ -11,7 +10,7 @@
     // height: 100%;
     aspect-ratio: 19/10;
 
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     overflow: hidden;
     // position: absolute;

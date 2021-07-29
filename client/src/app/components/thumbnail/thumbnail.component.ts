@@ -10,12 +10,13 @@ import { timeAgo } from 'src/app/_services/time-ago.service';
 export class ThumbnailComponent implements OnInit {
   @Input() thumbnailData!: Thumbnail;
   timeElapsed!: string;
-  owner = this.thumbnailData.owners[0];
+  owner!: string;
 
   constructor() {}
 
   ngOnInit(): void {
     this.timeElapsed = timeAgo(this.thumbnailData.createdAt);
     if (this.thumbnailData.owners.length > 1) this.owner = 'Various Owners';
+    else this.owner = this.thumbnailData.owners[0];
   }
 }

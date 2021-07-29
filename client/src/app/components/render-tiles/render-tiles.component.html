@@ -4,12 +4,20 @@
     See More
   </a>
 </div>
-<div class="thumbnails" ngClass.xs="container-small">
+<div
+  class="thumbnails"
+  *ngIf="vids && vids.length > 0"
+  ngClass.xs="container-small"
+>
   <app-thumbnail
     *ngFor="let vid of vids"
     [thumbnailData]="vid"
     ngClass.xs="mt-2"
   ></app-thumbnail>
+</div>
+
+<div class="no-vids" *ngIf="!vids || vids.length === 0">
+  <span>Sorry, No Content Available</span>
 </div>
 
 <hr class="mt-2" fxHide.xs />

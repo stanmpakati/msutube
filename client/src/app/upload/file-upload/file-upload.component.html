@@ -101,10 +101,13 @@
       (filesDropped)="handleDrop($event, 1)"
       (filesHovered)="thumbDropzoneState($event)"
       [ngClass]="{ 'drop-active': thumbDropzoneActive }"
-      *ngIf="fileName && !fileType?.includes('image')"
+      *ngIf="(fileName && !fileType?.includes('image')) || true"
     >
       <mat-error *ngIf="thumbnail.errors?.invalidMimeType">
         Sorry only jpg and png files supported
+      </mat-error>
+      <mat-error *ngIf="fileTooBigError">
+        {{ fileTooBigError }}
       </mat-error>
       <button
         mat-stroked-button
@@ -116,20 +119,21 @@
       </button>
       <input type="file" #thumbnailPicker (change)="onThumbPick($event)" />
       <button
-        *ngIf="thumbPreview === '' || !thumbPreview"
+        *ngIf="croppedImage === '' || !croppedImage"
         mat-icon-button
         (click)="thumbnailPicker.click()"
         type="button"
       >
         <mat-icon>add_photo_alternate</mat-icon>
       </button>
-      <div
-        class="image-preview"
-        *ngIf="thumbPreview !== '' && thumbPreview && thumbnail.valid"
-      >
-        <img [src]="thumbPreview" [alt]="uploadForm.value.title" />
-      </div>
     </div>
+    <div
+      class="image-preview"
+      *ngIf="croppedImage !== '' && croppedImage && thumbnail.valid"
+    >
+      <img [src]="croppedImage" [alt]="uploadForm.value.title" />
+    </div>
+
     <button
       *ngIf="uploadStatus.status != 'DONE'"
       mat-raised-button

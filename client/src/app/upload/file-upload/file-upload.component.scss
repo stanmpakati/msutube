@@ -10,11 +10,11 @@ input[type="file"] {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  background-size: contain;
 }
 
 .image-preview img {
   height: 100%;
-  background-size: contain;
 }
 
 .upload-box {

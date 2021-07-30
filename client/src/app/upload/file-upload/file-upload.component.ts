@@ -145,7 +145,7 @@ export class FileUploadComponent implements OnInit {
   openCropDialog(event: any): void {
     const dialogRef = this.dialog.open(ThumbnailCropperDialog, {
       width: '450px',
-      maxHeight: '600px',
+      maxHeight: '650px',
       data: event,
     });
 
@@ -154,6 +154,7 @@ export class FileUploadComponent implements OnInit {
       this.croppedImage = result;
 
       const ppFile = base64ToFile(this.croppedImage);
+      console.log(this.croppedImage);
 
       // Send file to form
       this.uploadForm.patchValue({ thumbnail: ppFile });
@@ -164,6 +165,14 @@ export class FileUploadComponent implements OnInit {
   imageLoaded() {
     this.showCropper = true;
     console.log('Image loaded');
+  }
+
+  cropperReady(sourceImageDimensions: any) {
+    console.log('Cropper ready', sourceImageDimensions);
+  }
+
+  loadImageFailed() {
+    console.log('Load failed');
   }
   // -----------------------------------------------------------------------------
 

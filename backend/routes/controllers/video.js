@@ -62,7 +62,6 @@ export const getPosts = (req, res) => {
   fileQuery
     .then((documents) => {
       fetchedPosts = documents;
-      console.log(documents);
       return Post.count();
     })
     .then((count) => {

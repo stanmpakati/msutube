@@ -1,6 +1,8 @@
-export const timeAgo = (date: Date): string => {
+export const timeAgo = (date: string): string => {
+  console.log(date);
+  console.log(Date.parse(date));
   const secondsDifference = Math.floor(
-    (new Date().getTime() - date.getTime()) / 1000
+    (new Date().getTime() - Date.parse(date)) / 1000
   );
 
   // greater than a year

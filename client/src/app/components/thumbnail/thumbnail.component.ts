@@ -15,6 +15,7 @@ export class ThumbnailComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    console.log(typeof this.thumbnailData.createdAt);
     this.timeElapsed = timeAgo(this.thumbnailData.createdAt);
     if (this.thumbnailData.owners.length > 1) this.owner = 'Various Owners';
     else this.owner = this.thumbnailData.owners[0];

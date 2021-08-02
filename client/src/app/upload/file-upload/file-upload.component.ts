@@ -20,7 +20,6 @@ import { base64ToFile, ImageCroppedEvent } from 'ngx-image-cropper';
 })
 export class FileUploadComponent implements OnInit {
   uploadForm!: FormGroup;
-  thumbPreview!: string | ArrayBuffer | null;
   filePreview!: string | ArrayBuffer | null;
   draggedFile!: File;
   fileDropzoneActive: boolean = false;
@@ -70,19 +69,19 @@ export class FileUploadComponent implements OnInit {
   }
 
   // To add the thumbnail to the form and preview
-  readThumbFile(file: File) {
-    // Add file to form
-    this.uploadForm.patchValue({ thumbnail: file });
-    this.uploadForm.get('thumbnail')?.updateValueAndValidity();
+  // readThumbFile(file: File) {
+  //   // Add file to form
+  //   this.uploadForm.patchValue({ thumbnail: file });
+  //   this.uploadForm.get('thumbnail')?.updateValueAndValidity();
 
-    // Load with file reader
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.thumbPreview = reader.result as string;
-    };
+  //   // Load with file reader
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     this.thumbPreview = reader.result as string;
+  //   };
 
-    reader.readAsDataURL(file);
-  }
+  //   reader.readAsDataURL(file);
+  // }
 
   // To add the uploadfile to the form and preview
   readContentFile(file: File) {
@@ -109,7 +108,7 @@ export class FileUploadComponent implements OnInit {
   onImagePicked(event: Event) {
     // @ts-ignore: Object is possibly 'null'.
     const file = (event.target as HTMLInputElement).files[0];
-    this.readThumbFile(file);
+    // this.onThumbPick(file);
   }
   // ----------------------------------------------------------------
 
@@ -188,7 +187,7 @@ export class FileUploadComponent implements OnInit {
     console.log('dropped');
 
     if (fileNum === 0) this.readContentFile(fileList[0]);
-    else this.readThumbFile(fileList[0]);
+    // else this.readThumbFile(fileList[0]);
   }
 
   // Fpload files
@@ -199,7 +198,7 @@ export class FileUploadComponent implements OnInit {
     if (this.uploadForm.invalid) return;
 
     // Ask user to upload thumbnail
-    if (!this.thumbPreview && !this.fileType.includes('image')) {
+    if (!this.croppedImage && !this.fileType.includes('image')) {
       this.openDialog();
     } else {
       this.continueFileUpload();

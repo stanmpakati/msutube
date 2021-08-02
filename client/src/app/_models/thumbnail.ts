@@ -4,5 +4,6 @@ export interface Thumbnail {
   length?: any;
   owners: string[];
   thumbnailUrl?: string;
-  createdAt: Date;
+  createdAt: string;
+  fileUrl: string;
 }

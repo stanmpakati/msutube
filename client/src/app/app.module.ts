@@ -44,6 +44,7 @@ import { RenderTilesComponent } from './components/render-tiles/render-tiles.com
 import { TrendingComponent } from './home/trending/trending.component';
 import { ReferencesFormComponent } from './upload/references-form/references-form.component';
 import { AuthInterceptor } from './_helpers/auth.interceptor';
+import { ContentScreenComponent } from './content-screen/content-screen.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { AuthInterceptor } from './_helpers/auth.interceptor';
     RenderTilesComponent,
     TrendingComponent,
     ReferencesFormComponent,
+    ContentScreenComponent,
   ],
   imports: [
     BrowserModule,

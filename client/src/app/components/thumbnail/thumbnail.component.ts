@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Thumbnail } from 'src/app/_models/thumbnail';
 import { timeAgo } from 'src/app/_services/time-ago.service';
 
@@ -12,11 +13,15 @@ export class ThumbnailComponent implements OnInit {
   timeElapsed!: string;
   owner!: string;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.timeElapsed = timeAgo(this.thumbnailData.createdAt);
     if (this.thumbnailData.owners.length > 1) this.owner = 'Various Owners';
     else this.owner = this.thumbnailData.owners[0];
+  }
+
+  navigateToPage() {
+    this.router.navigateByUrl(`video/${this.thumbnailData._id}`);
   }
 }

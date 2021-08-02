@@ -13,7 +13,7 @@ export class FeaturedComponent implements OnInit {
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
-    this.postService.getPosts(10, 1).subscribe((postData) => {
+    this.postService.getPosts(10, 1, 'video').subscribe((postData) => {
       this.vids = postData.posts;
     });
   }

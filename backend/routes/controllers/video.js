@@ -49,8 +49,9 @@ export const savePostDetails = (req, res) => {
 export const getPosts = (req, res) => {
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
+  const fileType = req.query.filetype;
 
-  const fileQuery = Post.find().select(
+  const fileQuery = Post.find({ fileType: { $regex: fileType } }).select(
     "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
   );
   let fetchedPosts;
@@ -62,7 +63,7 @@ export const getPosts = (req, res) => {
   fileQuery
     .then((documents) => {
       fetchedPosts = documents;
-      return Post.count();
+      return Post.countDocuments();
     })
     .then((count) => {
       res.status(200).json({ posts: fetchedPosts, maxPosts: count });

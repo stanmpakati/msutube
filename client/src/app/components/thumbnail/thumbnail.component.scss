@@ -4,6 +4,9 @@
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+  overflow: hidden;
+  text-align: center;
+
   img {
     // TODO fix stretching of image
     width: 100%;

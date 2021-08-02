@@ -1,14 +1,5 @@
 <div class="thumb-container" ngClass.xs="small" fxLayout="column">
   <div class="img">
-    <img
-      *ngIf="!thumbnailData.thumbnailUrl"
-      [src]="
-        thumbnailData.thumbnailUrl
-          ? thumbnailData.thumbnailUrl
-          : '/assets/img/Get-Out.jpg'
-      "
-      [alt]="thumbnailData.title"
-    />
     <video width="400" preload="metadata" [poster]="thumbnailData.thumbnailUrl">
       <source [src]="thumbnailData.fileUrl" type="video/mp4" />
       Sorry Your browser does not support the video tag.

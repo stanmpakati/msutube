@@ -1,4 +1,9 @@
-<div class="thumb-container" ngClass.xs="small" fxLayout="column">
+<div
+  class="thumb-container"
+  ngClass.xs="small"
+  fxLayout="column"
+  (click)="navigateToPage()"
+>
   <div class="img">
     <video width="400" preload="metadata" [poster]="thumbnailData.thumbnailUrl">
       <source [src]="thumbnailData.fileUrl" type="video/mp4" />

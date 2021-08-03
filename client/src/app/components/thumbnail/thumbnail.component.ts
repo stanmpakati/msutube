@@ -22,6 +22,7 @@ export class ThumbnailComponent implements OnInit {
   }
 
   navigateToPage() {
-    this.router.navigateByUrl(`video/${this.thumbnailData._id}`);
+    console.log('clicked');
+    this.router.navigate(['/video', this.thumbnailData._id]);
   }
 }

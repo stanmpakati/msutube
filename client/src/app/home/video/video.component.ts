@@ -10,6 +10,7 @@ import { PostService } from 'src/app/_services/post.service';
 })
 export class VideoComponent implements OnInit {
   video!: Post;
+  isLoading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,12 +22,13 @@ export class VideoComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (id) {
-        this.postService.getPost(id).subscribe((post) => (this.video = post));
+        this.postService.getPost(id).subscribe((post) => {
+          this.video = post;
+          this.isLoading = false;
+        });
       } else {
         this.router.navigate(['404']);
       }
     });
-
-    console.log(this.video);
   }
 }

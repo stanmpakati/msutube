@@ -12,4 +12,5 @@ export class Post {
   fileUrl!: string;
   fileType!: 'video' | 'audio' | 'image';
   thumbnailUrl?: string;
+  createdAt?: string;
 }

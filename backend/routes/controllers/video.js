@@ -76,6 +76,7 @@ export const getPosts = (req, res) => {
 export const getPost = (req, res) => {
   Post.findById(req.params.id)
     .then((file) => {
+      console.log(file);
       if (file) res.status(200).json(file);
       else res.status(404).json({ message: "Post not found" });
     })

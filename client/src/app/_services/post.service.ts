@@ -46,6 +46,7 @@ export class PostService {
   // }
 
   getPost(id: string) {
-    return this.http.get<Post>(`http://localhost:5000/api/posts/${id}`);
+    console.log('get post');
+    return this.http.get<Post>(`${postsUrl}/${id}`);
   }
 }

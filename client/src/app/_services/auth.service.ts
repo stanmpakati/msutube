@@ -137,7 +137,7 @@ export class AuthService {
               return;
             }
             // Otherwise go to homepage
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/video/6107ebdaedef0055c7046c3d');
           }
         },
         (error) => {

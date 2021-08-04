@@ -1,4 +1,4 @@
-export interface Description {
+export interface Details {
   _id: string;
   title: string;
   description: string;

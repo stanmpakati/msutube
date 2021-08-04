@@ -18,7 +18,9 @@
       <!-- Description Tab group -->
       <mat-tab label="Description">
         <ng-template matTabContent>
-          <app-description></app-description>
+          <div class="container">
+            <app-description [details]="details"></app-description>
+          </div>
         </ng-template>
       </mat-tab>
 

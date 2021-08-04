@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  Input,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -24,6 +25,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   user!: User;
   @ViewChild('img', { static: true }) image!: ElementRef;
   @ViewChild('newImg', { static: true }) newImage!: ElementRef;
+  @Input() displayNav = true;
 
   constructor(
     private themeService: ThemeService,

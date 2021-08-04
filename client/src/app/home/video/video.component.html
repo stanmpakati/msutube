@@ -3,11 +3,41 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 
 <!-- Container -->
-<div fxAlign.lt-sm="column">
+<div *ngIf="!isLoading" fxAlign.lt-sm="column">
   <div class="video">
-    <video preload="auto" [poster]="video.thumbnailUrl" autoplay controls>
+    <!-- Todo put autoplay -->
+    <video preload="auto" [poster]="video.thumbnailUrl" controls>
       <source [src]="video.fileUrl" type="video/mp4" />
       Sorry Your browser does not support the video tag.
     </video>
+  </div>
+
+  <!-- Tab Nav for Mobile -->
+  <div class="vid-nav">
+    <mat-tab-group>
+      <!-- Description Tab group -->
+      <mat-tab label="Description">
+        <ng-template matTabContent>
+          <app-description></app-description>
+        </ng-template>
+      </mat-tab>
+
+      <!-- Credits tab group -->
+      <mat-tab label="Credits">
+        <ng-template matTabContent> <app-credits></app-credits> </ng-template>
+      </mat-tab>
+
+      <!-- Pictures Tab group -->
+      <mat-tab label="Comments">
+        <ng-template matTabContent> <app-comments></app-comments> </ng-template>
+      </mat-tab>
+
+      <!-- Suggestions Tab group -->
+      <mat-tab label="Suggestions">
+        <ng-template matTabContent>
+          <app-suggestions></app-suggestions>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>

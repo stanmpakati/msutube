@@ -45,6 +45,10 @@ import { TrendingComponent } from './home/trending/trending.component';
 import { ReferencesFormComponent } from './upload/references-form/references-form.component';
 import { AuthInterceptor } from './_helpers/auth.interceptor';
 import { VideoComponent } from './home/video/video.component';
+import { DescriptionComponent } from './components/description/description.component';
+import { CreditsComponent } from './components/credits/credits.component';
+import { CommentsComponent } from './components/comments/comments.component';
+import { SuggestionsComponent } from './components/suggestions/suggestions.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +81,10 @@ import { VideoComponent } from './home/video/video.component';
     TrendingComponent,
     ReferencesFormComponent,
     VideoComponent,
+    DescriptionComponent,
+    CreditsComponent,
+    CommentsComponent,
+    SuggestionsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,2 +1,25 @@
 <h2>{{ details.title }}</h2>
-<!-- <div class="row"></div> -->
+
+<!-- Date, Views, likes and Share button -->
+<div class="row">
+  <span class="mat-caption">{{ details.createdAt | date }}</span>
+  <div class="stats">
+    <span class="stats-section">{{ details.views }} views</span>
+    <span class="stats-section"
+      ><mat-icon>favorite_border</mat-icon>{{ details.likes }} likes</span
+    >
+    <span class="stats-section"><mat-icon>share</mat-icon>share</span>
+  </div>
+</div>
+
+<!-- Categories -->
+<h3>Categories</h3>
+<mat-chip-list aria-label="Categories">
+  <mat-chip *ngFor="let tag of details.tags" selected color="primary">
+    {{ tag }}
+  </mat-chip>
+</mat-chip-list>
+
+<!-- Description -->
+<h3>About</h3>
+<p>{{ details.description }}</p>

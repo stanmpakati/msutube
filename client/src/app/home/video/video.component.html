@@ -1,3 +1,13 @@
 <!-- NavBar -->
-<app-navbar></app-navbar>
-<mat-spinner *ngIf="true"></mat-spinner>
+<app-navbar [displayNav]="false"></app-navbar>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<!-- Container -->
+<div fxAlign.lt-sm="column">
+  <div class="video">
+    <video preload="auto" [poster]="video.thumbnailUrl" autoplay controls>
+      <source [src]="video.fileUrl" type="video/mp4" />
+      Sorry Your browser does not support the video tag.
+    </video>
+  </div>
+</div>

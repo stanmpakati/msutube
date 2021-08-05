@@ -49,6 +49,8 @@ import { DescriptionComponent } from './components/description/description.compo
 import { CreditsComponent } from './components/credits/credits.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { SuggestionsComponent } from './components/suggestions/suggestions.component';
+import { OwnerComponentComponent } from './components/owner-component/owner-component.component';
+import { CitationComponent } from './components/citation/citation.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +87,8 @@ import { SuggestionsComponent } from './components/suggestions/suggestions.compo
     CreditsComponent,
     CommentsComponent,
     SuggestionsComponent,
+    OwnerComponentComponent,
+    CitationComponent,
   ],
   imports: [
     BrowserModule,

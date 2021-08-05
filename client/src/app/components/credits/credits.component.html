@@ -1,1 +1,16 @@
-<p>credits works!</p>
+<h3>Owners</h3>
+
+<!-- <app-owner-component *ngFor="let owner of ' [username]=''></app-owner-component> -->
+
+<!-- Contributers -->
+<h3>Contributers</h3>
+<app-contributer-circle
+  *ngFor="let contributer of contributers"
+  [contributer]="contributer"
+></app-contributer-circle>
+
+<!-- Citations -->
+<app-citation
+  *ngFor="let citation of citations"
+  [citation]="citation"
+></app-citation>

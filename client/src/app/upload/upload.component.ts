@@ -37,7 +37,7 @@ export class UploadComponent implements OnInit, OnDestroy {
     tags: string[];
   };
   contributers!: {
-    owners?: string[] | undefined;
+    owners: string[];
     contibuters?: Contributer[] | undefined;
   };
 

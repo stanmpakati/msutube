@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Contributer } from 'src/app/_models/contributer';
 import { Citation } from 'src/app/_models/reference.interface';
-import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-credits',
@@ -9,11 +8,15 @@ import { User } from 'src/app/_models/user';
   styleUrls: ['./credits.component.scss'],
 })
 export class CreditsComponent implements OnInit {
-  @Input() owners!: User;
-  @Input() contributers!: Contributer[];
-  @Input() citations!: Citation[];
+  @Input() owners!: string[];
+  @Input() contributers?: Contributer[];
+  @Input() citations?: Citation[];
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.owners);
+    console.log(this.contributers);
+    console.log(this.citations);
+  }
 }

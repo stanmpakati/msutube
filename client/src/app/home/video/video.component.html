@@ -26,7 +26,13 @@
 
       <!-- Credits tab group -->
       <mat-tab label="Credits">
-        <ng-template matTabContent> <app-credits></app-credits> </ng-template>
+        <ng-template matTabContent>
+          <app-credits
+            [owners]="video.owners"
+            [citations]="video.citations"
+            [contributers]="video.contibuters"
+          ></app-credits>
+        </ng-template>
       </mat-tab>
 
       <!-- Pictures Tab group -->

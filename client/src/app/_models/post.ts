@@ -6,7 +6,7 @@ export class Post {
   title!: string;
   description!: string;
   tags?: string[];
-  owners?: string[] | undefined;
+  owners!: string[];
   contibuters?: Contributer[] | undefined;
   citations?: Citation[];
   fileUrl!: string;

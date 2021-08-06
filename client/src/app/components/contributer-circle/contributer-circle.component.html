@@ -6,8 +6,8 @@
 >
   <img
     [src]="
-      contributer.user.profilePicUrl
-        ? contributer.user.profilePicUrl
+      contributer.user?.profilePicUrl
+        ? contributer.user?.profilePicUrl
         : '/assets/vectors/man.jpg'
     "
     alt="icon"
@@ -18,7 +18,7 @@
 <mat-menu #contribTooltip>
   <ng-template matMenuContent>
     <div class="container-small">
-      <h3>{{ contributer.user.username }}</h3>
+      <h3>{{ contributer.user?.username }}</h3>
       <p class="mat-body-2">{{ contributer.role }}</p>
       <p>
         {{ contributer.roleDetails }}

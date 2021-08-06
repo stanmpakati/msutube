@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { reverse } from 'lodash';
+
 import { Details } from 'src/app/_models/details.interface';
 import { Post } from 'src/app/_models/post';
 import { PostService } from 'src/app/_services/post.service';

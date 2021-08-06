@@ -10,7 +10,7 @@ export class Post {
   contibuters?: Contributer[] | undefined;
   citations?: Citation[];
   fileUrl!: string;
-  fileType!: 'video' | 'audio' | 'image';
+  fileType!: string;
   thumbnailUrl?: string;
   createdAt?: string;
 }

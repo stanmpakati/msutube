@@ -17,7 +17,7 @@ export class UploadService {
   private fileDestDetails!: {
     fileUrl: string;
     thumbnailUrl: string;
-    fileMimetype: 'video' | 'audio' | 'image';
+    fileMimetype: string;
   };
 
   constructor(
@@ -37,7 +37,7 @@ export class UploadService {
   set recordFileDestDetails(details: {
     fileUrl: string;
     thumbnailUrl: string;
-    fileMimetype: 'video' | 'audio' | 'image';
+    fileMimetype: string;
   }) {
     this.fileDestDetails = details;
   }
@@ -61,7 +61,7 @@ export class UploadService {
       message: string;
       fileUrl: string;
       thumbnailUrl: string;
-      fileMimetype: 'video' | 'audio' | 'image';
+      fileMimetype: string;
     }>(videoUrl, postData, {
       reportProgress: true,
       observe: 'events',

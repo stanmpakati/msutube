@@ -4,7 +4,7 @@ import Post from "../../models/post.js";
 
 export const uploadPost = (req, res) => {
   const url = req.protocol + "://" + req.get("host");
-  const fileType = req.files.file[0].mimetype.split("/")[0];
+  const fileType = req.files.file[0].mimetype;
   // console.log(getVideoDurationInSeconds(files.file[0]));
 
   const filePath = `${url}/${req.files.file[0].path}`;

@@ -38,7 +38,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   };
   contributers!: {
     owners: string[];
-    contibuters?: Contributer[] | undefined;
+    contributers?: Contributer[];
   };
 
   constructor(
@@ -128,6 +128,7 @@ export class UploadComponent implements OnInit, OnDestroy {
       fileType: this.uploadService.getFileDestDetails.fileMimetype,
     };
     console.log(filePost);
+    console.log();
 
     this.uploadService.uploadFileDetails(filePost);
     this.isLoading = true;

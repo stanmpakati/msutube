@@ -27,6 +27,8 @@ export const savePostDetails = (req, res) => {
   const post = new Post({
     ...req.body,
   });
+  console.log(post);
+  console.log(req.body.contributers);
 
   post
     .save()

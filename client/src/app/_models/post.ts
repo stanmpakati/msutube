@@ -7,7 +7,7 @@ export class Post {
   description!: string;
   tags?: string[];
   owners!: string[];
-  contibuters?: Contributer[] | undefined;
+  contributers?: Contributer[] | undefined;
   citations?: Citation[];
   fileUrl!: string;
   fileType!: string;

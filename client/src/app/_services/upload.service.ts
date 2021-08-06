@@ -75,7 +75,7 @@ export class UploadService {
     else console.log('No Username');
     file.owners = [...new Set(file.owners)];
 
-    console.log(file.contibuters);
+    console.log(file.contributers);
 
     this.http.post(`${videoUrl}/post`, file).subscribe(
       (response) => {

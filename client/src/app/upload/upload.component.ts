@@ -78,14 +78,15 @@ export class UploadComponent implements OnInit, OnDestroy {
       const dialogRef = this.dialog.open(NoFileDialogComponent);
 
       dialogRef.afterClosed().subscribe();
+      return true;
     }
 
-    if (this.detailsForm.invalid) return;
+    return true;
   }
 
   recordDetails() {
     // Check form validity before continuing
-    this.checkIfFileIsUploading();
+    if (this.checkIfFileIsUploading()) return;
     if (this.detailsForm.invalid) return;
 
     // Make details object to send to service
@@ -95,7 +96,6 @@ export class UploadComponent implements OnInit, OnDestroy {
       tags: this.detailsComponent.tags,
     };
 
-    console.log(details);
     this.details = details;
   }
 

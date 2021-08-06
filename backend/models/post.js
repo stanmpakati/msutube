@@ -31,8 +31,10 @@ const postSchema = mongoose.Schema(
     contributers: [
       {
         username: { type: String },
+        email: { type: String },
+        profilePicUrl: { type: String },
         role: { type: String },
-        roleDescription: { type: String },
+        description: { type: String },
       },
     ],
     comments: [

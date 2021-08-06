@@ -111,7 +111,6 @@ export class UploadComponent implements OnInit, OnDestroy {
       contributers: this.contributersFormComponent.contributers,
     };
 
-    console.log(contributers);
     this.contributers = contributers;
   }
 
@@ -127,8 +126,6 @@ export class UploadComponent implements OnInit, OnDestroy {
       thumbnailUrl: this.uploadService.getFileDestDetails.thumbnailUrl,
       fileType: this.uploadService.getFileDestDetails.fileMimetype,
     };
-    console.log(filePost);
-    console.log();
 
     this.uploadService.uploadFileDetails(filePost);
     this.isLoading = true;

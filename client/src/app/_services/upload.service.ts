@@ -75,14 +75,11 @@ export class UploadService {
     else console.log('No Username');
     file.owners = [...new Set(file.owners)];
 
-    console.log(file.contributers);
     // Todo throw error if no file url
     if (!file.fileUrl) return;
 
     this.http.post(`${videoUrl}/post`, file).subscribe(
       (response) => {
-        console.log(response);
-
         this.router.navigateByUrl('/home');
       },
       (error) => {

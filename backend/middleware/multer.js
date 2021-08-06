@@ -9,11 +9,13 @@ const IMG_MINE_TYPE_MAP = {
 const VID_MINE_TYPE_MAP = {
   "video/mp4": "mp4",
   "video/mkv": "mkv",
+  "video/x-matroska": "mkv",
 };
 
 const MINE_TYPE_MAP = {
   "video/mp4": "mp4",
   "video/mkv": "mkv",
+  "video/x-matroska": "mkv",
   "image/png": "png",
   "image/jpeg": "jpg",
   "image/jpg": "jpg",
@@ -23,7 +25,7 @@ const MINE_TYPE_MAP = {
 export const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const isValid = MINE_TYPE_MAP[file.mimetype];
-    let error = new Error("Invalid mine type");
+    let error = new Error("Sorry file type not supported");
     if (isValid) error = null;
 
     // Save thumbnails first

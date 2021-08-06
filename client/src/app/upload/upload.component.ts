@@ -108,7 +108,7 @@ export class UploadComponent implements OnInit, OnDestroy {
     // Make details object to send to service
     const contributers = {
       owners: this.contributersFormComponent.partners,
-      contibuters: this.contributersFormComponent.contributers,
+      contributers: this.contributersFormComponent.contributers,
     };
 
     console.log(contributers);

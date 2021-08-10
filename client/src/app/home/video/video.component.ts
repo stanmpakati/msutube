@@ -27,7 +27,6 @@ export class VideoComponent implements OnInit {
       if (id) {
         this.postService.getPost(id).subscribe((post) => {
           this.video = { ...post };
-          console.log('this.video');
           this.details = {
             _id: post._id,
             title: post.title,

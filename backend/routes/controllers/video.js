@@ -27,8 +27,8 @@ export const savePostDetails = (req, res) => {
   delete req.body._id;
   const post = new Post({
     ...req.body,
+    contributers: req.body.contributers,
   });
-  console.log("post", post);
 
   post
     .save()

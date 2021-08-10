@@ -15,8 +15,6 @@ export class CreditsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('owners', this.owners);
-    console.log('cont', this.contributers);
     console.log('cit', this.citations);
   }
 }

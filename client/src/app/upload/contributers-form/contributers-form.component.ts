@@ -121,7 +121,6 @@ export class ContributersFormComponent implements OnInit {
     // Update error messages
     this.contribSubmit = true;
     // if (this.helpersForm.invalid) return;
-    console.log('valid', this.username.value, this.helpersForm.value.username);
 
     // Confirm user with database
     // and add contributer
@@ -137,7 +136,6 @@ export class ContributersFormComponent implements OnInit {
         roleDetails: this.description.value,
       };
       this.contributers.push(newContributer);
-      console.log(this.contributers);
 
       this.helpersForm.reset();
     });

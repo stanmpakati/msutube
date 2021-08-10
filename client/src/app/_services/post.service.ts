@@ -42,7 +42,6 @@ export class PostService {
   // }
 
   getPost(id: string) {
-    console.log('get post');
     return this.http.get<Post>(`${postsUrl}/${id}`);
   }
 }

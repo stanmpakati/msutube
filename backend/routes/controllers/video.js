@@ -23,12 +23,12 @@ export const uploadPost = (req, res) => {
 export const savePostDetails = (req, res) => {
   // Todo undo user given null id
   // const {recievedPost} = {}
+  console.log("body", req.body);
   delete req.body._id;
   const post = new Post({
     ...req.body,
   });
-  console.log(post);
-  console.log(req.body.contributers);
+  console.log("post", post);
 
   post
     .save()

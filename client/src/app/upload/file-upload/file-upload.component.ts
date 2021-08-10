@@ -91,7 +91,6 @@ export class FileUploadComponent implements OnInit {
     // update file name
     this.fileName = file.name;
     this.fileType = file.type;
-    console.log(file.type);
 
     this.readyForUpload = true;
 
@@ -153,7 +152,6 @@ export class FileUploadComponent implements OnInit {
       this.croppedImage = result;
 
       const ppFile = base64ToFile(this.croppedImage);
-      console.log(this.croppedImage);
 
       // Send file to form
       this.uploadForm.patchValue({ thumbnail: ppFile });
@@ -163,7 +161,6 @@ export class FileUploadComponent implements OnInit {
 
   imageLoaded() {
     this.showCropper = true;
-    console.log('Image loaded');
   }
 
   cropperReady(sourceImageDimensions: any) {
@@ -209,7 +206,6 @@ export class FileUploadComponent implements OnInit {
     const dialogRef = this.dialog.open(ThumbCheckDialog);
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
       if (result) this.continueFileUpload();
     });
   }
@@ -232,7 +228,6 @@ export class FileUploadComponent implements OnInit {
   }
 
   continueFileUpload() {
-    console.log('uploading');
     this.UploadService.uploadVideo(
       this.uploadForm.value.thumbnail,
       this.uploadForm.value.file

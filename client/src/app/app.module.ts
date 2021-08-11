@@ -8,9 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
-import { SetupComponent } from './auth/setup/setup.component';
+
 import { ContactDetailsFormComponent } from './auth/setup/contact-details-form/contact-details-form.component';
 import { PersonalDetailsFormComponent } from './auth/setup/personal-details-form/personal-details-form.component';
 import { HomeComponent } from './home/home.component';
@@ -56,9 +54,6 @@ import { CreditOwnerComponent } from './components/credits/credit-owner/credit-o
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    SignupComponent,
-    SetupComponent,
     ContactDetailsFormComponent,
     PersonalDetailsFormComponent,
     HomeComponent,

@@ -50,7 +50,7 @@ export class AuthService {
 
   saveSignUpAuth(authDetails: Auth) {
     this.signupAuth = authDetails;
-    this.router.navigateByUrl('/setup');
+    this.router.navigateByUrl('/auth/setup');
   }
 
   createUser(
@@ -87,7 +87,7 @@ export class AuthService {
     this.http.post(`${authUrl}/signup`, userData).subscribe(
       (response) => {
         console.log(response);
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/auth/login');
       },
       (error) => {
         console.log(error);

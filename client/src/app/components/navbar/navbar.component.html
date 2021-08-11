@@ -56,17 +56,17 @@
             Dark Mode
           </mat-slide-toggle>
         </div>
-        <a href="#" routerLink="/profile" mat-menu-item
-          ><mat-icon>person</mat-icon> Profile</a
-        >
-        <a href="#" routerLink="/settings" mat-menu-item
-          ><mat-icon>settings</mat-icon> Settings</a
-        >
+        <a href="#" routerLink="/profile" mat-menu-item>
+          <mat-icon>person</mat-icon> Profile
+        </a>
+        <a href="#" routerLink="/settings" mat-menu-item>
+          <mat-icon>settings</mat-icon> Settings
+        </a>
         <hr />
         <button *ngIf="user" mat-menu-item (click)="logout()">
           <mat-icon>logout</mat-icon> Logout
         </button>
-        <a *ngIf="!user" mat-menu-item href="#" routerLink="/login">
+        <a *ngIf="!user" mat-menu-item href="#" routerLink="/auth/login">
           <mat-icon>logout</mat-icon> Login
         </a>
       </mat-menu>

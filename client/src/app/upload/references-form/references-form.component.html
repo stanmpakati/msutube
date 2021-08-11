@@ -4,7 +4,9 @@
     <div class="citations" *ngIf="citations.length > 0">
       <h4>Added References:</h4>
       <mat-chip-list>
-        <mat-chip *ngFor="let ref of citations">{{ ref.author }}</mat-chip>
+        <!-- Todo Style this better -->
+        <app-citation *ngFor="let ref of citations" [citation]="ref">
+        </app-citation>
       </mat-chip-list>
     </div>
     <!-- Author -->

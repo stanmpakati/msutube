@@ -27,7 +27,13 @@
       <!-- Credits tab group -->
       <mat-tab label="Credits">
         <ng-template matTabContent>
-          <div class="container">
+          <div
+            class="container"
+            [ngClass]="{
+              'dark-background': isDarkMode,
+              'light-background': !isDarkMode
+            }"
+          >
             <app-credits
               [owners]="video.owners"
               [citations]="video.citations"

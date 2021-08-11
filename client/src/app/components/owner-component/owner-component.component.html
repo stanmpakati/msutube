@@ -1,1 +1,16 @@
-<p>owner-component works!</p>
+<button mat-button (click)="navigateToProfile()">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <img
+      [src]="
+        userDetails?.profilePicUrl
+          ? userDetails?.profilePicUrl
+          : '/assets/vectors/man.jpg'
+      "
+      alt="icon"
+    />
+    <div class="text-items" fxLayout="column" fxLayoutAlign="start">
+      <span class="tx-500">{{ username }}</span>
+      <span>{{ userDetails?.first }} {{ userDetails?.last }}</span>
+    </div>
+  </div>
+</button>

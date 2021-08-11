@@ -1,6 +1,9 @@
 <h3>Owners</h3>
 
-<!-- <app-owner-component *ngFor="let owner of ' [username]=''></app-owner-component> -->
+<app-owner-component
+  *ngFor="let owner of owners"
+  [username]="owner"
+></app-owner-component>
 
 <!-- Contributers -->
 <h3>Contributers</h3>

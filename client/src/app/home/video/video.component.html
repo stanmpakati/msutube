@@ -14,9 +14,9 @@
 
   <!-- Tab Nav for Mobile -->
   <div class="vid-nav">
-    <mat-tab-group>
+    <mat-tab-group mat-stretch-tabs>
       <!-- Description Tab group -->
-      <mat-tab label="Description">
+      <mat-tab label="Details">
         <ng-template matTabContent>
           <div class="container">
             <app-description [details]="details"></app-description>
@@ -52,7 +52,7 @@
       </mat-tab>
 
       <!-- Suggestions Tab group -->
-      <mat-tab label="Suggestions">
+      <mat-tab label="Other">
         <ng-template matTabContent>
           <div class="container">
             <app-suggestions></app-suggestions>

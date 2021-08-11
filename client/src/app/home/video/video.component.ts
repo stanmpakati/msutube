@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -11,6 +11,7 @@ import { ThemeService } from 'src/app/_services/theme.service';
   selector: 'app-video',
   templateUrl: './video.component.html',
   styleUrls: ['./video.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class VideoComponent implements OnInit, OnDestroy {
   video!: Post;

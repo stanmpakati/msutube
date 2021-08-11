@@ -17,3 +17,12 @@ video {
 .dark-background {
   background-color: #3b3b3b;
 }
+
+.mat-tab-label {
+  max-width: 25% !important;
+  width: 25px !important;
+}
+
+::ng-deep .mat-tab-header-pagination {
+  display: none !important;
+}

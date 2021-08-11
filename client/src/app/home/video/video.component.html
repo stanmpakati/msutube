@@ -27,23 +27,30 @@
       <!-- Credits tab group -->
       <mat-tab label="Credits">
         <ng-template matTabContent>
-          <app-credits
-            [owners]="video.owners"
-            [citations]="video.citations"
-            [contributers]="video.contributers"
-          ></app-credits>
+          <div class="container">
+            <app-credits
+              [owners]="video.owners"
+              [citations]="video.citations"
+              [contributers]="video.contributers"
+            ></app-credits>
+          </div>
         </ng-template>
       </mat-tab>
 
       <!-- Pictures Tab group -->
       <mat-tab label="Comments">
-        <ng-template matTabContent> <app-comments></app-comments> </ng-template>
+        <ng-template matTabContent>
+          <div class="container">
+            <app-comments></app-comments></div
+        ></ng-template>
       </mat-tab>
 
       <!-- Suggestions Tab group -->
       <mat-tab label="Suggestions">
         <ng-template matTabContent>
-          <app-suggestions></app-suggestions>
+          <div class="container">
+            <app-suggestions></app-suggestions>
+          </div>
         </ng-template>
       </mat-tab>
     </mat-tab-group>

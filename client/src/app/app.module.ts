@@ -2,15 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ImageCropperModule } from 'ngx-image-cropper';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ContactDetailsFormComponent } from './auth/setup/contact-details-form/contact-details-form.component';
-import { PersonalDetailsFormComponent } from './auth/setup/personal-details-form/personal-details-form.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BottomNavbarComponent } from './components/bottom-navbar/bottom-navbar.component';
@@ -19,7 +16,6 @@ import {
   NoFileDialogComponent,
   UploadComponent,
 } from './upload/upload.component';
-import { FileDropDirective } from './_helpers/file-drop.directive';
 import { DetailsComponent } from './upload/details/details.component';
 import { ThumbnailComponent } from './components/thumbnail/thumbnail.component';
 import { MusicComponent } from './music/music.component';
@@ -33,10 +29,7 @@ import {
 import { ContributersFormComponent } from './upload/contributers-form/contributers-form.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ContributerCircleComponent } from './components/contributer-circle/contributer-circle.component';
-import {
-  ImageCropperDialog,
-  MediaComponent,
-} from './auth/setup/media/media.component';
+
 import { MaterialModule } from './shared/material/material.module';
 import { RenderTilesComponent } from './components/render-tiles/render-tiles.component';
 import { TrendingComponent } from './home/trending/trending.component';
@@ -50,17 +43,15 @@ import { SuggestionsComponent } from './components/suggestions/suggestions.compo
 import { OwnerComponentComponent } from './components/owner-component/owner-component.component';
 import { CitationComponent } from './components/citation/citation.component';
 import { CreditOwnerComponent } from './components/credits/credit-owner/credit-owner.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContactDetailsFormComponent,
-    PersonalDetailsFormComponent,
     HomeComponent,
     NavbarComponent,
     BottomNavbarComponent,
     UploadComponent,
-    FileDropDirective,
     DetailsComponent,
     ThumbnailComponent,
     MusicComponent,
@@ -73,8 +64,6 @@ import { CreditOwnerComponent } from './components/credits/credit-owner/credit-o
     ThumbCheckDialog,
     NoFileDialogComponent,
     ContributerCircleComponent,
-    MediaComponent,
-    ImageCropperDialog,
     RenderTilesComponent,
     TrendingComponent,
     ReferencesFormComponent,
@@ -93,11 +82,11 @@ import { CreditOwnerComponent } from './components/credits/credit-owner/credit-o
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ImageCropperModule,
     FlexLayoutModule,
-
     // Angular Material imports
     MaterialModule,
+    // With Shared stuff
+    SharedModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

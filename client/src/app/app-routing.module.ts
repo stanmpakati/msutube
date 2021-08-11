@@ -17,7 +17,10 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'video/:id', component: VideoComponent },
   { path: 'videos/featured', component: FeaturedComponent },
-  { path: 'auth', loadChildren: 'auth/auth.module#AuthModule' },
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 

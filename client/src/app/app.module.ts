@@ -41,7 +41,6 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { SuggestionsComponent } from './components/suggestions/suggestions.component';
 import { OwnerComponentComponent } from './components/owner-component/owner-component.component';
 import { CitationComponent } from './components/citation/citation.component';
-import { CreditOwnerComponent } from './components/credits/credit-owner/credit-owner.component';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
@@ -73,7 +72,6 @@ import { SharedModule } from './shared/shared.module';
     SuggestionsComponent,
     OwnerComponentComponent,
     CitationComponent,
-    CreditOwnerComponent,
   ],
   imports: [
     BrowserModule,

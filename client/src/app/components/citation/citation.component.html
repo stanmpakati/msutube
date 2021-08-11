@@ -1,1 +1,9 @@
-<p>citation works!</p>
+<p>
+  <span *ngFor="let auth of citation.author">{{ auth }}. </span>
+  <span>({{ citation.publicationDate | date: "y" }}) </span>
+  <span style="font-style: italic">{{ citation.refTitle }} </span>
+  <span>
+    Available at: <a [href]="citation.link">{{ citation.link }}</a>
+  </span>
+  <span> [Accessed: {{ citation.dateAccessed | date }}]</span>
+</p>

@@ -172,7 +172,7 @@ export class AuthService {
     this.authStatusListener.next(false);
     this.userId = '';
     this.clearAuthData();
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/auth/login');
     clearTimeout(this.tokenTimer);
   }
 
@@ -213,6 +213,8 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('expiration');
     localStorage.removeItem('userId');
+    localStorage.removeItem('profileUrl');
+    localStorage.removeItem('username');
   }
 
   private getAuthData() {

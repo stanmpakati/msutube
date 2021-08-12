@@ -50,7 +50,7 @@
         <div *ngIf="username" class="user-name">
           Welcome <span>{{ username }}</span>
         </div>
-        <hr />
+        <hr *ngIf="username" />
         <div mat-menu-item (click)="$event.stopPropagation()">
           <mat-slide-toggle
             [checked]="isDarkMode"

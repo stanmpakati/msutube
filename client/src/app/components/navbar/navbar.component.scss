@@ -12,6 +12,13 @@ mat-form-field {
   height: 22px;
 }
 
+.user-name {
+  padding: 6px 16px;
+  span {
+    font-weight: 500;
+  }
+}
+
 .search-input {
   border-radius: 5px 0px 0px 5px;
   border: none;

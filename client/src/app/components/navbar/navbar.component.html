@@ -47,7 +47,10 @@
       </button>
       <!-- profile menu -->
       <mat-menu #menu="matMenu">
-        <div *ngIf="user" class="user-name">{{ user.username }}</div>
+        <div *ngIf="username" class="user-name">
+          Welcome <span>{{ username }}</span>
+        </div>
+        <hr />
         <div mat-menu-item (click)="$event.stopPropagation()">
           <mat-slide-toggle
             [checked]="isDarkMode"
@@ -63,11 +66,11 @@
           <mat-icon>settings</mat-icon> Settings
         </a>
         <hr />
-        <button *ngIf="user" mat-menu-item (click)="logout()">
+        <button *ngIf="username" mat-menu-item (click)="logout()">
           <mat-icon>logout</mat-icon> Logout
         </button>
-        <a *ngIf="!user" mat-menu-item href="#" routerLink="/auth/login">
-          <mat-icon>logout</mat-icon> Login
+        <a *ngIf="!username" mat-menu-item href="#" routerLink="/auth/login">
+          <mat-icon>login</mat-icon> Login None?
         </a>
       </mat-menu>
     </div>

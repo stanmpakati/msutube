@@ -32,6 +32,11 @@ export class AuthService {
     return this.token;
   }
 
+  // Todo impliment this
+  getUser() {
+    return this.user;
+  }
+
   getUsername() {
     return localStorage.getItem('username');
   }

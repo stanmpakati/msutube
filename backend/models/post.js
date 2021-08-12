@@ -39,7 +39,7 @@ const postSchema = mongoose.Schema(
         roleDetails: { type: String },
       },
     ],
-    comments: { type: [CommentSchema], select: false },
+    // comments: { type: [CommentSchema], select: false },
     length: { type: Number },
   },
   { timestamps: true }

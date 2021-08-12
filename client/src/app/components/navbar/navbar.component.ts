@@ -7,10 +7,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/_models/user';
 import { AuthService } from 'src/app/_services/auth.service';
 import { ImageService } from 'src/app/_services/image.service';
 import { ThemeService } from 'src/app/_services/theme.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-navbar',
@@ -30,7 +30,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
     private themeService: ThemeService,
     private authService: AuthService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -67,5 +68,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authService.logout();
+
+    // Notify user with a snackbar
+    this._snackBar.open('You have been logged out', 'close', {
+      duration: 3000,
+    });
   }
 }

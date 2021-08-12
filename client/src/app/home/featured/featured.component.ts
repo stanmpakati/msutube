@@ -9,12 +9,15 @@ import { PostService } from 'src/app/_services/post.service';
 })
 export class FeaturedComponent implements OnInit {
   vids!: Thumbnail[];
+  isLoading!: boolean;
 
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.postService.getPosts(10, 1, 'video').subscribe((postData) => {
       this.vids = postData.posts;
+      this.isLoading = false;
     });
   }
 }

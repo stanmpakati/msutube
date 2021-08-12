@@ -10,6 +10,7 @@ export class RenderTilesComponent implements OnInit {
   @Input() vids!: Thumbnail[];
   @Input() featureName!: string;
   @Input() linkTo!: string;
+  @Input() isLoading!: boolean;
 
   constructor() {}
 

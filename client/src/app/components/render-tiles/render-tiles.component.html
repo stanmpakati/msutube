@@ -6,7 +6,7 @@
 </div>
 <div
   class="thumbnails"
-  *ngIf="vids && vids.length > 0"
+  *ngIf="vids && vids.length > 0 && !isLoading"
   ngClass.xs="container-small"
 >
   <app-thumbnail
@@ -16,9 +16,12 @@
   ></app-thumbnail>
 </div>
 
-<div class="no-vids" *ngIf="!vids || vids.length === 0">
+<div class="no-vids" *ngIf="!isLoading && (!vids || vids.length === 0)">
   <span>Sorry, No Content Available</span>
 </div>
+
+<!-- Loading state -->
+<mat-spinner color="accent" *ngIf="isLoading"></mat-spinner>
 
 <div ngStyle.xs="margin-top: 72px"></div>
 <hr class="mt-2" fxHide.xs />

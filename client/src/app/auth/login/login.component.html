@@ -11,7 +11,12 @@
   <header>
     <span class="logo-light">MSU<span class="color-primary">tube</span></span>
   </header>
-  <main fxLayout.gt-sm="row" class="row" *ngIf="!isLoading">
+  <main
+    fxLayout.gt-sm="row"
+    fxLayout.lt-sm="column-reverse"
+    class="row"
+    *ngIf="!isLoading"
+  >
     <!-- Signup section -->
     <div
       class="left"

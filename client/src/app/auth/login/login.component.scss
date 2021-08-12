@@ -1,3 +1,7 @@
+.logo-light {
+  font-size: xx-large;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -33,8 +37,8 @@ mat-icon {
 }
 
 img {
-  height: 200px;
-  padding: 70px;
+  height: 70%;
+  padding: 32px;
 }
 
 form {
@@ -78,7 +82,8 @@ mat-spinner {
   }
 
   img {
-    height: 80%;
+    height: 70%;
+    padding: 70px;
   }
 }
 

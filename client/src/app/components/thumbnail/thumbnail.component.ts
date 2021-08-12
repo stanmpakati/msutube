@@ -16,6 +16,7 @@ export class ThumbnailComponent implements OnInit, OnDestroy {
   owner!: string;
   themeSub: Subscription = new Subscription();
   isDarkMode!: boolean;
+  isLoading!: boolean;
 
   constructor(private router: Router, private themeService: ThemeService) {}
 

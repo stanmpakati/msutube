@@ -11,9 +11,9 @@
     </video>
     <span class="duration-stamp">{{ thumbnailData.length }}</span>
   </div>
-  <span [ngClass]="{ 'mat-body-2': true, 'color-blue': !isDarkMode }">{{
-    thumbnailData.title
-  }}</span>
+  <span [ngClass]="{ 'mat-body-2': true, 'color-blue': !isDarkMode }">
+    {{ thumbnailData.title }}
+  </span>
   <div class="owner-time" fxLayout="row" fxLayoutAlign="space-between center">
     <span>{{ owner }}</span>
     <span class="mat-caption">{{ timeElapsed }}</span>

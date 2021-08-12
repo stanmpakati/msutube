@@ -18,6 +18,22 @@ const userSchema = mongoose.Schema({
   twitterLink: { type: String },
   phoneNumber: { type: String },
   regnumber: { type: String },
+
+  likedVideos: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Post",
+    select: false,
+  },
+  likedImages: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Post",
+    select: false,
+  },
+  likedAudio: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Post",
+    select: false,
+  },
 });
 
 userSchema.plugin(uniqueValidator);

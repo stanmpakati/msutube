@@ -1,4 +1,4 @@
-$color-primary: blue;
+$color-primary: #1976d2;
 $color-accent: #ffd740;
 
 html,
@@ -56,6 +56,10 @@ app-bottom-navbar {
   span {
     color: #64b5f6;
   }
+}
+
+.color-blue {
+  color: $color-primary;
 }
 
 .spacer {

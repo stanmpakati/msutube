@@ -1,4 +1,19 @@
 import mongoose from "mongoose";
+// import CommentSchema from "./comment.js";
+
+const CommentSchema = new mongoose.Schema(
+  {
+    comment: { type: String, required: true },
+    // TODO: make likes an array
+    likes: { type: Number },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
 const postSchema = mongoose.Schema(
   {
@@ -9,6 +24,7 @@ const postSchema = mongoose.Schema(
     thumbnailUrl: { type: String, default: "" },
     tags: [{ type: String, trim: true }],
     views: { type: Number },
+    likes: { type: Number },
     citations: [
       {
         author: [{ type: String }],
@@ -41,20 +57,21 @@ const postSchema = mongoose.Schema(
     ],
     length: { type: Number },
     // Comments
-    comments: {
-      type: [
-        {
-          comment: { type: String, required: true },
-          likes: { type: Number, required: true },
-          commenter: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
-            required: true,
-          },
-        },
-      ],
-      select: false,
-    },
+    // comments: {
+    //   type: [
+    //     {
+    //       comment: { type: String, required: true },
+    //       likes: { type: Number, required: true },
+    //       commenter: {
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: "User",
+    //         required: true,
+    //       },
+    //     },
+    //   ],
+    //   select: false,
+    // },
+    comments: [{ type: CommentSchema }],
   },
   { timestamps: true }
 );

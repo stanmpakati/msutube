@@ -4,6 +4,8 @@ import multer from "multer";
 import checkAuth from "../middleware/check-auth.js";
 import { storage, videoStorage } from "../middleware/multer.js";
 import {
+  commentPost,
+  likePost,
   uploadPost,
   getPost,
   getPosts,
@@ -37,6 +39,10 @@ router.post(
 );
 
 router.post("/post", checkAuth, savePostDetails);
+
+router.patch("/comment/:id", checkAuth, commentPost);
+
+router.patch("/like/:id", likePost);
 
 router.patch(
   "/:id",

@@ -1,6 +1,7 @@
 // import getVideoDurationInSeconds from "get-video-duration";
 
 import Post from "../../models/post.js";
+import CommentSchema from "../../models/comment.js";
 
 export const uploadPost = (req, res) => {
   const url = req.protocol + "://" + req.get("host");
@@ -89,3 +90,36 @@ export const getPost = (req, res) => {
 export const deletePost = (req, res) => {};
 
 export const updatePost = (req, res) => {};
+
+export const likePost = (req, res) => {
+  Post.updateOne({ _id: req.params.id }, { $inc: { likes: 1 } }, { new: true })
+    .then((result) => {
+      console.log(result);
+      if (result.n > 0) res.status(201).json({ message: "update successful" });
+      else res.status(401).json({ message: "Not authorized" });
+    })
+    .catch((err) =>
+      res.status(500).json({ message: "Saving Post failed", error: err })
+    );
+};
+
+export const commentPost = (req, res) => {
+  // Confirm identity of post
+  Post.findById(req.params.id).then((file) => {
+    if (file) console.log("found");
+
+    console.log(req.userData.userId);
+
+    const comment = new CommentSchema({
+      comment: req.body.comment,
+      owner: req.userData.userId,
+    });
+
+    console.log(comment);
+
+    person.friends.push(friend);
+    person.save(done);
+
+    Post.updateOne({ _id: req.params.id, creator: req.userData.userId }, post);
+  });
+};

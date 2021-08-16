@@ -71,7 +71,7 @@ const postSchema = mongoose.Schema(
     //   ],
     //   select: false,
     // },
-    comments: [{ type: CommentSchema }],
+    comments: [{ type: CommentSchema, select: false }],
   },
   { timestamps: true }
 );

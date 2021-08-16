@@ -93,25 +93,30 @@ export const deletePost = (req, res) => {};
 export const updatePost = (req, res) => {};
 
 export const likePost = async (req, res) => {
+  // first verify if user has liked post before
+  const likedVids = await User.findById(req.params.id).select("likedVideos");
+
+  console.log(likedVids);
+
+  if (likedVids.includes(req.params.id))
+    return res.status(409).json({ message: "You have already liked this" });
+
+  // then Update liked results
   const updatelikeResult = await Post.updateOne(
     { _id: req.params.id },
     { $inc: { likes: 1 } },
     { new: true }
   );
 
-  console.log(updatelikeResult);
-
   if (updatelikeResult.n > 0) {
     // Update user's likes
     const userLikesUpdate = await User.updateOne(
-      { _id: "60f1a1f941674bcac6c5a38f" },
+      { _id: req.userData.userId },
       { $push: { likedVideos: req.params.id } },
       { new: true }
     );
 
-    console.log("user", userLikesUpdate);
-
-    if (updatelikeResult.n > 0)
+    if (userLikesUpdate.n > 0)
       res.status(201).json({ message: "update successful" });
   } else res.status(401).json({ message: "Some Error there" });
 };

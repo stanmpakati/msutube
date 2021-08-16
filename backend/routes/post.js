@@ -42,7 +42,7 @@ router.post("/post", checkAuth, savePostDetails);
 
 router.patch("/comment/:id", checkAuth, commentPost);
 
-router.patch("/like/:id", likePost);
+router.patch("/like/:id", checkAuth, likePost);
 
 router.patch(
   "/:id",

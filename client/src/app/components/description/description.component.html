@@ -6,9 +6,16 @@
   <div class="stats">
     <span class="stats-section">{{ details.views }} views</span>
     <span class="stats-section">
-      <mat-icon color="warn">{{
-        isLiked ? "favorite" : "favorite_border"
-      }}</mat-icon>
+      <button
+        mat-icon-button
+        color="warn"
+        aria-label="Button to toggle like on and of"
+        (click)="likeVideo()"
+      >
+        <mat-icon>
+          {{ isLiked ? "favorite" : "favorite_border" }}
+        </mat-icon>
+      </button>
       {{ details.likes }} likes
     </span>
     <span class="stats-section"><mat-icon>share</mat-icon>share</span>

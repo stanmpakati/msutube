@@ -20,9 +20,12 @@ export class DescriptionComponent implements OnInit {
       .subscribe((res) => (this.isLiked = res.isLiked));
   }
 
-  likeVideo(status: boolean) {
-    this.postService.likePost(this.details._id, status).subscribe((res) => {
-      if (res.isLiked) this.isLiked = res.isLiked;
-    });
+  likeVideo() {
+    this.isLiked = !this.isLiked;
+    this.postService
+      .likePost(this.details._id, !this.isLiked)
+      .subscribe((res) => {
+        if (res.isLiked) this.isLiked = res.isLiked;
+      });
   }
 }

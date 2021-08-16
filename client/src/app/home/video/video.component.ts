@@ -46,8 +46,8 @@ export class VideoComponent implements OnInit, OnDestroy {
             description: post.description,
             tags: post.tags,
             createdAt: post.createdAt,
-            views: 9,
-            likes: 1,
+            views: post.views,
+            likes: post.likes,
           };
           this.isLoading = false;
         });

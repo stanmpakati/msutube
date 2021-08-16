@@ -125,6 +125,8 @@ export class UploadComponent implements OnInit, OnDestroy {
       fileUrl: this.uploadService.getFileDestDetails.fileUrl,
       thumbnailUrl: this.uploadService.getFileDestDetails.thumbnailUrl,
       fileType: this.uploadService.getFileDestDetails.fileMimetype,
+      views: 0,
+      likes: 0,
     };
 
     this.uploadService.uploadFileDetails(filePost);

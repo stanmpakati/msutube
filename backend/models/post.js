@@ -23,8 +23,8 @@ const postSchema = mongoose.Schema(
     fileType: { type: String, required: true, trim: true },
     thumbnailUrl: { type: String, default: "" },
     tags: [{ type: String, trim: true }],
-    views: { type: Number },
-    likes: { type: Number },
+    views: { type: Number, default: 0 },
+    likes: { type: Number, default: 0 },
     citations: [
       {
         author: [{ type: String }],

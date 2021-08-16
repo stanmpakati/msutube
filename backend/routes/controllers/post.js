@@ -1,6 +1,7 @@
 // import getVideoDurationInSeconds from "get-video-duration";
 
 import Post from "../../models/post.js";
+import User from "../../models/user.js";
 import CommentSchema from "../../models/comment.js";
 
 export const uploadPost = (req, res) => {
@@ -91,19 +92,31 @@ export const deletePost = (req, res) => {};
 
 export const updatePost = (req, res) => {};
 
-export const likePost = (req, res) => {
-  Post.updateOne({ _id: req.params.id }, { $inc: { likes: 1 } }, { new: true })
-    .then((result) => {
-      console.log(result);
-      if (result.n > 0) res.status(201).json({ message: "update successful" });
-      else res.status(401).json({ message: "Not authorized" });
-    })
-    .catch((err) =>
-      res.status(500).json({ message: "Saving Post failed", error: err })
+export const likePost = async (req, res) => {
+  const updatelikeResult = await Post.updateOne(
+    { _id: req.params.id },
+    { $inc: { likes: 1 } },
+    { new: true }
+  );
+
+  console.log(updatelikeResult);
+
+  if (updatelikeResult.n > 0) {
+    // Update user's likes
+    const userLikesUpdate = await User.updateOne(
+      { _id: "60f1a1f941674bcac6c5a38f" },
+      { $push: { likedVideos: req.params.id } },
+      { new: true }
     );
+
+    console.log("user", userLikesUpdate);
+
+    if (updatelikeResult.n > 0)
+      res.status(201).json({ message: "update successful" });
+  } else res.status(401).json({ message: "Some Error there" });
 };
 
-export const commentPost = (req, res) => {
+export const commentPost = async (req, res) => {
   // Confirm identity of post
   Post.findById(req.params.id).then((file) => {
     if (file) console.log("found");

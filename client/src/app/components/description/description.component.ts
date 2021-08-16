@@ -25,7 +25,7 @@ export class DescriptionComponent implements OnInit {
     this.postService
       .likePost(this.details._id, !this.isLiked)
       .subscribe((res) => {
-        if (res.isLiked) this.isLiked = res.isLiked;
+        this.isLiked = res.isLiked;
       });
   }
 }

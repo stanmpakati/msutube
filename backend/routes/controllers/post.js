@@ -93,7 +93,6 @@ export const deletePost = (req, res) => {};
 export const updatePost = (req, res) => {};
 
 export const checkIfLiked = async (req, res) => {
-  console.log("params", req.params.id);
   const likedVids = await User.findById(req.userData.userId).select(
     "likedVideos"
   );
@@ -104,34 +103,85 @@ export const checkIfLiked = async (req, res) => {
 };
 
 export const likePost = async (req, res) => {
+  console.log("hit", req.params.id);
   // first verify if user has liked post before
-  const likedVids = await User.findById(req.params.id).select("likedVideos");
-
-  console.log("liked", likedVids);
-
-  if (likedVids.likedVideos.includes(req.params.id))
-    return res
-      .status(409)
-      .json({ message: "You have already liked this", isLiked: true });
-
-  // then Update liked results
-  const updatelikeResult = await Post.updateOne(
-    { _id: req.params.id },
-    { $inc: { likes: 1 } },
-    { new: true }
-  );
-
-  if (updatelikeResult.n > 0) {
-    // Update user's likes
-    const userLikesUpdate = await User.updateOne(
-      { _id: req.userData.userId },
-      { $push: { likedVideos: req.params.id } },
-      { new: true }
+  try {
+    const likedVids = await User.findById(req.userData.userId).select(
+      "likedVideos"
     );
 
-    if (userLikesUpdate.n > 0)
-      res.status(201).json({ message: "update successful", isLiked: true });
-  } else res.status(401).json({ message: "Some Error there", isLiked: false });
+    console.log("liked", likedVids);
+
+    // If already liked unlike and reduce likes
+    if (likedVids.likedVideos.includes(req.params.id)) {
+      console.log("includes");
+      // remove liked video
+      try {
+        const userLikesUpdate = await User.updateOne(
+          { _id: req.userData.userId },
+          { $pull: { likedVideos: req.params.id } },
+          { new: true }
+        );
+
+        if (userLikesUpdate.n > 0) {
+          // subtract likes
+          try {
+            const updatelikeResult = await Post.updateOne(
+              { _id: req.params.id },
+              { $inc: { likes: -1 } },
+              { new: true }
+            );
+
+            if (updatelikeResult.n > 0) {
+              // Respond unliked
+              console.log("unliked");
+              return res
+                .status(201)
+                .json({ message: "unliked", isLiked: false });
+            } else
+              return res
+                .status(401)
+                .json({ message: "Some Error there", isLiked: false });
+          } catch (e) {
+            console.log(e);
+          }
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      console.log("excludes");
+
+      // Else video not liked
+      // then Uadd to liked videos and increase likes
+      const userLikesUpdate = await User.updateOne(
+        { _id: req.userData.userId },
+        { $push: { likedVideos: req.params.id } },
+        { new: true }
+      );
+
+      if (userLikesUpdate.n > 0) {
+        const updatelikeResult = await Post.updateOne(
+          { _id: req.params.id },
+          { $inc: { likes: 1 } },
+          { new: true }
+        );
+
+        if (updatelikeResult.n > 0) {
+          console.log("liked");
+          // Update user's likes
+          return res
+            .status(201)
+            .json({ message: "update successful", isLiked: true });
+        } else
+          return res
+            .status(401)
+            .json({ message: "Some Error there", isLiked: false });
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const commentPost = async (req, res) => {
@@ -141,16 +191,16 @@ export const commentPost = async (req, res) => {
 
     console.log(req.userData.userId);
 
-    const comment = new CommentSchema({
-      comment: req.body.comment,
-      owner: req.userData.userId,
-    });
+    // const comment = new CommentSchema({
+    //   comment: req.body.comment,
+    //   owner: req.userData.userId,
+    // });
 
-    console.log(comment);
+    // console.log(comment);
 
-    person.friends.push(friend);
-    person.save(done);
+    // person.friends.push(friend);
+    // person.save(done);
 
-    Post.updateOne({ _id: req.params.id, creator: req.userData.userId }, post);
+    // Post.updateOne({ _id: req.params.id, creator: req.userData.userId }, post);
   });
 };

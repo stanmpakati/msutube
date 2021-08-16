@@ -52,7 +52,7 @@ export class PostService {
   likePost(postId: string, status: boolean) {
     return this.http.patch<{ message: string; isLiked: boolean }>(
       `${postsUrl}/like/${postId}`,
-      status
+      { status: status }
     );
   }
 }

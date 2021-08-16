@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Details } from 'src/app/_models/details.interface';
+import { PostService } from 'src/app/_services/post.service';
 
 @Component({
   selector: 'app-description',
@@ -9,7 +10,13 @@ import { Details } from 'src/app/_models/details.interface';
 export class DescriptionComponent implements OnInit {
   @Input() details!: Details;
 
-  constructor() {}
+  constructor(public postService: PostService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Todo: check if liked
+  }
+
+  likeVideo() {
+    this.postService.likePost(this.details._id);
+  }
 }

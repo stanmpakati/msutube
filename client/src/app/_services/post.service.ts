@@ -44,4 +44,10 @@ export class PostService {
   getPost(id: string) {
     return this.http.get<Post>(`${postsUrl}/${id}`);
   }
+
+  likePost(postId: string) {
+    return this.http.get<{ message: string; isLiked: boolean }>(
+      `${postsUrl}/like/${postId}`
+    );
+  }
 }

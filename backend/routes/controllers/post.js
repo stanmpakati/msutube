@@ -77,15 +77,20 @@ export const getPosts = (req, res) => {
     );
 };
 
-export const getPost = (req, res) => {
-  Post.findById(req.params.id)
-    .then((file) => {
-      if (file) res.status(200).json(file);
-      else res.status(404).json({ message: "Post not found" });
-    })
-    .catch((err) =>
-      res.status(500).json({ message: "Getting Post failed", error: err })
-    );
+export const getPost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if (post) {
+      // response
+      res.status(200).json(post);
+
+      // Updating views
+      post.updateOne({ $inc: { views: 1 } }, { new: true });
+    } else res.status(404).json({ message: "Post not found" });
+  } catch (err) {
+    res.status(500).json({ message: "Getting Post failed", error: err });
+  }
 };
 
 export const deletePost = (req, res) => {};
@@ -103,7 +108,6 @@ export const checkIfLiked = async (req, res) => {
 };
 
 export const likePost = async (req, res) => {
-  console.log("hit", req.params.id);
   // first verify if user has liked post before
   try {
     const likedVids = await User.findById(req.userData.userId).select(

@@ -39,8 +39,22 @@ const postSchema = mongoose.Schema(
         roleDetails: { type: String },
       },
     ],
-    // comments: { type: [CommentSchema], select: false },
     length: { type: Number },
+    // Comments
+    comments: {
+      type: [
+        {
+          comment: { type: String, required: true },
+          likes: { type: Number, required: true },
+          commenter: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+          },
+        },
+      ],
+      select: false,
+    },
   },
   { timestamps: true }
 );

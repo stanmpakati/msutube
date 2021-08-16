@@ -4,7 +4,7 @@ import cors from "cors";
 
 // import postRoutes from "./routes/posts.js";
 import userRoutes from "./routes/user.js";
-import videoRoutes from "./routes/videos.js";
+import postRoutes from "./routes/post.js";
 
 export const app = express();
 
@@ -31,4 +31,4 @@ app.get("/", (req, res) => res.send("Hello Weirdo, Your server is working"));
 
 // app.use("/api/posts", postRoutes);
 app.use("/api/user", userRoutes);
-app.use("/api/video", videoRoutes);
+app.use("/api/video", postRoutes);

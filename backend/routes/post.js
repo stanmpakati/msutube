@@ -10,7 +10,7 @@ import {
   updatePost,
   deletePost,
   savePostDetails,
-} from "./controllers/video.js";
+} from "./controllers/post.js";
 
 const router = express.Router();
 

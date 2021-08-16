@@ -57,11 +57,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.themeService.getTheme();
 
     // Todo remove later
-    // this.authService.loginUser({
-    //   email: 'stan@stan.com',
-    //   username: 'stanmpakati',
-    //   password: 'Test123.',
-    // });
+    this.authService.loginUser({
+      email: 'stan@stan.com',
+      username: 'stanmpakati',
+      password: 'Test123.',
+    });
   }
 
   ngOnDestroy() {

@@ -5,9 +5,12 @@
   <span class="mat-caption">{{ details.createdAt | date }}</span>
   <div class="stats">
     <span class="stats-section">{{ details.views }} views</span>
-    <span class="stats-section"
-      ><mat-icon>favorite_border</mat-icon>{{ details.likes }} likes</span
-    >
+    <span class="stats-section">
+      <mat-icon color="warn">{{
+        isLiked ? "favorite" : "favorite_border"
+      }}</mat-icon>
+      {{ details.likes }} likes
+    </span>
     <span class="stats-section"><mat-icon>share</mat-icon>share</span>
   </div>
 </div>

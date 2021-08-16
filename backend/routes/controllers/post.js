@@ -92,15 +92,24 @@ export const deletePost = (req, res) => {};
 
 export const updatePost = (req, res) => {};
 
-export const checkIfLiked = (req, res) => {};
+export const checkIfLiked = async (req, res) => {
+  console.log("params", req.params.id);
+  const likedVids = await User.findById(req.userData.userId).select(
+    "likedVideos"
+  );
+
+  if (likedVids.likedVideos.includes(req.params.id))
+    return res.status(200).json({ isLiked: true });
+  else return res.status(200).json({ isLiked: false });
+};
 
 export const likePost = async (req, res) => {
   // first verify if user has liked post before
   const likedVids = await User.findById(req.params.id).select("likedVideos");
 
-  console.log(likedVids);
+  console.log("liked", likedVids);
 
-  if (likedVids.includes(req.params.id))
+  if (likedVids.likedVideos.includes(req.params.id))
     return res
       .status(409)
       .json({ message: "You have already liked this", isLiked: true });

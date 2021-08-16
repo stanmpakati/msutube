@@ -45,9 +45,14 @@ export class PostService {
     return this.http.get<Post>(`${postsUrl}/${id}`);
   }
 
-  likePost(postId: string) {
-    return this.http.get<{ message: string; isLiked: boolean }>(
-      `${postsUrl}/like/${postId}`
+  getIsLiked(postId: string) {
+    return this.http.get<{ isLiked: boolean }>(`${postsUrl}/like/${postId}`);
+  }
+
+  likePost(postId: string, status: boolean) {
+    return this.http.patch<{ message: string; isLiked: boolean }>(
+      `${postsUrl}/like/${postId}`,
+      status
     );
   }
 }

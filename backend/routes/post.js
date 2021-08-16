@@ -7,6 +7,7 @@ import {
   commentPost,
   likePost,
   uploadPost,
+  checkIfLiked,
   getPost,
   getPosts,
   updatePost,
@@ -41,6 +42,8 @@ router.post(
 router.post("/post", checkAuth, savePostDetails);
 
 router.patch("/comment/:id", checkAuth, commentPost);
+
+router.get("/like/:id", checkAuth, checkIfLiked);
 
 router.patch("/like/:id", checkAuth, likePost);
 

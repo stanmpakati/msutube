@@ -9,14 +9,20 @@ import { PostService } from 'src/app/_services/post.service';
 })
 export class DescriptionComponent implements OnInit {
   @Input() details!: Details;
+  isLiked!: boolean;
 
-  constructor(public postService: PostService) {}
+  constructor(private postService: PostService) {}
 
   ngOnInit(): void {
-    // Todo: check if liked
+    // Todo: check if liked if logged in
+    this.postService
+      .getIsLiked(this.details._id)
+      .subscribe((res) => (this.isLiked = res.isLiked));
   }
 
-  likeVideo() {
-    this.postService.likePost(this.details._id);
+  likeVideo(status: boolean) {
+    this.postService.likePost(this.details._id, status).subscribe((res) => {
+      if (res.isLiked) this.isLiked = res.isLiked;
+    });
   }
 }

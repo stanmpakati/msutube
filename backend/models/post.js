@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 
 const postSchema = mongoose.Schema(
   {
-    title: { type: String, required: true },
+    title: { type: String, required: true, trim: true },
     description: { type: String, required: true },
     fileUrl: { type: String, required: true },
-    fileType: { type: String, required: true },
+    fileType: { type: String, required: true, trim: true },
     thumbnailUrl: { type: String, default: "" },
-    tags: [{ type: String }],
+    tags: [{ type: String, trim: true }],
     views: { type: Number },
     citations: [
       {

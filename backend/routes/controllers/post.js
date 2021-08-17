@@ -86,7 +86,11 @@ export const getPost = async (req, res) => {
       res.status(200).json(post);
 
       // Updating views
-      post.updateOne({ $inc: { views: 1 } }, { new: true });
+      Post.updateOne(
+        { _id: req.params.id },
+        { $inc: { views: 1 } },
+        { new: true }
+      );
     } else res.status(404).json({ message: "Post not found" });
   } catch (err) {
     res.status(500).json({ message: "Getting Post failed", error: err });

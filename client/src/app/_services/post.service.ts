@@ -45,6 +45,10 @@ export class PostService {
     return this.http.get<Post>(`${postsUrl}/${id}`);
   }
 
+  addView(id: string) {
+    return this.http.get<Post>(`${postsUrl}/view/${id}`);
+  }
+
   getIsLiked(postId: string) {
     return this.http.get<{ isLiked: boolean }>(`${postsUrl}/like/${postId}`);
   }

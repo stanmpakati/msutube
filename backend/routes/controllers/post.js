@@ -111,6 +111,28 @@ export const checkIfLiked = async (req, res) => {
   else return res.status(200).json({ isLiked: false });
 };
 
+export const viewPost = async (req, res) => {
+  try {
+    const updateViewResult = await Post.updateOne(
+      { _id: req.params.id },
+      { $inc: { views: 1 } },
+      { new: true }
+    );
+
+    if (updateViewResult.n > 0) {
+      // Update user's likes
+      return res
+        .status(201)
+        .json({ message: "update successful", isViewed: true });
+    } else
+      return res
+        .status(401)
+        .json({ message: "Some Error there", isViewed: false });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const likePost = async (req, res) => {
   // first verify if user has liked post before
   try {
@@ -118,11 +140,8 @@ export const likePost = async (req, res) => {
       "likedVideos"
     );
 
-    console.log("liked", likedVids);
-
     // If already liked unlike and reduce likes
     if (likedVids.likedVideos.includes(req.params.id)) {
-      console.log("includes");
       // remove liked video
       try {
         const userLikesUpdate = await User.updateOne(
@@ -142,7 +161,6 @@ export const likePost = async (req, res) => {
 
             if (updatelikeResult.n > 0) {
               // Respond unliked
-              console.log("unliked");
               return res
                 .status(201)
                 .json({ message: "unliked", isLiked: false });
@@ -158,8 +176,6 @@ export const likePost = async (req, res) => {
         console.log(e);
       }
     } else {
-      console.log("excludes");
-
       // Else video not liked
       // then Uadd to liked videos and increase likes
       const userLikesUpdate = await User.updateOne(
@@ -176,7 +192,6 @@ export const likePost = async (req, res) => {
         );
 
         if (updatelikeResult.n > 0) {
-          console.log("liked");
           // Update user's likes
           return res
             .status(201)

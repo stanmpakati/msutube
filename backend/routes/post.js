@@ -13,6 +13,7 @@ import {
   updatePost,
   deletePost,
   savePostDetails,
+  viewPost,
 } from "./controllers/post.js";
 
 const router = express.Router();
@@ -42,6 +43,8 @@ router.post(
 router.post("/post", checkAuth, savePostDetails);
 
 router.patch("/comment/:id", checkAuth, commentPost);
+
+router.get("/view/:id", viewPost);
 
 router.get("/like/:id", checkAuth, checkIfLiked);
 

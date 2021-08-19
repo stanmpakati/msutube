@@ -51,6 +51,11 @@ export class VideoComponent implements OnInit, OnDestroy {
           };
           this.isLoading = false;
         });
+
+        // Add view after 10s
+        setTimeout(() => {
+          this.postService.addView(id).subscribe(() => this.details.views++);
+        }, 5000);
       } else {
         this.router.navigate(['404']);
       }

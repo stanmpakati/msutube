@@ -208,22 +208,28 @@ export const likePost = async (req, res) => {
 };
 
 export const commentPost = async (req, res) => {
-  // Confirm identity of post
-  Post.findById(req.params.id).then((file) => {
-    if (file) console.log("found");
+  console.log("hit");
+  // Make comment
+  const comment = {
+    owner: req.userData.userId,
+    likes: 0,
+    comment: req.body.comment,
+  };
 
-    console.log(req.userData.userId);
+  // Update comment
+  const updatelikeResult = await Post.updateOne(
+    { _id: req.params.id },
+    { $push: { comments: comment } },
+    { new: true }
+  );
 
-    // const comment = new CommentSchema({
-    //   comment: req.body.comment,
-    //   owner: req.userData.userId,
-    // });
-
-    // console.log(comment);
-
-    // person.friends.push(friend);
-    // person.save(done);
-
-    // Post.updateOne({ _id: req.params.id, creator: req.userData.userId }, post);
-  });
+  if (updatelikeResult.n > 0) {
+    // Update post's comments
+    return res
+      .status(201)
+      .json({ message: "update successful", comment: comment });
+  } else
+    return res
+      .status(401)
+      .json({ message: "Some Error there", isLiked: false });
 };

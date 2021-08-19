@@ -59,4 +59,11 @@ export class PostService {
       { status: status }
     );
   }
+
+  addComment(postId: string, comment: String) {
+    return this.http.post<{ message: string; comment: Comment }>(
+      `${postsUrl}/comment/${postId}`,
+      { comment: comment }
+    );
+  }
 }

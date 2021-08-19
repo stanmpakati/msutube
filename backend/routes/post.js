@@ -42,7 +42,7 @@ router.post(
 
 router.post("/post", checkAuth, savePostDetails);
 
-router.patch("/comment/:id", checkAuth, commentPost);
+router.post("/comment/:id", checkAuth, commentPost);
 
 router.get("/view/:id", viewPost);
 

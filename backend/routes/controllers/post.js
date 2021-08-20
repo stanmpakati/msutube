@@ -207,6 +207,32 @@ export const likePost = async (req, res) => {
   }
 };
 
+export const getComments = async (req, res) => {
+  const pageSize = +req.query.pagesize;
+  const currentPage = +req.query.page;
+
+  const commentsQuery = Post.findById(req.params.id).select("comments");
+
+  let fetchedPosts;
+  let count;
+
+  // Limit query
+  if (pageSize && currentPage) {
+    commentsQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
+  }
+
+  commentsQuery
+    .then((documents) => {
+      fetchedPosts = documents;
+    })
+    .then((count) => {
+      res.status(200).json({ posts: fetchedPosts, maxPosts: 100 });
+    })
+    .catch((err) =>
+      res.status(500).json({ message: "Fetching Posts failed", error: err })
+    );
+};
+
 export const commentPost = async (req, res) => {
   console.log("hit");
   // Make comment

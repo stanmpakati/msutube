@@ -5,6 +5,7 @@ import checkAuth from "../middleware/check-auth.js";
 import { storage, videoStorage } from "../middleware/multer.js";
 import {
   commentPost,
+  getComments,
   likePost,
   uploadPost,
   checkIfLiked,
@@ -41,6 +42,8 @@ router.post(
 );
 
 router.post("/post", checkAuth, savePostDetails);
+
+router.get("/comment/:id", getComments);
 
 router.post("/comment/:id", checkAuth, commentPost);
 

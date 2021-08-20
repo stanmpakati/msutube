@@ -213,7 +213,7 @@ export const getComments = async (req, res) => {
 
   const commentsQuery = Post.findById(req.params.id).select("comments");
 
-  let fetchedPosts;
+  let fetchedComments;
   let count;
 
   // Limit query
@@ -223,13 +223,13 @@ export const getComments = async (req, res) => {
 
   commentsQuery
     .then((documents) => {
-      fetchedPosts = documents;
+      fetchedComments = documents;
     })
     .then((count) => {
-      res.status(200).json({ posts: fetchedPosts, maxPosts: 100 });
+      res.status(200).json({ comments: fetchedComments, maxComments: 100 });
     })
     .catch((err) =>
-      res.status(500).json({ message: "Fetching Posts failed", error: err })
+      res.status(500).json({ message: "Fetching Comments failed", error: err })
     );
 };
 

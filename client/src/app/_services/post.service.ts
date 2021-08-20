@@ -60,6 +60,12 @@ export class PostService {
     );
   }
 
+  getComments(postId: string) {
+    return this.http.get<{ maxComments: number; comment: Comment }>(
+      `${postsUrl}/comment/${postId}`
+    );
+  }
+
   addComment(postId: string, comment: String) {
     return this.http.post<{ message: string; comment: Comment }>(
       `${postsUrl}/comment/${postId}`,

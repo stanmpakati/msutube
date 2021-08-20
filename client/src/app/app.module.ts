@@ -42,6 +42,7 @@ import { SuggestionsComponent } from './components/suggestions/suggestions.compo
 import { OwnerComponentComponent } from './components/owner-component/owner-component.component';
 import { CitationComponent } from './components/citation/citation.component';
 import { SharedModule } from './shared/shared.module';
+import { CommentComponent } from './components/comments/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { SharedModule } from './shared/shared.module';
     SuggestionsComponent,
     OwnerComponentComponent,
     CitationComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,

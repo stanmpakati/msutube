@@ -214,7 +214,6 @@ export const getComments = async (req, res) => {
   const commentsQuery = Post.findById(req.params.id).select("comments");
 
   let fetchedComments;
-  let count;
 
   // Limit query
   if (pageSize && currentPage) {

@@ -1,6 +1,7 @@
 <hr />
-<div class="comment-container">
-  <div class="circle-border">
-    <img src="" alt="" />
-  </div>
+<div class="comment-container" fxFlexAli>
+  <img
+    [src]="user.profilePicUrl ? user.profilePicUrl : '/assets/vectors/icon.png'"
+    [alt]="user.username + 'profile picture'"
+  />
 </div>

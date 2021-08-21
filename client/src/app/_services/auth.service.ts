@@ -37,6 +37,10 @@ export class AuthService {
     return this.user;
   }
 
+  getUserId() {
+    return localStorage.getItem('userId');
+  }
+
   getUsername() {
     return localStorage.getItem('username');
   }

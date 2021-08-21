@@ -1,4 +1,10 @@
-<textarea name="" id="" cols="30" rows="10"></textarea>
+<form [formGroup]="commentForm" (ngSubmit)="commentSubmit()">
+  <mat-form-field class="w-100">
+    <mat-label>What do you think about the video...</mat-label>
+    <textarea matInput rows="2" formControlName="comment"></textarea>
+  </mat-form-field>
+  <button mat-button>Submit</button>
+</form>
 
 <!-- Comments -->
 <div *ngIf="!isLoading">

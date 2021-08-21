@@ -233,7 +233,6 @@ export const getComments = async (req, res) => {
 };
 
 export const commentPost = async (req, res) => {
-  console.log("hit");
   // Make comment
   const comment = {
     owner: req.userData.userId,

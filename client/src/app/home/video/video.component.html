@@ -3,7 +3,7 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 
 <!-- Container -->
-<div *ngIf="!isLoading" fxAlign.lt-sm="column">
+<div *ngIf="!isLoading" fxAlign.lt-sm="column" fxHide.gt-sm>
   <div class="video">
     <!-- Todo put autoplay -->
     <video preload="auto" [poster]="video.thumbnailUrl" controls>
@@ -62,4 +62,40 @@
       </mat-tab>
     </mat-tab-group>
   </div>
+</div>
+
+<!-- ----------------------For Desktop ------------------------------------ -->
+<div *ngIf="!isLoading" fxAlign="row" fxHide.lt-sm>
+  <!-- Credits -->
+  <app-credits
+    fxFlex="20%"
+    [ngClass]="{
+      'dark-background': isDarkMode,
+      'light-background': !isDarkMode
+    }"
+    [owners]="video.owners"
+    [citations]="video.citations"
+    [contributers]="video.contributers"
+  ></app-credits>
+
+  <!-- Main Body -->
+  <div class="mainContent" fxFlex="60%">
+    <!-- Video Screen -->
+    <div class="video">
+      <!-- Todo put autoplay -->
+      <video preload="auto" [poster]="video.thumbnailUrl" controls>
+        <source [src]="video.fileUrl" type="video/mp4" />
+        Sorry Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- Description section -->
+    <app-description [details]="details"></app-description>
+
+    <!-- Comments section -->
+    <app-comments></app-comments>
+  </div>
+
+  <!-- Suggestions -->
+  <app-suggestions fxFlex="20%"></app-suggestions>
 </div>

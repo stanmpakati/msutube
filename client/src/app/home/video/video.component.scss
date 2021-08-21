@@ -26,3 +26,8 @@ video {
 ::ng-deep .mat-tab-header-pagination {
   display: none !important;
 }
+
+// For larger screens
+.mainContent {
+  padding: 0px 20px;
+}

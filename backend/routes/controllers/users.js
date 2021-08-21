@@ -51,7 +51,7 @@ export const searchUser = (req, res) => {
     $or: [
       { username: req.body.query.toLowerCase() },
       { regnumber: req.body.query.toLowerCase() },
-      { _id: req.body.query.toLowerCase() },
+      { _id: req.body.query },
     ],
   })
     .then((user) => {

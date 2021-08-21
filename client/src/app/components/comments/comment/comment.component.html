@@ -1,7 +1,25 @@
 <hr />
-<div class="comment-container" fxFlexAli>
+<div class="comment-container" fxLayout="row" fxFlexAlign="">
   <img
     [src]="user.profilePicUrl ? user.profilePicUrl : '/assets/vectors/icon.png'"
     [alt]="user.username + 'profile picture'"
   />
+  <div fxLayout="column">
+    <div fxLayout="row">
+      <span>{{ user.username }}</span>
+      <span class="mat-caption">{{ timeElapsed }}</span>
+    </div>
+  </div>
+  <p>{{ comment.comment }}</p>
+  <button
+    mat-icon-button
+    color="warn"
+    aria-label="Button to toggle like on and of"
+    (click)="likeComment()"
+  >
+    <mat-icon>
+      {{ isLiked ? "favorite" : "favorite_border" }}
+    </mat-icon>
+    {{ comment.likes }} likes
+  </button>
 </div>

@@ -9,17 +9,17 @@
       <span>{{ user.username }}</span>
       <span class="mat-caption">{{ timeElapsed }}</span>
     </div>
+    <p>{{ comment.comment }}</p>
+    <button
+      mat-icon-button
+      color="warn"
+      aria-label="Button to toggle like on and of"
+      (click)="likeComment()"
+    >
+      <mat-icon>
+        {{ isLiked ? "favorite" : "favorite_border" }}
+      </mat-icon>
+      {{ comment.likes }} likes
+    </button>
   </div>
-  <p>{{ comment.comment }}</p>
-  <button
-    mat-icon-button
-    color="warn"
-    aria-label="Button to toggle like on and of"
-    (click)="likeComment()"
-  >
-    <mat-icon>
-      {{ isLiked ? "favorite" : "favorite_border" }}
-    </mat-icon>
-    {{ comment.likes }} likes
-  </button>
 </div>

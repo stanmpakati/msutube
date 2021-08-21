@@ -222,7 +222,7 @@ export const getComments = async (req, res) => {
 
   commentsQuery
     .then((documents) => {
-      fetchedComments = documents;
+      fetchedComments = documents.comments;
     })
     .then((count) => {
       res.status(200).json({ comments: fetchedComments, maxComments: 100 });

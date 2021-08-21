@@ -5,21 +5,20 @@
     [alt]="user.username + 'profile picture'"
   />
   <div fxLayout="column">
-    <div fxLayout="row">
-      <span>{{ user.username }}</span>
-      <span class="mat-caption">{{ timeElapsed }}</span>
+    <div fxLayout="row" fxFlexAlign="end end">
+      <span class="tx-500">{{ user.username }} </span>
+      <span class="mat-caption"> {{ timeElapsed }}</span>
     </div>
     <p>{{ comment.comment }}</p>
     <button
       mat-icon-button
-      color="warn"
       aria-label="Button to toggle like on and of"
       (click)="likeComment()"
     >
-      <mat-icon>
+      <mat-icon color="warn">
         {{ isLiked ? "favorite" : "favorite_border" }}
       </mat-icon>
-      {{ comment.likes }} likes
+      {{ comment.likes }}
     </button>
   </div>
 </div>

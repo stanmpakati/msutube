@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { Post } from '../_models/post';
-import { environment } from '../../environments/environment';
-import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+
+import { environment } from '../../environments/environment';
+
+import { Post } from '../_models/post';
 import { Thumbnail } from '../_models/thumbnail';
+import { Comment } from '../_models/comment.interface';
 
 const postsUrl = `${environment.host}/video`;
 
@@ -61,7 +61,7 @@ export class PostService {
   }
 
   getComments(postId: string) {
-    return this.http.get<{ maxComments: number; comment: Comment }>(
+    return this.http.get<{ maxComments: number; comments: Comment[] }>(
       `${postsUrl}/comment/${postId}`
     );
   }

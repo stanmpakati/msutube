@@ -1,1 +1,12 @@
 <textarea name="" id="" cols="30" rows="10"></textarea>
+
+<!-- Comments -->
+<div *ngIf="!isLoading">
+  <app-comment
+    *ngFor="let comment of comments"
+    [comment]="comment"
+  ></app-comment>
+</div>
+
+<!-- Loading spinner -->
+<mat-spinner *ngIf="isLoading"></mat-spinner>

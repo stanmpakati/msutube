@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { values } from 'lodash';
 import { FullUser } from '../_models/user-details';
 import { ThemeService } from '../_services/theme.service';
 import { UserService } from '../_services/user.service';
@@ -12,6 +13,10 @@ import { UserService } from '../_services/user.service';
 export class ProfileComponent implements OnInit {
   user!: FullUser;
   isDarkMode!: boolean;
+  isLoading = true;
+  videos: string[] = [];
+  pics: string[] = [];
+  audio: string[] = [];
 
   constructor(
     private userService: UserService,
@@ -33,6 +38,13 @@ export class ProfileComponent implements OnInit {
         this.userService.getUser(id).subscribe((res) => {
           this.user = { ...res.user };
           console.log(this.user);
+
+          res.user.uploadedPosts?.forEach((val) => {
+            if (val.fileType.includes('video')) this.videos.push(val._id);
+            else if (val.fileType.includes('audio')) this.audio.push(val._id);
+            if (val.fileType.includes('image')) this.pics.push(val._id);
+            this.isLoading = false;
+          });
         });
       } else {
         this.router.navigate(['404']);

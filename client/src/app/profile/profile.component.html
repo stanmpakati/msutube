@@ -1,5 +1,6 @@
 <app-navbar [displayNav]="false"></app-navbar>
 <div
+  *ngIf="!isLoading"
   class="container"
   fxLayout="row"
   fxLayout.lt-md="column"
@@ -27,11 +28,15 @@
 
     <!-- Shows what content a person has posted -->
     <div class="content-icons">
-      <span class="libraries"><mat-icon>video_library</mat-icon> 4 Videos</span>
+      <span class="libraries"
+        ><mat-icon>video_library</mat-icon> {{ videos.length }} Videos</span
+      >
       <span class="libraries">
-        <mat-icon>photo_library</mat-icon> 15 Pictures
+        <mat-icon>photo_library</mat-icon> {{ pics.length }} Pictures
       </span>
-      <span class="libraries"><mat-icon>library_music</mat-icon> 1 Audio</span>
+      <span class="libraries"
+        ><mat-icon>library_music</mat-icon> {{ audio.length }} Audio</span
+      >
     </div>
 
     <!-- Links to various people's social media handles -->

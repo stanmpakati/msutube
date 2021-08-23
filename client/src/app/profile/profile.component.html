@@ -91,7 +91,9 @@
           <ng-template mat-tab-label>
             <mat-icon>video_library</mat-icon> Videos
           </ng-template>
-          <ng-template matTabContent> Vids </ng-template>
+          <ng-template matTabContent>
+            <app-profile-videos [vids]="videos"></app-profile-videos>
+          </ng-template>
         </mat-tab>
         <!-- Music tab group -->
         <mat-tab>

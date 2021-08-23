@@ -72,10 +72,29 @@ export const getPosts = (req, res) => {
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
   const fileType = req.query.filetype;
+  const postIds = req.query.ids;
+  console.log(req.query);
 
-  const fileQuery = Post.find({ fileType: { $regex: fileType } }).select(
-    "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
-  );
+  // To be Updated with search query
+  let fileQuery;
+
+  if (postIds && postIds !== "undefined") {
+    console.log("on post", postIds);
+    // limit to ids in the query
+    fileQuery = Post.find({ fileType: { $regex: fileType } })
+      .where("_id")
+      .in(postIds)
+      .select(
+        "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
+      );
+  } else {
+    console.log("not on post");
+    // No Limit
+    fileQuery = Post.find({ fileType: { $regex: fileType } }).select(
+      "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
+    );
+  }
+
   let fetchedPosts;
 
   if (pageSize && currentPage) {

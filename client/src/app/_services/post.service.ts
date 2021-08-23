@@ -18,8 +18,13 @@ export class PostService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getPosts(postsPerPage: number, currentPage: number, fileType?: string) {
-    const queryParams = `?pagesize=${postsPerPage}&page=${currentPage}&filetype=${fileType}`;
+  getPosts(
+    postsPerPage: number,
+    currentPage: number,
+    fileType?: string,
+    ids?: string[]
+  ) {
+    let queryParams = `?pagesize=${postsPerPage}&page=${currentPage}&filetype=${fileType}&ids=${ids}`;
     return this.http.get<{ posts: Thumbnail[]; maxPosts: number }>(
       `${postsUrl}${queryParams}`
     );

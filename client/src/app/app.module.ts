@@ -43,6 +43,7 @@ import { OwnerComponentComponent } from './components/owner-component/owner-comp
 import { CitationComponent } from './components/citation/citation.component';
 import { SharedModule } from './shared/shared.module';
 import { CommentComponent } from './components/comments/comment/comment.component';
+import { ProfileVideosComponent } from './profile/profile-videos/profile-videos.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { CommentComponent } from './components/comments/comment/comment.componen
     OwnerComponentComponent,
     CitationComponent,
     CommentComponent,
+    ProfileVideosComponent,
   ],
   imports: [
     BrowserModule,

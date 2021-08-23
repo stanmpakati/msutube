@@ -188,9 +188,7 @@ export const login = (req, res) => {
     })
     .then((result) => {
       // Stop function from continuing when error occured
-      console.log("something here");
       if (errorState) return;
-      console.log("something else here");
 
       if (!loggedInUser)
         if (!result)

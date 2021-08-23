@@ -14,11 +14,12 @@ export class CommentComponent implements OnInit {
   user!: User;
   isLoading = false;
   timeElapsed!: string;
-  isLiked = false;
+  isLiked!: boolean;
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.timeElapsed = timeAgo(this.comment.createdAt);
 
     this.userService.getUser(this.comment.owner).subscribe((res) => {

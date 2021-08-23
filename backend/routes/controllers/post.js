@@ -25,7 +25,6 @@ export const uploadPost = (req, res) => {
 export const savePostDetails = (req, res) => {
   // Todo undo user given null id
   // const {recievedPost} = {}
-  console.log("body", req.body);
   delete req.body._id;
   const post = new Post({
     ...req.body,
@@ -35,7 +34,6 @@ export const savePostDetails = (req, res) => {
   post
     .save()
     .then((createdPost) => {
-      console.log("created post", createdPost);
       res.status(201).json({
         message: "201 message idiot, what else do you want from me?",
         post: {

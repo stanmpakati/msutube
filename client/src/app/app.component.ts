@@ -58,8 +58,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Todo remove later
     this.authService.loginUser({
-      email: 'stan@stan.com',
-      username: 'stanmpakati',
+      email: 'test@test.com',
+      username: 'testuser',
       password: 'Test123.',
     });
   }

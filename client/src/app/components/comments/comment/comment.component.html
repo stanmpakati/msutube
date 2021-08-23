@@ -1,12 +1,14 @@
 <hr />
-<div class="comment-container" fxLayout="row" fxFlexAlign="">
+<div *ngIf="isLoading" class="comment-container" fxLayout="row" fxFlexAlign="">
   <img
-    [src]="user.profilePicUrl ? user.profilePicUrl : '/assets/vectors/icon.png'"
-    [alt]="user.username + 'profile picture'"
+    [src]="
+      user?.profilePicUrl ? user.profilePicUrl : '/assets/vectors/icon.png'
+    "
+    [alt]="user?.username + 'profile picture'"
   />
   <div fxLayout="column">
     <div fxLayout="row" fxFlexAlign="end end">
-      <span class="tx-500">{{ user.username }} </span>
+      <span class="tx-500">{{ user?.username }} </span>
       <span class="mat-caption"> {{ timeElapsed }}</span>
     </div>
     <p>{{ comment.comment }}</p>

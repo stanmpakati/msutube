@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 
 import User from "../../models/user.js";
 
@@ -27,7 +28,6 @@ export const getEmail = (req, res) => {
     ],
   })
     .then((email) => {
-      console.log(email);
       if (email.length !== 0) return res.status(200).json({ message: "Found" });
       else res.status(200).json({ message: "Not found" });
     })
@@ -39,7 +39,6 @@ export const getEmail = (req, res) => {
 // --------------------------------------------------Search User--------------------------------------
 export const searchUser = (req, res) => {
   // To search for a user in the database
-  console.log(req.body.query);
 
   // Check is there is a query parameter
   if (!req.body.query)
@@ -47,11 +46,16 @@ export const searchUser = (req, res) => {
       .status(400)
       .json({ message: "Sorry there is no query parameter" });
 
+  let id = new mongoose.Types.ObjectId("000000000000000000000000");
+
+  if (mongoose.Types.ObjectId.isValid(req.body.query))
+    id = mongoose.Types.ObjectId(req.body.query);
+
   User.findOne({
     $or: [
       { username: req.body.query.toLowerCase() },
       { regnumber: req.body.query.toLowerCase() },
-      { _id: req.body.query },
+      { _id: id },
     ],
   })
     .then((user) => {
@@ -134,8 +138,6 @@ export const signup = (req, res) => {
           password: hash,
           profilePicUrl: ppPath,
         });
-
-        console.log(user);
 
         // Save user
         user

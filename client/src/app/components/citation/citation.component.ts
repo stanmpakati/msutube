@@ -11,7 +11,5 @@ export class CitationComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.citation);
-  }
+  ngOnInit(): void {}
 }

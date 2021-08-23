@@ -4,7 +4,7 @@ import Post from "../../models/post.js";
 import User from "../../models/user.js";
 import CommentSchema from "../../models/comment.js";
 
-export const uploadPost = (req, res) => {
+export const uploadPost = async (req, res) => {
   const url = req.protocol + "://" + req.get("host");
   const fileType = req.files.file[0].mimetype;
   // console.log(getVideoDurationInSeconds(files.file[0]));
@@ -31,9 +31,37 @@ export const savePostDetails = (req, res) => {
     contributers: req.body.contributers,
   });
 
+  let createdPost;
+
   post
     .save()
-    .then((createdPost) => {
+    .then((newPost) => {
+      // Update created post value
+      createdPost = newPost;
+
+      // Add post to all users
+      // Iterate through all owners
+      post.owners.forEach(async (owner) => {
+        // Push post._id to record
+        const updatelikeResult = await User.updateOne(
+          { username: owner },
+          {
+            $push: {
+              uploadedPosts: { _id: post._id, fileType: post.fileType },
+            },
+          },
+          { new: true }
+        );
+
+        if (updatelikeResult.n > 0) {
+          console.log("saved to user");
+        } else
+          return res
+            .status(401)
+            .json({ message: "Some Error there", isLiked: false });
+      });
+    })
+    .then(() => {
       res.status(201).json({
         message: "201 message idiot, what else do you want from me?",
         post: {
@@ -41,6 +69,7 @@ export const savePostDetails = (req, res) => {
         },
       });
     })
+    .then(() => {})
     .catch((err) => {
       res.status(500).json({ message: "Saving Post failed", error: err });
       console.log(err);

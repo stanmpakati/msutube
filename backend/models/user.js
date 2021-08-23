@@ -26,16 +26,16 @@ const userSchema = mongoose.Schema({
     ref: "Post",
     select: false,
   },
-  likedImages: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "Post",
-    select: false,
-  },
-  likedAudio: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "Post",
-    select: false,
-  },
+  uploadedPosts: [
+    {
+      _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post",
+      },
+      fileType: String,
+    },
+  ],
+  select: false,
 });
 
 userSchema.plugin(uniqueValidator);

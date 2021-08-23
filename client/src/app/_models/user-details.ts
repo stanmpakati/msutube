@@ -10,4 +10,6 @@ export interface FullUser {
   instagramLink?: string;
   twitterLink?: string;
   whatsappLink?: string;
+  uploadedPosts?: { _id: string; fileType: string }[];
+  contributedPosts?: { _id: string; fileType: string }[];
 }

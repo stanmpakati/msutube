@@ -43,22 +43,13 @@ export const savePostDetails = (req, res) => {
       // Iterate through all owners
       post.owners.forEach(async (owner) => {
         // Push post._id to record
-        const updatelikeResult = await User.updateOne(
-          { username: owner },
-          {
-            $push: {
-              uploadedPosts: { _id: post._id, fileType: post.fileType },
-            },
-          },
-          { new: true }
-        );
+        addOwnedPost(owner, post._id, post.fileType);
+      });
 
-        if (updatelikeResult.n > 0) {
-          console.log("saved to user");
-        } else
-          return res
-            .status(401)
-            .json({ message: "Some Error there", isLiked: false });
+      // Add post to all contributers
+      post.contributers.forEach(async (contributer) => {
+        // Push post._id to record
+        addContributedPost(contributer.user.username, post._id, post.fileType);
       });
     })
     .then(() => {
@@ -279,6 +270,44 @@ export const commentPost = async (req, res) => {
     return res
       .status(201)
       .json({ message: "update successful", comment: comment });
+  } else
+    return res
+      .status(401)
+      .json({ message: "Some Error there", isLiked: false });
+};
+
+const addOwnedPost = async (owner, id, fileType) => {
+  const updatelikeResult = await User.updateOne(
+    { username: owner },
+    {
+      $push: {
+        uploadedPosts: { _id: id, fileType: fileType },
+      },
+    },
+    { new: true }
+  );
+
+  if (updatelikeResult.n > 0) {
+    console.log("saved to user");
+  } else
+    return res
+      .status(401)
+      .json({ message: "Some Error there", isLiked: false });
+};
+
+const addContributedPost = async (contributer, id, fileType) => {
+  const updatelikeResult = await User.updateOne(
+    { username: contributer },
+    {
+      $push: {
+        contributedPosts: { _id: id, fileType: fileType },
+      },
+    },
+    { new: true }
+  );
+
+  if (updatelikeResult.n > 0) {
+    console.log("saved to user");
   } else
     return res
       .status(401)

@@ -46,13 +46,12 @@ a {
   img {
     height: 80%;
   }
+}
 
+@media only screen and (min-width: 960px) {
   .libraries {
     white-space: nowrap;
     width: 100%;
     display: block;
   }
-}
-
-@media only screen and (min-width: 960px) {
 }

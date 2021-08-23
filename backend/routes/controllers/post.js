@@ -39,6 +39,9 @@ export const savePostDetails = (req, res) => {
       // Update created post value
       createdPost = newPost;
 
+      console.log("owners", post.owners);
+      console.log("cont", post.contributers);
+
       // Add post to all users
       // Iterate through all owners
       post.owners.forEach(async (owner) => {

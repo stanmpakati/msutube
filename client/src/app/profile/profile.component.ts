@@ -14,9 +14,11 @@ export class ProfileComponent implements OnInit {
   user!: FullUser;
   isDarkMode!: boolean;
   isLoading = true;
-  videos: string[] = [];
-  pics: string[] = [];
-  audio: string[] = [];
+  owned: { [key: string]: string[] } = {
+    videos: [],
+    pics: [],
+    audio: [],
+  };
   contributed: { [key: string]: string[] } = {
     videos: [],
     pics: [],
@@ -45,9 +47,10 @@ export class ProfileComponent implements OnInit {
           console.log(this.user);
 
           res.user.uploadedPosts?.forEach((val) => {
-            if (val.fileType.includes('video')) this.videos.push(val._id);
-            else if (val.fileType.includes('audio')) this.audio.push(val._id);
-            if (val.fileType.includes('image')) this.pics.push(val._id);
+            if (val.fileType.includes('video')) this.owned.videos.push(val._id);
+            else if (val.fileType.includes('audio'))
+              this.owned.audio.push(val._id);
+            if (val.fileType.includes('image')) this.owned.pics.push(val._id);
           });
 
           res.user.contributedPosts?.forEach((val) => {

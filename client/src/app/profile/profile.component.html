@@ -28,15 +28,24 @@
 
     <!-- Shows what content a person has posted -->
     <div class="content-icons">
-      <span class="libraries"
-        ><mat-icon>video_library</mat-icon> {{ videos.length }} Videos</span
-      >
       <span class="libraries">
-        <mat-icon>photo_library</mat-icon> {{ pics.length }} Pictures
+        <mat-icon>video_library</mat-icon> {{ owned.videos.length }} Videos
       </span>
-      <span class="libraries"
-        ><mat-icon>library_music</mat-icon> {{ audio.length }} Audio</span
-      >
+      <span class="libraries">
+        <mat-icon>photo_library</mat-icon> {{ owned.pics.length }} Pictures
+      </span>
+      <span class="libraries">
+        <mat-icon>library_music</mat-icon> {{ owned.audio.length }} Audio
+      </span>
+      <span class="libraries">
+        <mat-icon>library_music</mat-icon>
+        {{
+          contributed.videos.length +
+            contributed.pics.length +
+            contributed.audio.length
+        }}
+        Contributions
+      </span>
     </div>
 
     <!-- Links to various people's social media handles -->
@@ -92,7 +101,10 @@
             <mat-icon>video_library</mat-icon> Videos
           </ng-template>
           <ng-template matTabContent>
-            <app-profile-videos [vids]="videos"></app-profile-videos>
+            <app-profile-videos
+              [vids]="owned.videos"
+              [contribVids]="contributed.videos"
+            ></app-profile-videos>
           </ng-template>
         </mat-tab>
         <!-- Music tab group -->

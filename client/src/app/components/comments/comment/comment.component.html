@@ -1,5 +1,5 @@
 <hr />
-<div *ngIf="isLoading" class="comment-container" fxLayout="row" fxFlexAlign="">
+<div *ngIf="!isLoading" class="comment-container" fxLayout="row" fxFlexAlign="">
   <img
     [src]="
       user?.profilePicUrl ? user.profilePicUrl : '/assets/vectors/icon.png'

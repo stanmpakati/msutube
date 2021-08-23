@@ -1,6 +1,12 @@
 <div class="section-title" fxHide.xs>
   <span class="mat-title">{{ featureName }}</span> <span class="spacer"></span>
-  <a href="#" [routerLink]="linkTo" mat-stroked-button color="primary">
+  <a
+    href="#"
+    *ngIf="linkTo"
+    [routerLink]="linkTo"
+    mat-stroked-button
+    color="primary"
+  >
     See More
   </a>
 </div>

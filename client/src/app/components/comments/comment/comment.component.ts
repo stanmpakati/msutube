@@ -12,7 +12,7 @@ import { timeAgo } from 'src/app/_services/time-ago.service';
 export class CommentComponent implements OnInit {
   @Input() comment!: Comment;
   user!: User;
-  isLoading = false;
+  isLoading = true;
   timeElapsed!: string;
   isLiked!: boolean;
 

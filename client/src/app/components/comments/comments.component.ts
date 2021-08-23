@@ -56,6 +56,10 @@ export class CommentsComponent implements OnInit {
         likes: 0,
       };
 
+      // Clear comment field
+      this.comment.reset();
+
+      // Add to comments
       this.comments.push(comment);
 
       // To Database

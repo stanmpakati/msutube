@@ -108,6 +108,15 @@ export class AuthService {
   }
 
   loginUser(authDetails: Auth, returnUrl?: string) {
+    // Let's try clearing all previous auth token stuff
+    this.token = '';
+    this.isAuthenticated = false;
+    this.authStatusListener.next(false);
+    this.userId = '';
+    this.clearAuthData();
+    clearTimeout(this.tokenTimer);
+
+    // Login at db
     this.http
       .post<{
         token: string;
@@ -176,8 +185,8 @@ export class AuthService {
     this.authStatusListener.next(false);
     this.userId = '';
     this.clearAuthData();
-    this.router.navigateByUrl('/auth/login');
     clearTimeout(this.tokenTimer);
+    this.router.navigateByUrl('/auth/login');
   }
 
   findEmail(email: string) {

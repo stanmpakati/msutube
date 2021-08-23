@@ -9,7 +9,7 @@ import { PostService } from 'src/app/_services/post.service';
 })
 export class DescriptionComponent implements OnInit {
   @Input() details!: Details;
-  isLiked!: boolean;
+  isLiked = false;
 
   constructor(private postService: PostService) {}
 

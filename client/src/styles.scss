@@ -20,6 +20,10 @@ mat-button {
   font-weight: 600;
 }
 
+a {
+  overflow-wrap: break-word;
+}
+
 app-bottom-navbar {
   position: fixed;
   bottom: 0px;

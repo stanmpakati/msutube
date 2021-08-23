@@ -188,7 +188,9 @@ export const login = (req, res) => {
     })
     .then((result) => {
       // Stop function from continuing when error occured
+      console.log("something here");
       if (errorState) return;
+      console.log("something else here");
 
       if (!loggedInUser)
         if (!result)
@@ -224,7 +226,7 @@ export const login = (req, res) => {
       });
     })
     .catch((err) => {
-      console.log(err),
+      console.log("here error", err),
         res
           .status(500)
           .json({ message: "Invalid Password or Username/email", error: err });

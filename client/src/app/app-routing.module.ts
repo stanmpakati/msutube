@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'upload', component: UploadComponent, canActivate: [AuthGuard] },
   { path: 'music', component: MusicComponent },
   { path: 'pictures', component: PicturesComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile/:id', component: ProfileComponent },
   { path: 'video/:id', component: VideoComponent },
   { path: 'videos/featured', component: FeaturedComponent },
   {

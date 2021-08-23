@@ -59,7 +59,7 @@
             Dark Mode
           </mat-slide-toggle>
         </div>
-        <a href="#" routerLink="/profile" mat-menu-item>
+        <a *ngIf="username" href="#" [routerLink]="profileLink" mat-menu-item>
           <mat-icon>person</mat-icon> Profile
         </a>
         <a href="#" routerLink="/settings" mat-menu-item>

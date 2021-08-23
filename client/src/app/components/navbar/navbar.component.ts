@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   themeSub: Subscription = new Subscription();
   imgCache: Subscription = new Subscription();
   username!: string | null;
+  profileLink!: string;
   @ViewChild('img', { static: true }) image!: ElementRef;
   @ViewChild('newImg', { static: true }) newImage!: ElementRef;
   @Input() displayNav = true;
@@ -42,6 +43,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     );
 
     this.username = this.authService.getUsername();
+    this.profileLink = `/profile/${this.username}`;
 
     // this.imgCache = this.imageService
     //   .getImage(this.user.profilePicUrl)

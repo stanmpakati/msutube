@@ -9,15 +9,26 @@ import { PostService } from 'src/app/_services/post.service';
 })
 export class ProfileVideosComponent implements OnInit {
   @Input() vids!: string[];
+  @Input() contribVids!: string[];
   thumbs!: Thumbnail[];
+  contribThumbs!: Thumbnail[];
   isLoading = true;
 
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
+    // Fetching Owned Videos
     this.postService.getPosts(1000, 1, '', this.vids).subscribe((postData) => {
       this.thumbs = postData.posts;
       this.isLoading = false;
     });
+
+    // Fetching videos from contributions
+    this.postService
+      .getPosts(1000, 1, '', this.contribVids)
+      .subscribe((postData) => {
+        this.contribThumbs = postData.posts;
+        this.isLoading = false;
+      });
   }
 }

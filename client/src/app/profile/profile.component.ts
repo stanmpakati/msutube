@@ -17,6 +17,11 @@ export class ProfileComponent implements OnInit {
   videos: string[] = [];
   pics: string[] = [];
   audio: string[] = [];
+  contributed: { [key: string]: string[] } = {
+    videos: [],
+    pics: [],
+    audio: [],
+  };
 
   constructor(
     private userService: UserService,
@@ -43,8 +48,17 @@ export class ProfileComponent implements OnInit {
             if (val.fileType.includes('video')) this.videos.push(val._id);
             else if (val.fileType.includes('audio')) this.audio.push(val._id);
             if (val.fileType.includes('image')) this.pics.push(val._id);
-            this.isLoading = false;
           });
+
+          res.user.contributedPosts?.forEach((val) => {
+            if (val.fileType.includes('video'))
+              this.contributed.videos.push(val._id);
+            else if (val.fileType.includes('audio'))
+              this.contributed.audio.push(val._id);
+            if (val.fileType.includes('image'))
+              this.contributed.pics.push(val._id);
+          });
+          this.isLoading = false;
         });
       } else {
         this.router.navigate(['404']);

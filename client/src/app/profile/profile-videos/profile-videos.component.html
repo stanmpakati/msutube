@@ -1,1 +1,13 @@
-<p>profile-videos works!</p>
+<app-render-tiles
+  [isLoading]="isLoading"
+  [vids]="thumbs"
+  [featureName]="'Owned'"
+></app-render-tiles>
+
+<hr />
+
+<app-render-tiles
+  [isLoading]="isLoading"
+  [vids]="thumbs"
+  [featureName]="'Contributed'"
+></app-render-tiles>

@@ -36,6 +36,10 @@ $dark-theme: mat.define-dark-theme(
 .dark-theme {
   @include mat.core-color($dark-theme);
   @include mat.all-component-themes($dark-theme);
+
+  a {
+    color: #7777ff;
+  }
 }
 
 // .main-color {

@@ -29,5 +29,6 @@ export class CommentComponent implements OnInit {
 
   likeComment() {
     this.isLiked = !this.isLiked;
+    this.comment.likes++;
   }
 }

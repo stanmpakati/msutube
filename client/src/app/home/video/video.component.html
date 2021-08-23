@@ -3,7 +3,7 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
 
 <!-- Container -->
-<div *ngIf="!isLoading" fxAlign.lt-sm="column" fxHide.gt-sm>
+<div *ngIf="!isLoading" fxAlign.lt-sm="column" fxHide.gt-sm fxHide.sm>
   <div class="video">
     <!-- Todo put autoplay -->
     <video preload="auto" [poster]="video.thumbnailUrl" controls>

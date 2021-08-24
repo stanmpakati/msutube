@@ -1,15 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
+
 import { Thumbnail } from 'src/app/_models/thumbnail';
 import { PostService } from 'src/app/_services/post.service';
 
 @Component({
-  selector: 'app-trending',
-  templateUrl: './trending.component.html',
-  styleUrls: ['./trending.component.scss'],
+  selector: 'app-latest',
+  templateUrl: './latest.component.html',
+  styleUrls: ['./latest.component.scss'],
 })
-export class TrendingComponent implements OnInit {
+export class LatestComponent implements OnInit {
   @Input() fileType!: string;
-  vids!: Thumbnail[];
+  thumbs!: Thumbnail[];
   isLoading!: boolean;
 
   constructor(private postService: PostService) {}
@@ -24,7 +25,7 @@ export class TrendingComponent implements OnInit {
         fileType: this.fileType,
       })
       .subscribe((postData) => {
-        this.vids = postData.posts;
+        this.thumbs = postData.posts;
         this.isLoading = false;
       });
   }

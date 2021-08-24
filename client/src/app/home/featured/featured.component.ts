@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Thumbnail } from 'src/app/_models/thumbnail';
 import { PostService } from 'src/app/_services/post.service';
 
@@ -8,6 +8,7 @@ import { PostService } from 'src/app/_services/post.service';
   styleUrls: ['./featured.component.scss'],
 })
 export class FeaturedComponent implements OnInit {
+  @Input() fileType!: string;
   vids!: Thumbnail[];
   isLoading!: boolean;
 
@@ -20,7 +21,7 @@ export class FeaturedComponent implements OnInit {
         postsPerPage: 10,
         currentPage: 1,
         isFeatured: true,
-        fileType: 'video',
+        fileType: this.fileType,
       })
       .subscribe((postData) => {
         this.vids = postData.posts;

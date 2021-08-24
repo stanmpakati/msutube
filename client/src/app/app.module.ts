@@ -44,6 +44,7 @@ import { CitationComponent } from './components/citation/citation.component';
 import { SharedModule } from './shared/shared.module';
 import { CommentComponent } from './components/comments/comment/comment.component';
 import { ProfileVideosComponent } from './profile/profile-videos/profile-videos.component';
+import { LatestComponent } from './home/latest/latest.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { ProfileVideosComponent } from './profile/profile-videos/profile-videos.
     CitationComponent,
     CommentComponent,
     ProfileVideosComponent,
+    LatestComponent,
   ],
   imports: [
     BrowserModule,

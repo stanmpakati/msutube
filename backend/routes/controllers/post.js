@@ -39,9 +39,6 @@ export const savePostDetails = (req, res) => {
       // Update created post value
       createdPost = newPost;
 
-      console.log("owners", post.owners);
-      console.log("cont", post.contributers);
-
       // Add post to all users
       // Iterate through all owners
       post.owners.forEach(async (owner) => {
@@ -82,7 +79,6 @@ export const getPosts = (req, res) => {
   let fileQuery;
 
   if (postIds && postIds !== "undefined") {
-    console.log("on post", postIds);
     // limit to ids in the query
     fileQuery = Post.find({ fileType: { $regex: fileType } })
       .where("_id")
@@ -91,7 +87,6 @@ export const getPosts = (req, res) => {
         "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
       );
   } else {
-    console.log("not on post");
     // No Limit
     fileQuery = Post.find({ fileType: { $regex: fileType } }).select(
       "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"

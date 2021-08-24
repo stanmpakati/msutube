@@ -13,6 +13,7 @@ export class Post {
   fileType!: string;
   thumbnailUrl?: string;
   createdAt?: string;
+  isFeatured?: boolean;
   views: number = 0;
   likes: number = 0;
 }

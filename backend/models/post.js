@@ -25,6 +25,7 @@ const postSchema = mongoose.Schema(
     tags: [{ type: String, trim: true }],
     views: { type: Number, default: 0 },
     likes: { type: Number, default: 0 },
+    isFeatured: { type: Boolean, default: false },
     citations: [
       {
         author: [{ type: String }],

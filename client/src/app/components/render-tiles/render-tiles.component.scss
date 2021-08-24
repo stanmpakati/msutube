@@ -18,3 +18,9 @@
 .no-vids {
   text-align: center;
 }
+
+@media only screen and (min-width: 600px) {
+  .fewThumbnails {
+    grid-template-columns: repeat(3, minmax(200px, 500px));
+  }
+}

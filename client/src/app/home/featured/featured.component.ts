@@ -16,7 +16,12 @@ export class FeaturedComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.postService
-      .getPosts({ postsPerPage: 10, currentPage: 1, isFeatured: true })
+      .getPosts({
+        postsPerPage: 10,
+        currentPage: 1,
+        isFeatured: true,
+        fileType: 'video',
+      })
       .subscribe((postData) => {
         this.vids = postData.posts;
         this.isLoading = false;

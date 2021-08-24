@@ -76,6 +76,7 @@ export const getPosts = (req, res) => {
   const trending = req.query.trending;
   const latest = req.query.latest;
   const postIds = req.query.ids;
+
   console.log(req.query);
 
   // To be Updated with search query
@@ -90,24 +91,29 @@ export const getPosts = (req, res) => {
         "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
       );
   } else if (isFeatured) {
+    console.log("is featured");
     fileQuery = Post.find({
       $and: [{ fileType: { $regex: fileType } }, { isFeatured: isFeatured }],
     }).select(
       "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
     );
   } else if (latest) {
+    console.log("is latest");
     fileQuery = Post.find({ fileType: { $regex: fileType } })
       .sort({ createdAt: -1 })
       .select(
         "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
       );
   } else if (trending) {
+    console.log("is trending");
+
     fileQuery = Post.find({ fileType: { $regex: fileType } })
       .sort({ views: 1 })
       .select(
         "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
       );
   } else {
+    console.log("nothing");
     // No Limit
     fileQuery = Post.find({ fileType: { $regex: fileType } }).select(
       "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
@@ -120,17 +126,21 @@ export const getPosts = (req, res) => {
     fileQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
   }
 
-  fileQuery
-    .then((documents) => {
-      fetchedPosts = documents;
-      return Post.countDocuments();
-    })
-    .then((count) => {
-      res.status(200).json({ posts: fetchedPosts, maxPosts: count });
-    })
-    .catch((err) =>
-      res.status(500).json({ message: "Fetching Posts failed", error: err })
-    );
+  // console.log("fetched", fileQuery);
+
+  fileQuery.exec(function (err, documents) {
+    if (err) console.log(err);
+    console.log("got here");
+
+    fetchedPosts = documents;
+    res.status(200).json({ posts: fetchedPosts, maxPosts: 10000 });
+    // return Post.countDocuments();
+  });
+  // .then((count) => {
+  // })
+  // .catch((err) =>
+  //   res.status(500).json({ message: "Fetching Posts failed", error: err })
+  // );
 };
 
 export const getPost = async (req, res) => {

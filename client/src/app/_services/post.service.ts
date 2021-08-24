@@ -21,7 +21,7 @@ export class PostService {
   getPosts(query: {
     postsPerPage?: number;
     currentPage?: number;
-    fileType?: string;
+    fileType: string;
     ids?: string[];
     isFeatured?: boolean;
     trending?: boolean;

@@ -108,7 +108,7 @@ export const getPosts = (req, res) => {
     console.log("is trending");
 
     fileQuery = Post.find({ fileType: { $regex: fileType } })
-      .sort({ views: 1 })
+      .sort({ views: -1 })
       .select(
         "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
       );
@@ -130,7 +130,6 @@ export const getPosts = (req, res) => {
 
   fileQuery.exec(function (err, documents) {
     if (err) console.log(err);
-    console.log("got here");
 
     fetchedPosts = documents;
     res.status(200).json({ posts: fetchedPosts, maxPosts: 10000 });

@@ -21,7 +21,7 @@ export class LatestComponent implements OnInit {
       .getPosts({
         postsPerPage: 10,
         currentPage: 1,
-        trending: true,
+        latest: true,
         fileType: this.fileType,
       })
       .subscribe((postData) => {

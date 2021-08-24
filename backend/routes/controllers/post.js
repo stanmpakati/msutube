@@ -330,3 +330,24 @@ const addContributedPost = async (contributer, id, fileType) => {
       .status(401)
       .json({ message: "Some Error there", isLiked: false });
 };
+
+// One time function to populate user's owned posts with previously saved posts
+function pop() {
+  User.find()
+    .up("uploadedPosts")
+    .exec(function (err, conversation) {
+      //do stuff
+      if (err) console.log(err);
+      Post.find().select("name occupation");
+    });
+
+  User.updateOne(
+    { username: contributer },
+    {
+      $push: {
+        contributedPosts: { _id: id, fileType: fileType },
+      },
+    },
+    { new: true }
+  );
+}

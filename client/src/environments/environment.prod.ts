@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  prod: 'https://msutube.herokuapp.com/api',
 };

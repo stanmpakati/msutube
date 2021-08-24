@@ -7,6 +7,8 @@ export const environment = {
   host: 'http://localhost:5000/api',
   // For network server
   // host: 'http://192.168.100.4:5002/api',
+  // For production
+  prod: 'https://msutube.herokuapp.com/api',
 };
 
 /*

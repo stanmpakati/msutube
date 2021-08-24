@@ -18,14 +18,16 @@ export class ProfileVideosComponent implements OnInit {
 
   ngOnInit(): void {
     // Fetching Owned Videos
-    this.postService.getPosts(1000, 1, '', this.vids).subscribe((postData) => {
-      this.thumbs = postData.posts;
-      this.isLoading = false;
-    });
+    this.postService
+      .getPosts({ postsPerPage: 10000, currentPage: 1, ids: this.vids })
+      .subscribe((postData) => {
+        this.thumbs = postData.posts;
+        this.isLoading = false;
+      });
 
     // Fetching videos from contributions
     this.postService
-      .getPosts(1000, 1, '', this.contribVids)
+      .getPosts({ postsPerPage: 10000, currentPage: 1, ids: this.contribVids })
       .subscribe((postData) => {
         this.contribThumbs = postData.posts;
         this.isLoading = false;

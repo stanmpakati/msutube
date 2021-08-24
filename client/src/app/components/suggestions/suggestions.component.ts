@@ -14,9 +14,11 @@ export class SuggestionsComponent implements OnInit {
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
-    this.postService.getPosts(10, 1, 'video').subscribe((postData) => {
-      this.vids = postData.posts;
-      this.isLoading = false;
-    });
+    this.postService
+      .getPosts({ postsPerPage: 10, currentPage: 1, fileType: 'video' })
+      .subscribe((postData) => {
+        this.vids = postData.posts;
+        this.isLoading = false;
+      });
   }
 }

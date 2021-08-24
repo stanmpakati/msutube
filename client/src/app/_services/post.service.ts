@@ -18,13 +18,37 @@ export class PostService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getPosts(
-    postsPerPage: number,
-    currentPage: number,
-    fileType?: string,
-    ids?: string[]
-  ) {
-    let queryParams = `?pagesize=${postsPerPage}&page=${currentPage}&filetype=${fileType}&ids=${ids}`;
+  getPosts(query: {
+    postsPerPage?: number;
+    currentPage?: number;
+    fileType?: string;
+    ids?: string[];
+    isFeatured?: boolean;
+    trending?: boolean;
+    latest?: boolean;
+  }) {
+    const {
+      postsPerPage,
+      currentPage,
+      fileType,
+      ids,
+      isFeatured,
+      trending,
+      latest,
+    } = query;
+
+    // Declare Query params
+    let queryParams = '?';
+
+    // Fill Query params
+    if (postsPerPage) queryParams += `pagesize=${postsPerPage}&`;
+    if (currentPage) queryParams += `page=${currentPage}&`;
+    if (fileType) queryParams += `filetype=${fileType}&`;
+    if (ids) queryParams += `ids=${ids}&`;
+    if (isFeatured) queryParams += `isFeatured=${isFeatured}&`;
+    if (trending) queryParams += `trending=${trending}&`;
+    if (latest) queryParams += `latest=${latest}`;
+
     return this.http.get<{ posts: Thumbnail[]; maxPosts: number }>(
       `${postsUrl}${queryParams}`
     );

@@ -72,6 +72,9 @@ export const getPosts = (req, res) => {
   const pageSize = +req.query.pagesize;
   const currentPage = +req.query.page;
   const fileType = req.query.filetype;
+  const isFeatured = req.query.isFeatured;
+  const trending = req.query.trending;
+  const latest = req.query.latest;
   const postIds = req.query.ids;
   console.log(req.query);
 
@@ -83,6 +86,24 @@ export const getPosts = (req, res) => {
     fileQuery = Post.find({ fileType: { $regex: fileType } })
       .where("_id")
       .in(postIds)
+      .select(
+        "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
+      );
+  } else if (isFeatured) {
+    fileQuery = Post.find({
+      $and: [{ fileType: { $regex: fileType } }, { isFeatured: isFeatured }],
+    }).select(
+      "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
+    );
+  } else if (latest) {
+    fileQuery = Post.find({ fileType: { $regex: fileType } })
+      .sort({ createdAt: -1 })
+      .select(
+        "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
+      );
+  } else if (trending) {
+    fileQuery = Post.find({ fileType: { $regex: fileType } })
+      .sort({ views: 1 })
       .select(
         "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
       );

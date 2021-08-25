@@ -5,7 +5,7 @@
       'custom-bg-light': !isDarkMode,
       'custom-bg-dark': isDarkMode
     }"
-    fxLayout.gt-sm="row"
+    fxLayout="row"
   >
     <!-- Upload Form -->
     <div
@@ -14,12 +14,18 @@
       fxLayoutAlign="center center"
       fxFlex.gt-sm="100%"
       [fxHide.lt-sm]="fileUploading"
+      [fxHide.sm]="fileUploading"
     >
       <app-file-upload></app-file-upload>
     </div>
 
     <!-- Uploaded media details -->
-    <div fxFlex="70%" fxFlex.lt-sm="100" [fxHide.lt-sm]="!fileUploading">
+    <div
+      fxFlex.lt-sm="70%"
+      fxFlex="100%"
+      [fxHide.sm]="fileUploading"
+      [fxHide.lt-sm]="!fileUploading"
+    >
       <mat-horizontal-stepper linear="true" #stepper>
         <!-- Media details -->
         <mat-step [stepControl]="detailsForm" (onsubmit)="recordDetails()">

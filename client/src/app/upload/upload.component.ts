@@ -86,7 +86,7 @@ export class UploadComponent implements OnInit, OnDestroy {
 
   recordDetails() {
     // Check form validity before continuing
-    // if (!this.checkIfFileIsUploading()) return;
+    if (!this.checkIfFileIsUploading()) return;
     if (this.detailsForm.invalid) return;
 
     // Make details object to send to service
@@ -116,6 +116,7 @@ export class UploadComponent implements OnInit, OnDestroy {
 
   // References --------------------------------------------------------------------------------
   recordReferences() {
+    this.checkIfFileIsUploading();
     const refs = this.referencesFormComponent.citations;
     const filePost: Post = {
       _id: '',

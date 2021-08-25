@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/_services/auth.service';
 import { ThemeService } from 'src/app/_services/theme.service';
 
 @Component({
@@ -10,9 +11,13 @@ import { ThemeService } from 'src/app/_services/theme.service';
 export class BottomNavbarComponent implements OnInit, OnDestroy {
   className!: string;
   isDarkmode!: boolean;
+  profileRoute!: string;
   themeSub: Subscription = new Subscription();
 
-  constructor(private themeService: ThemeService) {}
+  constructor(
+    private themeService: ThemeService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.themeSub = this.themeService.themeStatusListener.subscribe(
@@ -24,6 +29,12 @@ export class BottomNavbarComponent implements OnInit, OnDestroy {
     );
 
     this.themeService.getTheme();
+
+    // Get username
+    console.log(this.authService.getUsername());
+    this.authService.getUsername()
+      ? (this.profileRoute = `/profile/${this.authService.getUsername()}`)
+      : '/auth/login';
   }
 
   ngOnDestroy(): void {

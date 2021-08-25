@@ -45,6 +45,8 @@ import { SharedModule } from './shared/shared.module';
 import { CommentComponent } from './components/comments/comment/comment.component';
 import { ProfileVideosComponent } from './profile/profile-videos/profile-videos.component';
 import { LatestComponent } from './home/latest/latest.component';
+import { ProfileAudioComponent } from './profile/profile-audio/profile-audio.component';
+import { ProfileImagesComponent } from './profile/profile-images/profile-images.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +79,8 @@ import { LatestComponent } from './home/latest/latest.component';
     CitationComponent,
     CommentComponent,
     ProfileVideosComponent,
+    ProfileAudioComponent,
+    ProfileImagesComponent,
     LatestComponent,
   ],
   imports: [

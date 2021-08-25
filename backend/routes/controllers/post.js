@@ -77,8 +77,6 @@ export const getPosts = (req, res) => {
   const latest = req.query.latest;
   const postIds = req.query.ids;
 
-  console.log(req.query);
-
   // To be Updated with search query
   let fileQuery;
 
@@ -91,29 +89,24 @@ export const getPosts = (req, res) => {
         "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
       );
   } else if (isFeatured) {
-    console.log("is featured");
     fileQuery = Post.find({
       $and: [{ fileType: { $regex: fileType } }, { isFeatured: isFeatured }],
     }).select(
       "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
     );
   } else if (latest) {
-    console.log("is latest");
     fileQuery = Post.find({ fileType: { $regex: fileType } })
       .sort({ createdAt: -1 })
       .select(
         "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
       );
   } else if (trending) {
-    console.log("is trending");
-
     fileQuery = Post.find({ fileType: { $regex: fileType } })
       .sort({ views: -1 })
       .select(
         "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
       );
   } else {
-    console.log("nothing");
     // No Limit
     fileQuery = Post.find({ fileType: { $regex: fileType } }).select(
       "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"

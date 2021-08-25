@@ -38,19 +38,24 @@ export class VideoComponent implements OnInit, OnDestroy {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (id) {
-        this.postService.getPost(id).subscribe((post) => {
-          this.video = { ...post };
-          this.details = {
-            _id: post._id,
-            title: post.title,
-            description: post.description,
-            tags: post.tags,
-            createdAt: post.createdAt,
-            views: post.views,
-            likes: post.likes,
-          };
-          this.isLoading = false;
-        });
+        this.postService.getPost(id).subscribe(
+          (post) => {
+            this.video = { ...post };
+            this.details = {
+              _id: post._id,
+              title: post.title,
+              description: post.description,
+              tags: post.tags,
+              createdAt: post.createdAt,
+              views: post.views,
+              likes: post.likes,
+            };
+            this.isLoading = false;
+          },
+          (err) => {
+            this.router.navigate(['404/video']);
+          }
+        );
 
         // Add view after 10s
         setTimeout(() => {

@@ -23,6 +23,7 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '404/:page', component: NotFoundComponent },
   { path: '**', pathMatch: 'full', component: NotFoundComponent },
 ];
 

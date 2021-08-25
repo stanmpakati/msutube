@@ -42,32 +42,35 @@ export class ProfileComponent implements OnInit {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (id) {
-        this.userService.getUser(id).subscribe((res) => {
-          // If user not found
-          if (!res.user) this.router.navigate(['404']);
+        this.userService.getUser(id).subscribe(
+          (res) => {
+            // If user not found
+            if (!res.user) this.router.navigate(['404']);
 
-          this.user = { ...res.user };
-          console.log(this.user);
+            this.user = { ...res.user };
 
-          res.user.uploadedPosts?.forEach((val) => {
-            if (val.fileType.includes('video')) this.owned.videos.push(val._id);
-            else if (val.fileType.includes('audio'))
-              this.owned.audio.push(val._id);
-            if (val.fileType.includes('image')) this.owned.pics.push(val._id);
-          });
+            res.user.uploadedPosts?.forEach((val) => {
+              if (val.fileType.includes('video'))
+                this.owned.videos.push(val._id);
+              else if (val.fileType.includes('audio'))
+                this.owned.audio.push(val._id);
+              if (val.fileType.includes('image')) this.owned.pics.push(val._id);
+            });
 
-          res.user.contributedPosts?.forEach((val) => {
-            if (val.fileType.includes('video'))
-              this.contributed.videos.push(val._id);
-            else if (val.fileType.includes('audio'))
-              this.contributed.audio.push(val._id);
-            if (val.fileType.includes('image'))
-              this.contributed.pics.push(val._id);
-          });
-          this.isLoading = false;
-        });
-      } else {
-        this.router.navigate(['404']);
+            res.user.contributedPosts?.forEach((val) => {
+              if (val.fileType.includes('video'))
+                this.contributed.videos.push(val._id);
+              else if (val.fileType.includes('audio'))
+                this.contributed.audio.push(val._id);
+              if (val.fileType.includes('image'))
+                this.contributed.pics.push(val._id);
+            });
+            this.isLoading = false;
+          },
+          (err) => {
+            this.router.navigate(['404/user']);
+          }
+        );
       }
     });
   }

@@ -59,6 +59,8 @@
         <a
           [ngClass]="{ 'color-light': !isDarkMode, 'color-dark': isDarkMode }"
           [href]="'https://facebook.com/' + user.facebookLink"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <mat-icon svgIcon="facebook"></mat-icon> {{ user.facebookLink }}
         </a>
@@ -67,6 +69,8 @@
         <a
           [ngClass]="{ 'color-light': !isDarkMode, 'color-dark': isDarkMode }"
           [href]="'https://instagram.com/' + user.instagramLink"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <mat-icon svgIcon="instagram"></mat-icon> {{ user.instagramLink }}
         </a>
@@ -75,6 +79,8 @@
         <a
           [ngClass]="{ 'color-light': !isDarkMode, 'color-dark': isDarkMode }"
           [href]="'https://twitter.com/' + user.twitterLink"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <mat-icon svgIcon="twitter" style="color: #1da1f2"></mat-icon>
           {{ user.twitterLink }}
@@ -84,6 +90,8 @@
         <a
           [ngClass]="{ 'color-light': !isDarkMode, 'color-dark': isDarkMode }"
           [href]="'https://wa.me.com/' + user.instagramLink"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <mat-icon svgIcon="whatsapp"></mat-icon> {{ user.whatsappLink }}
         </a>

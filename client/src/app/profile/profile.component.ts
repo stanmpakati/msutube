@@ -43,6 +43,9 @@ export class ProfileComponent implements OnInit {
       const id = params.get('id');
       if (id) {
         this.userService.getUser(id).subscribe((res) => {
+          // If user not found
+          if (!res.user) this.router.navigate(['404']);
+
           this.user = { ...res.user };
           console.log(this.user);
 

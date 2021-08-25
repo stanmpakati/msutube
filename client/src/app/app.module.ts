@@ -47,6 +47,7 @@ import { ProfileVideosComponent } from './profile/profile-videos/profile-videos.
 import { LatestComponent } from './home/latest/latest.component';
 import { ProfileAudioComponent } from './profile/profile-audio/profile-audio.component';
 import { ProfileImagesComponent } from './profile/profile-images/profile-images.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { ProfileImagesComponent } from './profile/profile-images/profile-images.
     ProfileAudioComponent,
     ProfileImagesComponent,
     LatestComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

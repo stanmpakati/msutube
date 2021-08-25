@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FeaturedComponent } from './home/featured/featured.component';
 import { HomeComponent } from './home/home.component';
 import { VideoComponent } from './home/video/video.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', pathMatch: 'full', component: NotFoundComponent },
 ];
 
 @NgModule({

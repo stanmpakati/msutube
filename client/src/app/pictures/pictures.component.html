@@ -4,26 +4,26 @@
 <mat-tab-group mat-align-tabs="start" fxHide.gt-xs>
   <mat-tab label="Featured">
     <ng-template matTabContent>
-      <app-featured [fileType]="'picture'"></app-featured>
+      <app-featured [fileType]="'image'"></app-featured>
     </ng-template>
   </mat-tab>
   <mat-tab label="Trending">
     <ng-template matTabContent>
-      <app-trending [fileType]="'picture'"></app-trending>
+      <app-trending [fileType]="'image'"></app-trending>
     </ng-template>
   </mat-tab>
   <mat-tab label="New">
     <ng-template matTabContent>
-      <app-latest [fileType]="'picture'"></app-latest>
+      <app-latest [fileType]="'image'"></app-latest>
     </ng-template>
   </mat-tab>
 </mat-tab-group>
 
 <!-- Shown on Desktop and Tablet -->
 <div class="container" fxHide.xs>
-  <app-featured [fileType]="'picture'"></app-featured>
-  <app-trending [fileType]="'picture'"></app-trending>
-  <app-latest [fileType]="'picture'"></app-latest>
+  <app-featured [fileType]="'image'"></app-featured>
+  <app-trending [fileType]="'image'"></app-trending>
+  <app-latest [fileType]="'image'"></app-latest>
 </div>
 
 <!-- For Mobile -->

@@ -18,29 +18,39 @@ export class ProfileAudioComponent implements OnInit {
 
   ngOnInit(): void {
     // Fetching Owned Videos
-    this.postService
-      .getPosts({
-        postsPerPage: 10000,
-        currentPage: 1,
-        ids: this.vids,
-        fileType: 'audio',
-      })
-      .subscribe((postData) => {
-        this.thumbs = postData.posts;
-        this.isLoading = false;
-      });
+    if (!this.vids || this.vids.length === 0) {
+      this.thumbs = [];
+      this.isLoading = false;
+    } else {
+      this.postService
+        .getPosts({
+          postsPerPage: 10000,
+          currentPage: 1,
+          ids: this.vids,
+          fileType: 'audio',
+        })
+        .subscribe((postData) => {
+          this.thumbs = postData.posts;
+          this.isLoading = false;
+        });
+    }
 
     // Fetching videos from contributions
-    this.postService
-      .getPosts({
-        postsPerPage: 10000,
-        currentPage: 1,
-        ids: this.contribVids,
-        fileType: 'audio',
-      })
-      .subscribe((postData) => {
-        this.contribThumbs = postData.posts;
-        this.isLoading = false;
-      });
+    if (this.contribVids || this.contribThumbs.length === 0) {
+      this.contribThumbs = [];
+      this.isLoading = false;
+    } else {
+      this.postService
+        .getPosts({
+          postsPerPage: 10000,
+          currentPage: 1,
+          ids: this.contribVids,
+          fileType: 'audio',
+        })
+        .subscribe((postData) => {
+          this.contribThumbs = postData.posts;
+          this.isLoading = false;
+        });
+    }
   }
 }

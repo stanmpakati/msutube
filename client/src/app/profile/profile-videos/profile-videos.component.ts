@@ -18,29 +18,41 @@ export class ProfileVideosComponent implements OnInit {
 
   ngOnInit(): void {
     // Fetching Owned Videos
-    this.postService
-      .getPosts({
-        postsPerPage: 10000,
-        currentPage: 1,
-        ids: this.vids,
-        fileType: 'video',
-      })
-      .subscribe((postData) => {
-        this.thumbs = postData.posts;
-        this.isLoading = false;
-      });
+    if (!this.vids || this.vids.length === 0) {
+      this.thumbs = [];
+      this.isLoading = false;
+    } else {
+      console.log('running vids', this.vids);
+      this.postService
+        .getPosts({
+          postsPerPage: 10000,
+          currentPage: 1,
+          ids: [...this.vids],
+          fileType: 'video',
+        })
+        .subscribe((postData) => {
+          this.thumbs = postData.posts;
+          this.isLoading = false;
+        });
+    }
 
     // Fetching videos from contributions
-    this.postService
-      .getPosts({
-        postsPerPage: 10000,
-        currentPage: 1,
-        ids: this.contribVids,
-        fileType: 'video',
-      })
-      .subscribe((postData) => {
-        this.contribThumbs = postData.posts;
-        this.isLoading = false;
-      });
+    if (this.contribVids || this.contribThumbs.length === 0) {
+      this.contribThumbs = [];
+      this.isLoading = false;
+    } else {
+      console.log('running con', this.contribVids);
+      this.postService
+        .getPosts({
+          postsPerPage: 10000,
+          currentPage: 1,
+          ids: [...this.contribVids],
+          fileType: 'video',
+        })
+        .subscribe((postData) => {
+          this.contribThumbs = postData.posts;
+          this.isLoading = false;
+        });
+    }
   }
 }

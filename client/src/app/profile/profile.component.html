@@ -113,7 +113,12 @@
           <ng-template mat-tab-label>
             <mat-icon>library_music</mat-icon> Audio
           </ng-template>
-          <ng-template matTabContent> Music </ng-template>
+          <ng-template matTabContent>
+            <app-profile-audio
+              [vids]="owned.audio"
+              [contribVids]="contributed.audio"
+            ></app-profile-audio>
+          </ng-template>
         </mat-tab>
 
         <!-- Pictures Tab group -->
@@ -121,7 +126,12 @@
           <ng-template mat-tab-label>
             <mat-icon>photo_library</mat-icon> Pictures
           </ng-template>
-          <ng-template matTabContent> Pics </ng-template>
+          <ng-template matTabContent>
+            <app-profile-images
+              [vids]="owned.img"
+              [contribVids]="contributed.img"
+            ></app-profile-images>
+          </ng-template>
         </mat-tab>
       </mat-tab-group>
     </div>

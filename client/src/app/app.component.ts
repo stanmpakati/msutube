@@ -25,25 +25,19 @@ export class AppComponent implements OnInit, OnDestroy {
       .addSvgIcon(
         'instagram',
         this.domSanitizer.bypassSecurityTrustResourceUrl(
-          'https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/instagram.svg'
+          '../assets/vectors/instagram.svg'
         )
       )
       .addSvgIcon(
         'twitter',
         this.domSanitizer.bypassSecurityTrustResourceUrl(
-          'https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/twitter.svg'
-        )
-      )
-      .addSvgIcon(
-        'whatsapp',
-        this.domSanitizer.bypassSecurityTrustResourceUrl(
-          'https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/whatsapp.svg'
+          '../assets/vectors/twitter.svg'
         )
       )
       .addSvgIcon(
         'facebook',
         this.domSanitizer.bypassSecurityTrustResourceUrl(
-          'https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/facebook.svg'
+          '../assets/vectors/facebook.svg'
         )
       );
   }
@@ -57,11 +51,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.themeService.getTheme();
 
     // Todo remove later
-    this.authService.loginUser({
-      email: 'test@test.com',
-      username: 'testuser',
-      password: 'Test123.',
-    });
+    // this.authService.loginUser({
+    //   email: 'test@test.com',
+    //   username: 'testuser',
+    //   password: 'Test123.',
+    // });
   }
 
   ngOnDestroy() {

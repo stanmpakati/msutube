@@ -76,7 +76,8 @@
           [ngClass]="{ 'color-light': !isDarkMode, 'color-dark': isDarkMode }"
           [href]="'https://twitter.com/' + user.twitterLink"
         >
-          <mat-icon svgIcon="twitter"></mat-icon> {{ user.twitterLink }}
+          <mat-icon svgIcon="twitter" style="color: #1da1f2"></mat-icon>
+          {{ user.twitterLink }}
         </a>
       </div>
       <div class="social-link" *ngIf="user?.whatsappLink">

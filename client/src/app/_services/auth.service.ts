@@ -155,7 +155,7 @@ export class AuthService {
               return;
             }
             // Otherwise go to homepage
-            this.router.navigateByUrl('/profile/testuser');
+            this.router.navigateByUrl('/upload');
           }
         },
         (error) => {

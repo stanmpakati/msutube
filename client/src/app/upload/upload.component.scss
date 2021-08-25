@@ -1,6 +1,7 @@
 .container {
   height: 100vh;
 }
+
 // styling stepper
 mat-form-field {
   width: 100%;
@@ -8,6 +9,10 @@ mat-form-field {
 
 .mt-1 {
   margin-top: 1rem;
+}
+
+.custom-bg {
+  width: 100%;
 }
 
 .custom-bg-light {

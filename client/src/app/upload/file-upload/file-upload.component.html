@@ -101,7 +101,7 @@
       (filesDropped)="handleDrop($event, 1)"
       (filesHovered)="thumbDropzoneState($event)"
       [ngClass]="{ 'drop-active': thumbDropzoneActive }"
-      *ngIf="(fileName && !fileType?.includes('image')) || true"
+      *ngIf="fileName && !fileType?.includes('image')"
     >
       <mat-error *ngIf="thumbnail.errors?.invalidMimeType">
         Sorry only jpg and png files supported

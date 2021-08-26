@@ -1,6 +1,9 @@
 {
   "env": {
     "MONGO_ATLAS_PW": "tqRlQTjR8e9TVjPE",
-    "JWT_KEY": "Encryption_939ef,;C,QFIj0ewf;d^0;(3a2"
+    "JWT_KEY": "Encryption_939ef,;C,QFIj0ewf;d^0;(3a2",
+    "CLOUDINARY_NAME": "stanmpakati",
+    "CLOUDINARY_API_KEY": "744165879542744",
+    "CLOUDINARY_API_SECRET": "iohyTePCtNlejWsvUdj80sTPT68"
   }
 }

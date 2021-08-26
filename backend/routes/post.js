@@ -1,9 +1,8 @@
 import express from "express";
 import multer from "multer";
 import streamifier from "streamifier";
-// import { v2 } from "cloudinary";
 
-import cloudinary from "../utils/cloudinary.js";
+import cloudinaryV2 from "../utils/cloudinary.js";
 import checkAuth from "../middleware/check-auth.js";
 import { storage, videoStorage } from "../middleware/multer.js";
 import {
@@ -46,15 +45,8 @@ router.post(
 
 router.post("/cloud", multer().single("image"), function (req, res) {
   let streamUpload = (req) => {
-    // let cloudinary = v2({
-    //   cloud_name: process.env.CLOUDINARY_NAME,
-    //   api_key: process.env.CLOUDINARY_API_KEY,
-    //   api_secret: process.env.CLOUDINARY_API_SECRET,
-    // });
     return new Promise((resolve, reject) => {
-      console.log(cloudinary);
-
-      let stream = cloudinary.uploader.upload_stream((error, result) => {
+      let stream = cloudinaryV2.uploader.upload_stream((error, result) => {
         if (result) {
           resolve(result);
         } else {

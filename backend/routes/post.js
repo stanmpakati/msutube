@@ -1,8 +1,6 @@
 import express from "express";
 import multer from "multer";
-import streamifier from "streamifier";
 
-import cloudinaryV2 from "../utils/cloudinary.js";
 import checkAuth from "../middleware/check-auth.js";
 import { storage, videoStorage } from "../middleware/multer.js";
 import {
@@ -10,6 +8,7 @@ import {
   getComments,
   likePost,
   uploadPost,
+  uploadToCloud,
   checkIfLiked,
   getPost,
   getPosts,
@@ -43,35 +42,7 @@ router.post(
   uploadPost
 );
 
-router.post("/cloud", multer().single("image"), function (req, res) {
-  let streamUpload = (req) => {
-    return new Promise((resolve, reject) => {
-      let stream = cloudinaryV2.uploader.upload_stream((error, result) => {
-        if (result) {
-          resolve(result);
-        } else {
-          reject(error);
-        }
-      });
-
-      streamifier.createReadStream(req.file.buffer).pipe(stream);
-    });
-  };
-
-  async function upload(req) {
-    try {
-      console.log("hit");
-      let result = await streamUpload(req);
-      console.log(result);
-      res.json({ message: "done" });
-    } catch (err) {
-      console.log(err);
-      res.status(500).json({ message: "done" });
-    }
-  }
-
-  upload(req);
-});
+router.post("/cloud", multer().single("image"), uploadToCloud);
 
 router.post("/post", checkAuth, savePostDetails);
 

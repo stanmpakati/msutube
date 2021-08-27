@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { environment } from 'src/environments/environment';
 import { Details } from 'src/app/_models/details.interface';
 import { Post } from 'src/app/_models/post';
 import { PostService } from 'src/app/_services/post.service';
@@ -20,7 +19,6 @@ export class VideoComponent implements OnInit, OnDestroy {
   details!: Details;
   isDarkMode!: boolean;
   themeSub: Subscription = new Subscription();
-  cloudinary = environment.cloudinary;
   fileUrl!: string;
 
   constructor(
@@ -53,8 +51,7 @@ export class VideoComponent implements OnInit, OnDestroy {
               views: post.views,
               likes: post.likes,
             };
-            this.fileUrl =
-              this.cloudinary + post.file_public_id || post.fileUrl || '';
+            this.fileUrl = post.file_public_id || post.fileUrl || '';
             this.isLoading = false;
           },
           (err) => {

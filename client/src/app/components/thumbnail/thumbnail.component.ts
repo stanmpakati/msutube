@@ -4,9 +4,6 @@ import { Subscription } from 'rxjs';
 import { Thumbnail } from 'src/app/_models/thumbnail';
 import { ThemeService } from 'src/app/_services/theme.service';
 import { timeAgo } from 'src/app/_services/time-ago.service';
-import { environment } from 'src/environments/environment';
-
-const cloudinary = environment.cloudinary;
 
 @Component({
   selector: 'app-thumbnail',
@@ -30,12 +27,12 @@ export class ThumbnailComponent implements OnInit, OnDestroy {
     this.timeElapsed = timeAgo(this.thumbnailData.createdAt);
 
     if (this.thumbnailData.thumb_public_id)
-      this.thumbnailUrl = cloudinary + this.thumbnailData.thumb_public_id;
+      this.thumbnailUrl = this.thumbnailData.thumb_public_id;
     else if (this.thumbnailData.thumbnailUrl)
       this.thumbnailUrl = this.thumbnailData.thumbnailUrl;
 
     if (this.thumbnailData.file_public_id)
-      this.fileUrl = cloudinary + this.thumbnailData.file_public_id;
+      this.fileUrl = this.thumbnailData.file_public_id;
     else this.thumbnailData.fileUrl;
 
     // Determine how many authors there are

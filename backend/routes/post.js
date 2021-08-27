@@ -44,7 +44,7 @@ router.post(
 
 router.post(
   "/cloud",
-  checkAuth,
+  // checkAuth,
   multer().fields([
     {
       name: "thumbnail",

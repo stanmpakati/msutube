@@ -70,11 +70,12 @@ export const uploadToCloud = async (req, res) => {
       const fileType = req.files.file[0].mimetype;
       let result2 = await streamFileUpload(req);
       let result1 = await streamThumbnailUpload(req);
-      console.log(typeof result2.duration);
+      console.log(result2);
+      console.log(result1);
       return res.status(200).json({
         message: "Uploaded",
-        file_public_id: result2.public_id,
-        thumb_public_id: result1.public_id,
+        file_public_id: result2.url,
+        thumb_public_id: result1.url,
         fileMimetype: fileType,
         duration: result2.duration,
       });

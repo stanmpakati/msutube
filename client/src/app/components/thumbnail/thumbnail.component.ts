@@ -20,18 +20,23 @@ export class ThumbnailComponent implements OnInit, OnDestroy {
   themeSub: Subscription = new Subscription();
   isDarkMode!: boolean;
   isLoading!: boolean;
+  thumbnailUrl!: string;
+  fileUrl!: string;
 
   constructor(private router: Router, private themeService: ThemeService) {}
-  thumnailUrl!: string;
 
   ngOnInit(): void {
     // Calculate time submited relative to today
     this.timeElapsed = timeAgo(this.thumbnailData.createdAt);
 
     if (this.thumbnailData.thumb_public_id)
-      this.thumnailUrl = cloudinary + this.thumbnailData.thumb_public_id;
+      this.thumbnailUrl = cloudinary + this.thumbnailData.thumb_public_id;
     else if (this.thumbnailData.thumbnailUrl)
-      this.thumnailUrl = this.thumbnailData.thumbnailUrl;
+      this.thumbnailUrl = this.thumbnailData.thumbnailUrl;
+
+    if (this.thumbnailData.file_public_id)
+      this.fileUrl = cloudinary + this.thumbnailData.file_public_id;
+    else this.thumbnailData.fileUrl;
 
     // Determine how many authors there are
     if (this.thumbnailData.owners.length > 1) this.owner = 'Various Owners';

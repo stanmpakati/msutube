@@ -9,7 +9,7 @@ export class Post {
   owners!: string[];
   contributers?: Contributer[] | undefined;
   citations?: Citation[];
-  fileUrl!: string;
+  fileUrl?: string;
   fileType!: string;
   thumbnailUrl?: string;
   createdAt?: string;

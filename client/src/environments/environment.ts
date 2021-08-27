@@ -5,6 +5,8 @@
 export const environment = {
   production: false,
   host: 'http://localhost:5000/api',
+  cloudinary: 'https://res.cloudinary.com/stanmpakati/v1630059707/',
+  // cloudinary_thumb: 'https://res.cloudinary.com/stanmpakati/image/upload/v1630059719'
   // For network server
   // host: 'http://192.168.100.4:5002/api',
   // For production

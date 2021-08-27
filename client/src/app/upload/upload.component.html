@@ -22,6 +22,7 @@
 
     <!-- Uploaded media details -->
     <div
+      class="stepper"
       fxFlex.lt-sm="100%"
       fxFlex="100%"
       [fxHide.sm]="fileUploading"
@@ -31,7 +32,7 @@
         <!-- Media details -->
         <mat-step [stepControl]="detailsForm" (onsubmit)="recordDetails()">
           <!-- Form: {{ detailsForm }} -->
-          <ng-template matStepLabel>Fill in video details</ng-template>
+          <ng-template matStepLabel>Details</ng-template>
           <ng-template matStepContent>
             <app-details #detailsComponent></app-details>
             <button

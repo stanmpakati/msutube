@@ -22,3 +22,19 @@ mat-form-field {
 .custom-bg-dark {
   background-color: #424242;
 }
+
+@media screen and (max-width: 776px) and (min-width: 600px) {
+  .stepper {
+    max-width: 50% !important;
+  }
+}
+
+@media screen and(min-width: 778px) {
+  .stepper {
+    max-width: 100% !important;
+  }
+
+  .video-upload-form {
+    max-width: 35% !important;
+  }
+}

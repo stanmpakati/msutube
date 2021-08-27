@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Details } from 'src/app/_models/details.interface';
+import { AuthService } from 'src/app/_services/auth.service';
 import { PostService } from 'src/app/_services/post.service';
 
 @Component({
@@ -11,13 +12,18 @@ export class DescriptionComponent implements OnInit {
   @Input() details!: Details;
   isLiked = false;
 
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     // Todo: check if liked if logged in
-    this.postService
-      .getIsLiked(this.details._id)
-      .subscribe((res) => (this.isLiked = res.isLiked));
+
+    if (this.authService.getUserId())
+      this.postService
+        .getIsLiked(this.details._id)
+        .subscribe((res) => (this.isLiked = res.isLiked));
   }
 
   likeVideo() {

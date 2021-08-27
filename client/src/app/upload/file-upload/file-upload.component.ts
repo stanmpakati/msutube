@@ -151,11 +151,13 @@ export class FileUploadComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.croppedImage = result;
 
-      const ppFile = base64ToFile(this.croppedImage);
+      if (this.croppedImage) {
+        const ppFile = base64ToFile(this.croppedImage);
 
-      // Send file to form
-      this.uploadForm.patchValue({ thumbnail: ppFile });
-      this.thumbnail.updateValueAndValidity();
+        // Send file to form
+        this.uploadForm.patchValue({ thumbnail: ppFile });
+        this.thumbnail.updateValueAndValidity();
+      }
     });
   }
 

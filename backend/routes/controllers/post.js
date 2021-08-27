@@ -25,9 +25,28 @@ export const uploadPost = async (req, res) => {
 };
 
 export const uploadToCloud = async (req, res) => {
-  let streamUpload = (req) => {
+  let streamThumbnailUpload = (req) => {
     return new Promise((resolve, reject) => {
-      let stream = cloudinaryV2.uploader.upload_stream(
+      let streamThumbnail = cloudinaryV2.uploader.upload_stream(
+        { resource_type: "image", upload_preset: "thumbnail" },
+        (error, result) => {
+          if (result) {
+            resolve(result);
+          } else {
+            reject(error);
+          }
+        }
+      );
+
+      streamifier
+        .createReadStream(req.files.thumbnail[0].buffer)
+        .pipe(streamThumbnail);
+    });
+  };
+
+  let streamFileUpload = (req) => {
+    return new Promise((resolve, reject) => {
+      let streamVideo = cloudinaryV2.uploader.upload_stream(
         { resource_type: "video", upload_preset: "video" },
         (error, result) => {
           if (result) {
@@ -38,23 +57,25 @@ export const uploadToCloud = async (req, res) => {
         }
       );
 
-      streamifier.createReadStream(req.file.buffer).pipe(stream);
+      streamifier.createReadStream(req.files.file[0].buffer).pipe(streamVideo);
     });
   };
 
   async function upload(req) {
     try {
-      let result = await streamUpload(req);
-      console.log(result);
+      const fileType = req.files.file[0].mimetype;
+      let result1 = await streamThumbnailUpload(req);
+      let result2 = await streamFileUpload(req);
       return res.status(200).json({
         message: "Uploaded",
-        public_id: result.public_id,
-        fileMimetype: `${result.resource_type}/${result.format}`,
-        duration: result.duration,
+        file_public_id: result2.public_id,
+        thumb_public_id: result1.public_id,
+        fileMimetype: fileType,
+        duration: result2.duration,
       });
     } catch (err) {
       console.log(err);
-      res.status(500).json({ message: "done" });
+      res.status(500).json({ message: "Error" });
     }
   }
 

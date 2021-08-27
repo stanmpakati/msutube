@@ -42,7 +42,20 @@ router.post(
   uploadPost
 );
 
-router.post("/cloud", multer().single("image"), uploadToCloud);
+router.post(
+  "/cloud",
+  multer().fields([
+    {
+      name: "thumbnail",
+      maxCount: 1,
+    },
+    {
+      name: "file",
+      maxCount: 1,
+    },
+  ]),
+  uploadToCloud
+);
 
 router.post("/post", checkAuth, savePostDetails);
 

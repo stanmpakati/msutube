@@ -38,16 +38,24 @@ export const uploadToCloud = async (req, res) => {
         }
       );
 
-      streamifier
-        .createReadStream(req.files.thumbnail[0].buffer)
-        .pipe(streamThumbnail);
+      if (req.files.thumbnail && req.files.thumbnail[0])
+        streamifier
+          .createReadStream(req.files.thumbnail[0].buffer)
+          .pipe(streamThumbnail);
+      else return;
     });
   };
 
   let streamFileUpload = (req) => {
+    let resType;
+    if (req.files.file[0].mimetype.includes("image")) resType = "Image";
+    if (req.files.file[0].mimetype.includes("audio")) resType = "video";
+    if (req.files.file[0].mimetype.includes("video")) resType = "video";
+    console.log(resType);
+
     return new Promise((resolve, reject) => {
       let streamVideo = cloudinaryV2.uploader.upload_stream(
-        { resource_type: "video", upload_preset: "video" },
+        { resource_type: resType, upload_preset: resType },
         (error, result) => {
           if (result) {
             resolve(result);
@@ -57,11 +65,7 @@ export const uploadToCloud = async (req, res) => {
         }
       );
 
-      if (req.files.thumbnail[0]) {
-        streamifier
-          .createReadStream(req.files.file[0].buffer)
-          .pipe(streamVideo);
-      }
+      streamifier.createReadStream(req.files.file[0].buffer).pipe(streamVideo);
     });
   };
 

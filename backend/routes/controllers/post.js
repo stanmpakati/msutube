@@ -57,7 +57,11 @@ export const uploadToCloud = async (req, res) => {
         }
       );
 
-      streamifier.createReadStream(req.files.file[0].buffer).pipe(streamVideo);
+      if (req.files.thumbnail[0]) {
+        streamifier
+          .createReadStream(req.files.file[0].buffer)
+          .pipe(streamVideo);
+      }
     });
   };
 
@@ -66,6 +70,7 @@ export const uploadToCloud = async (req, res) => {
       const fileType = req.files.file[0].mimetype;
       let result1 = await streamThumbnailUpload(req);
       let result2 = await streamFileUpload(req);
+      console.log(typeof result2.duration);
       return res.status(200).json({
         message: "Uploaded",
         file_public_id: result2.public_id,

@@ -16,4 +16,7 @@ export class Post {
   isFeatured?: boolean;
   views: number = 0;
   likes: number = 0;
+  file_public_id?: string;
+  thumb_public_id?: string;
+  duration?: number;
 }

@@ -9,7 +9,7 @@
       <source [src]="thumbnailData.fileUrl" type="video/mp4" />
       Sorry Your browser does not support the video tag.
     </video>
-    <span class="duration-stamp">{{ thumbnailData.length }}</span>
+    <span class="duration-stamp">{{ thumbnailData.duration }}</span>
   </div>
   <span [ngClass]="{ 'mat-body-2': true, 'color-blue': !isDarkMode }">
     {{ thumbnailData.title }}

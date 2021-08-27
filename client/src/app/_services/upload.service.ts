@@ -18,6 +18,9 @@ export class UploadService {
     fileUrl: string;
     thumbnailUrl: string;
     fileMimetype: string;
+    file_public_id: string;
+    thumb_public_id: string;
+    duration: number;
   };
 
   constructor(
@@ -38,6 +41,9 @@ export class UploadService {
     fileUrl: string;
     thumbnailUrl: string;
     fileMimetype: string;
+    file_public_id: string;
+    thumb_public_id: string;
+    duration: number;
   }) {
     this.fileDestDetails = details;
   }
@@ -62,7 +68,10 @@ export class UploadService {
       fileUrl: string;
       thumbnailUrl: string;
       fileMimetype: string;
-    }>(videoUrl, postData, {
+      file_public_id: string;
+      thumb_public_id: string;
+      duration: number;
+    }>(`${videoUrl}/cloud`, postData, {
       reportProgress: true,
       observe: 'events',
     });

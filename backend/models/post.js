@@ -19,16 +19,15 @@ const postSchema = mongoose.Schema(
   {
     title: { type: String, required: true, trim: true },
     description: { type: String, required: true },
-    fileUrl: { type: String, required: true },
+    fileUrl: { type: String },
     fileType: { type: String, required: true, trim: true },
     thumbnailUrl: { type: String, default: "" },
     tags: [{ type: String, trim: true }],
     views: { type: Number, default: 0 },
     likes: { type: Number, default: 0 },
     isFeatured: { type: Boolean, default: false },
-    file_public_id: { type: String },
+    file_public_id: { type: String, required: true },
     thumb_public_id: { type: String },
-    fileMimetype: { type: String },
     duration: { type: Number },
     citations: [
       {

@@ -68,8 +68,8 @@ export const uploadToCloud = async (req, res) => {
   async function upload(req) {
     try {
       const fileType = req.files.file[0].mimetype;
-      let result1 = await streamThumbnailUpload(req);
       let result2 = await streamFileUpload(req);
+      let result1 = await streamThumbnailUpload(req);
       console.log(typeof result2.duration);
       return res.status(200).json({
         message: "Uploaded",
@@ -90,6 +90,7 @@ export const uploadToCloud = async (req, res) => {
 export const savePostDetails = (req, res) => {
   // Todo undo user given null id
   // const {recievedPost} = {}
+  console.log("saving");
   delete req.body._id;
   const post = new Post({
     ...req.body,

@@ -202,7 +202,7 @@ export class FileUploadComponent implements OnInit {
     }
   }
 
-  openDialog() {
+  async openDialog() {
     const dialogRef = this.dialog.open(ThumbCheckDialog);
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -240,6 +240,7 @@ export class FileUploadComponent implements OnInit {
             let uploadPcnt = Math.round(
               (100 / event.total! || 0) * event.loaded
             );
+            console.log(uploadPcnt);
             this.uploadStatus.percentage = uploadPcnt;
           }
           if (event.type == HttpEventType.Response) {

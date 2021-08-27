@@ -83,6 +83,7 @@
     <!-- After file is finished uploading -->
     <div class="uploaded-box" *ngIf="uploadStatus.status === 'DONE'">
       <img src="/assets/del/upload_completed.jpg" alt="" />
+      <br />
       <span>{{ fileName }} Uploaded</span> <br />
       <button
         type="button"
@@ -127,10 +128,7 @@
         <mat-icon>add_photo_alternate</mat-icon>
       </button>
     </div>
-    <div
-      class="image-preview"
-      *ngIf="croppedImage !== '' && croppedImage && thumbnail.valid"
-    >
+    <div class="image-preview" *ngIf="croppedImage !== '' && croppedImage">
       <img [src]="croppedImage" [alt]="uploadForm.value.title" />
     </div>
 

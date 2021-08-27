@@ -85,7 +85,7 @@ export class UploadService {
     file.owners = [...new Set(file.owners)];
 
     // Todo throw error if no file url
-    if (!file.fileUrl) return;
+    if (!file.file_public_id) return;
 
     this.http.post(`${videoUrl}/post`, file).subscribe(
       (response) => {

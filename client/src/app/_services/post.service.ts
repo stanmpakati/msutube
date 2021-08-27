@@ -52,23 +52,7 @@ export class PostService {
     return this.http.get<{ posts: Thumbnail[]; maxPosts: number }>(
       `${postsUrl}${queryParams}`
     );
-    // .pipe(
-    //   map((postData) => ({
-    //     posts: postData.posts.map((post: any) => ({
-    //       title: post.title,
-    //       content: post.content,
-    //       imagePath: post.imagePath,
-    //       id: post._id,
-    //       creator: post.creator,
-    //     })),
-    //     maxPosts: postData.maxPosts,
-    //   }))
-    // )
   }
-
-  // getPostsListener(): Observable<{ posts: Post[]; postCount: number }> {
-  //   return this.postsUpdated.asObservable();
-  // }
 
   getPost(id: string) {
     return this.http.get<Post>(`${postsUrl}/${id}`);

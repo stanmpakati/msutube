@@ -146,36 +146,31 @@ export const getPosts = (req, res) => {
   // To be Updated with search query
   let fileQuery;
 
+  const selectString =
+    "_id title length owners thumbnailUrl fileUrl uploadDate createdAt file_public_id thumb_public_id";
+
   if (postIds && postIds !== "undefined") {
     // limit to ids in the query
     fileQuery = Post.find({ fileType: { $regex: fileType } })
       .where("_id")
       .in(postIds)
-      .select(
-        "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
-      );
+      .select(selectString);
   } else if (isFeatured) {
     fileQuery = Post.find({
       $and: [{ fileType: { $regex: fileType } }, { isFeatured: isFeatured }],
-    }).select(
-      "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
-    );
+    }).select(selectString);
   } else if (latest) {
     fileQuery = Post.find({ fileType: { $regex: fileType } })
       .sort({ createdAt: -1 })
-      .select(
-        "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
-      );
+      .select(selectString);
   } else if (trending) {
     fileQuery = Post.find({ fileType: { $regex: fileType } })
       .sort({ views: -1 })
-      .select(
-        "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
-      );
+      .select(selectString);
   } else {
     // No Limit
     fileQuery = Post.find({ fileType: { $regex: fileType } }).select(
-      "_id title length owners thumbnailUrl fileUrl uploadDate createdAt"
+      selectString
     );
   }
 

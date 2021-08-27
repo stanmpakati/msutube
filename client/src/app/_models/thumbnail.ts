@@ -5,6 +5,7 @@ export interface Thumbnail {
   owners: string[];
   thumbnailUrl?: string;
   thumb_public_id?: string;
+  file_public_id?: string;
   createdAt: string;
   fileUrl: string;
 }

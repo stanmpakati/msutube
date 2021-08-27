@@ -7,7 +7,7 @@ app.set("port", port);
 mongoose
   .connect(
     `mongodb+srv://stan:${process.env.MONGO_ATLAS_PW}@cluster0.eexsq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
-    { useNewUrlParser: true, useUnifiedTopology: true }
+    { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
   )
   .then(() => {
     console.log("Connected to database");

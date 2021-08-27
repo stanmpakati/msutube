@@ -1,5 +1,6 @@
 node_modules
 _uploads
+nodemon.json
 # images
 # videos
 # audios

@@ -26,6 +26,10 @@ const postSchema = mongoose.Schema(
     views: { type: Number, default: 0 },
     likes: { type: Number, default: 0 },
     isFeatured: { type: Boolean, default: false },
+    file_public_id: { type: String },
+    thumb_public_id: { type: String },
+    fileMimetype: { type: String },
+    duration: { type: Number },
     citations: [
       {
         author: [{ type: String }],
@@ -56,7 +60,6 @@ const postSchema = mongoose.Schema(
         roleDetails: { type: String },
       },
     ],
-    length: { type: Number },
     // Comments
     // comments: {
     //   type: [

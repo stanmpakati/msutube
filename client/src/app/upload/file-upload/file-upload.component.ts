@@ -242,12 +242,10 @@ export class FileUploadComponent implements OnInit {
             let uploadPcnt = Math.round(
               (100 / event.total! || 0) * event.loaded
             );
-            console.log(uploadPcnt);
             this.uploadStatus.percentage = uploadPcnt;
           }
           if (event.type == HttpEventType.Response) {
             this.uploadStatus.status = 'DONE';
-            console.log(event.body);
             const dets = { ...event.body! };
             // delete dets.message
 

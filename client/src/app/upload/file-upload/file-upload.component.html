@@ -104,11 +104,12 @@
       [ngClass]="{ 'drop-active': thumbDropzoneActive }"
       *ngIf="fileName && !fileType?.includes('image') && !croppedImage"
     >
-      <mat-error *ngIf="thumbnail.errors?.invalidMimeType">
-        Sorry only jpg and png files supported
-      </mat-error>
+      <mat-hint>Pick File less than 1mb</mat-hint>
       <mat-error *ngIf="fileTooBigError">
         {{ fileTooBigError }}
+      </mat-error>
+      <mat-error *ngIf="thumbnail.errors?.invalidMimeType">
+        Sorry only jpg and png files supported
       </mat-error>
       <button
         mat-stroked-button

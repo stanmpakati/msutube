@@ -11,7 +11,7 @@ export const environment = {
   // For network server
   // host: 'http://192.168.100.4:5002/api',
   // For production
-  prod: 'https://msutube.herokuapp.com/api',
+  // host: 'https://msutube.herokuapp.com/api',
 };
 
 /*

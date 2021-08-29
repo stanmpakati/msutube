@@ -207,7 +207,7 @@ export const login = (req, res) => {
     ],
   })
     .select("+password")
-    .then((user) => {
+    .then(async (user) => {
       // if user is not found
       if (!user) {
         errorState = true;
@@ -215,13 +215,13 @@ export const login = (req, res) => {
       }
       // if user found
       loggedInUser = user;
-      return bcrypt.compare(req.body.password, user.password);
+      return await bcrypt.compare(req.body.password, user.password);
     })
     .then((result) => {
       // Stop function from continuing when error occured
       if (errorState) return;
 
-      if (!loggedInUser)
+      if (loggedInUser)
         if (!result)
           // If passwords don't match
           return res

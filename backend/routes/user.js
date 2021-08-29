@@ -19,7 +19,7 @@ router.post("/email", getEmail);
 router.post(
   "/signup",
   // Todo get Filename from userid
-  multer({ storage: getProfilePic }).single("profilePicture"),
+  multer().single("profilePicture"),
   signup
 );
 

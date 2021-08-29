@@ -1,6 +1,9 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+import streamifier from "streamifier";
+
+import cloudinaryV2 from "../../utils/cloudinary.js";
 
 import User from "../../models/user.js";
 
@@ -76,86 +79,114 @@ export const searchUser = (req, res) => {
 };
 
 // ---------------------------------------------Sign Up-------------------------------------------
-export const signup = (req, res) => {
+export const signup = async (req, res) => {
   // For signing up new users
   // Recieves username, email and password
   let carryOn = true;
   let formData = { ...req.body };
   const url = req.protocol + "://" + req.get("host");
 
-  const ppPath = `${url}/${req.file.path}`;
+  // create upload stream
+  let streamFileUpload = (req) => {
+    return new Promise((resolve, reject) => {
+      let streamPP = cloudinaryV2.uploader.upload_stream(
+        { resource_type: "image", upload_preset: "profile-picture" },
+        (error, result) => {
+          if (result) {
+            resolve(result);
+          } else {
+            reject(error);
+          }
+        }
+      );
 
-  // Ensure all strings are lowercase
-  formData = Object.assign(
-    ...Object.keys(formData).map((key) => {
-      if (
-        typeof formData[key] === "string" &&
-        key != "bio" &&
-        key != "password"
-      ) {
-        return { [key]: formData[key].toLowerCase() };
-      }
-      return { [key]: formData[key] };
-    })
-  );
-
-  // Check if formdata has all the required fields
-  if (!formData.username || !formData.email || !formData.password)
-    return res
-      .status(400)
-      .json({ message: "Sorry incomplete details, try again", reset: true });
-
-  // Check if user is already in database
-  User.find({
-    email: formData.email.toLowerCase(),
-    username: formData.username.toLowerCase(),
-  })
-    .then((result) => {
-      if (result.length !== 0) {
-        carryOn = false;
-        return res
-          .status(400)
-          .json({ message: "Sorry email or username already exists" });
-      }
-    })
-    .then(() => {
-      if (!carryOn) return;
-
-      // Encrypypts the password
-      bcrypt.hash(formData.password, 10).then((hash) => {
-        // Create a new user with the information provided
-        // and hashed password
-        const user = new User({
-          ...formData,
-          name: {
-            first: formData.firstname,
-            last: formData.lastname,
-          },
-          location: {
-            city: formData.city,
-            country: formData.country,
-          },
-          password: hash,
-          profilePicUrl: ppPath,
-        });
-
-        // Save user
-        user
-          .save()
-          .then((result) => {
-            res.status(201).json({
-              message: "User Created",
-              result: result,
-            });
-          })
-          .catch((err) => {
-            res.status(500).json({
-              message: "Sorry creating user failed",
-              error: err,
-            });
-          });
-      });
+      streamifier.createReadStream(req.file.buffer).pipe(streamPP);
     });
+  };
+
+  try {
+    let result = await streamFileUpload(req);
+    console.log(result);
+
+    const ppPath = result.url;
+    // Old method to get file path
+    // const ppPath = `${url}/${req.file.path}`;
+
+    // Ensure all strings are lowercase
+    formData = Object.assign(
+      ...Object.keys(formData).map((key) => {
+        if (
+          typeof formData[key] === "string" &&
+          key != "bio" &&
+          key != "password"
+        ) {
+          return { [key]: formData[key].toLowerCase() };
+        }
+        return { [key]: formData[key] };
+      })
+    );
+
+    // Check if formdata has all the required fields
+    if (!formData.username || !formData.email || !formData.password)
+      return res
+        .status(400)
+        .json({ message: "Sorry incomplete details, try again", reset: true });
+
+    // Check if user is already in database
+    User.find({
+      email: formData.email.toLowerCase(),
+      username: formData.username.toLowerCase(),
+    })
+      .then((result) => {
+        if (result.length !== 0) {
+          carryOn = false;
+          return res
+            .status(400)
+            .json({ message: "Sorry email or username already exists" });
+        }
+      })
+      .then(() => {
+        if (!carryOn) return;
+
+        // Encrypypts the password
+        bcrypt.hash(formData.password, 10).then((hash) => {
+          // Create a new user with the information provided
+          // and hashed password
+          const user = new User({
+            ...formData,
+            name: {
+              first: formData.firstname,
+              last: formData.lastname,
+            },
+            location: {
+              city: formData.city,
+              country: formData.country,
+            },
+            password: hash,
+            profilePicUrl: ppPath,
+          });
+
+          // Save user
+          user
+            .save()
+            .then((result) => {
+              res.status(201).json({
+                message: "User Created",
+                result: result,
+              });
+            })
+            .catch((err) => {
+              res.status(500).json({
+                message: "Sorry creating user failed",
+                error: err,
+              });
+            });
+        });
+      });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Error" });
+  }
 };
 
 // --------------------------------------------------Login---------------------------------------

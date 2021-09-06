@@ -9,7 +9,6 @@ import cloudinaryV2 from "../../utils/cloudinary.js";
 export const uploadPost = async (req, res) => {
   const url = req.protocol + "://" + req.get("host");
   const fileType = req.files.file[0].mimetype;
-  // console.log(getVideoDurationInSeconds(files.file[0]));
 
   const filePath = `${url}/${req.files.file[0].path}`;
   const thumbPath = req.files.thumbnail
@@ -189,8 +188,6 @@ export const getPosts = (req, res) => {
   if (pageSize && currentPage) {
     fileQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
   }
-
-  // console.log("fetched", fileQuery);
 
   fileQuery.exec(function (err, documents) {
     if (err) console.log(err);
@@ -398,9 +395,7 @@ const addOwnedPost = async (owner, id, fileType) => {
     { new: true }
   );
 
-  if (updatelikeResult.n > 0) {
-    console.log("saved to user");
-  } else
+  if (updatelikeResult.n === 0)
     return res
       .status(401)
       .json({ message: "Some Error there", isLiked: false });
@@ -417,9 +412,7 @@ const addContributedPost = async (contributer, id, fileType) => {
     { new: true }
   );
 
-  if (updatelikeResult.n > 0) {
-    console.log("saved to user");
-  } else
+  if (updatelikeResult.n === 0)
     return res
       .status(401)
       .json({ message: "Some Error there", isLiked: false });

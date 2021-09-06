@@ -93,7 +93,6 @@ export const uploadToCloud = async (req, res) => {
 export const savePostDetails = (req, res) => {
   // Todo undo user given null id
   // const {recievedPost} = {}
-  console.log("saving");
   delete req.body._id;
   const post = new Post({
     ...req.body,
@@ -123,10 +122,8 @@ export const savePostDetails = (req, res) => {
     })
     .then(() => {
       res.status(201).json({
-        message: "201 message idiot, what else do you want from me?",
-        post: {
-          ...createdPost,
-        },
+        message: "Post successfully saved",
+        postId: createdPost._id,
       });
     })
     .then(() => {})

@@ -129,7 +129,8 @@
         <mat-icon>add_photo_alternate</mat-icon>
       </button>
     </div>
-    <div class="image-preview" *ngIf="croppedImage">
+
+    <div class="image-preview" *ngIf="croppedImage && !isSubmitted">
       <img [src]="croppedImage" [alt]="uploadForm.value.title" />
     </div>
 

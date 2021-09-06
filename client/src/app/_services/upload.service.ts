@@ -5,6 +5,7 @@ import { Post } from '../_models/post';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const videoUrl = `${environment.host}/video`;
 
@@ -26,7 +27,8 @@ export class UploadService {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {}
 
   get isFileUploading() {
@@ -81,20 +83,24 @@ export class UploadService {
     const username = this.authService.getUsername();
 
     if (username) file.owners?.push(username);
-    else console.log('No Username');
     file.owners = [...new Set(file.owners)];
 
     // Todo throw error if no file url
     if (!file.file_public_id) return;
 
-    this.http.post(`${videoUrl}/post`, file).subscribe(
-      (response) => {
-        this.router.navigateByUrl('/home');
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.http
+      .post<{ message: string; postId: string }>(`${videoUrl}/post`, file)
+      .subscribe(
+        (res) => {
+          this.openSnackBar(res.message, res.postId);
+
+          if (res.postId) this.router.navigateByUrl(`/video/${res.postId}`);
+          else this.router.navigateByUrl('/home');
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   // updatePost(post: Post, image: File | string) {
@@ -127,4 +133,20 @@ export class UploadService {
   //       });
   //     });
   // }
+
+  openSnackBar(content: string, postId: string) {
+    // If there is no postId inform of error
+    if (!postId)
+      this._snackBar.open(
+        'There seems to have been some error, please contact the developer',
+        'close',
+        {
+          duration: 5000,
+        }
+      );
+    else
+      this._snackBar.open(content, 'close', {
+        duration: 3000,
+      });
+  }
 }

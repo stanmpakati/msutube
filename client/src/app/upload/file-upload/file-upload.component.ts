@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { HttpEventType } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {
@@ -33,7 +33,11 @@ export class FileUploadComponent implements OnInit {
   croppedImage!: string;
   showCropper = false;
 
-  constructor(private UploadService: UploadService, public dialog: MatDialog) {}
+  constructor(
+    private UploadService: UploadService,
+    public dialog: MatDialog,
+    private ref: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.uploadForm = new FormGroup({
@@ -158,6 +162,9 @@ export class FileUploadComponent implements OnInit {
         this.uploadForm.patchValue({ thumbnail: ppFile });
         this.thumbnail.updateValueAndValidity();
       }
+
+      // Manually detect image input
+      this.ref.detectChanges();
     });
   }
 
@@ -239,6 +246,9 @@ export class FileUploadComponent implements OnInit {
           if (event.type === HttpEventType.UploadProgress) {
             this.uploadStatus.status = 'IN_PROGRESS';
 
+            // Manually detect changes and update state
+            this.ref.detectChanges();
+
             let uploadPcnt = Math.round(
               (100 / event.total! || 0) * event.loaded
             );
@@ -246,6 +256,10 @@ export class FileUploadComponent implements OnInit {
           }
           if (event.type == HttpEventType.Response) {
             this.uploadStatus.status = 'DONE';
+
+            // Manually detect changes and update state
+            this.ref.detectChanges();
+
             const dets = { ...event.body! };
             // delete dets.message
 

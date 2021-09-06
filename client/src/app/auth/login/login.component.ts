@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/_services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  isLoading = false;
+  isLoading!: boolean;
   submitted = false;
   hide = true;
   form!: FormGroup;
@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private ref: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +42,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe((authStatus) => {
         this.isLoading = false;
       });
+
+    this.isLoading = false;
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -66,6 +69,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.submitted = true;
     if (this.form.invalid) return;
     this.isLoading = true;
+
+    // Manualy detect changes
+    this.ref.detectChanges();
 
     const auth: Auth = {
       email: this.form.value.email,

@@ -31,7 +31,6 @@ export class BottomNavbarComponent implements OnInit, OnDestroy {
     this.themeService.getTheme();
 
     // Get username
-    console.log(this.authService.getUsername());
     this.authService.getUsername()
       ? (this.profileRoute = `/profile/${this.authService.getUsername()}`)
       : '/auth/login';

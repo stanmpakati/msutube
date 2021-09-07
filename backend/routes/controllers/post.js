@@ -24,37 +24,25 @@ export const uploadPost = async (req, res) => {
 };
 
 export const uploadToCloud = async (req, res) => {
-  let streamThumbnailUpload = (req) => {
-    return new Promise((resolve, reject) => {
-      let streamThumbnail = cloudinaryV2.uploader.upload_stream(
-        { resource_type: "image", upload_preset: "thumbnail" },
-        (error, result) => {
-          if (result) {
-            resolve(result);
-          } else {
-            reject(error);
-          }
-        }
-      );
+  // Set up stream
+  let streamFileUpload = (file, isThumbnail) => {
+    let resType, mimetype, preset;
+    if (file.mimetype.includes("image")) resType = "Image";
+    if (file.mimetype.includes("audio")) resType = "video";
+    if (file.mimetype.includes("video")) resType = "video";
 
-      if (req.files.thumbnail && req.files.thumbnail[0])
-        streamifier
-          .createReadStream(req.files.thumbnail[0].buffer)
-          .pipe(streamThumbnail);
-      else return;
-    });
-  };
-
-  let streamFileUpload = (req) => {
-    let resType;
-    if (req.files.file[0].mimetype.includes("image")) resType = "Image";
-    if (req.files.file[0].mimetype.includes("audio")) resType = "video";
-    if (req.files.file[0].mimetype.includes("video")) resType = "video";
-    console.log(resType);
+    if (isThumbnail) {
+      resType = null;
+      mimetype = "image";
+      preset = "thumbnail";
+    }
 
     return new Promise((resolve, reject) => {
       let streamVideo = cloudinaryV2.uploader.upload_stream(
-        { resource_type: resType, upload_preset: resType },
+        {
+          resource_type: resType || mimetype,
+          upload_preset: resType || preset,
+        },
         (error, result) => {
           if (result) {
             resolve(result);
@@ -64,25 +52,29 @@ export const uploadToCloud = async (req, res) => {
         }
       );
 
-      streamifier.createReadStream(req.files.file[0].buffer).pipe(streamVideo);
+      streamifier.createReadStream(file.buffer).pipe(streamVideo);
     });
   };
 
   async function upload(req) {
     try {
       const fileType = req.files.file[0].mimetype;
-      let result2 = await streamFileUpload(req);
-      let result1 = await streamThumbnailUpload(req);
+      let fileResult = await streamFileUpload(req.files.file[0], false);
+
+      let thumbnailResult;
+      if (req.files.thumbnail && req.files.thumbnail[0]) {
+        thumbnailResult = await streamFileUpload(req.files.thumbnail[0], true);
+      }
       return res.status(200).json({
         message: "Uploaded",
-        file_public_id: result2.url,
-        thumb_public_id: result1.url,
+        file_public_id: fileResult.url,
+        thumb_public_id: thumbnailResult ? thumbnailResult.url : null,
         fileMimetype: fileType,
-        duration: result2.duration,
+        duration: fileResult.duration,
       });
     } catch (err) {
-      console.log(err);
-      res.status(500).json({ message: "Error" });
+      console.log("err", err);
+      res.status(500).json({ message: "Some Error" });
     }
   }
 

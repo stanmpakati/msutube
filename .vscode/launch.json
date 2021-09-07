@@ -5,15 +5,9 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program against localhost",
-            "program": "${workspaceFolder}/backend/index.js"
-        },
-        {
             "type": "pwa-chrome",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
+            "name": "Launch Chrome against localhost 5000",
             "url": "http://localhost:4200",
             "webRoot": "${workspaceFolder}/client/"
         },

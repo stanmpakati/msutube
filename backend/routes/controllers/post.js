@@ -26,21 +26,21 @@ export const uploadPost = async (req, res) => {
 export const uploadToCloud = async (req, res) => {
   // Set up stream
   let streamFileUpload = (file, isThumbnail) => {
-    let resType, mimetype, preset;
+    // prepare resour
+    let resType, preset;
     if (file.mimetype.includes("image")) resType = "Image";
     if (file.mimetype.includes("audio")) resType = "video";
     if (file.mimetype.includes("video")) resType = "video";
 
     if (isThumbnail) {
       resType = null;
-      mimetype = "image";
       preset = "thumbnail";
     }
 
     return new Promise((resolve, reject) => {
       let streamVideo = cloudinaryV2.uploader.upload_stream(
         {
-          resource_type: resType || mimetype,
+          resource_type: resType || "image",
           upload_preset: resType || preset,
         },
         (error, result) => {
@@ -73,7 +73,6 @@ export const uploadToCloud = async (req, res) => {
         duration: fileResult.duration,
       });
     } catch (err) {
-      console.log("err", err);
       res.status(500).json({ message: "Some Error" });
     }
   }

@@ -2,6 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Cloudinary } from 'cloudinary-core';
+// import {
+//   CloudinaryModule,
+//   CloudinaryConfiguration
+// } from "@cloudinary/angular-5.x";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,6 +53,7 @@ import { LatestComponent } from './home/latest/latest.component';
 import { ProfileAudioComponent } from './profile/profile-audio/profile-audio.component';
 import { ProfileImagesComponent } from './profile/profile-images/profile-images.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { SafePipe } from './safe.pipe';
 
 @NgModule({
   declarations: [
@@ -84,6 +90,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     ProfileImagesComponent,
     LatestComponent,
     NotFoundComponent,
+    SafePipe,
   ],
   imports: [
     BrowserModule,
@@ -96,6 +103,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MaterialModule,
     // With Shared stuff
     SharedModule,
+    // Cloudinary module
+    // CloudinaryModule.forRoot(Cloudinary, {
+    //   cloud_name: "stanmpakati"
+    // } as CloudinaryConfiguration)
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

@@ -1,11 +1,14 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Cloudinary } from 'cloudinary-core';
+// import {  } from 'cloudinary-video-player'
 
 import { Details } from 'src/app/_models/details.interface';
 import { Post } from 'src/app/_models/post';
 import { PostService } from 'src/app/_services/post.service';
 import { ThemeService } from 'src/app/_services/theme.service';
+import * as cloudinary from 'cloudinary-core';
 
 @Component({
   selector: 'app-video',
@@ -20,6 +23,7 @@ export class VideoComponent implements OnInit, OnDestroy {
   isDarkMode!: boolean;
   themeSub: Subscription = new Subscription();
   fileUrl!: string;
+  cld!: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -58,6 +62,24 @@ export class VideoComponent implements OnInit, OnDestroy {
             this.router.navigate(['404/video']);
           }
         );
+
+        const cld = (window as any).cloudinary.Cloudinary.new({
+          cloud_name: 'stanmpakati',
+        });
+        const demoplayer = cld.videoPlayer('cloudinaryVideoPlayer');
+        demoplayer.source(
+          'https://res.cloudinary.com/stanmpakati/video/upload/v1630122736/video/cs0h4gbaopu7qpa6idxl.mp4'
+        );
+        demoplayer.on('loadstart', () => {
+          // console.log(JSON.stringify(event, null, 2))
+          console.log('loadstart');
+        });
+        demoplayer.on('play', () => {
+          // console.log(JSON.stringify(event, null, 2))
+          console.log('play');
+        });
+
+        this.cld = cloudinary.Cloudinary.new({ cloud_name: 'stanmpakati' });
 
         // Add view after 10s
         setTimeout(() => {

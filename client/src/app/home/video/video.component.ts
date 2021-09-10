@@ -66,7 +66,7 @@ export class VideoComponent implements OnInit, OnDestroy {
         const cld = (window as any).cloudinary.Cloudinary.new({
           cloud_name: 'stanmpakati',
         });
-        const demoplayer = cld.videoPlayer('cloudinaryVideoPlayer');
+        const demoplayer = cld.videoPlayer('player');
         demoplayer.source(
           'https://res.cloudinary.com/stanmpakati/video/upload/v1630122736/video/cs0h4gbaopu7qpa6idxl.mp4'
         );

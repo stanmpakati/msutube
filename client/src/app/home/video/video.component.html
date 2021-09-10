@@ -6,13 +6,12 @@
 <div *ngIf="!isLoading" fxAlign.lt-sm="column" fxHide.gt-sm fxHide.sm>
   <div class="video">
     <!-- Todo put autoplay -->
-    <iframe
-      [src]="video.file_public_id | safe"
-      width="100%"
-      height="200px"
-      allow="fullscreen; encrypted-media;"
-      frameborder="0"
-    ></iframe>
+    <video
+      id="player"
+      class="cld-video-player cld-fluid"
+      controls
+      playsinline
+    ></video>
   </div>
 
   <!-- Tab Nav for Mobile -->

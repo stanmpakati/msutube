@@ -54,6 +54,11 @@ import { ProfileAudioComponent } from './profile/profile-audio/profile-audio.com
 import { ProfileImagesComponent } from './profile/profile-images/profile-images.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SafePipe } from './safe.pipe';
+import {
+  CloudinaryConfiguration,
+  CloudinaryModule,
+  CloudinaryVideo,
+} from '@cloudinary/angular-5.x';
 
 @NgModule({
   declarations: [
@@ -98,15 +103,16 @@ import { SafePipe } from './safe.pipe';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CloudinaryModule,
 
     // Angular Material imports
     MaterialModule,
     // With Shared stuff
     SharedModule,
     // Cloudinary module
-    // CloudinaryModule.forRoot(Cloudinary, {
-    //   cloud_name: "stanmpakati"
-    // } as CloudinaryConfiguration)
+    CloudinaryModule.forRoot(Cloudinary, {
+      cloud_name: 'stanmpakati',
+    } as CloudinaryConfiguration),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

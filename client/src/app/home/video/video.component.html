@@ -6,12 +6,24 @@
 <div *ngIf="!isLoading" fxAlign.lt-sm="column" fxHide.gt-sm fxHide.sm>
   <div class="video">
     <!-- Todo put autoplay -->
-    <video
+    <!-- <video
       id="player"
       class="cld-video-player cld-fluid"
       controls
       playsinline
-    ></video>
+    ></video> -->
+    <cl-video
+      public-id="stanmpakati"
+      secure="true"
+      class="my-videos"
+      controls="true"
+    >
+      <cl-transformation
+        overlay="text:arial_60:cs0h4gbaopu7qpa6idxl"
+        gravity="north"
+        y="20"
+      ></cl-transformation>
+    </cl-video>
   </div>
 
   <!-- Tab Nav for Mobile -->

@@ -59,6 +59,8 @@ import {
   CloudinaryModule,
   CloudinaryVideo,
 } from '@cloudinary/angular-5.x';
+import { SearchItemsComponent } from './components/navbar/search-items/search-items.component';
+import { SearchItemComponent } from './components/navbar/search-items/search-item/search-item.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +98,8 @@ import {
     LatestComponent,
     NotFoundComponent,
     SafePipe,
+    SearchItemsComponent,
+    SearchItemComponent,
   ],
   imports: [
     BrowserModule,

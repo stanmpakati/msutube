@@ -2,48 +2,6 @@
   cursor: pointer;
 }
 
-.img {
-  aspect-ratio: 19/10;
-  height: 100%;
-  overflow: hidden;
-  text-align: center;
-
-  img {
-    // TODO fix stretching of image
-    width: 100%;
-    // height: 100%;
-    aspect-ratio: 19/10;
-
-    background-size: cover;
-    background-position: center;
-    overflow: hidden;
-    // position: absolute;
-  }
-}
-
-.small {
-  // font-size: 1rem;
-
-  .mat-body-2 {
-    margin-top: 4px;
-    font-size: 1rem;
-  }
-}
-
-.duration-stamp {
-  background-color: rgb(29, 29, 29);
-  color: rgb(255, 255, 255);
-  opacity: 0.9;
-  padding: 1px 3px;
-  position: absolute;
-  bottom: 6px;
-  left: 6px;
-}
-
-// .mat-body-2 {
-//   color: rgb(39, 39, 175);
-// }
-
 video {
   width: 100%;
   height: 100%;

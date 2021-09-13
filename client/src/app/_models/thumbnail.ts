@@ -8,4 +8,5 @@ export interface Thumbnail {
   file_public_id?: string;
   createdAt: string;
   fileUrl: string;
+  description?: string;
 }

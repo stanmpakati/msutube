@@ -132,6 +132,7 @@ export const getPosts = (req, res) => {
   const trending = req.query.trending;
   const latest = req.query.latest;
   const postIds = req.query.ids;
+  const searchQuery = req.query.search;
 
   // To be Updated with search query
   let fileQuery;
@@ -167,6 +168,13 @@ export const getPosts = (req, res) => {
     })
       .sort({ views: -1 })
       .select(selectString);
+  } else if (searchQuery) {
+    fileQuery = Post.find({
+      $or: [
+        { title: { $regex: searchQuery } },
+        { description: { $regex: searchQuery } },
+      ],
+    }).select(selectString + " description");
   } else {
     // No Limit
     fileQuery = Post.find({

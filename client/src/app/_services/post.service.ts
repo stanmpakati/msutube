@@ -26,6 +26,7 @@ export class PostService {
     isFeatured?: boolean;
     trending?: boolean;
     latest?: boolean;
+    searchQuery?: string;
   }) {
     const {
       postsPerPage,
@@ -35,6 +36,7 @@ export class PostService {
       isFeatured,
       trending,
       latest,
+      searchQuery,
     } = query;
 
     // Declare Query params
@@ -48,6 +50,7 @@ export class PostService {
     if (isFeatured) queryParams += `isFeatured=${isFeatured}&`;
     if (trending) queryParams += `trending=${trending}&`;
     if (latest) queryParams += `latest=${latest}`;
+    if (searchQuery) queryParams += `search=${searchQuery}`;
 
     return this.http.get<{ posts: Thumbnail[]; maxPosts: number }>(
       `${postsUrl}${queryParams}`

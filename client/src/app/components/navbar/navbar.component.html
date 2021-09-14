@@ -107,8 +107,10 @@
 
 <!-- Search results -->
 <div class="column">
-  <app-search-item
-    *ngFor="let result of searchedPosts"
-    [thumbnail]="result"
-  ></app-search-item>
+  <div [ngClass]="{ 'bg-dark': isDarkMode, 'bg-light': !isDarkMode }">
+    <app-search-item
+      *ngFor="let result of searchedPosts"
+      [thumbnail]="result"
+    ></app-search-item>
+  </div>
 </div>

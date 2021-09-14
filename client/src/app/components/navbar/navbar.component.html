@@ -106,7 +106,9 @@
 </mat-toolbar>
 
 <!-- Search results -->
-<app-search-items
-  *ngIf="searchedPosts"
-  [searchResults]="searchedPosts"
-></app-search-items>
+<div class="column">
+  <app-search-item
+    *ngFor="let result of searchedPosts"
+    [thumbnail]="result"
+  ></app-search-item>
+</div>

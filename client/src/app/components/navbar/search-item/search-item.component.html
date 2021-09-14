@@ -1,0 +1,22 @@
+<div class="search-container">
+  <div fxLayout="row">
+    <img
+      [src]="thumbnail.thumb_public_id || '/assets/vectors/no-image.svg'"
+      [alt]="thumbnail.title"
+      fxFlex="25%"
+    />
+    <div fxLayout="column">
+      <span class="">{{ thumbnail.title }}</span>
+      <div
+        class="owner-time"
+        fxLayout="row"
+        fxLayoutAlign="space-between center"
+      >
+        <span>{{ owner }}</span>
+        <span class="mat-caption">{{ timeElapsed }}</span>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+</div>

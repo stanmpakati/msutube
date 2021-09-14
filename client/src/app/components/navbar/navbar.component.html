@@ -8,26 +8,32 @@
     <span class="spacer"></span>
     <!-- Search form -->
     <!-- <mat-form-field appearance="outline"> </mat-form-field> -->
-    <div
-      fxHide.lt-sm
-      fxLayout="row"
-      fxFlexAlign="center stretch"
-      class="search-field"
-    >
-      <input
-        matInput
-        type="search"
-        [ngClass]="{
-          'search-input': true,
-          'search-input-dark': isDarkMode
-        }"
-      />
-      <button
-        [ngClass]="{ 'search-button': true, 'search-button-dark': isDarkMode }"
+    <form [formGroup]="searchForm">
+      <div
+        fxHide.lt-sm
+        fxLayout="row"
+        fxFlexAlign="center stretch"
+        class="search-field"
       >
-        <mat-icon>search</mat-icon>
-      </button>
-    </div>
+        <input
+          matInput
+          type="search"
+          formControlName="query"
+          [ngClass]="{
+            'search-input': true,
+            'search-input-dark': isDarkMode
+          }"
+        />
+        <button
+          [ngClass]="{
+            'search-button': true,
+            'search-button-dark': isDarkMode
+          }"
+        >
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+    </form>
 
     <button fxHide.gt-xs mat-button><mat-icon>search</mat-icon></button>
 

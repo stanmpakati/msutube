@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   Input,
@@ -6,24 +7,29 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
-import { ImageService } from 'src/app/_services/image.service';
 import { ThemeService } from 'src/app/_services/theme.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PostService } from 'src/app/_services/post.service';
+import { Thumbnail } from 'src/app/_models/thumbnail';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   isDarkMode!: boolean;
   profileUrl!: string | null;
   themeSub: Subscription = new Subscription();
-  imgCache: Subscription = new Subscription();
+  searchSubscription: Subscription = new Subscription();
   username!: string | null;
   profileLink!: string;
+  searchForm!: FormGroup;
+  searchedPosts!: Thumbnail[];
   @ViewChild('img', { static: true }) image!: ElementRef;
   @ViewChild('newImg', { static: true }) newImage!: ElementRef;
   @Input() displayNav = true;
@@ -31,10 +37,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
     private themeService: ThemeService,
     private authService: AuthService,
-    private imageService: ImageService,
+    private postService: PostService,
     private _snackBar: MatSnackBar
   ) {}
-
   ngOnInit(): void {
     this.themeSub = this.themeService.themeStatusListener.subscribe(
       (isDark) => {
@@ -45,22 +50,34 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.username = this.authService.getUsername();
     this.profileLink = `/profile/${this.username}`;
 
-    // this.imgCache = this.imageService
-    //   .getImage(this.user.profilePicUrl)
-    //   .subscribe((res) => {
-    //     console.log(res);
-    //     this.image.nativeElement.src = this.user.profilePicUrl;
-    //   });
-
     this.profileUrl = this.authService.getProfileUrl();
     this.themeService.getTheme();
 
-    // this.imageService.cacheUrls = [this.user.profilePicUrl];
+    this.searchForm = new FormGroup({
+      query: new FormControl(null),
+    });
+  }
+
+  get query() {
+    return this.searchForm.controls.query;
+  }
+
+  ngAfterViewInit(): void {
+    this.searchSubscription = this.query.valueChanges
+      .pipe(debounceTime(1000))
+      .subscribe((val) => {
+        console.log(val);
+        this.postService
+          .getPosts({ fileType: '', searchQuery: val })
+          .subscribe((res) => {
+            this.searchedPosts = res.posts;
+          });
+      });
   }
 
   ngOnDestroy() {
     this.themeSub.unsubscribe();
-    this.imgCache.unsubscribe();
+    this.searchSubscription.unsubscribe();
   }
 
   toggleThemeSelection() {

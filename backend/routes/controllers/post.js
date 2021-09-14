@@ -176,6 +176,9 @@ export const getPosts = (req, res) => {
       ],
     }).select(selectString + " description");
   } else {
+    // Return error if no filetype
+    if (!fileType) return res.json({ message: "No search parameter" });
+
     // No Limit
     fileQuery = Post.find({
       $and: [{ fileType: { $regex: fileType } }, { fileUrl: undefined }],
@@ -183,6 +186,8 @@ export const getPosts = (req, res) => {
   }
 
   let fetchedPosts;
+
+  if (!fileQuery) return res.json({ message: "No search parameter" });
 
   if (pageSize && currentPage) {
     fileQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);

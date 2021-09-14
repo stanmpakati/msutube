@@ -104,3 +104,9 @@
     <a routerLink="/pictures" routerLinkActive="link-active">Pictures</a>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<!-- Search results -->
+<app-search-items
+  *ngIf="searchedPosts"
+  [searchResults]="searchedPosts"
+></app-search-items>

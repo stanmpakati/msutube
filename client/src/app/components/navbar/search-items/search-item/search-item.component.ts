@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Thumbnail } from 'src/app/_models/thumbnail';
 import { timeAgo } from 'src/app/_services/time-ago.service';
 
@@ -8,7 +8,7 @@ import { timeAgo } from 'src/app/_services/time-ago.service';
   styleUrls: ['./search-item.component.scss'],
 })
 export class SearchItemComponent implements OnInit {
-  thumbnail!: Thumbnail;
+  @Input() thumbnail!: Thumbnail;
   owner!: string;
   timeElapsed!: string;
 

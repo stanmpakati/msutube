@@ -1,1 +1,4 @@
-<p>search-items works!</p>
+<app-search-item
+  *ngFor="let result of searchResults"
+  [thumbnail]="result"
+></app-search-item>

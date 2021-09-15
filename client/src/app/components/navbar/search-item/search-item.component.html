@@ -1,20 +1,21 @@
-<div class="search-container">
+<div class="search-container" (click)="navigateToPage()">
   <div fxLayout="row">
     <img
       [src]="thumbnail.thumb_public_id || '/assets/vectors/no-image.svg'"
       [alt]="thumbnail.title"
       fxFlex="25%"
     />
-    <div fxLayout="column">
-      <span class="">{{ thumbnail.title }}</span>
+    <div class="pl-1" fxLayout="column" fxLayoutAlign="start start">
+      <span class="mat-body-2">{{ thumbnail.title }}</span>
       <span class="">{{ thumbnail.description }}</span>
+      <div class="spacer-y"></div>
       <div
-        class="owner-time"
         fxLayout="row"
         fxLayoutAlign="space-between center"
+        style="width: 100%"
       >
-        <span>{{ owner }}</span>
-        <span class="mat-caption">{{ timeElapsed }}</span>
+        <span class="mat-caption">{{ owner }}</span>
+        <span class="mat-caption owner-time">{{ timeElapsed }}</span>
       </div>
     </div>
   </div>

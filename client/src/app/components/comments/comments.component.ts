@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Comment } from 'src/app/_models/comment.interface';
 import { AuthService } from 'src/app/_services/auth.service';
@@ -20,7 +21,9 @@ export class CommentsComponent implements OnInit {
   constructor(
     private postService: PostService,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private router: Router,
+    private authService: AuthService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -56,14 +59,25 @@ export class CommentsComponent implements OnInit {
         likes: 0,
       };
 
-      // Clear comment field
-      this.comment.reset();
-
       // Add to comments
       this.comments.push(comment);
 
       // To Database
       this.postService.addComment(this.postId, this.comment.value).subscribe();
+
+      // Clear comment field
+      this.comment.reset();
+    } else {
+      this.openSnackBar();
+      this.router.navigate(['/auth/login'], {
+        queryParams: { returnUrl: this.router.url },
+      });
     }
+  }
+
+  openSnackBar() {
+    this._snackBar.open('Sorry, you need to log in to Comment', 'close', {
+      duration: 3000,
+    });
   }
 }

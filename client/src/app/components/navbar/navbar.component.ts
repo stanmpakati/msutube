@@ -23,6 +23,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   isDarkMode!: boolean;
+  showSearch = false;
   profileUrl!: string | null;
   themeSub: Subscription = new Subscription();
   searchSubscription: Subscription = new Subscription();
@@ -82,6 +83,10 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
   clearSearch() {
     this.query.reset();
+  }
+
+  toggleSearch() {
+    this.showSearch = !this.showSearch;
   }
 
   toggleThemeSelection() {

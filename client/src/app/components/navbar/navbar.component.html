@@ -7,14 +7,8 @@
     </a>
     <span class="spacer"></span>
     <!-- Search form -->
-    <!-- <mat-form-field appearance="outline"> </mat-form-field> -->
     <form [formGroup]="searchForm">
-      <div
-        fxHide.lt-sm
-        fxLayout="row"
-        fxFlexAlign="center stretch"
-        class="search-field"
-      >
+      <div fxHide.lt-sm fxLayout="row" fxFlexAlign="center stretch">
         <input
           matInput
           type="search"
@@ -35,7 +29,22 @@
       </div>
     </form>
 
-    <button fxHide.gt-xs mat-button><mat-icon>search</mat-icon></button>
+    <form [formGroup]="searchForm" fxLayout="row" fxFlexAlign="center stretch">
+      <input
+        matInput
+        type="search"
+        formControlName="query"
+        [ngClass]="{
+          'search-input': true,
+          'search-input-dark': isDarkMode
+        }"
+        [fxShow.xs]="showSearch"
+        fxHide.gt-xs
+      />
+      <button fxHide.gt-xs mat-button (click)="toggleSearch()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </form>
 
     <span fxHide.lt-sm ngClass="spacer"></span>
 

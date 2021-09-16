@@ -21,6 +21,8 @@ export default (req, res, next) => {
     next();
   } catch (err) {
     console.log(err);
-    res.status(401).json({ message: "Auth failed!", error: err });
+    res
+      .status(401)
+      .json({ message: "Sorry you are not authenticated", error: err });
   }
 };

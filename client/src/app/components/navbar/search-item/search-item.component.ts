@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Thumbnail } from 'src/app/_models/thumbnail';
 import { timeAgo } from 'src/app/_services/time-ago.service';
@@ -10,6 +10,7 @@ import { timeAgo } from 'src/app/_services/time-ago.service';
 })
 export class SearchItemComponent implements OnInit {
   @Input() thumbnail!: Thumbnail;
+  @Output() clear = new EventEmitter();
   owner!: string;
   timeElapsed!: string;
 
@@ -24,5 +25,6 @@ export class SearchItemComponent implements OnInit {
 
   navigateToPage() {
     this.router.navigate(['/video', this.thumbnail._id]);
+    this.clear.emit();
   }
 }

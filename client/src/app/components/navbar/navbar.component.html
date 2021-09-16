@@ -111,6 +111,7 @@
     <app-search-item
       *ngFor="let result of searchedPosts"
       [thumbnail]="result"
+      (clear)="clearSearch()"
     ></app-search-item>
   </div>
 </div>

@@ -80,6 +80,10 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.searchSubscription.unsubscribe();
   }
 
+  clearSearch() {
+    this.query.reset();
+  }
+
   toggleThemeSelection() {
     this.isDarkMode = !this.isDarkMode;
     this.themeService.toggleTheme(this.isDarkMode);

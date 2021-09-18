@@ -18,7 +18,36 @@
       </button>
       {{ details.likes }} likes
     </span>
-    <span class="stats-section"><mat-icon>share</mat-icon>share</span>
+
+    <!-- Share -->
+    <!-- <popup-buttons
+      [theme]="'modern-light'"
+      [include]="[
+        'facebook',
+        'twitter',
+        'linkedin',
+        'pinterest',
+        'reddit',
+        'tumblr',
+        'telegram',
+        'messenger',
+        'whatsapp',
+        'sms',
+        'email',
+        'copy'
+      ]"
+      [show]="3"
+      [showText]="true"
+      [title]="'riding on a skateboard'"
+      [description]="'A video riding on a skateboard'"
+      [autoSetMeta]="false"
+    ></popup-buttons> -->
+    <!-- <share-popup-button theme="modern-dark"></share-popup-button> -->
+    <share-buttons
+      theme="material-dark"
+      [showText]="true"
+      [show]="4"
+    ></share-buttons>
   </div>
 </div>
 

@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Cloudinary } from 'cloudinary-core';
+import { ShareButtonsPopupModule } from 'ngx-sharebuttons/popup';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+
 // import {
 //   CloudinaryModule,
 //   CloudinaryConfiguration
@@ -60,6 +63,8 @@ import {
   CloudinaryVideo,
 } from '@cloudinary/angular-5.x';
 import { SearchItemComponent } from './components/navbar/search-item/search-item.component';
+import { ShareModule } from 'ngx-sharebuttons';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 
 @NgModule({
   declarations: [
@@ -107,14 +112,22 @@ import { SearchItemComponent } from './components/navbar/search-item/search-item
     HttpClientModule,
     CloudinaryModule,
 
+    // Share
+    // ShareModule,
+    ShareButtonsPopupModule,
+    ShareButtonsModule.withConfig({
+      debug: true,
+    }),
+    ShareIconsModule,
+
     // Angular Material imports
     MaterialModule,
     // With Shared stuff
     SharedModule,
     // Cloudinary module
-    CloudinaryModule.forRoot(Cloudinary, {
-      cloud_name: 'stanmpakati',
-    } as CloudinaryConfiguration),
+    // CloudinaryModule.forRoot(Cloudinary, {
+    //   cloud_name: 'stanmpakati',
+    // } as CloudinaryConfiguration),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

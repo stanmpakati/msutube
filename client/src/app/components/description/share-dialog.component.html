@@ -1,0 +1,23 @@
+<mat-dialog-content>
+  <h3>Choose where to share</h3>
+  <share-buttons
+    [theme]="'modern-dark'"
+    [include]="[
+      'facebook',
+      'twitter',
+      'whatsapp',
+      'linkedin',
+      'pinterest',
+      'reddit',
+      'tumblr',
+      'telegram',
+      'messenger',
+      'sms',
+      'email',
+      'copy'
+    ]"
+    [showText]="true"
+    [description]="title"
+    [autoSetMeta]="false"
+  ></share-buttons>
+</mat-dialog-content>

@@ -43,7 +43,10 @@ import { TrendingComponent } from './home/trending/trending.component';
 import { ReferencesFormComponent } from './upload/references-form/references-form.component';
 import { AuthInterceptor } from './_helpers/auth.interceptor';
 import { VideoComponent } from './home/video/video.component';
-import { DescriptionComponent } from './components/description/description.component';
+import {
+  DescriptionComponent,
+  ShareDialogComponent,
+} from './components/description/description.component';
 import { CreditsComponent } from './components/credits/credits.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { SuggestionsComponent } from './components/suggestions/suggestions.component';
@@ -103,6 +106,7 @@ import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
     NotFoundComponent,
     SafePipe,
     SearchItemComponent,
+    ShareDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -113,11 +117,7 @@ import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
     CloudinaryModule,
 
     // Share
-    // ShareModule,
-    ShareButtonsPopupModule,
-    ShareButtonsModule.withConfig({
-      debug: true,
-    }),
+    ShareButtonsModule,
     ShareIconsModule,
 
     // Angular Material imports

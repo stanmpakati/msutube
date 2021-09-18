@@ -27,7 +27,11 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/light-theme.scss", "src/styles.scss"],
+            "styles": [
+              "node_modules/ngx-sharebuttons/themes/modern.scss",
+              "src/light-theme.scss",
+              "src/styles.scss"
+            ],
             "scripts": ["node_modules/hammerjs/hammer.min.js"]
           },
           "configurations": {

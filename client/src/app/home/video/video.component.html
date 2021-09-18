@@ -4,7 +4,7 @@
 
 <!-- Container -->
 <div *ngIf="!isLoading" fxAlign.lt-sm="column" fxHide.gt-sm fxHide.sm>
-  <div class="video">
+  <div class=".w-100">
     <!-- Todo put autoplay -->
     <!-- <video
       id="player"
@@ -95,7 +95,7 @@
   <!-- Main Body -->
   <div class="mainContent" fxFlex="60%">
     <!-- Video Screen -->
-    <div class="video">
+    <div class="w-100">
       <!-- Todo put autoplay -->
       <iframe
         [src]="video.file_public_id | safe"

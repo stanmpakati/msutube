@@ -69,6 +69,7 @@ import { SearchItemComponent } from './components/navbar/search-item/search-item
 import { ShareModule } from 'ngx-sharebuttons';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { PostsComponent } from './posts/posts.component';
+import { DurationPipe } from './duration.pipe';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import { PostsComponent } from './posts/posts.component';
     SearchItemComponent,
     ShareDialogComponent,
     PostsComponent,
+    DurationPipe,
   ],
   imports: [
     BrowserModule,

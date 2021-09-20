@@ -25,12 +25,20 @@
       ></cl-transformation>
     </cl-video> -->
     <iframe
+      *ngIf="!video.fileType.includes('image')"
       [src]="video.file_public_id | safe"
       width="100%"
       height="220px"
       allow="fullscreen; encrypted-media;"
       frameborder="0"
     ></iframe>
+
+    <img
+      style="width: 100%"
+      *ngIf="video.fileType.includes('image')"
+      [src]="video.file_public_id"
+      [alt]="video.title"
+    />
   </div>
 
   <!-- Tab Nav for Mobile -->
@@ -105,12 +113,20 @@
     <div class="w-100">
       <!-- Todo put autoplay -->
       <iframe
+        *ngIf="!video.fileType.includes('image')"
         [src]="video.file_public_id | safe"
         width="100%"
         height="432px"
         allow="fullscreen; encrypted-media;"
         frameborder="0"
       ></iframe>
+
+      <img
+        style="width: 100%"
+        *ngIf="video.fileType.includes('image')"
+        [src]="video.file_public_id"
+        [alt]="video.title"
+      />
     </div>
 
     <!-- Description section -->

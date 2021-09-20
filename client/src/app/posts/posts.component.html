@@ -1,7 +1,15 @@
-<div class="container">
+<app-navbar></app-navbar>
+
+<div ngClass.gt-xs="container">
+  <span class="mat-title" style="margin-left: 24px" fxHide.gt-xs>{{
+    page | titlecase
+  }}</span>
+
   <app-render-tiles
     [isLoading]="isLoading"
     [vids]="vids"
     [featureName]="page"
   ></app-render-tiles>
 </div>
+
+<app-bottom-navbar fxHide.gt-xs></app-bottom-navbar>

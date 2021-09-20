@@ -6,13 +6,18 @@
 >
   <div class="img">
     <video
+      *ngIf="!thumbnailData.fileType.includes('image')"
       width="400"
       preload="metadata"
-      [poster]="thumbnailUrl || fileUrl || null"
+      [poster]="thumbnailUrl"
     >
       <source [src]="fileUrl" type="video/mp4" />
       Sorry Your browser does not support the video tag.
     </video>
+    <img
+      *ngIf="thumbnailData.fileType.includes('image')"
+      [src]="thumbnailData.file_public_id"
+    />
     <span class="duration-stamp">{{ thumbnailData.duration | duration }}</span>
   </div>
   <span [ngClass]="{ 'mat-body-2': true, 'color-blue': !isDarkMode }">

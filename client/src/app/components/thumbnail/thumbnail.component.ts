@@ -33,7 +33,6 @@ export class ThumbnailComponent implements OnInit, OnDestroy {
 
     if (this.thumbnailData.file_public_id)
       this.fileUrl = this.thumbnailData.file_public_id;
-    else this.thumbnailData.fileUrl;
 
     // Determine how many authors there are
     if (this.thumbnailData.owners.length > 1) this.owner = 'Various Owners';

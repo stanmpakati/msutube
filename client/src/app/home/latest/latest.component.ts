@@ -12,11 +12,15 @@ export class LatestComponent implements OnInit {
   @Input() fileType!: string;
   thumbs!: Thumbnail[];
   isLoading!: boolean;
+  linkTo!: string;
 
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
+
+    this.linkTo = `/${this.fileType}s/latest`;
+
     this.postService
       .getPosts({
         postsPerPage: 10,

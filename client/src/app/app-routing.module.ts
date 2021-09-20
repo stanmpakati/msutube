@@ -17,7 +17,21 @@ const routes: Routes = [
   { path: 'pictures', component: PicturesComponent },
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'video/:id', component: VideoComponent },
-  { path: 'videos/:category', component: PostsComponent },
+  {
+    path: 'videos/:category',
+    component: PostsComponent,
+    data: { fileType: 'video' },
+  },
+  {
+    path: 'audios/:category',
+    component: PostsComponent,
+    data: { fileType: 'audio' },
+  },
+  {
+    path: 'images/:category',
+    component: PostsComponent,
+    data: { fileType: 'image' },
+  },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),

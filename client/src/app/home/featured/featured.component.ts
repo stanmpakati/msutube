@@ -11,11 +11,15 @@ export class FeaturedComponent implements OnInit {
   @Input() fileType!: string;
   vids!: Thumbnail[];
   isLoading!: boolean;
+  linkTo!: string;
 
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
+
+    this.linkTo = `/${this.fileType}s/featured`;
+
     this.postService
       .getPosts({
         postsPerPage: 10,

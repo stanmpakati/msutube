@@ -11,11 +11,15 @@ export class TrendingComponent implements OnInit {
   @Input() fileType!: string;
   vids!: Thumbnail[];
   isLoading!: boolean;
+  linkTo!: string;
 
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
+
+    this.linkTo = `/${this.fileType}s/trending`;
+
     this.postService
       .getPosts({
         postsPerPage: 10,

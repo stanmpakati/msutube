@@ -23,7 +23,7 @@ export class LatestComponent implements OnInit {
 
     this.postService
       .getPosts({
-        postsPerPage: 10,
+        postsPerPage: 12,
         currentPage: 1,
         latest: true,
         fileType: this.fileType,

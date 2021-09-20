@@ -22,7 +22,7 @@ export class FeaturedComponent implements OnInit {
 
     this.postService
       .getPosts({
-        postsPerPage: 10,
+        postsPerPage: 12,
         currentPage: 1,
         isFeatured: true,
         fileType: this.fileType,

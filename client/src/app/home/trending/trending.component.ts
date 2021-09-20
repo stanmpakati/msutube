@@ -22,7 +22,7 @@ export class TrendingComponent implements OnInit {
 
     this.postService
       .getPosts({
-        postsPerPage: 10,
+        postsPerPage: 12,
         currentPage: 1,
         trending: true,
         fileType: this.fileType,

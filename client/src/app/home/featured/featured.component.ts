@@ -18,7 +18,7 @@ export class FeaturedComponent implements OnInit {
     this.isLoading = true;
     this.postService
       .getPosts({
-        postsPerPage: 10,
+        postsPerPage: 100,
         currentPage: 1,
         isFeatured: true,
         fileType: this.fileType,

@@ -12,7 +12,7 @@
       controls
       playsinline
     ></video> -->
-    <cl-video
+    <!-- <cl-video
       public-id="stanmpakati"
       secure="true"
       class="my-videos"
@@ -23,7 +23,14 @@
         gravity="north"
         y="20"
       ></cl-transformation>
-    </cl-video>
+    </cl-video> -->
+    <iframe
+      [src]="video.file_public_id | safe"
+      width="100%"
+      height="220px"
+      allow="fullscreen; encrypted-media;"
+      frameborder="0"
+    ></iframe>
   </div>
 
   <!-- Tab Nav for Mobile -->

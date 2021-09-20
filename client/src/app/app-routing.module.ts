@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'pictures', component: PicturesComponent },
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'video/:id', component: VideoComponent },
-  { path: 'videos/featured', component: FeaturedComponent },
+  { path: 'videos/:category', component: FeaturedComponent },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),

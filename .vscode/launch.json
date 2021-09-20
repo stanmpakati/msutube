@@ -11,5 +11,12 @@
             "url": "http://localhost:4200",
             "webRoot": "${workspaceFolder}/client/"
         },
+        {
+            "type": "pwa-chrome",
+            "request": "launch",
+            "name": "192.168.100.x network launch",
+            "url": "http://192.168.100.8:4200",
+            "webRoot": "${workspaceFolder}/client/"
+        },
     ]
 }

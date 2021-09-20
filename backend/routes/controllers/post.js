@@ -143,28 +143,24 @@ export const getPosts = (req, res) => {
   if (postIds && postIds !== "undefined") {
     // limit to ids in the query
     fileQuery = Post.find({
-      $and: [{ fileType: { $regex: fileType } }, { fileUrl: undefined }],
+      $and: [{ fileType: { $regex: fileType } }],
     })
       .where("_id")
       .in(postIds)
       .select(selectString);
   } else if (isFeatured) {
     fileQuery = Post.find({
-      $and: [
-        { fileType: { $regex: fileType } },
-        { isFeatured: isFeatured },
-        { fileUrl: undefined },
-      ],
+      $and: [{ fileType: { $regex: fileType } }, { isFeatured: isFeatured }],
     }).select(selectString);
   } else if (latest) {
     fileQuery = Post.find({
-      $and: [{ fileType: { $regex: fileType } }, { fileUrl: undefined }],
+      $and: [{ fileType: { $regex: fileType } }],
     })
       .sort({ createdAt: -1 })
       .select(selectString);
   } else if (trending) {
     fileQuery = Post.find({
-      $and: [{ fileType: { $regex: fileType } }, { fileUrl: undefined }],
+      $and: [{ fileType: { $regex: fileType } }],
     })
       .sort({ views: -1 })
       .select(selectString);
@@ -181,7 +177,7 @@ export const getPosts = (req, res) => {
 
     // No Limit
     fileQuery = Post.find({
-      $and: [{ fileType: { $regex: fileType } }, { fileUrl: undefined }],
+      $and: [{ fileType: { $regex: fileType } }],
     }).select(selectString);
   }
 

@@ -73,9 +73,6 @@ export const getProfilePic = multer.diskStorage({
     cb(error, "./_uploads/profile-pictures");
   },
   filename: (req, file, cb) => {
-    // todo get name from user id
-    // const name = req.user._id.substring(0, 8);
-
     const name = file.originalname.toLocaleLowerCase().split(" ").join("-");
     const ext = IMG_MINE_TYPE_MAP[file.mimetype];
     cb(null, "pp-" + Date.now() + "-" + name);

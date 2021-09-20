@@ -49,13 +49,6 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     );
     this.themeService.getTheme();
-
-    // Todo remove later
-    // this.authService.loginUser({
-    //   email: 'test@test.com',
-    //   username: 'testuser',
-    //   password: 'Test123.',
-    // });
   }
 
   ngOnDestroy() {

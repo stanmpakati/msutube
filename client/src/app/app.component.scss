@@ -9,21 +9,16 @@
   text-align: center;
 
   img {
-    // TODO fix stretching of image
     width: 100%;
-    // height: 100%;
     aspect-ratio: 19/10;
 
     background-size: cover;
     background-position: center;
     overflow: hidden;
-    // position: absolute;
   }
 }
 
 .small {
-  // font-size: 1rem;
-
   .mat-body-2 {
     margin-top: 4px;
     font-size: 1rem;

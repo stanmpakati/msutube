@@ -16,12 +16,7 @@ router.get("/usernames", getUsernames);
 
 router.post("/email", getEmail);
 
-router.post(
-  "/signup",
-  // Todo get Filename from userid
-  multer().single("profilePicture"),
-  signup
-);
+router.post("/signup", multer().single("profilePicture"), signup);
 
 router.post("/login", login);
 

@@ -15,6 +15,7 @@ export class CommentComponent implements OnInit {
   isLoading = true;
   timeElapsed!: string;
   isLiked!: boolean;
+  routerLink!: string;
 
   constructor(private userService: UserService) {}
 
@@ -24,6 +25,7 @@ export class CommentComponent implements OnInit {
 
     this.userService.getUser(this.comment.owner).subscribe((res) => {
       this.user = res.user;
+      this.routerLink = '/profile/' + res.user.username;
       this.isLoading = false;
     });
   }

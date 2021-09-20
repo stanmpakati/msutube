@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { FeaturedComponent } from './home/featured/featured.component';
 import { HomeComponent } from './home/home.component';
 import { VideoComponent } from './home/video/video.component';
 import { MusicComponent } from './music/music.component';
 import { PicturesComponent } from './pictures/pictures.component';
+import { PostsComponent } from './posts/posts.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UploadComponent } from './upload/upload.component';
 import { AuthGuard } from './_helpers/auth.guard';
@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'pictures', component: PicturesComponent },
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'video/:id', component: VideoComponent },
-  { path: 'videos/:category', component: FeaturedComponent },
+  { path: 'videos/:category', component: PostsComponent },
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),

@@ -21,6 +21,18 @@
     [thumbnailData]="vid"
     ngClass.xs="mt-2"
   ></app-thumbnail>
+
+  <a
+    href="#"
+    *ngIf="linkTo"
+    [routerLink]="linkTo"
+    mat-stroked-button
+    color="primary"
+    fxHide.gt-xs
+    style="width: 100%; margin-top: 12px"
+  >
+    See More
+  </a>
 </div>
 
 <div class="no-vids" *ngIf="!isLoading && (!vids || vids.length === 0)">

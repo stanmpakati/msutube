@@ -5,6 +5,8 @@
 .img {
   aspect-ratio: 19/10;
   overflow: hidden;
+
+  position: relative;
 }
 
 video {
@@ -14,4 +16,14 @@ video {
   vertical-align: middle;
 
   object-fit: 19/10;
+}
+
+.duration-stamp {
+  background-color: black;
+  color: #cdcdcd;
+  padding: 0px 2px;
+  z-index: 9;
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
 }

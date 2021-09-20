@@ -36,7 +36,7 @@ export class ProfileAudioComponent implements OnInit {
     }
 
     // Fetching videos from contributions
-    if (this.contribVids || this.contribThumbs.length === 0) {
+    if (!this.contribVids || this.contribVids.length === 0) {
       this.contribThumbs = [];
       this.isLoading = false;
     } else {

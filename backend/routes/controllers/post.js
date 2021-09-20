@@ -141,12 +141,15 @@ export const getPosts = (req, res) => {
     "_id title length owners thumbnailUrl fileUrl uploadDate createdAt file_public_id thumb_public_id";
 
   if (postIds && postIds !== "undefined") {
+    // Transform string into ObjectIds
+    let objectIds = postIds.split(",");
+
     // limit to ids in the query
     fileQuery = Post.find({
       $and: [{ fileType: { $regex: fileType } }],
     })
       .where("_id")
-      .in(postIds)
+      .in(objectIds)
       .select(selectString);
   } else if (isFeatured) {
     fileQuery = Post.find({

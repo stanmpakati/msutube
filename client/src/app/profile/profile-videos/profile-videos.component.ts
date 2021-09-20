@@ -22,7 +22,6 @@ export class ProfileVideosComponent implements OnInit {
       this.thumbs = [];
       this.isLoading = false;
     } else {
-      console.log('running vids', this.vids);
       this.postService
         .getPosts({
           postsPerPage: 10000,
@@ -37,11 +36,10 @@ export class ProfileVideosComponent implements OnInit {
     }
 
     // Fetching videos from contributions
-    if (this.contribVids || this.contribThumbs.length === 0) {
+    if (!this.contribVids || this.contribVids.length === 0) {
       this.contribThumbs = [];
       this.isLoading = false;
     } else {
-      console.log('running con', this.contribVids);
       this.postService
         .getPosts({
           postsPerPage: 10000,

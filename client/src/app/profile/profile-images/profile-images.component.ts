@@ -36,7 +36,7 @@ export class ProfileImagesComponent implements OnInit {
     }
 
     // Fetching images from contributions
-    if (this.contribVids || this.contribThumbs.length === 0) {
+    if (!this.contribVids || this.contribVids.length === 0) {
       this.contribThumbs = [];
       this.isLoading = false;
     } else {

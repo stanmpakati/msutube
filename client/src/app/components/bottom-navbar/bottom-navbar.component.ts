@@ -33,7 +33,7 @@ export class BottomNavbarComponent implements OnInit, OnDestroy {
     // Get username
     this.authService.getUsername()
       ? (this.profileRoute = `/profile/${this.authService.getUsername()}`)
-      : '/auth/login';
+      : (this.profileRoute = '/auth/login');
   }
 
   ngOnDestroy(): void {

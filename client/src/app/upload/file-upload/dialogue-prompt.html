@@ -4,8 +4,11 @@
     It is strongly encouraged to upload a custom thumbnail along with your file
     to make it stand out more
   </p>
+  <span class="mat-hint">
+    Actually It's not working and I don't have the energy to fix it
+  </span>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="true">Upload anyway</button>
+  <button mat-button [mat-dialog-close]="true" disabled>Upload anyway</button>
   <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Cancel</button>
 </mat-dialog-actions>

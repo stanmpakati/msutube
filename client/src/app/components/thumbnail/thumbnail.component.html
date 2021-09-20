@@ -5,7 +5,11 @@
   (click)="navigateToPage()"
 >
   <div class="img">
-    <video width="400" preload="metadata" [poster]="thumbnailUrl || fileUrl">
+    <video
+      width="400"
+      preload="metadata"
+      [poster]="thumbnailUrl || fileUrl || null"
+    >
       <source [src]="fileUrl" type="video/mp4" />
       Sorry Your browser does not support the video tag.
     </video>

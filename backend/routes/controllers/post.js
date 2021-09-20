@@ -138,7 +138,7 @@ export const getPosts = (req, res) => {
   let fileQuery;
 
   const selectString =
-    "_id title length owners thumbnailUrl fileUrl uploadDate createdAt file_public_id thumb_public_id";
+    "_id title length owners thumbnailUrl fileUrl duration uploadDate createdAt file_public_id thumb_public_id";
 
   if (postIds && postIds !== "undefined") {
     // Transform string into ObjectIds
